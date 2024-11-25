@@ -5,6 +5,10 @@ VisualStudioVersion = 17.11.35327.3
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Editor_Window", "Editor_Window\Editor_Window.vcxproj", "{F83AD574-F514-425E-8E07-A1EF8EF9AC96}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ArkCollectorEngine_Window", "ArkCollectorEngine_Window\ArkCollectorEngine_Window.vcxproj", "{91BFC3A8-2B6A-4181-9C80-81B634ABA8AA}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ArkCollectorEngine_SOURCE", "ArkCollectorEngine_SOURCE\ArkCollectorEngine_SOURCE.vcxitems", "{24A2E826-9015-4BD4-8C2F-E3CD86185761}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -21,11 +25,23 @@ Global
 		{F83AD574-F514-425E-8E07-A1EF8EF9AC96}.Release|x64.Build.0 = Release|x64
 		{F83AD574-F514-425E-8E07-A1EF8EF9AC96}.Release|x86.ActiveCfg = Release|Win32
 		{F83AD574-F514-425E-8E07-A1EF8EF9AC96}.Release|x86.Build.0 = Release|Win32
+		{91BFC3A8-2B6A-4181-9C80-81B634ABA8AA}.Debug|x64.ActiveCfg = Debug|x64
+		{91BFC3A8-2B6A-4181-9C80-81B634ABA8AA}.Debug|x64.Build.0 = Debug|x64
+		{91BFC3A8-2B6A-4181-9C80-81B634ABA8AA}.Debug|x86.ActiveCfg = Debug|Win32
+		{91BFC3A8-2B6A-4181-9C80-81B634ABA8AA}.Debug|x86.Build.0 = Debug|Win32
+		{91BFC3A8-2B6A-4181-9C80-81B634ABA8AA}.Release|x64.ActiveCfg = Release|x64
+		{91BFC3A8-2B6A-4181-9C80-81B634ABA8AA}.Release|x64.Build.0 = Release|x64
+		{91BFC3A8-2B6A-4181-9C80-81B634ABA8AA}.Release|x86.ActiveCfg = Release|Win32
+		{91BFC3A8-2B6A-4181-9C80-81B634ABA8AA}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5EC9C997-F346-4371-A179-75D83EF13B52}
+	EndGlobalSection
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		ArkCollectorEngine_SOURCE\ArkCollectorEngine_SOURCE.vcxitems*{24a2e826-9015-4bd4-8c2f-e3cd86185761}*SharedItemsImports = 9
+		ArkCollectorEngine_SOURCE\ArkCollectorEngine_SOURCE.vcxitems*{91bfc3a8-2b6a-4181-9c80-81b634aba8aa}*SharedItemsImports = 4
 	EndGlobalSection
 EndGlobal
