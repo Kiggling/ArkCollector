@@ -161,4 +161,4 @@
 > `BREAKING CHANGE: Changed API endpoint from /v1 to /v2`
 
 ## 리소스 
-- https://craftpix.net/categorys/monster-sprites/page/2/
+- [https://itch.io/search?q=Lucifer](https://itch.io/search?q=Lucifer)
