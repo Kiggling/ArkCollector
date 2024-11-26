@@ -10,6 +10,8 @@ namespace ac
 		void Tick();
 		void Render(HDC hdc);
 
+		float DeltaTime() { return mDeltaTime; }
+
 	private:
 		LARGE_INTEGER mCpuFrequency;
 		LARGE_INTEGER mPrevFrequency;
