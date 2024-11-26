@@ -16,9 +16,13 @@
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)acApplication.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)acMath.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)smeEntity.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)acInput.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)acApplication.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)smeEntity.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)acInput.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)acMath.cpp" />
   </ItemGroup>
 </Project>
