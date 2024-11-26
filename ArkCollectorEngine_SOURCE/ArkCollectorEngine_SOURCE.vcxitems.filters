@@ -2,10 +2,17 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)acApplication.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)smeEntity.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)acEntity.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)acTime.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)acInput.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)acMath.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)acApplication.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)smeEntity.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)acEntity.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)acTime.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)CommonInclude.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)acMath.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)acInput.h" />
   </ItemGroup>
 </Project>
