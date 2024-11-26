@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="$(MSBuildThisFileDirectory)acApplication.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)acMath.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="$(MSBuildThisFileDirectory)acApplication.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)acMath.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Common">
+      <UniqueIdentifier>{c7875b56-df9d-485b-abf0-1f0f878bc7fc}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
