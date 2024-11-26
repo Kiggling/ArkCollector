@@ -1,7 +1,5 @@
 #pragma once
-
-#include <vector>
-#include <Windows.h>
+#include "CommonInclude.h"
 
 namespace ac
 {
@@ -22,12 +20,6 @@ namespace ac
 		End
 	};
 
-	struct FVector2
-	{
-		int x;
-		int y;
-	};
-
 	class Input
 	{
 	public:
@@ -45,7 +37,7 @@ namespace ac
 		__forceinline static bool GetKeyDown(EKeyCode InKeyCode) { return mKeys[(UINT)InKeyCode].keyState == EKeyState::Down; }
 		__forceinline static bool GetKeyUp(EKeyCode InKeyCode) { return mKeys[(UINT)InKeyCode].keyState == EKeyState::Up; }
 		__forceinline static bool GetKey(EKeyCode InKeyCode) { return mKeys[(UINT)InKeyCode].keyState == EKeyState::Pressed; }
-		__forceinline static FVector2 GetMousePosition() { return mMousePosition; }
+		__forceinline static math::Vector2 GetMousePosition() { return mMousePosition; }
 	private:
 		void updateAllKeys();
 		void setPressedState(UINT key);
@@ -54,7 +46,7 @@ namespace ac
 		void clearKeys();
 	private:
 		static std::vector<FKey> mKeys;
-		static FVector2 mMousePosition;
+		static math::Vector2 mMousePosition;
 
 	};
 }

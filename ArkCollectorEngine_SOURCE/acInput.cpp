@@ -1,7 +1,7 @@
 #include "acInput.h"
 #include "acApplication.h"
 
-// extern ac::Application application;
+extern ac::Application application;
 
 namespace ac
 {
@@ -83,27 +83,24 @@ namespace ac
 	}
 	void Input::getMousePointPositionByWindow()
 	{
-		/*
-		POINT mousePos = {};
-		GetCursorPos(&mousePos);
-		ScreenToClient(application.GetHwnd(), &mousePos);
+		//POINT mousePos = {};
+		//GetCursorPos(&mousePos);
+		//ScreenToClient(application.GetHwnd(), &mousePos);
 
-		UINT width = application.GetWidth();
-		UINT height = application.GetHeight();
+		//UINT width = application.GetWidth();
+		//UINT height = application.GetHeight();
 
-		mMousePosition.x = -1.f;
-		mMousePosition.y = -1.f;
+		//mMousePosition.x = -1.f;
+		//mMousePosition.y = -1.f;
 
-		if (mousePos.x < width && mousePos.x > 0)
-		{
-			mMousePosition.x = mousePos.x;
-		}
-		if (mousePos.y < Height && mousePos.y > 0)
-		{
-			mMousePosition.y = mousePos.y;
-		}
-		*/
-
+		//if (mousePos.x < width && mousePos.x > 0)
+		//{
+		//	mMousePosition.x = mousePos.x;
+		//}
+		//if (mousePos.y < Height && mousePos.y > 0)
+		//{
+		//	mMousePosition.y = mousePos.y;
+		//}
 	}
 	void Input::clearKeys()
 	{

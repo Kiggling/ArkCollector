@@ -1,18 +1,51 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="$(MSBuildThisFileDirectory)acApplication.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)acEntity.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)acTime.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)acInput.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)acMath.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)acMath.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)acEntity.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)acInput.cpp">
+      <Filter>Helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)acTime.cpp">
+      <Filter>Helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)acApplication.cpp">
+      <Filter>Application</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="$(MSBuildThisFileDirectory)acApplication.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)acEntity.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)acTime.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)CommonInclude.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)acMath.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)acInput.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)acMath.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)acEntity.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)acTime.h">
+      <Filter>Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)acInput.h">
+      <Filter>Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)acApplication.h">
+      <Filter>Application</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)CommonInclude.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Common">
+      <UniqueIdentifier>{63cf0267-682b-45bb-b7f3-4a9dde02acc6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Helpers">
+      <UniqueIdentifier>{7e3fccbc-f454-4288-9dc7-f8a801786503}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Application">
+      <UniqueIdentifier>{5c7a7d35-ecec-42ad-abab-667ce962a9d4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>
