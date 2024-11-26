@@ -361,3 +361,9 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+# 공유 항목 프로젝트 파일
+*.vcxitems
+
+# 필터 파일
+*.filters
