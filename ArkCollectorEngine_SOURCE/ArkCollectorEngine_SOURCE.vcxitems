@@ -15,7 +15,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)acApplication.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)acComponent.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)acEnums.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)acGameObject.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)acScriptComponent.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)acTime.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)acTransformComponent.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CommonInclude.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)acMath.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)acEntity.h" />
@@ -23,9 +28,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)acApplication.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)acComponent.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)acGameObject.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)acScriptComponent.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)acTime.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)acEntity.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)acInput.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)acMath.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)acTransformComponent.cpp" />
   </ItemGroup>
 </Project>

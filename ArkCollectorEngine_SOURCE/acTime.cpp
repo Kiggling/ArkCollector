@@ -9,10 +9,10 @@ namespace ac
 
 	void Time::Initialize()
 	{
-		// cpuÀÇ ÃÊ´ç ÁÖÆÄ¼ö¸¦ mCpuFrequency¿¡ ¹Ş¾Æ¿Â´Ù.
+		// cpuì˜ ì´ˆë‹¹ ì£¼íŒŒìˆ˜ë¥¼ mCpuFrequencyì— ë°›ì•„ì˜¨ë‹¤.
 		QueryPerformanceFrequency(&mCpuFrequency);
 
-		// ÇÁ·Î±×·¥ÀÌ ½ÃÀÛµÈ ½ÃÁ¡ÀÇ cpu Å¬·° ¼ö¸¦ mPrevFrequency¿¡ ¹Ş¾Æ¿Â´Ù.
+		// í”„ë¡œê·¸ë¨ì´ ì‹œì‘ëœ ì‹œì ì˜ cpu í´ëŸ­ ìˆ˜ë¥¼ mPrevFrequencyì— ë°›ì•„ì˜¨ë‹¤.
 		QueryPerformanceCounter(&mPrevFrequency);
 	}
 	void Time::Update()

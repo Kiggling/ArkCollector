@@ -1,3 +1,4 @@
+#include "CommonInclude.h"
 #include "acApplication.h"
 #include "acTime.h"
 #include "acInput.h"
@@ -44,18 +45,17 @@ namespace ac
 
 	void Application::LateUpdate()
 	{
-		
 	}
 
 	void Application::Render()
 	{
-		// mBackHdc Áö¿ì±â
+		// mBackHdc ï¿½ï¿½ï¿½ï¿½ï¿½
 		clearRenderTarget();
 
-		// È­¸é¿¡ Ãâ·ÂÇÏ°íÀÚ ÇÏ´Â Å¬·¡½ºÀÇ Render ÇÔ¼ö È£Ãâ (ÀÎÀÚ·Î mBackHdc »ç¿ë)
+		// È­ï¿½é¿¡ ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ï¿½ï¿½ ï¿½Ï´ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Render ï¿½Ô¼ï¿½ È£ï¿½ï¿½ (ï¿½ï¿½ï¿½Ú·ï¿½ mBackHdc ï¿½ï¿½ï¿½)
 		
 
-		// mBackHdc¿¡ ±×¸° °ÍµéÀ» mHdc·Î º¹»ç
+		// mBackHdcï¿½ï¿½ ï¿½×¸ï¿½ ï¿½Íµï¿½ï¿½ï¿½ mHdcï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		copyRenderTarget(mBackHdc, mHdc);
 	}
 
