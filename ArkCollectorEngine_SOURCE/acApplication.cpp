@@ -1,5 +1,5 @@
+#include "CommonInclude.h"
 #include "acApplication.h"
-
 
 namespace ac
 {
@@ -16,7 +16,6 @@ namespace ac
 
 	void Application::Initialize(HWND InHwnd, UINT width, UINT height)
 	{
-		
 	}
 	void Application::Run()
 	{
@@ -26,14 +25,11 @@ namespace ac
 	}
 	void Application::Update()
 	{
-	
 	}
 	void Application::LateUpdate()
 	{
-		
 	}
 	void Application::Render()
 	{
-		
 	}
 }

@@ -6,3 +6,4 @@
 #include <string>
 
 #include "acMath.h"
+#include "acEnums.h"
