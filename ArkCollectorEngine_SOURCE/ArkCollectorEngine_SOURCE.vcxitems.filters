@@ -16,9 +16,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)acApplication.cpp">
       <Filter>Application</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)acLayer.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)acScene.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)acSceneManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)acGameObject.cpp">
       <Filter>GameObject</Filter>
     </ClCompile>
@@ -30,6 +27,15 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)acScriptComponent.cpp">
       <Filter>Components\Script</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)acScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)acSceneManager.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)acLayer.cpp">
+      <Filter>Layer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -51,10 +57,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)CommonInclude.h">
       <Filter>Common</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)acLayer.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)acScene.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)acSceneManager.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)acEnums.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)acGameObject.h">
       <Filter>GameObject</Filter>
     </ClInclude>
@@ -69,6 +71,18 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)acScriptComponent.h">
       <Filter>Components\Script</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)acEnums.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)acScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)acSceneManager.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)acLayer.h">
+      <Filter>Layer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -92,6 +106,12 @@
     </Filter>
     <Filter Include="Components\Script">
       <UniqueIdentifier>{b264960f-2a9c-43b6-82dc-70c3749cce42}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene">
+      <UniqueIdentifier>{e1b73266-d699-4a44-9316-86727fd043a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Layer">
+      <UniqueIdentifier>{97846682-277e-489f-9345-0bd7b46a966a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
