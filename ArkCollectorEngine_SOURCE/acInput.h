@@ -30,8 +30,8 @@ namespace ac
 			bool bIsPressed;
 		};
 
-		void Initialize();
-		void Update();
+		static void Initialize();
+		static void Update();
 
 
 		__forceinline static bool GetKeyDown(EKeyCode InKeyCode) { return mKeys[(UINT)InKeyCode].keyState == EKeyState::Down; }
@@ -39,11 +39,11 @@ namespace ac
 		__forceinline static bool GetKey(EKeyCode InKeyCode) { return mKeys[(UINT)InKeyCode].keyState == EKeyState::Pressed; }
 		__forceinline static math::Vector2 GetMousePosition() { return mMousePosition; }
 	private:
-		void updateAllKeys();
-		void setPressedState(UINT key);
-		void setNotPressedState(UINT key);
-		void getMousePointPositionByWindow();
-		void clearKeys();
+		static void updateAllKeys();
+		static void setPressedState(UINT key);
+		static void setNotPressedState(UINT key);
+		static void getMousePointPositionByWindow();
+		static void clearKeys();
 	private:
 		static std::vector<FKey> mKeys;
 		static math::Vector2 mMousePosition;

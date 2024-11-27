@@ -35,6 +35,7 @@ namespace ac
 		T* AddCompenet()
 		{
 			T* comp = new T();
+			comp->SetOwner(this);
 			comp->Initialize();
 			mComponents[(UINT)comp->GetType()] = comp;
 

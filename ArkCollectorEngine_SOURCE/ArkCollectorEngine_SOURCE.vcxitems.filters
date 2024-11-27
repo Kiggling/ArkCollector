@@ -25,6 +25,9 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)acComponent.cpp">
       <Filter>Components</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)acScriptComponent.cpp">
+      <Filter>Components\Script</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)acMath.h">
@@ -57,6 +60,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)acComponent.h">
       <Filter>Components</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)acScriptComponent.h">
+      <Filter>Components\Script</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Common">
@@ -76,6 +82,9 @@
     </Filter>
     <Filter Include="Components\Transform">
       <UniqueIdentifier>{586206be-14d8-4360-a836-f8be6c2abf81}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Script">
+      <UniqueIdentifier>{b264960f-2a9c-43b6-82dc-70c3749cce42}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

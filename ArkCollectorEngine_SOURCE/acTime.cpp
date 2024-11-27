@@ -2,6 +2,11 @@
 
 namespace ac
 {
+	LARGE_INTEGER Time::mCpuFrequency = {};
+	LARGE_INTEGER Time::mPrevFrequency = {};
+	LARGE_INTEGER Time::mCurrentFrequency = {};
+	float Time::mDeltaTime = 0;
+
 	void Time::Initialize()
 	{
 		// cpu의 초당 주파수를 mCpuFrequency에 받아온다.

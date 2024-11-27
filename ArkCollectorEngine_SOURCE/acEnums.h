@@ -6,6 +6,7 @@ namespace ac::enums
 	{
 		Transform,
 		Collider,
+		Script,
 		End,
 	};
 }
