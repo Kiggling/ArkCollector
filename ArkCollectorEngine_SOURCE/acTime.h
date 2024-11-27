@@ -7,10 +7,10 @@ namespace ac
 	{
 	public:
 		static void Initialize();
-		static void Tick();
+		static void Update();
 		static void Render(HDC hdc);
 
-		static float DeltaTime() { return mDeltaTime; }
+		__forceinline static float DeltaTime() { return mDeltaTime; }
 
 	private:
 		static LARGE_INTEGER mCpuFrequency;
