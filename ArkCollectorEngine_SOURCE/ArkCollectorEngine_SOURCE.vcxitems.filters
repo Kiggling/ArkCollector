@@ -16,6 +16,9 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)acApplication.cpp">
       <Filter>Application</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)acLayer.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)acScene.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)acSceneManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)acMath.h">
@@ -36,6 +39,10 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)CommonInclude.h">
       <Filter>Common</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)acLayer.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)acScene.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)acSceneManager.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)acEnums.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Common">

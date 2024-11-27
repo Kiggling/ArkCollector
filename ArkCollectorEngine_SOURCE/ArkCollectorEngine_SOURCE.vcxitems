@@ -15,6 +15,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)acApplication.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)acEnums.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)acLayer.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)acScene.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)acSceneManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)acTime.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CommonInclude.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)acMath.h" />
@@ -23,6 +27,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)acApplication.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)acLayer.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)acScene.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)acSceneManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)acTime.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)acEntity.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)acInput.cpp" />
