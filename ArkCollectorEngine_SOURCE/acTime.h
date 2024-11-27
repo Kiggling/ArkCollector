@@ -6,18 +6,19 @@ namespace ac
 	class Time
 	{
 	public:
-		void Initialize();
-		void Tick();
-		void Render(HDC hdc);
+		static void Initialize();
+		static void Update();
+		static void Render(HDC hdc);
 
-		float DeltaTime() { return mDeltaTime; }
+		__forceinline static float DeltaTime() { return mDeltaTime; }
 
 	private:
-		LARGE_INTEGER mCpuFrequency;
-		LARGE_INTEGER mPrevFrequency;
-		LARGE_INTEGER mCurrentFrequency;
+		static LARGE_INTEGER mCpuFrequency;
+		static LARGE_INTEGER mPrevFrequency;
+		static LARGE_INTEGER mCurrentFrequency;
 
-		float mDeltaTime;
+		static float mDeltaTime;
 	};
 }
 
+ 

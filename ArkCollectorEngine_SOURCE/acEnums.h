@@ -11,5 +11,13 @@ namespace ac::enums
 		Floor,
 		Particle,
 		Max = 16,
+  };
+  
+	enum class EComponentType
+	{
+		Transform,
+		Collider,
+		Script,
+		End,
 	};
 }
