@@ -1,6 +1,7 @@
 #pragma once
 #include "CommonInclude.h"
 #include "acEntity.h"
+#include "acComponent.h"
 
 namespace ac
 {
@@ -15,8 +16,34 @@ namespace ac
 		virtual void LateUpdate();
 		virtual void Render(HDC InHdc);
 
-	private:
+		template <typename T>
+		T* GetCompenet()
+		{
+			T* comp = nullptr;
+			for (Component* c : mComponents)
+			{
+				comp = dynamic_cast<T*>(c);
+				if (c)
+				{
+					break;
+				}
+			}
+			
+			return comp;
+		}
+		template <typename T>
+		T* AddCompenet()
+		{
+			T* comp = new T();
+			comp->Initialize();
+			mComponents[(UINT)comp->GetType()] = comp;
 
+			return comp;
+		}
+
+
+	private:
+		std::vector<Component*> mComponents;
 	};
 
 }	

@@ -19,6 +19,12 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)acGameObject.cpp">
       <Filter>GameObject</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)acTransformComponent.cpp">
+      <Filter>Components\Transform</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)acComponent.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)acMath.h">
@@ -42,6 +48,15 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)acGameObject.h">
       <Filter>GameObject</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)acEnums.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)acTransformComponent.h">
+      <Filter>Components\Transform</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)acComponent.h">
+      <Filter>Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Common">
@@ -55,6 +70,12 @@
     </Filter>
     <Filter Include="GameObject">
       <UniqueIdentifier>{425a4c4f-10a9-4617-a1a1-d97e90022a74}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components">
+      <UniqueIdentifier>{5bcbd394-1db6-4a55-9141-d26bcb2d3d77}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Transform">
+      <UniqueIdentifier>{586206be-14d8-4360-a836-f8be6c2abf81}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -1,5 +1,8 @@
+#include "CommonInclude.h"
 #include "acApplication.h"
 #include "acGameObject.h"
+#include "acComponent.h"
+#include "acTransformComponent.h"
 
 namespace ac
 {
