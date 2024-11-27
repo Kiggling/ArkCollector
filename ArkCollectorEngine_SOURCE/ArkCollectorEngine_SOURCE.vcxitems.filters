@@ -16,6 +16,9 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)acApplication.cpp">
       <Filter>Application</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)acGameObject.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)acMath.h">
@@ -36,6 +39,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)CommonInclude.h">
       <Filter>Common</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)acGameObject.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Common">
@@ -46,6 +52,9 @@
     </Filter>
     <Filter Include="Application">
       <UniqueIdentifier>{5c7a7d35-ecec-42ad-abab-667ce962a9d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject">
+      <UniqueIdentifier>{425a4c4f-10a9-4617-a1a1-d97e90022a74}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
