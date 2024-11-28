@@ -17,7 +17,7 @@ namespace ac
 		virtual void Render(HDC InHdc);
 
 		template <typename T>
-		T* GetCompenet()
+		T* GetCompenent()
 		{
 			T* comp = nullptr;
 			for (Component* c : mComponents)
@@ -32,7 +32,7 @@ namespace ac
 			return comp;
 		}
 		template <typename T>
-		T* AddCompenet()
+		T* AddCompenent()
 		{
 			T* comp = new T();
 			comp->SetOwner(this);

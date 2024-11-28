@@ -37,6 +37,12 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)acLayer.cpp">
       <Filter>Layer</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)acCameraComponent.cpp">
+      <Filter>Components\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)acRenderer.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)acMath.h">
@@ -84,6 +90,12 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)acLayer.h">
       <Filter>Layer</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)acCameraComponent.h">
+      <Filter>Components\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)acRenderer.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Common">
@@ -112,6 +124,12 @@
     </Filter>
     <Filter Include="Layer">
       <UniqueIdentifier>{97846682-277e-489f-9345-0bd7b46a966a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Camera">
+      <UniqueIdentifier>{56f4d09e-bd67-4b2d-b1b3-439f25166bd0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderer">
+      <UniqueIdentifier>{71a9c9a7-c280-4fa7-afad-245c52dab4e4}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

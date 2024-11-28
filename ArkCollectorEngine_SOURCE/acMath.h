@@ -63,6 +63,11 @@ namespace ac::math
 			x += other.x;
 			y += other.y;
 		}
+		void operator-=(Vector2 other)
+		{
+			x -= other.x;
+			y -= other.y;
+		}
 
 		Vector2 operator-(Vector2 other)
 		{
