@@ -37,6 +37,18 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)acLayer.cpp">
       <Filter>Layer</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)acColliderComponent.cpp">
+      <Filter>Components\Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)acCollisionManager.cpp">
+      <Filter>Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)acBoxCollidier2DComponent.cpp">
+      <Filter>Components\Collider\BoxCollider2D</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)acCircleCollider2DComponent.cpp">
+      <Filter>Components\Collider\CircleCollider2D</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)acMath.h">
@@ -84,6 +96,18 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)acLayer.h">
       <Filter>Layer</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)acColliderComponent.h">
+      <Filter>Components\Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)acCollisionManager.h">
+      <Filter>Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)acBoxCollidier2DComponent.h">
+      <Filter>Components\Collider\BoxCollider2D</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)acCircleCollider2DComponent.h">
+      <Filter>Components\Collider\CircleCollider2D</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Common">
@@ -112,6 +136,18 @@
     </Filter>
     <Filter Include="Layer">
       <UniqueIdentifier>{97846682-277e-489f-9345-0bd7b46a966a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Collider">
+      <UniqueIdentifier>{7fee990b-4bad-4614-9354-793f589bc66b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Collision">
+      <UniqueIdentifier>{05dd7bb6-6a8c-4df0-9e15-1ab9cc9af0a0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Collider\BoxCollider2D">
+      <UniqueIdentifier>{eb1da46e-4cfc-4d44-87ee-6992183f3a8c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Collider\CircleCollider2D">
+      <UniqueIdentifier>{d71a96e7-8543-4ddb-8c81-11af77015ca4}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

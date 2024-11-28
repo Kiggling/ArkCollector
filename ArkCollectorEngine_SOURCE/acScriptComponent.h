@@ -16,6 +16,10 @@ namespace ac
 		virtual void LateUpdate() override;
 		virtual void Render(HDC InHdc) override;
 
+		virtual void OnCollisionEnter(class ColliderComponent* other);
+		virtual void OnCollisionStay(class ColliderComponent* other);
+		virtual void OnCollisionExit(class ColliderComponent* other);
+
 	private:
 	};
 }

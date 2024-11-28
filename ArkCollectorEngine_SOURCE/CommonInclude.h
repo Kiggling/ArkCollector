@@ -5,6 +5,8 @@
 #include <algorithm>
 #include <string>
 #include <map>
+#include <bitset>
+#include <unordered_map>
 
 #include "acMath.h"
 #include "acEnums.h"

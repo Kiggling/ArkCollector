@@ -6,6 +6,8 @@ namespace ac
 		: Component(enums::EComponentType::Transform)
 		, mPosition(math::Vector2::Zero)
 		, mRotation(math::Vector2::Zero)
+		, mWidth(0.0f)
+		, mHeight(0.0f)
 		, mScale(1.f)
 
 	{
