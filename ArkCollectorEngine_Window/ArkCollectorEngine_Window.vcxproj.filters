@@ -23,5 +23,7 @@
     <ClInclude Include="acPlayerScriptComponent.h">
       <Filter>Contents\Player</Filter>
     </ClInclude>
+    <ClInclude Include="acLoadResources.h" />
+    <ClInclude Include="acLoadScenes.h" />
   </ItemGroup>
 </Project>
