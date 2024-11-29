@@ -12,6 +12,7 @@ namespace ac
 		{
 			if (gameObj == nullptr)
 				continue;
+      
 			delete gameObj;
 			gameObj = nullptr;
 		}
@@ -22,6 +23,7 @@ namespace ac
 		{
 			if (gameObj == nullptr)
 				continue;
+
 			gameObj->Initialize();
 		}
 	}
@@ -31,6 +33,7 @@ namespace ac
 		{
 			if (gameObj == nullptr)
 				continue;
+
 			gameObj->Update();
 		}
 	}
@@ -40,6 +43,7 @@ namespace ac
 		{
 			if (gameObj == nullptr)
 				continue;
+
 			gameObj->LateUpdate();
 		}
 	}
@@ -49,6 +53,7 @@ namespace ac
 		{
 			if (gameObj == nullptr)
 				continue;
+
 			gameObj->Render(hdc);
 		}
 	}
@@ -56,6 +61,7 @@ namespace ac
 	{
 		if (gameObject == nullptr)
 			return;
+
 		mGameObjects.push_back(gameObject);
 	}
 	void Layer::EraseGameObject(GameObject* eraseGameObj)
