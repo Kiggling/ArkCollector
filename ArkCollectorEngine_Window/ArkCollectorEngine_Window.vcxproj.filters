@@ -7,6 +7,9 @@
     <Filter Include="Contents\Player">
       <UniqueIdentifier>{c9b78936-c9d7-4b46-b7bb-c2b731ecdc2d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Load">
+      <UniqueIdentifier>{a3eb4ead-f3db-4a9e-a00e-fb26b5de38a8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="acPlayer.cpp">
@@ -23,7 +26,11 @@
     <ClInclude Include="acPlayerScriptComponent.h">
       <Filter>Contents\Player</Filter>
     </ClInclude>
-    <ClInclude Include="acLoadResources.h" />
-    <ClInclude Include="acLoadScenes.h" />
+    <ClInclude Include="acLoadScenes.h">
+      <Filter>Load</Filter>
+    </ClInclude>
+    <ClInclude Include="acLoadResources.h">
+      <Filter>Load</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

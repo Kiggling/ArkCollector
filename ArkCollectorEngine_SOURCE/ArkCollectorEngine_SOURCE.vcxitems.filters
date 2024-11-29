@@ -1,29 +1,65 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="$(MSBuildThisFileDirectory)acMath.cpp">
-      <Filter>Common</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)acEntity.cpp">
-      <Filter>Common</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)acInput.cpp">
-      <Filter>Helpers</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)acTime.cpp">
-      <Filter>Helpers</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)acApplication.cpp">
       <Filter>Application</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)acGameObject.cpp">
-      <Filter>GameObject</Filter>
+    <ClCompile Include="$(MSBuildThisFileDirectory)acAnimation.cpp">
+      <Filter>Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)acBoxCollidier2DComponent.cpp">
+      <Filter>Components\Collider\Rect2D</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)acCircleCollider2DComponent.cpp">
+      <Filter>Components\Collider\Circle2D</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)acCameraComponent.cpp">
+      <Filter>Components\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)acColliderComponent.cpp">
+      <Filter>Components\Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)acSpriteRendererComponent.cpp">
+      <Filter>Components\SpriteRenderer</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)acTransformComponent.cpp">
       <Filter>Components\Transform</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)acAnimatorComponent.cpp">
+      <Filter>Components\Animator</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)acCollisionManager.cpp">
+      <Filter>Collision</Filter>
+    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)acComponent.cpp">
       <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)acInput.cpp">
+      <Filter>Helpers\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)acTime.cpp">
+      <Filter>Helpers\Time</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)acEntity.cpp">
+      <Filter>Common\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)acGameObject.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)acLayer.cpp">
+      <Filter>Layer</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)acMath.cpp">
+      <Filter>Common\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)acRenderer.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)acResource.cpp">
+      <Filter>Resourse</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)acResources.cpp">
+      <Filter>Resourse</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)acScriptComponent.cpp">
       <Filter>Components\Script</Filter>
@@ -34,183 +70,168 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)acSceneManager.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)acLayer.cpp">
-      <Filter>Layer</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)acSpriteRendererComponent.cpp">
-      <Filter>Components\SpriteRenderer</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)acResource.cpp">
-      <Filter>Resource</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)acResources.cpp">
-      <Filter>Resource</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)acTexture.cpp">
-      <Filter>Resource\Texture</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)acAnimatorComponent.cpp">
-      <Filter>Components\Animator</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)acAnimation.cpp">
-      <Filter>Components\Animator</Filter>
-    <ClCompile Include="$(MSBuildThisFileDirectory)acColliderComponent.cpp">
-      <Filter>Components\Collider</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)acCollisionManager.cpp">
-      <Filter>Collision</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)acBoxCollidier2DComponent.cpp">
-      <Filter>Components\Collider\BoxCollider2D</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)acCircleCollider2DComponent.cpp">
-      <Filter>Components\Collider\CircleCollider2D</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)acCameraComponent.cpp">
-      <Filter>Components\Camera</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)acRenderer.cpp">
-      <Filter>Renderer</Filter>
+      <Filter>Texture</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="$(MSBuildThisFileDirectory)acMath.h">
-      <Filter>Common</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)acEntity.h">
-      <Filter>Common</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)acTime.h">
-      <Filter>Helpers</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)acInput.h">
-      <Filter>Helpers</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)acApplication.h">
       <Filter>Application</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)CommonInclude.h">
-      <Filter>Common</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)acGameObject.h">
-      <Filter>GameObject</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)acEnums.h">
-      <Filter>Common</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)acTransformComponent.h">
-      <Filter>Components\Transform</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)acComponent.h">
-      <Filter>Components</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)acScriptComponent.h">
-      <Filter>Components\Script</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)acEnums.h">
-      <Filter>Common</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)acScene.h">
-      <Filter>Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)acSceneManager.h">
-      <Filter>Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)acLayer.h">
-      <Filter>Layer</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)acSpriteRendererComponent.h">
-      <Filter>Components\SpriteRenderer</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)acResource.h">
-      <Filter>Resource</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)acResources.h">
-      <Filter>Resource</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)acTexture.h">
-      <Filter>Resource\Texture</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)acAnimatorComponent.h">
-      <Filter>Components\Animator</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)acAnimation.h">
-      <Filter>Components\Animator</Filter>
+      <Filter>Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)acBoxCollidier2DComponent.h">
+      <Filter>Components\Collider\Rect2D</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)acCircleCollider2DComponent.h">
+      <Filter>Components\Collider\Circle2D</Filter>
+    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)acCameraComponent.h">
       <Filter>Components\Camera</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)acRenderer.h">
-      <Filter>Renderer</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)acColliderComponent.h">
       <Filter>Components\Collider</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)acSpriteRendererComponent.h">
+      <Filter>Components\SpriteRenderer</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)acTransformComponent.h">
+      <Filter>Components\Transform</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)acAnimatorComponent.h">
+      <Filter>Components\Animator</Filter>
+    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)acCollisionManager.h">
       <Filter>Collision</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)acBoxCollidier2DComponent.h">
-      <Filter>Components\Collider\BoxCollider2D</Filter>
+    <ClInclude Include="$(MSBuildThisFileDirectory)acComponent.h">
+      <Filter>Components</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)acCircleCollider2DComponent.h">
-      <Filter>Components\Collider\CircleCollider2D</Filter>
+    <ClInclude Include="$(MSBuildThisFileDirectory)acInput.h">
+      <Filter>Helpers\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)acTime.h">
+      <Filter>Helpers\Time</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)acEntity.h">
+      <Filter>Common\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)acEnums.h">
+      <Filter>Common\Enums</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)acGameObject.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)acLayer.h">
+      <Filter>Layer</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)acMath.h">
+      <Filter>Common\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)acRenderer.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)acResource.h">
+      <Filter>Resourse</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)acResources.h">
+      <Filter>Resourse</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)acScriptComponent.h">
+      <Filter>Components\Script</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)acSceneManager.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)acScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)acTexture.h">
+      <Filter>Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)CommonInclude.h">
+      <Filter>Common\Header</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="Common">
-      <UniqueIdentifier>{63cf0267-682b-45bb-b7f3-4a9dde02acc6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Helpers">
-      <UniqueIdentifier>{7e3fccbc-f454-4288-9dc7-f8a801786503}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Application">
-      <UniqueIdentifier>{5c7a7d35-ecec-42ad-abab-667ce962a9d4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameObject">
-      <UniqueIdentifier>{425a4c4f-10a9-4617-a1a1-d97e90022a74}</UniqueIdentifier>
+      <UniqueIdentifier>{84ca59f7-4607-4f89-8dd9-4e0117850a68}</UniqueIdentifier>
     </Filter>
     <Filter Include="Components">
-      <UniqueIdentifier>{5bcbd394-1db6-4a55-9141-d26bcb2d3d77}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Components\Transform">
-      <UniqueIdentifier>{586206be-14d8-4360-a836-f8be6c2abf81}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Components\Script">
-      <UniqueIdentifier>{b264960f-2a9c-43b6-82dc-70c3749cce42}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Scene">
-      <UniqueIdentifier>{e1b73266-d699-4a44-9316-86727fd043a9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Layer">
-      <UniqueIdentifier>{97846682-277e-489f-9345-0bd7b46a966a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Components\SpriteRenderer">
-      <UniqueIdentifier>{eb9f1a6c-c0eb-4bb8-97ba-0f488cadcaff}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Resource">
-      <UniqueIdentifier>{1137096c-41fc-43c7-a2d2-d0b18a25594b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Resource\Texture">
-      <UniqueIdentifier>{df23ccb0-3c0f-43a8-af19-bc71b7d7f9cd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Components\Animator">
-      <UniqueIdentifier>{c649f40f-1ffb-4e25-bd82-188cb0e927fc}</UniqueIdentifier>
-    <Filter Include="Components\Camera">
-      <UniqueIdentifier>{56f4d09e-bd67-4b2d-b1b3-439f25166bd0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Renderer">
-      <UniqueIdentifier>{71a9c9a7-c280-4fa7-afad-245c52dab4e4}</UniqueIdentifier>
+      <UniqueIdentifier>{357c230d-442a-488f-9683-d4183ea00a79}</UniqueIdentifier>
     </Filter>
     <Filter Include="Components\Collider">
-      <UniqueIdentifier>{7fee990b-4bad-4614-9354-793f589bc66b}</UniqueIdentifier>
+      <UniqueIdentifier>{1bf57596-fcf8-4ccc-9647-090b7913f4f0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Animator">
+      <UniqueIdentifier>{4c52c374-7602-40ab-84ae-0b29bcbc9410}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Animation">
+      <UniqueIdentifier>{3b93ec14-1ca1-4999-a265-39acd2466a26}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Collider\Rect2D">
+      <UniqueIdentifier>{b97781c4-9b03-4b36-b47e-313c7fe6579a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Collider\Circle2D">
+      <UniqueIdentifier>{4f78bcfd-ddba-4d7f-9f8f-d30b52c16b5d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Camera">
+      <UniqueIdentifier>{ac3a574f-de4f-4613-887b-2bb4c2db37a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Transform">
+      <UniqueIdentifier>{9e7f4422-1d65-4c88-ae0d-551eaea321e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\SpriteRenderer">
+      <UniqueIdentifier>{d53a1c3c-ca16-482b-8fbe-e4d9966f0222}</UniqueIdentifier>
     </Filter>
     <Filter Include="Collision">
-      <UniqueIdentifier>{05dd7bb6-6a8c-4df0-9e15-1ab9cc9af0a0}</UniqueIdentifier>
+      <UniqueIdentifier>{ad795605-cd4f-4371-a45e-c307edf6b8c4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Components\Collider\BoxCollider2D">
-      <UniqueIdentifier>{eb1da46e-4cfc-4d44-87ee-6992183f3a8c}</UniqueIdentifier>
+    <Filter Include="Helpers">
+      <UniqueIdentifier>{96c89e04-9e99-43d3-a2c6-e166be631388}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Components\Collider\CircleCollider2D">
-      <UniqueIdentifier>{d71a96e7-8543-4ddb-8c81-11af77015ca4}</UniqueIdentifier>
+    <Filter Include="Helpers\Input">
+      <UniqueIdentifier>{e7564da3-dfe3-4c05-827b-c404c138d9eb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Helpers\Time">
+      <UniqueIdentifier>{05733d77-9add-419f-ba0e-c02df44debfe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common">
+      <UniqueIdentifier>{609e39f0-8f43-4039-bbc0-77ceda6d3be1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common\Entity">
+      <UniqueIdentifier>{0823c45d-0a84-4605-9f3a-82501ba0d077}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common\Enums">
+      <UniqueIdentifier>{48af8ab6-2c29-4336-ae96-4b16391314ac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject">
+      <UniqueIdentifier>{8da3334a-b8bd-4c25-a926-4888f59dff6a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Layer">
+      <UniqueIdentifier>{ea20926d-d730-404e-8d9f-13837d2da1c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common\Math">
+      <UniqueIdentifier>{935ca27f-8a84-4b82-b528-fdde649e14af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderer">
+      <UniqueIdentifier>{4d5b1e3c-9fa5-48fe-b4b1-b930b4825b6e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resourse">
+      <UniqueIdentifier>{eecdea94-7f8c-417e-992e-d175b9357ced}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Script">
+      <UniqueIdentifier>{cacaf9de-a09a-4327-8141-366cf4abbef2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene">
+      <UniqueIdentifier>{fd4a7fda-f02f-4675-b7dd-2cac7f3c8063}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Texture">
+      <UniqueIdentifier>{2970936b-4f2c-4868-87aa-7da5755f4c85}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common\Header">
+      <UniqueIdentifier>{ba49d154-f81f-408a-918d-0750db64a7d4}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
