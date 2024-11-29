@@ -45,7 +45,7 @@ namespace ac
 			return;
 
 		GameObject* gameObj = mAnimator->GetOwner();
-		TransformComponent* tr = gameObj->GetCompenet<TransformComponent>();
+		TransformComponent* tr = gameObj->GetComponent<TransformComponent>();
 		math::Vector2 pos = tr->GetPosition();
 		math::Vector2 rot = tr->GetRotation();
 		float scale = tr->GetScale();
