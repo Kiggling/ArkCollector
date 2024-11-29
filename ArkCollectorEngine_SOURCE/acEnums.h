@@ -2,7 +2,7 @@
 
 namespace ac::enums
 {
-	enum class eLayerType
+	enum class ELayerType
 	{
 		None,
 		BackGround,
@@ -17,7 +17,16 @@ namespace ac::enums
 	{
 		Transform,
 		Collider,
+		Rigidbody,
 		Script,
+		Camera,
+		End,
+	};
+	
+	enum class EColliderType
+	{
+		Rect2D,
+		Circle2D,
 		End,
 	};
 }

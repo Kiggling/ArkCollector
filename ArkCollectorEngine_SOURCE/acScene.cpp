@@ -66,8 +66,8 @@ namespace ac
 
 	void Scene::createLayers()
 	{
-		mLayers.resize((UINT)enums::eLayerType::Max);
-		for (size_t i = 0; i < (UINT)enums::eLayerType::Max; i++)
+		mLayers.resize((UINT)enums::ELayerType::Max);
+		for (size_t i = 0; i < (UINT)enums::ELayerType::Max; i++)
 		{
 			mLayers[i] = new Layer();
 		}

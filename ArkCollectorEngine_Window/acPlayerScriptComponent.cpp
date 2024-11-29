@@ -2,6 +2,7 @@
 #include "acTransformComponent.h"
 #include "acGameObject.h"
 #include "acInput.h"
+#include "acColliderComponent.h"
 #include "acTime.h"
 
 namespace ac
@@ -17,7 +18,7 @@ namespace ac
 	}
 	void PlayerScriptComponent::Update()
 	{
-		TransformComponent* tr = this->GetOwner()->GetCompenet<TransformComponent>();
+		TransformComponent* tr = this->GetOwner()->GetComponent<TransformComponent>();
 		math::Vector2 pos = tr->GetPosition();
 
 		float value = 100.f;
@@ -45,6 +46,21 @@ namespace ac
 	{
 	}
 	void PlayerScriptComponent::Render(HDC InHdc)
+	{
+	}
+	void PlayerScriptComponent::OnCollisionEnter(ColliderComponent* other)
+	{
+		TransformComponent* tr = other->GetOwner()->GetComponent<TransformComponent>();
+
+		math::Vector2 pos = tr->GetPosition();
+
+		pos.x += 50;
+		tr->SetPosition(pos);
+	}
+	void PlayerScriptComponent::OnCollisionStay(ColliderComponent* other)
+	{
+	}
+	void PlayerScriptComponent::OnCollisionExit(ColliderComponent* other)
 	{
 	}
 }

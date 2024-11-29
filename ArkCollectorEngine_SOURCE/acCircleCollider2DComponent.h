@@ -1,14 +1,13 @@
 #pragma once
-#include "CommonInclude.h"
-#include "acComponent.h"
+#include "acColliderComponent.h"
 
 namespace ac
 {
-	class Collider : public Component
+	class CircleCollider2DComponent : public ColliderComponent
 	{
 	public:
-		Collider();
-		~Collider();
+		CircleCollider2DComponent();
+		~CircleCollider2DComponent();
 
 		virtual void Initialize() override;
 		virtual void Update() override;
@@ -18,3 +17,4 @@ namespace ac
 	private:
 	};
 }
+
