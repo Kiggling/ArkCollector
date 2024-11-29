@@ -11,7 +11,7 @@ namespace ac::enums
 		Floor,
 		Particle,
 		Max = 16,
-  };
+	};
   
 	enum class EComponentType
 	{
@@ -19,6 +19,17 @@ namespace ac::enums
 		Collider,
 		Rigidbody,
 		Script,
+		SpriteRenderer,
+		Animator,
+		End,
+	};
+
+	enum class eResourceType
+	{
+		Texture,
+		AudioClip,
+		Animation,
+		Prefab,
 		Camera,
 		End,
 	};

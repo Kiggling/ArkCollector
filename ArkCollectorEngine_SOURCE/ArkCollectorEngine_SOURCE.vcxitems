@@ -14,6 +14,8 @@
     <ProjectCapability Include="SourceItemsFromImports" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="$(MSBuildThisFileDirectory)acAnimation.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)acAnimatorComponent.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)acApplication.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)acBoxCollidier2DComponent.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)acCircleCollider2DComponent.h" />
@@ -21,6 +23,8 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)acCollisionManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)acCameraComponent.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)acLayer.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)acResource.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)acResources.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)acRenderer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)acScene.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)acSceneManager.h" />
@@ -28,6 +32,8 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)acEnums.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)acGameObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)acScriptComponent.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)acSpriteRendererComponent.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)acTexture.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)acTime.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)acTransformComponent.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CommonInclude.h" />
@@ -36,6 +42,8 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)acInput.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="$(MSBuildThisFileDirectory)acAnimation.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)acAnimatorComponent.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)acApplication.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)acBoxCollidier2DComponent.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)acCircleCollider2DComponent.cpp" />
@@ -43,12 +51,16 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)acCollisionManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)acCameraComponent.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)acLayer.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)acResource.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)acResources.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)acRenderer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)acScene.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)acSceneManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)acComponent.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)acGameObject.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)acScriptComponent.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)acSpriteRendererComponent.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)acTexture.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)acTime.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)acEntity.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)acInput.cpp" />

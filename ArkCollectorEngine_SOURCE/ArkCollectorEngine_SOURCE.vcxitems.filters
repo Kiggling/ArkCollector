@@ -37,6 +37,23 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)acLayer.cpp">
       <Filter>Layer</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)acSpriteRendererComponent.cpp">
+      <Filter>Components\SpriteRenderer</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)acResource.cpp">
+      <Filter>Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)acResources.cpp">
+      <Filter>Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)acTexture.cpp">
+      <Filter>Resource\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)acAnimatorComponent.cpp">
+      <Filter>Components\Animator</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)acAnimation.cpp">
+      <Filter>Components\Animator</Filter>
     <ClCompile Include="$(MSBuildThisFileDirectory)acColliderComponent.cpp">
       <Filter>Components\Collider</Filter>
     </ClCompile>
@@ -102,6 +119,23 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)acLayer.h">
       <Filter>Layer</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)acSpriteRendererComponent.h">
+      <Filter>Components\SpriteRenderer</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)acResource.h">
+      <Filter>Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)acResources.h">
+      <Filter>Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)acTexture.h">
+      <Filter>Resource\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)acAnimatorComponent.h">
+      <Filter>Components\Animator</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)acAnimation.h">
+      <Filter>Components\Animator</Filter>
     <ClInclude Include="$(MSBuildThisFileDirectory)acCameraComponent.h">
       <Filter>Components\Camera</Filter>
     </ClInclude>
@@ -149,6 +183,17 @@
     <Filter Include="Layer">
       <UniqueIdentifier>{97846682-277e-489f-9345-0bd7b46a966a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Components\SpriteRenderer">
+      <UniqueIdentifier>{eb9f1a6c-c0eb-4bb8-97ba-0f488cadcaff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource">
+      <UniqueIdentifier>{1137096c-41fc-43c7-a2d2-d0b18a25594b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource\Texture">
+      <UniqueIdentifier>{df23ccb0-3c0f-43a8-af19-bc71b7d7f9cd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Animator">
+      <UniqueIdentifier>{c649f40f-1ffb-4e25-bd82-188cb0e927fc}</UniqueIdentifier>
     <Filter Include="Components\Camera">
       <UniqueIdentifier>{56f4d09e-bd67-4b2d-b1b3-439f25166bd0}</UniqueIdentifier>
     </Filter>
