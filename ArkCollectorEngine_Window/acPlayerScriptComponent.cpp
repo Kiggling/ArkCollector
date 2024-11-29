@@ -17,7 +17,7 @@ namespace ac
 	}
 	void PlayerScriptComponent::Update()
 	{
-		TransformComponent* tr = this->GetOwner()->GetCompenet<TransformComponent>();
+		TransformComponent* tr = this->GetOwner()->GetComponent<TransformComponent>();
 		math::Vector2 pos = tr->GetPosition();
 
 		float value = 100.f;
