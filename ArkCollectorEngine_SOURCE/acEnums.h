@@ -21,6 +21,7 @@ namespace ac::enums
 		Script,
 		SpriteRenderer,
 		Animator,
+		Camera,
 		End,
 	};
 
@@ -30,7 +31,6 @@ namespace ac::enums
 		AudioClip,
 		Animation,
 		Prefab,
-		Camera,
 		End,
 	};
 	
