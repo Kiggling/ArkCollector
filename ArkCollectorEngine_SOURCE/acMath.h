@@ -68,7 +68,24 @@ namespace ac::math
 			x -= other.x;
 			y -= other.y;
 		}
-
+		void operator*=(Vector2 other)
+		{
+			x *= other.x;
+			y *= other.y;
+		}
+		void operator*=(float value)
+		{
+			x *= value;
+			y *= value;
+		}
+		Vector2 operator-()
+		{
+			return Vector2(-x, -y);
+		}
+		bool operator ==(Vector2 other)
+		{
+			return ((x == other.x) && (y == other.y));
+		}
 		Vector2 operator-(Vector2 other)
 		{
 			return Vector2(x - other.x, y - other.y);

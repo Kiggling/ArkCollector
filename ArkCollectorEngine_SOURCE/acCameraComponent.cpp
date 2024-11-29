@@ -28,11 +28,11 @@ namespace ac
 		TransformComponent* tr = nullptr;
 		if (mTarget == nullptr)
 		{
-			tr = this->GetOwner()->GetCompenent<TransformComponent>();
+			tr = this->GetOwner()->GetComponent<TransformComponent>();
 		}
 		else
 		{
-			tr = mTarget->GetCompenent<TransformComponent>();
+			tr = mTarget->GetComponent<TransformComponent>();
 		}
 		mCameraPosition = tr->GetPosition();;
 	}
