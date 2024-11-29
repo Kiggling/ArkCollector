@@ -54,6 +54,23 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)acAnimation.cpp">
       <Filter>Components\Animator</Filter>
+    <ClCompile Include="$(MSBuildThisFileDirectory)acColliderComponent.cpp">
+      <Filter>Components\Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)acCollisionManager.cpp">
+      <Filter>Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)acBoxCollidier2DComponent.cpp">
+      <Filter>Components\Collider\BoxCollider2D</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)acCircleCollider2DComponent.cpp">
+      <Filter>Components\Collider\CircleCollider2D</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)acCameraComponent.cpp">
+      <Filter>Components\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)acRenderer.cpp">
+      <Filter>Renderer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -119,6 +136,23 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)acAnimation.h">
       <Filter>Components\Animator</Filter>
+    <ClInclude Include="$(MSBuildThisFileDirectory)acCameraComponent.h">
+      <Filter>Components\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)acRenderer.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)acColliderComponent.h">
+      <Filter>Components\Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)acCollisionManager.h">
+      <Filter>Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)acBoxCollidier2DComponent.h">
+      <Filter>Components\Collider\BoxCollider2D</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)acCircleCollider2DComponent.h">
+      <Filter>Components\Collider\CircleCollider2D</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -160,6 +194,23 @@
     </Filter>
     <Filter Include="Components\Animator">
       <UniqueIdentifier>{c649f40f-1ffb-4e25-bd82-188cb0e927fc}</UniqueIdentifier>
+    <Filter Include="Components\Camera">
+      <UniqueIdentifier>{56f4d09e-bd67-4b2d-b1b3-439f25166bd0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderer">
+      <UniqueIdentifier>{71a9c9a7-c280-4fa7-afad-245c52dab4e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Collider">
+      <UniqueIdentifier>{7fee990b-4bad-4614-9354-793f589bc66b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Collision">
+      <UniqueIdentifier>{05dd7bb6-6a8c-4df0-9e15-1ab9cc9af0a0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Collider\BoxCollider2D">
+      <UniqueIdentifier>{eb1da46e-4cfc-4d44-87ee-6992183f3a8c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Collider\CircleCollider2D">
+      <UniqueIdentifier>{d71a96e7-8543-4ddb-8c81-11af77015ca4}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

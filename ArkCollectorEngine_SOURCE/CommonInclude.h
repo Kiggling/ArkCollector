@@ -8,6 +8,8 @@
 #include <map>
 #include <functional>
 #include <filesystem>
+#include <bitset>
+#include <unordered_map>
 
 #include "acMath.h"
 #include "acEnums.h"

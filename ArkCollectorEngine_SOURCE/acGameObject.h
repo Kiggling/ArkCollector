@@ -23,7 +23,7 @@ namespace ac
 			for (Component* c : mComponents)
 			{
 				comp = dynamic_cast<T*>(c);
-				if (c)
+				if (comp)
 				{
 					break;
 				}

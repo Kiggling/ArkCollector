@@ -2,7 +2,7 @@
 
 namespace ac::enums
 {
-	enum class eLayerType
+	enum class ELayerType
 	{
 		None,
 		BackGround,
@@ -17,6 +17,7 @@ namespace ac::enums
 	{
 		Transform,
 		Collider,
+		Rigidbody,
 		Script,
 		SpriteRenderer,
 		Animator,
@@ -29,6 +30,14 @@ namespace ac::enums
 		AudioClip,
 		Animation,
 		Prefab,
+		Camera,
+		End,
+	};
+	
+	enum class EColliderType
+	{
+		Rect2D,
+		Circle2D,
 		End,
 	};
 }
