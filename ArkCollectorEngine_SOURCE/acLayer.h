@@ -22,7 +22,6 @@ namespace ac
 
 
 	private:
-		// 게임오브젝트를 담은 vector
 		std::vector<GameObject*> mGameObjects;
 	};
 }

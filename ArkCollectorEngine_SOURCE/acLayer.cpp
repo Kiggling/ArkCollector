@@ -12,7 +12,7 @@ namespace ac
 		{
 			if (gameObj == nullptr)
 				continue;
-
+      
 			delete gameObj;
 			gameObj = nullptr;
 		}

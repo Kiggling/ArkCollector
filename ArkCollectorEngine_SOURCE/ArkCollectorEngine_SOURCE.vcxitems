@@ -15,7 +15,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)acApplication.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)acBoxCollidier2DComponent.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)acCircleCollider2DComponent.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)acColliderComponent.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)acCollisionManager.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)acCameraComponent.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)acLayer.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)acRenderer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)acScene.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)acSceneManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)acComponent.h" />
@@ -31,7 +37,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)acApplication.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)acBoxCollidier2DComponent.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)acCircleCollider2DComponent.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)acColliderComponent.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)acCollisionManager.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)acCameraComponent.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)acLayer.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)acRenderer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)acScene.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)acSceneManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)acComponent.cpp" />

@@ -19,7 +19,7 @@ namespace ac
 		virtual void OnEnter();
 		virtual void OnExit();
 
-		__forceinline Layer* GetLayer(const enums::eLayerType type) { return mLayers[(UINT)type]; }
+		__forceinline Layer* GetLayer(const enums::ELayerType type) { return mLayers[(UINT)type]; }
 
 	private:
 		void createLayers();
