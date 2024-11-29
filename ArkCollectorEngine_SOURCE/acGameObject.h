@@ -32,7 +32,7 @@ namespace ac
 			return comp;
 		}
 		template <typename T>
-		T* AddCompenent()
+		T* AddComponent()
 		{
 			T* comp = new T();
 			comp->SetOwner(this);
