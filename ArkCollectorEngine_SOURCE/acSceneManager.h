@@ -21,6 +21,8 @@ namespace ac
 		}
 		static Scene* LoadScene(const std::wstring& name);
 		static Scene* GetActiveScene() { return mActiveScene; }
+		static Scene* GetDontDestroyOnLoad() { return mDontDestroyOnLoad; }
+		static std::vector<GameObject*> GetGameObjects(enums::ELayerType layer);
 		
 
 		static void Initialize();
@@ -31,5 +33,6 @@ namespace ac
 	private:
 		static std::map<std::wstring, Scene*> mScenes;
 		static Scene* mActiveScene;
+		static Scene* mDontDestroyOnLoad;
 	};
 }

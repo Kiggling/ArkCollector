@@ -1,9 +1,11 @@
 #include "acSceneManager.h"
+#include "acDontDestroyOnLoad.h"
 
 namespace ac
 {
 	std::map<std::wstring, Scene*> SceneManager::mScenes = {};
 	Scene* SceneManager::mActiveScene = nullptr;
+	Scene* SceneManager::mDontDestroyOnLoad = nullptr;
 
 	Scene* SceneManager::LoadScene(const std::wstring& name)
 	{
@@ -21,19 +23,32 @@ namespace ac
 
 		return iter->second;
 	}
+	std::vector<GameObject*> SceneManager::GetGameObjects(enums::ELayerType layer)
+	{
+		std::vector<GameObject*> gameObjects = mActiveScene->GetLayer(layer)->GetGameObjects();
+		std::vector<GameObject*> dontDestroyOnLoadGameObjects = mDontDestroyOnLoad->GetLayer(layer)->GetGameObjects();
+
+		gameObjects.insert(gameObjects.end(), dontDestroyOnLoadGameObjects.begin(), dontDestroyOnLoadGameObjects.end());
+
+		return gameObjects;
+	}
 	void SceneManager::Initialize()
 	{
+		mDontDestroyOnLoad = CreateScene<DontDestroyOnLoad>(L"DontDestroyOnLoad");
 	}
 	void SceneManager::Update()
 	{
 		mActiveScene->Update();
+		mDontDestroyOnLoad->Update();
 	}
 	void SceneManager::LateUpdate()
 	{
 		mActiveScene->LateUpdate();
+		mDontDestroyOnLoad->LateUpdate();
 	}
 	void SceneManager::Render(HDC hdc)
 	{
 		mActiveScene->Render(hdc);
+		mDontDestroyOnLoad->Render(hdc);
 	}
 }
