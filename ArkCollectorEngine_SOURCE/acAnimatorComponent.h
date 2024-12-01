@@ -38,16 +38,12 @@ namespace ac
 		void LateUpdate() override;
 		void Render(HDC hdc) override;
 
-		void CreateAnimation(std::wstring& name
+		void CreateAnimation(const std::wstring& name
 			, graphics::Texture* spriteSheet
 			, math::Vector2 leftTop
 			, math::Vector2 size
 			, math::Vector2 offset
 			, UINT spriteLegth
-			, float duration);
-		void CreateAnimationByFolder(std::wstring& name
-			, const std::wstring& path
-			, math::Vector2 offset
 			, float duration);
 
 		Animation* FindAnimation(const std::wstring& name);

@@ -55,7 +55,7 @@ namespace ac
 		if (mActiveAnimation)
 			mActiveAnimation->Render(hdc);
 	}
-	void AnimatorComponent::CreateAnimation(std::wstring& name
+	void AnimatorComponent::CreateAnimation(const std::wstring& name
 		, graphics::Texture* spriteSheet
 		, math::Vector2 leftTop
 		, math::Vector2 size

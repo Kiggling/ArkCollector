@@ -13,7 +13,7 @@ namespace ac::graphics
 			None,
 		};
 
-		static Texture* Create(std::wstring& name, UINT width, UINT height);
+		static Texture* Create(const std::wstring& name, UINT width, UINT height);
 
 		Texture();
 		~Texture();

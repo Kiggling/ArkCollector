@@ -9,7 +9,7 @@ namespace ac
 		Entity();
 		~Entity();
 
-		__forceinline void SetName(std::wstring& InName) { mName = InName; }
+		__forceinline void SetName(const std::wstring& InName) { mName = InName; }
 		__forceinline std::wstring GetName() { return mName; }
 
 	private:

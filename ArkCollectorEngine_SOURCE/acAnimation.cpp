@@ -126,7 +126,7 @@ namespace ac
 			);
 		}
 	}
-	void Animation::CreateAnimation(std::wstring& name, graphics::Texture* spriteSheet, math::Vector2 leftTop, math::Vector2 size, math::Vector2 offset, UINT spriteLength, float duration)
+	void Animation::CreateAnimation(const std::wstring& name, graphics::Texture* spriteSheet, math::Vector2 leftTop, math::Vector2 size, math::Vector2 offset, UINT spriteLength, float duration)
 	{
 		mTexture = spriteSheet;
 		for (size_t i = 0; i < spriteLength; i++)
