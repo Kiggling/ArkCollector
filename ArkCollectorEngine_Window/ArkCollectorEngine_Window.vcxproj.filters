@@ -10,6 +10,12 @@
     <Filter Include="Load">
       <UniqueIdentifier>{a3eb4ead-f3db-4a9e-a00e-fb26b5de38a8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Scenes">
+      <UniqueIdentifier>{02e73730-435c-4871-99aa-170c9292dfb5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes\Test">
+      <UniqueIdentifier>{3e41346d-aac5-4d50-b124-704d3a06dfa2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="acPlayer.cpp">
@@ -17,6 +23,9 @@
     </ClCompile>
     <ClCompile Include="acPlayerScriptComponent.cpp">
       <Filter>Contents\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="acTestScene.cpp">
+      <Filter>Scenes\Test</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -31,6 +40,9 @@
     </ClInclude>
     <ClInclude Include="acLoadResources.h">
       <Filter>Load</Filter>
+    </ClInclude>
+    <ClInclude Include="acTestScene.h">
+      <Filter>Scenes\Test</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

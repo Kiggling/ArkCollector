@@ -32,7 +32,7 @@ namespace ac
 		void Update();
 		void Render(HDC hdc);
 
-		void CreateAnimation(std::wstring& name
+		void CreateAnimation(const std::wstring& name
 			, graphics::Texture* spriteSheet
 			, math::Vector2 leftTop
 			, math::Vector2 size

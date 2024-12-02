@@ -6,7 +6,7 @@ extern ac::Application application;
 
 namespace ac::graphics
 {
-    Texture* Texture::Create(std::wstring& name, UINT width, UINT height)
+    Texture* Texture::Create(const std::wstring& name, UINT width, UINT height)
     {
         Texture* image = Resources::Find<Texture>(name);
         if (image)

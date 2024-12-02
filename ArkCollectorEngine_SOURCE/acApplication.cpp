@@ -2,6 +2,7 @@
 #include "acApplication.h"
 #include "acTime.h"
 #include "acInput.h"
+#include "acSceneManager.h"
 
 namespace ac
 {
@@ -28,6 +29,7 @@ namespace ac
 
 		Input::Initialize();
 		Time::Initialize();
+		SceneManager::Initialize();
 	}
 
 	void Application::Run()
@@ -41,10 +43,13 @@ namespace ac
 	{
 		Input::Update();
 		Time::Update();
+
+		SceneManager::Update();
 	}
 
 	void Application::LateUpdate()
 	{
+		SceneManager::LateUpdate();
 	}
 
 	void Application::Render()
@@ -53,7 +58,7 @@ namespace ac
 		clearRenderTarget();
 
 		// ȭ�鿡 ����ϰ��� �ϴ� Ŭ������ Render �Լ� ȣ�� (���ڷ� mBackHdc ���)
-		
+		SceneManager::Render(mBackHdc);
 
 		// mBackHdc�� �׸� �͵��� mHdc�� ����
 		copyRenderTarget(mBackHdc, mHdc);
