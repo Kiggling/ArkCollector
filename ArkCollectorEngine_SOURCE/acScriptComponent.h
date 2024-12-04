@@ -5,6 +5,9 @@
 
 namespace ac
 {
+	/* 사용 예시
+	* ScriptComponent* sc = gameObj->AddComponent<ScriptComponent>();
+	*/
 	class ScriptComponent : public Component
 	{
 	public:

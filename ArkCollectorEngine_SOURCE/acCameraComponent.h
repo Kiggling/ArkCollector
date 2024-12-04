@@ -5,6 +5,10 @@
 
 namespace ac
 {
+	/* 사용 예시
+	* CameraComponent* cameraComp = camera->AddComponent<CameraComponent>();
+	* renderer::mainCamera = cameraComp;
+	*/
 	class CameraComponent : public Component
 	{
 	public:

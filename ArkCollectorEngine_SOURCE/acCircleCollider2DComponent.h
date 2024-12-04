@@ -3,6 +3,11 @@
 
 namespace ac
 {
+	/* 사용 예시
+	* CircleCollider2DComponent* circleCol = gameObj->AddComponent<CircleCollider2DComponent>();
+	* circleCol->SetSize(math::Vector2::One);
+	* circleCol->SetOffset(math::Vector2::Zero);
+	*/
 	class CircleCollider2DComponent : public ColliderComponent
 	{
 	public:
