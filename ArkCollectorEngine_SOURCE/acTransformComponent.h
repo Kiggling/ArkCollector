@@ -17,22 +17,22 @@ namespace ac
 		virtual void Render(HDC InHdc) override;
 
 		void SetPosition(math::Vector2 InPos) { mPosition = InPos; }
-		void SetRotation(math::Vector2 InRot) { mRotation = InRot; }
-		void SetScale(float InScale) { mScale = InScale; }
+		void SetScale(math::Vector2 InScale) { mScale = InScale; }
+		void SetRotation(float InRot) { mRotation = InRot; }
 		void SetWidth(float InWidth) { mWidth = InWidth; }
 		void SetHeight(float InHeight) { mHeight = InHeight; }
 		math::Vector2 GetPosition() const { return mPosition; }
-		math::Vector2 GetRotation() const {	return mRotation; }
-		float GetScale() const { return mScale; }
+		math::Vector2 GetScale() const { return mScale; }
+		float GetRotation() const { return mRotation; }
 		float GetWidth() const { return mWidth; }
 		float GetHeight() const { return mHeight; }
 
 	private:
 		math::Vector2 mPosition;
-		math::Vector2 mRotation;
+		math::Vector2 mScale;
 		float mWidth;
 		float mHeight;
-		float mScale;
+		float mRotation;
 
 	};
 }

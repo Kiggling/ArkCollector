@@ -48,4 +48,10 @@ namespace ac
 		InPos += mResolution / 2;
 		return InPos;
 	}
+	math::Vector2 CameraComponent::GetPositionInToolScene(math::Vector2 InPos)
+	{
+		InPos += mCameraPosition;
+		InPos -= mResolution / 2;
+		return InPos;
+	}
 }

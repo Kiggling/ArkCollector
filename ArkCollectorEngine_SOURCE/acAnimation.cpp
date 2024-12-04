@@ -47,8 +47,8 @@ namespace ac
 		GameObject* gameObj = mAnimator->GetOwner();
 		TransformComponent* tr = gameObj->GetComponent<TransformComponent>();
 		math::Vector2 pos = tr->GetPosition();
-		math::Vector2 rot = tr->GetRotation();
-		float scale = tr->GetScale();
+		math::Vector2 scale = tr->GetScale();
+		float rot = tr->GetRotation();
 
 		//if (renderer::mainCamera)
 		//	pos = renderer::mainCamera->CalculatePosition(pos);
@@ -70,8 +70,8 @@ namespace ac
 				AlphaBlend(hdc
 					, pos.x - (sprite.size.x / 2.0f) + sprite.offset.x
 					, pos.y - (sprite.size.y / 2.0f) + sprite.offset.y
-					, sprite.size.x * scale
-					, sprite.size.y * scale
+					, sprite.size.x * scale.x
+					, sprite.size.y * scale.y
 					, imgHdc
 					, sprite.leftTop.x
 					, sprite.leftTop.y
@@ -84,8 +84,8 @@ namespace ac
 				TransparentBlt(hdc
 					, pos.x - (sprite.size.x / 2.0f) + sprite.offset.x
 					, pos.y - (sprite.size.y / 2.0f) + sprite.offset.y
-					, sprite.size.x * scale
-					, sprite.size.y * scale
+					, sprite.size.x * scale.x
+					, sprite.size.y * scale.y
 					, imgHdc
 					, sprite.leftTop.x
 					, sprite.leftTop.y
@@ -114,8 +114,8 @@ namespace ac
 				(
 					pos.x - (sprite.size.x / 2.0f)
 					, pos.y - (sprite.size.y / 2.0f)
-					, sprite.size.x * scale
-					, sprite.size.y * scale
+					, sprite.size.x * scale.x
+					, sprite.size.y * scale.y
 				)
 				, sprite.leftTop.x
 				, sprite.leftTop.y

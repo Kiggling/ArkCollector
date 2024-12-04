@@ -1,4 +1,5 @@
 #include "acGameObject.h"
+#include "acTransformComponent.h"
 
 namespace ac
 {
@@ -8,6 +9,7 @@ namespace ac
 		{
 			mComponents.push_back(nullptr);
 		}
+		initializeTransform();
 	}
 	GameObject::~GameObject()
 	{
@@ -54,5 +56,9 @@ namespace ac
 				continue;
 			comp->Render(InHdc);
 		}
+	}
+	void GameObject::initializeTransform()
+	{
+		AddComponent<TransformComponent>();
 	}
 }

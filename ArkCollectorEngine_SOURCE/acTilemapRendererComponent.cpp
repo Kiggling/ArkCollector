@@ -1,28 +1,36 @@
-#include "acSpriteRendererComponent.h"
+#include "acTilemapRendererComponent.h"
 #include "acGameObject.h"
 #include "acTransformComponent.h"
+#include "acRenderer.h"
 
 namespace ac
 {
-	SpriteRenderer::SpriteRenderer()
+	math::Vector2 TilemapRendererComponent::OriginTileSize = math::Vector2(32.f, 32.f);
+	math::Vector2 TilemapRendererComponent::SelectedIndex = math::Vector2::Zero;
+	math::Vector2 TilemapRendererComponent::TileSize = math::Vector2(32.f, 32.f);
+
+	TilemapRendererComponent::TilemapRendererComponent()
 		: Component(enums::EComponentType::SpriteRenderer)
 		, mTexture(nullptr)
 		, mSize(math::Vector2::One)
+		, mIndex(math::Vector2::Zero)
+		, mTileSize(math::Vector2(32.f, 32.f))
+	{
+		TileSize = mTileSize * mSize;
+	}
+	TilemapRendererComponent::~TilemapRendererComponent()
 	{
 	}
-	SpriteRenderer::~SpriteRenderer()
+	void TilemapRendererComponent::Initialize()
 	{
 	}
-	void SpriteRenderer::Initialize()
+	void TilemapRendererComponent::Update()
 	{
 	}
-	void SpriteRenderer::Update()
+	void TilemapRendererComponent::LateUpdate()
 	{
 	}
-	void SpriteRenderer::LateUpdate()
-	{
-	}
-	void SpriteRenderer::Render(HDC hdc)
+	void TilemapRendererComponent::Render(HDC hdc)
 	{
 		if (mTexture == nullptr)
 			assert(false);
@@ -32,7 +40,8 @@ namespace ac
 		math::Vector2 scale = tr->GetScale();
 		float rot = tr->GetRotation();
 
-		// pos = renderer::mainCamera->CalculatePosition(pos);
+		pos = renderer::mainCamera->GetPositionInCameraSpace(pos);
+
 		if (mTexture->GetTextureType()
 			== graphics::Texture::eTextureType::Bmp)
 		{
@@ -47,12 +56,13 @@ namespace ac
 				AlphaBlend(hdc
 					, pos.x
 					, pos.y
-					, mTexture->GetWidth() * mSize.x * scale.x
-					, mTexture->GetHeight() * mSize.y * scale.y
+					, TileSize.x * scale.x
+					, TileSize.y * scale.y
 					, mTexture->GetHdc()
-					, 0, 0
-					, mTexture->GetWidth()
-					, mTexture->GetHeight()
+					, mIndex.x * mTileSize.x 
+					, mIndex.y * mTileSize.y
+					, mTileSize.x
+					, mTileSize.y
 					, func);
 			}
 			else
@@ -60,12 +70,13 @@ namespace ac
 				TransparentBlt(hdc
 					, pos.x
 					, pos.y
-					, mTexture->GetWidth() * mSize.x * scale.x
-					, mTexture->GetHeight() * mSize.y * scale.y
+					, TileSize.x * scale.x
+					, TileSize.y * scale.y
 					, mTexture->GetHdc()
-					, 0, 0
-					, mTexture->GetWidth()
-					, mTexture->GetHeight()
+					, mIndex.x * mTileSize.x
+					, mIndex.y * mTileSize.y
+					, mTileSize.x
+					, mTileSize.y
 					, RGB(255, 0, 255));
 			}
 		}
@@ -77,7 +88,7 @@ namespace ac
 			imgAtt.SetColorKey(Gdiplus::Color(230, 230, 230), Gdiplus::Color(255, 255, 255));
 
 			Gdiplus::Graphics graphics(hdc);
-			
+
 			//graphics.TranslateTransform(pos.x, pos.y);
 			//graphics.RotateTransform(rot);
 			//graphics.TranslateTransform(-pos.x, -pos.y);
@@ -86,14 +97,15 @@ namespace ac
 				, Gdiplus::Rect
 				(
 					pos.x, pos.y
-					, mTexture->GetWidth() * mSize.x * scale.x
-					, mTexture->GetHeight() * mSize.y * scale.y
+					, TileSize.x * scale.x
+					, TileSize.y * scale.y
 				)
-				, 0, 0
-				, mTexture->GetWidth(), mTexture->GetHeight()
+				, mIndex.x * mTileSize.x
+				, mIndex.y * mTileSize.y
+				, mTileSize.x
+				, mTileSize.y
 				, Gdiplus::UnitPixel
 				, nullptr/*&imgAtt*/);
 		}
-
 	}
 }

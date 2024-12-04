@@ -42,9 +42,12 @@ namespace ac
 			return comp;
 		}
 
-
+		void SetLayerType(enums::ELayerType InLayerType) { mLayerType = InLayerType; }
+	private:
+		void initializeTransform();
 	private:
 		std::vector<Component*> mComponents;
+		enums::ELayerType mLayerType;
 	};
 
 }	

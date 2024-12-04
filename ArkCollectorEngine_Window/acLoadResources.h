@@ -7,5 +7,6 @@ namespace ac
 	void LoadResources()
 	{
 		//Resources::Load<graphics::Texture>();
+		Resources::Load<graphics::Texture>(L"DungeonTileset", L"..\\Content\\Dungeon_Tileset\\Png\\DungeonTileset.png");
 	}
 }

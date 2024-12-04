@@ -25,8 +25,8 @@ namespace ac::graphics
 
         HBRUSH transparentBrush = (HBRUSH)GetStockObject(NULL_BRUSH);
         HBRUSH oldBrush = (HBRUSH)SelectObject(hdc, transparentBrush);
-        Rectangle(hdc, -1, -1, image->GetWidth() + 1, image->GetHeight() + 1);
-        SelectObject(hdc, oldBrush);
+        Rectangle(image->mHdc, -1, -1, image->GetWidth() + 1, image->GetHeight() + 1);
+        SelectObject(image->mHdc, oldBrush);
 
         HBITMAP oldBitmap = (HBITMAP)SelectObject(image->mHdc, image->mBitmap);
         DeleteObject(oldBitmap);

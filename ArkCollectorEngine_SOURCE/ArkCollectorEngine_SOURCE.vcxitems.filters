@@ -76,6 +76,9 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)acDontDestroyOnLoad.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)acTilemapRendererComponent.cpp">
+      <Filter>Components\TilemapRenderer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)acApplication.h">
@@ -159,6 +162,10 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)acDontDestroyOnLoad.h">
       <Filter>Scene</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)acObject.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)acTilemapRendererComponent.h">
+      <Filter>Components\TilemapRenderer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Application">
@@ -238,6 +245,12 @@
     </Filter>
     <Filter Include="Common\Header">
       <UniqueIdentifier>{ba49d154-f81f-408a-918d-0750db64a7d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common\Object">
+      <UniqueIdentifier>{bef04c7d-e74c-4416-9150-5eee21e93ff4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\TilemapRenderer">
+      <UniqueIdentifier>{ee699d1e-1476-4c14-97d1-22469baeff15}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

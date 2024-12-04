@@ -18,6 +18,7 @@ namespace ac
 		
 		void SetTarget(class GameObject* InTarget) { mTarget = InTarget; }
 		math::Vector2 GetPositionInCameraSpace(math::Vector2 InPos);
+		math::Vector2 GetPositionInToolScene(math::Vector2 InPos);
 
 	private:
 		math::Vector2 mCameraPosition;

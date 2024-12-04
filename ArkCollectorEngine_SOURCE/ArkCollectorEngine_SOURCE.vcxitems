@@ -24,6 +24,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)acCameraComponent.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)acDontDestroyOnLoad.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)acLayer.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)acObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)acResource.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)acResources.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)acRenderer.h" />
@@ -35,6 +36,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)acScriptComponent.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)acSpriteRendererComponent.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)acTexture.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)acTilemapRendererComponent.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)acTime.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)acTransformComponent.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CommonInclude.h" />
@@ -63,6 +65,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)acScriptComponent.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)acSpriteRendererComponent.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)acTexture.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)acTilemapRendererComponent.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)acTime.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)acEntity.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)acInput.cpp" />
