@@ -53,7 +53,7 @@ namespace ac
 				Tile* tile = object::Instantiate<Tile>(enums::ELayerType::Tile);
 				TilemapRendererComponent* tmr = tile->AddComponent<TilemapRendererComponent>();
 				tmr->SetTexture(Resources::Find<graphics::Texture>(L"DungeonTileset"));
-				tmr->SetIndex(math::Vector2(13, 4));
+				tmr->SetIndex(TilemapRendererComponent::SelectedIndex);
 
 				tile->SetIndexPosition(idxX, idxY);
 
@@ -95,4 +95,108 @@ namespace ac
 	{
 		Scene::OnExit();
 	}
+}
+
+
+LRESULT CALLBACK TileWndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
+{
+	switch (message)
+	{
+	case WM_LBUTTONDOWN:
+	{
+		POINT mousePos = {};
+		GetCursorPos(&mousePos);
+		ScreenToClient(hWnd, &mousePos);
+
+		ac::math::Vector2 mousePositionVector;
+		mousePositionVector.x = mousePos.x;
+		mousePositionVector.y = mousePos.y;
+
+		int idxX = mousePositionVector.x / ac::TilemapRendererComponent::OriginTileSize.x;
+		int idxY = mousePositionVector.y / ac::TilemapRendererComponent::OriginTileSize.y;
+
+		ac::TilemapRendererComponent::SelectedIndex = ac::math::Vector2(idxX, idxY);
+	}
+	break;
+	case WM_PAINT:
+	{
+		PAINTSTRUCT ps;
+		HDC hdc = BeginPaint(hWnd, &ps);
+		// TODO: 여기에 hdc를 사용하는 그리기 코드를 추가합니다...
+
+
+		ac::graphics::Texture* texture = ac::Resources::Find<ac::graphics::Texture>(L"DungeonTileset");
+
+		if (texture == nullptr)
+			assert(false);
+
+		if (texture->GetTextureType()
+			== ac::graphics::Texture::eTextureType::Bmp)
+		{
+			if (texture->IsAlpha())
+			{
+				BLENDFUNCTION func = {};
+				func.BlendOp = AC_SRC_OVER;
+				func.BlendFlags = 0;
+				func.AlphaFormat = AC_SRC_ALPHA;
+				func.SourceConstantAlpha = 255; // 0(transparent) ~ 255(Opaque)
+
+				AlphaBlend(hdc
+					, 0
+					, 0
+					, texture->GetWidth()
+					, texture->GetHeight() 
+					, texture->GetHdc()
+					, 0, 0
+					, texture->GetWidth()
+					, texture->GetHeight()
+					, func);
+			}
+			else
+			{
+				TransparentBlt(hdc
+					, 0
+					, 0
+					, texture->GetWidth()
+					, texture->GetHeight()
+					, texture->GetHdc()
+					, 0, 0
+					, texture->GetWidth()
+					, texture->GetHeight()
+					, RGB(255, 0, 255));
+			}
+		}
+		else if (texture->GetTextureType()
+			== ac::graphics::Texture::eTextureType::Png)
+		{
+			// 투명화시킬 픽셀의 색 범위
+			Gdiplus::ImageAttributes imgAtt = {};
+			imgAtt.SetColorKey(Gdiplus::Color(230, 230, 230), Gdiplus::Color(255, 255, 255));
+
+			Gdiplus::Graphics graphics(hdc);
+
+			graphics.DrawImage(texture->GetImage()
+				, Gdiplus::Rect
+				(
+					0, 0
+					, texture->GetWidth()
+					, texture->GetHeight()
+				)
+				, 0, 0
+				, texture->GetWidth(), texture->GetHeight()
+				, Gdiplus::UnitPixel
+				, nullptr/*&imgAtt*/);
+		}
+
+
+		EndPaint(hWnd, &ps);
+	}
+	break;
+	case WM_DESTROY:
+		PostQuitMessage(0);
+		break;
+	default:
+		return DefWindowProc(hWnd, message, wParam, lParam);
+	}
+	return 0;
 }

@@ -20,3 +20,4 @@ namespace ac
 	private:
 	};
 }
+LRESULT CALLBACK TileWndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);

@@ -8,5 +8,6 @@ namespace ac
 	{
 		//Resources::Load<graphics::Texture>();
 		Resources::Load<graphics::Texture>(L"DungeonTileset", L"..\\Content\\Dungeon_Tileset\\Png\\DungeonTileset.png");
+		Resources::Load<graphics::Texture>(L"SpringFloor", L"..\\Content\\Dungeon_Tileset\\Png\\SpringFloor.bmp");
 	}
 }
