@@ -1,5 +1,6 @@
 #pragma once
 #include "..\\ArkCollectorEngine_SOURCE\\acScene.h"
+#include "acTile.h"
 
 namespace ac
 {
@@ -17,7 +18,12 @@ namespace ac
 		void OnEnter() override;
 		void OnExit() override;
 
+
+		void Save();
+		void Load();
+
 	private:
+		std::vector<Tile*> mTiles;
 	};
 }
 LRESULT CALLBACK TileWndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);

@@ -14,6 +14,7 @@ extern ac::Application application;
 namespace ac
 {
 	ToolScene::ToolScene()
+		: mTiles{}
 	{
 	}
 	ToolScene::~ToolScene()
@@ -57,9 +58,16 @@ namespace ac
 
 				tile->SetIndexPosition(idxX, idxY);
 
-
+				mTiles.push_back(tile);
 			}
-
+		}
+		if (Input::GetKeyDown(EKeyCode::S))
+		{
+			Save();
+		}
+		if (Input::GetKeyDown(EKeyCode::L))
+		{
+			Load();
 		}
 	}
 	void ToolScene::Render(HDC hdc)
@@ -94,6 +102,104 @@ namespace ac
 	void ToolScene::OnExit()
 	{
 		Scene::OnExit();
+	}
+	void ToolScene::Save()
+	{
+		// open a file name
+		OPENFILENAME ofn = {};
+
+		wchar_t szFilePath[256] = {};
+
+		ZeroMemory(&ofn, sizeof(ofn));
+		ofn.lStructSize = sizeof(ofn);
+		ofn.hwndOwner = NULL;
+		ofn.lpstrFile = szFilePath;
+		ofn.lpstrFile[0] = '\0';
+		ofn.nMaxFile = 256;
+		ofn.lpstrFilter = L"Tile\0*.tile\0";
+		ofn.nFilterIndex = 1;
+		ofn.lpstrFileTitle = NULL;
+		ofn.nMaxFileTitle = 0;
+		ofn.lpstrInitialDir = NULL;
+		ofn.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST;
+
+		if (false == GetSaveFileName(&ofn))
+			return;
+
+		FILE* file = nullptr;
+
+		_wfopen_s(&file, szFilePath, L"wt");
+		for (Tile* tile : mTiles)
+		{
+			TilemapRendererComponent* tmr = tile->GetComponent<TilemapRendererComponent>();
+			TransformComponent* tr = tile->GetComponent<TransformComponent>();
+
+			math::Vector2 sourceIndex = tmr->GetIndex();
+			math::Vector2 position = tr->GetPosition();
+
+			int x = sourceIndex.x;
+			fwrite(&x, sizeof(int), 1, file);
+			int y = sourceIndex.y;
+			fwrite(&y, sizeof(int), 1, file);
+			x = position.x;
+			fwrite(&x, sizeof(int), 1, file);
+			y = position.y;
+			fwrite(&y, sizeof(int), 1, file);
+
+		}
+		fclose(file);
+
+	}
+	void ToolScene::Load()
+	{
+		// open a file name
+		OPENFILENAME ofn = {};
+
+		wchar_t szFilePath[256] = {};
+
+		ZeroMemory(&ofn, sizeof(ofn));
+		ofn.lStructSize = sizeof(ofn);
+		ofn.hwndOwner = NULL;
+		ofn.lpstrFile = szFilePath;
+		ofn.lpstrFile[0] = '\0';
+		ofn.nMaxFile = 256;
+		ofn.lpstrFilter = L"All\0*.*\0Text\0*.TXT\0";
+		ofn.nFilterIndex = 1;
+		ofn.lpstrFileTitle = NULL;
+		ofn.nMaxFileTitle = 0;
+		ofn.lpstrInitialDir = NULL;
+		ofn.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST;
+
+		if (false == GetSaveFileName(&ofn))
+			return;
+
+		FILE* file = nullptr;
+
+		_wfopen_s(&file, szFilePath, L"rt");
+		while(true)
+		{
+			int idxX = 0;
+			int idxY = 0;
+			int posX = 0;
+			int posY = 0;
+
+			if (fread(&idxX, sizeof(int), 1, file) == NULL)
+				break;
+			if (fread(&idxY, sizeof(int), 1, file) == NULL)
+				break;
+			if (fread(&posX, sizeof(int), 1, file) == NULL)
+				break;
+			if (fread(&posY, sizeof(int), 1, file) == NULL)
+				break;
+
+			Tile* tile = object::Instantiate<Tile>(enums::ELayerType::Tile, math::Vector2(posX, posY));
+			TilemapRendererComponent* tmr = tile->AddComponent<TilemapRendererComponent>();
+			tmr->SetTexture(Resources::Find<graphics::Texture>(L"DungeonTileset"));
+			tmr->SetIndex(math::Vector2(idxX, idxY));
+
+			mTiles.push_back(tile);
+		}
+		fclose(file);
 	}
 }
 
