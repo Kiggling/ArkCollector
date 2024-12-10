@@ -28,14 +28,36 @@ namespace ac
 
 		GameObject* camera = object::Instantiate<GameObject>(enums::ELayerType::None, math::Vector2(WinWidth/2, WinHeight/2));
 		CameraComponent* cameraComp = camera->AddComponent<CameraComponent>();
-		CameraScriptComponent* sc = camera->AddComponent<CameraScriptComponent>();
 		renderer::mainCamera = cameraComp;
 
 		Scene::Initialize();
 	}
 	void ToolScene::Update()
 	{
-		Scene::Update();		
+		Scene::Update();
+
+		for (auto it = mTiles.begin(); it != mTiles.end(); )
+		{
+			math::Vector2 mousePos = Input::GetMousePosition();
+			int idxX = mousePos.x / TilemapRendererComponent::TileSize.x;
+			int idxY = mousePos.y / TilemapRendererComponent::TileSize.y;
+			mousePos.x = idxX * TilemapRendererComponent::TileSize.x;
+			mousePos.y = idxY * TilemapRendererComponent::TileSize.y;
+
+			TransformComponent* tr = (*it)->GetComponent<TransformComponent>();
+			
+			if (fabs(mousePos.x - tr->GetPosition().x) < 0.001f && fabs(mousePos.y - tr->GetPosition().y) < 0.001f)
+			{
+				if (Input::GetKeyDown(EKeyCode::D))
+				{
+					(*it)->SetIsDead(true);
+					it = mTiles.erase(it);
+					continue;
+				}
+			}
+
+			it++;
+		}
 	}
 	void ToolScene::LateUpdate()
 	{
@@ -55,7 +77,7 @@ namespace ac
 				TilemapRendererComponent* tmr = tile->AddComponent<TilemapRendererComponent>();
 				tmr->SetTexture(Resources::Find<graphics::Texture>(L"DungeonTileset"));
 				tmr->SetIndex(TilemapRendererComponent::SelectedIndex);
-
+				
 				tile->SetIndexPosition(idxX, idxY);
 
 				mTiles.push_back(tile);
@@ -77,8 +99,8 @@ namespace ac
 		UINT WinWidth = application.GetWidth();
 		UINT WinHeight = application.GetHeight();
 
-		UINT numOfWidthLine = 100;
-		UINT numOfHeightLine = 100;
+		UINT numOfWidthLine = WinWidth / TilemapRendererComponent::TileSize.x;
+		UINT numOfHeightLine = WinHeight / TilemapRendererComponent::TileSize.y;
 
 		for (size_t i = 0; i < numOfWidthLine; i++)
 		{
@@ -129,6 +151,7 @@ namespace ac
 		FILE* file = nullptr;
 
 		_wfopen_s(&file, szFilePath, L"wt");
+		int cnt = 0;
 		for (Tile* tile : mTiles)
 		{
 			TilemapRendererComponent* tmr = tile->GetComponent<TilemapRendererComponent>();
@@ -146,8 +169,23 @@ namespace ac
 			y = position.y;
 			fwrite(&y, sizeof(int), 1, file);
 
+			cnt++;
+
+			if (cnt > 162)
+			{
+				int a = 0;
+			}
 		}
 		fclose(file);
+
+		wchar_t successMessage[100] = {};
+		swprintf_s(successMessage, L"%d개의 타일이 성공적으로 저장되었습니다.", cnt);
+		MessageBox(
+			NULL,
+			successMessage,
+			L"알림",                         
+			MB_OK | MB_ICONINFORMATION         // 확인 버튼 및 정보 아이콘
+		);
 
 	}
 	void ToolScene::Load()
@@ -176,12 +214,18 @@ namespace ac
 		FILE* file = nullptr;
 
 		_wfopen_s(&file, szFilePath, L"rt");
+		int cnt = 0;
 		while(true)
 		{
 			int idxX = 0;
 			int idxY = 0;
 			int posX = 0;
 			int posY = 0;
+
+			if (cnt >= 163)
+			{
+				int a = 0;
+			}
 
 			if (fread(&idxX, sizeof(int), 1, file) == NULL)
 				break;
@@ -198,8 +242,19 @@ namespace ac
 			tmr->SetIndex(math::Vector2(idxX, idxY));
 
 			mTiles.push_back(tile);
+			cnt++;
 		}
 		fclose(file);
+
+		wchar_t successMessage[100] = {};
+		swprintf_s(successMessage, L"%d개의 타일을 불러왔습니다.", cnt);
+		MessageBox(
+			NULL,
+			successMessage,
+			L"알림",
+			MB_OK | MB_ICONINFORMATION         // 확인 버튼 및 정보 아이콘
+		);
+
 	}
 }
 

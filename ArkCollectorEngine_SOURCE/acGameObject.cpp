@@ -4,6 +4,7 @@
 namespace ac
 {
 	GameObject::GameObject()
+		: mbIsDead(false)
 	{
 		for (size_t i = 0; i < (UINT)enums::EComponentType::End; i++)
 		{

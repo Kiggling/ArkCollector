@@ -7,7 +7,7 @@ namespace ac
 {
 	math::Vector2 TilemapRendererComponent::OriginTileSize = math::Vector2(32.f, 32.f);
 	math::Vector2 TilemapRendererComponent::SelectedIndex = math::Vector2::Zero;
-	math::Vector2 TilemapRendererComponent::TileSize = math::Vector2(32.f, 32.f);
+	math::Vector2 TilemapRendererComponent::TileSize = math::Vector2(30.f, 30.f);
 
 	TilemapRendererComponent::TilemapRendererComponent()
 		: Component(enums::EComponentType::SpriteRenderer)
@@ -16,7 +16,7 @@ namespace ac
 		, mIndex(math::Vector2::Zero)
 		, mTileSize(math::Vector2(32.f, 32.f))
 	{
-		TileSize = mTileSize * mSize;
+		//TileSize = mTileSize * mSize;
 	}
 	TilemapRendererComponent::~TilemapRendererComponent()
 	{

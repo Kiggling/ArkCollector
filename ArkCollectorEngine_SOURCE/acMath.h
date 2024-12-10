@@ -105,6 +105,10 @@ namespace ac::math
 		{
 			return Vector2(x * v.x, y * v.y);
 		}
+		Vector2 operator/(Vector2 v)
+		{
+			return Vector2(x / v.x, y / v.y);
+		}
 
 		void clear()
 		{

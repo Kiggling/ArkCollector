@@ -10,6 +10,7 @@
 #include <filesystem>
 #include <bitset>
 #include <unordered_map>
+#include <list>
 
 #include "acMath.h"
 #include "acEnums.h"
