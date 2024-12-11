@@ -33,6 +33,7 @@ namespace ac
 		float rot = tr->GetRotation();
 
 		// pos = renderer::mainCamera->CalculatePosition(pos);
+
 		if (mTexture->GetTextureType()
 			== graphics::Texture::eTextureType::Bmp)
 		{

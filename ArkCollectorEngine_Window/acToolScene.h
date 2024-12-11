@@ -21,9 +21,12 @@ namespace ac
 
 		void Save();
 		void Load();
-
+		void SaveAsBmp();
+	private:
+		bool saveBitmapToFile(HBITMAP hBitmap, HDC hDC, LPCWSTR filename);
 	private:
 		std::vector<Tile*> mTiles;
+		bool mbShowLine;
 	};
 }
 LRESULT CALLBACK TileWndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);

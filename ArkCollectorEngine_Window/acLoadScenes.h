@@ -13,6 +13,7 @@ namespace ac
 		SceneManager::LoadScene(L"TestScene");*/
 
 		SceneManager::CreateScene<ToolScene>(L"ToolScene");
+		SceneManager::CreateScene<TestScene>(L"TestScene");
 		SceneManager::LoadScene(L"ToolScene");
 	}
 }

@@ -89,10 +89,6 @@ namespace ac
 
 			Gdiplus::Graphics graphics(hdc);
 
-			//graphics.TranslateTransform(pos.x, pos.y);
-			//graphics.RotateTransform(rot);
-			//graphics.TranslateTransform(-pos.x, -pos.y);
-
 			graphics.DrawImage(mTexture->GetImage()
 				, Gdiplus::Rect
 				(

@@ -15,6 +15,7 @@ namespace ac
 {
 	ToolScene::ToolScene()
 		: mTiles{}
+		, mbShowLine(true)
 	{
 	}
 	ToolScene::~ToolScene()
@@ -91,30 +92,41 @@ namespace ac
 		{
 			Load();
 		}
+		if (Input::GetKeyDown(EKeyCode::P))
+		{
+			SaveAsBmp();
+		}
+		if (Input::GetKeyDown(EKeyCode::I))
+		{
+			mbShowLine = !mbShowLine;
+		}
 	}
 	void ToolScene::Render(HDC hdc)
 	{
 		Scene::Render(hdc);
-
-		UINT WinWidth = application.GetWidth();
-		UINT WinHeight = application.GetHeight();
-
-		UINT numOfWidthLine = WinWidth / TilemapRendererComponent::TileSize.x;
-		UINT numOfHeightLine = WinHeight / TilemapRendererComponent::TileSize.y;
-
-		for (size_t i = 0; i < numOfWidthLine; i++)
+		if (mbShowLine)
 		{
-			math::Vector2 pos = renderer::mainCamera->GetPositionInCameraSpace(math::Vector2(TilemapRendererComponent::TileSize.x*i, 0.f));
 
-			MoveToEx(hdc, pos.x, 0, NULL);
-			LineTo(hdc, pos.x, WinHeight);
-		}
-		for (size_t i = 0; i < numOfHeightLine; i++)
-		{
-			math::Vector2 pos = renderer::mainCamera->GetPositionInCameraSpace(math::Vector2(0.f, TilemapRendererComponent::TileSize.y*i));
+			UINT WinWidth = application.GetWidth();
+			UINT WinHeight = application.GetHeight();
 
-			MoveToEx(hdc, 0, pos.y, NULL);
-			LineTo(hdc, WinWidth, pos.y);
+			UINT numOfWidthLine = WinWidth / TilemapRendererComponent::TileSize.x;
+			UINT numOfHeightLine = WinHeight / TilemapRendererComponent::TileSize.y;
+
+			for (size_t i = 0; i < numOfWidthLine; i++)
+			{
+				math::Vector2 pos = renderer::mainCamera->GetPositionInCameraSpace(math::Vector2(TilemapRendererComponent::TileSize.x*i, 0.f));
+
+				MoveToEx(hdc, pos.x, 0, NULL);
+				LineTo(hdc, pos.x, WinHeight);
+			}
+			for (size_t i = 0; i < numOfHeightLine; i++)
+			{
+				math::Vector2 pos = renderer::mainCamera->GetPositionInCameraSpace(math::Vector2(0.f, TilemapRendererComponent::TileSize.y*i));
+
+				MoveToEx(hdc, 0, pos.y, NULL);
+				LineTo(hdc, WinWidth, pos.y);
+			}
 		}
 	}
 	void ToolScene::OnEnter()
@@ -150,7 +162,7 @@ namespace ac
 
 		FILE* file = nullptr;
 
-		_wfopen_s(&file, szFilePath, L"wt");
+		_wfopen_s(&file, szFilePath, L"wb");
 		int cnt = 0;
 		for (Tile* tile : mTiles)
 		{
@@ -170,11 +182,6 @@ namespace ac
 			fwrite(&y, sizeof(int), 1, file);
 
 			cnt++;
-
-			if (cnt > 162)
-			{
-				int a = 0;
-			}
 		}
 		fclose(file);
 
@@ -213,19 +220,14 @@ namespace ac
 
 		FILE* file = nullptr;
 
-		_wfopen_s(&file, szFilePath, L"rt");
+		_wfopen_s(&file, szFilePath, L"rb");
 		int cnt = 0;
-		while(true)
+		while(!feof(file))
 		{
 			int idxX = 0;
 			int idxY = 0;
 			int posX = 0;
 			int posY = 0;
-
-			if (cnt >= 163)
-			{
-				int a = 0;
-			}
 
 			if (fread(&idxX, sizeof(int), 1, file) == NULL)
 				break;
@@ -256,6 +258,111 @@ namespace ac
 		);
 
 	}
+	void ToolScene::SaveAsBmp()
+	{
+		// open a file name
+		OPENFILENAME ofn = {};
+
+		wchar_t szFilePath[256] = {};
+
+		ZeroMemory(&ofn, sizeof(ofn));
+		ofn.lStructSize = sizeof(ofn);
+		ofn.hwndOwner = NULL;
+		ofn.lpstrFile = szFilePath;
+		ofn.lpstrFile[0] = '\0';
+		ofn.nMaxFile = 256;
+		ofn.lpstrFilter = L"Bmp\0*.bmp\0";
+		ofn.nFilterIndex = 1;
+		ofn.lpstrFileTitle = NULL;
+		ofn.nMaxFileTitle = 0;
+		ofn.lpstrInitialDir = NULL;
+		ofn.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST;
+
+		if (false == GetSaveFileName(&ofn))
+			return;
+
+		wchar_t extension[5] = L".bmp";
+		wcscat_s(szFilePath, extension);
+
+		HWND hwnd = application.GetHwnd();
+		HDC currentHdc = application.GetHdc();
+
+		RECT rc; 
+		GetClientRect(hwnd, &rc);
+		UINT winWidth = rc.right - rc.left;
+		UINT winHeight = rc.bottom - rc.top;
+
+		HBITMAP bitmapForSave = CreateCompatibleBitmap(currentHdc, winWidth, winHeight);
+		HDC hdcForSave = CreateCompatibleDC(currentHdc);
+
+		HBITMAP oldBitmap = (HBITMAP)SelectObject(hdcForSave, bitmapForSave);
+		DeleteObject(oldBitmap);
+
+		BitBlt(hdcForSave, 0, 0, winWidth, winHeight, currentHdc, 0, 0, SRCCOPY);
+
+		saveBitmapToFile(bitmapForSave, hdcForSave, szFilePath);
+
+		MessageBox(
+			NULL,
+			L"bmp 파일이 성공적으로 저장되었습니다.",
+			L"알림",
+			MB_OK | MB_ICONINFORMATION         // 확인 버튼 및 정보 아이콘
+		);
+	}
+
+	bool ToolScene::saveBitmapToFile(HBITMAP hBitmap, HDC hDC, LPCWSTR filename)
+	{
+		BITMAP bmp;
+		GetObject(hBitmap, sizeof(BITMAP), &bmp);
+
+		BITMAPFILEHEADER bmfHeader;
+		BITMAPINFOHEADER bi;
+
+		bi.biSize = sizeof(BITMAPINFOHEADER);
+		bi.biWidth = bmp.bmWidth;
+		bi.biHeight = -bmp.bmHeight; // Top-down DIB
+		bi.biPlanes = 1;
+		bi.biBitCount = 32; // Assuming 32 bits per pixel
+		bi.biCompression = BI_RGB;
+		bi.biSizeImage = 0;
+		bi.biXPelsPerMeter = 0;
+		bi.biYPelsPerMeter = 0;
+		bi.biClrUsed = 0;
+		bi.biClrImportant = 0;
+
+		DWORD dwBmpSize = ((bmp.bmWidth * bi.biBitCount + 31) / 32) * 4 * bmp.bmHeight;
+
+		HANDLE hDIB = GlobalAlloc(GHND, dwBmpSize);
+		char* lpbitmap = (char*)GlobalLock(hDIB);
+
+		GetDIBits(hDC, hBitmap, 0, (UINT)bmp.bmHeight, lpbitmap, (BITMAPINFO*)&bi, DIB_RGB_COLORS);
+
+		HANDLE hFile = CreateFile(filename, GENERIC_WRITE, 0, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+		if (hFile == INVALID_HANDLE_VALUE) {
+			GlobalUnlock(hDIB);
+			GlobalFree(hDIB);
+			return false;
+		}
+
+		DWORD dwSizeofDIB = dwBmpSize + sizeof(BITMAPFILEHEADER) + sizeof(BITMAPINFOHEADER);
+
+		bmfHeader.bfOffBits = sizeof(BITMAPFILEHEADER) + sizeof(BITMAPINFOHEADER);
+		bmfHeader.bfSize = dwSizeofDIB;
+		bmfHeader.bfType = 0x4D42; // BM
+
+		DWORD dwBytesWritten;
+		WriteFile(hFile, (LPSTR)&bmfHeader, sizeof(BITMAPFILEHEADER), &dwBytesWritten, NULL);
+		WriteFile(hFile, (LPSTR)&bi, sizeof(BITMAPINFOHEADER), &dwBytesWritten, NULL);
+		WriteFile(hFile, (LPSTR)lpbitmap, dwBmpSize, &dwBytesWritten, NULL);
+
+		CloseHandle(hFile);
+		GlobalUnlock(hDIB);
+		GlobalFree(hDIB);
+
+		return true;
+	}
+
+	
 }
 
 
