@@ -14,6 +14,6 @@ namespace ac
 
 		SceneManager::CreateScene<ToolScene>(L"ToolScene");
 		SceneManager::CreateScene<TestScene>(L"TestScene");
-		SceneManager::LoadScene(L"ToolScene");
+		SceneManager::LoadScene(L"TestScene");
 	}
 }

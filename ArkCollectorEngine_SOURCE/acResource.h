@@ -6,7 +6,7 @@ namespace ac
 	class Resource abstract : public Entity
 	{
 	public:
-		Resource(enums::eResourceType type);
+		Resource(enums::EResourceType type);
 		virtual ~Resource();
 
 		virtual HRESULT Load(const std::wstring& path) = 0;
@@ -15,7 +15,7 @@ namespace ac
 		void SetPath(const std::wstring& path) { mPath = path; }
 
 	private:
-		const enums::eResourceType mType;
+		const enums::EResourceType mType;
 		std::wstring mPath;
 	};
 }

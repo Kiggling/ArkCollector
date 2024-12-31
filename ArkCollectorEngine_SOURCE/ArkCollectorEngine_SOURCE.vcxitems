@@ -39,6 +39,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)acTilemapRendererComponent.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)acTime.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)acTransformComponent.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)acUIBase.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)acUIHUD.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)acUIManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CommonInclude.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)acMath.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)acEntity.h" />
@@ -71,5 +74,8 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)acInput.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)acMath.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)acTransformComponent.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)acUIBase.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)acUIHUD.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)acUIManager.cpp" />
   </ItemGroup>
 </Project>

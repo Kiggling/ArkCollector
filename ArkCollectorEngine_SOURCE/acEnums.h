@@ -25,7 +25,7 @@ namespace ac::enums
 		End,
 	};
 
-	enum class eResourceType
+	enum class EResourceType
 	{
 		Texture,
 		AudioClip,
@@ -38,6 +38,12 @@ namespace ac::enums
 	{
 		Rect2D,
 		Circle2D,
+		End,
+	};
+
+	enum class EUIType
+	{
+		HUD,
 		End,
 	};
 }

@@ -7,7 +7,7 @@
 namespace ac
 {
 	Animation::Animation()
-		: Resource(enums::eResourceType::Animation)
+		: Resource(enums::EResourceType::Animation)
 		, mAnimator(nullptr)
 		, mTexture(nullptr)
 		, mAnimationSheet{}

@@ -37,7 +37,7 @@ namespace ac::graphics
     }
 
     Texture::Texture()
-        : Resource(enums::eResourceType::Texture)
+        : Resource(enums::EResourceType::Texture)
         , mbAlpha(false)
         , mType(eTextureType::None)
         , mImage(nullptr)

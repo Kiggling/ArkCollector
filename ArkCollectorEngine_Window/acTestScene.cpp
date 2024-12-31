@@ -17,7 +17,7 @@ namespace ac
 	{
 		GameObject* background = object::Instantiate<GameObject>(enums::ELayerType::BackGround);
 		SpriteRenderer* sr = background->AddComponent<SpriteRenderer>();
-		graphics::Texture* texture = Resources::Find<graphics::Texture>(L"SpringFloor");
+		graphics::Texture* texture = Resources::Find<graphics::Texture>(L"Dungeon");
 		sr->SetTexture(texture);
 
 	}

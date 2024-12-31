@@ -2,7 +2,7 @@
 
 namespace ac
 {
-	Resource::Resource(enums::eResourceType type)
+	Resource::Resource(enums::EResourceType type)
 		: mType(type)
 	{
 	}
