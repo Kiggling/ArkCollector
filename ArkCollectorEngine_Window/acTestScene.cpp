@@ -4,6 +4,7 @@
 #include "acObject.h"
 #include "acResources.h"
 #include "acTexture.h"
+#include "acUIManager.h"
 
 namespace ac
 {
@@ -19,6 +20,8 @@ namespace ac
 		SpriteRenderer* sr = background->AddComponent<SpriteRenderer>();
 		graphics::Texture* texture = Resources::Find<graphics::Texture>(L"Dungeon");
 		sr->SetTexture(texture);
+
+		UIManager::Push(enums::EUIType::HUD);
 
 	}
 	void TestScene::Update()

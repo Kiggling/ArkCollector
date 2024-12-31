@@ -1,4 +1,5 @@
 #include "acUIManager.h"
+#include "acUIHUD.h"
 
 namespace ac
 {
@@ -8,6 +9,9 @@ namespace ac
 
 	void UIManager::Initialize()
 	{
+		UIHUD* hud = new UIHUD();
+		mUIs.insert({ enums::EUIType::HUD, hud });
+
 	}
 	void UIManager::OnLoad(enums::EUIType InType)
 	{
@@ -68,7 +72,7 @@ namespace ac
 		{
 			enums::EUIType requestUI = mRequestUIQueue.front();
 			mRequestUIQueue.pop();
-
+			OnLoad(requestUI);
 		}
 	}
 	void UIManager::LateUpdate()
