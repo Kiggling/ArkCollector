@@ -76,6 +76,18 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)acDontDestroyOnLoad.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)acTilemapRendererComponent.cpp">
+      <Filter>Components\TilemapRenderer</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)acUIManager.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)acUIBase.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)acUIHUD.cpp">
+      <Filter>UI\HUD</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)acApplication.h">
@@ -159,6 +171,19 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)acDontDestroyOnLoad.h">
       <Filter>Scene</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)acObject.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)acTilemapRendererComponent.h">
+      <Filter>Components\TilemapRenderer</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)acUIManager.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)acUIBase.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)acUIHUD.h">
+      <Filter>UI\HUD</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Application">
@@ -238,6 +263,18 @@
     </Filter>
     <Filter Include="Common\Header">
       <UniqueIdentifier>{ba49d154-f81f-408a-918d-0750db64a7d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common\Object">
+      <UniqueIdentifier>{bef04c7d-e74c-4416-9150-5eee21e93ff4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\TilemapRenderer">
+      <UniqueIdentifier>{ee699d1e-1476-4c14-97d1-22469baeff15}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI">
+      <UniqueIdentifier>{345d0468-a788-495f-8ecf-04b437119460}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\HUD">
+      <UniqueIdentifier>{a992fd5f-d02e-41cb-bb87-a04142bebb9f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

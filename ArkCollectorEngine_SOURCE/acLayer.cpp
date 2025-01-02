@@ -39,12 +39,21 @@ namespace ac
 	}
 	void Layer::LateUpdate()
 	{
-		for (GameObject* gameObj : mGameObjects)
+		for (auto it = mGameObjects.begin(); it != mGameObjects.end(); )
 		{
-			if (gameObj == nullptr)
+			if (*it == nullptr)
 				continue;
+			if ((*it)->GetIsDead())
+			{
+				delete *it;
 
-			gameObj->LateUpdate();
+				it = mGameObjects.erase(it);
+				
+				continue;
+			}
+			(*it)->LateUpdate();
+
+			it++;
 		}
 	}
 	void Layer::Render(HDC hdc)

@@ -6,6 +6,7 @@ extern ac::Application application;
 namespace ac
 {
 	std::vector<Input::FKey> Input::mKeys = {};
+	math::Vector2 Input::mMousePosition = math::Vector2::Zero;
 	int ASCII[(UINT)EKeyCode::End] =
 	{
 		'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P',
@@ -83,24 +84,24 @@ namespace ac
 	}
 	void Input::getMousePointPositionByWindow()
 	{
-		//POINT mousePos = {};
-		//GetCursorPos(&mousePos);
-		//ScreenToClient(application.GetHwnd(), &mousePos);
+		POINT mousePos = {};
+		GetCursorPos(&mousePos);
+		ScreenToClient(application.GetHwnd(), &mousePos);
 
-		//UINT width = application.GetWidth();
-		//UINT height = application.GetHeight();
+		UINT width = application.GetWidth();
+		UINT height = application.GetHeight();
 
-		//mMousePosition.x = -1.f;
-		//mMousePosition.y = -1.f;
+		mMousePosition.x = -1.f;
+		mMousePosition.y = -1.f;
 
-		//if (mousePos.x < width && mousePos.x > 0)
-		//{
-		//	mMousePosition.x = mousePos.x;
-		//}
-		//if (mousePos.y < Height && mousePos.y > 0)
-		//{
-		//	mMousePosition.y = mousePos.y;
-		//}
+		if (mousePos.x < width && mousePos.x > 0)
+		{
+			mMousePosition.x = mousePos.x;
+		}
+		if (mousePos.y < height && mousePos.y > 0)
+		{
+			mMousePosition.y = mousePos.y;
+		}
 	}
 	void Input::clearKeys()
 	{

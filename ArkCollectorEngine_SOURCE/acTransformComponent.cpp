@@ -7,11 +7,10 @@ namespace ac
 	TransformComponent::TransformComponent()
 		: Component(enums::EComponentType::Transform)
 		, mPosition(math::Vector2::Zero)
-		, mRotation(math::Vector2::Zero)
+		, mScale(math::Vector2::One)
 		, mWidth(0.0f)
 		, mHeight(0.0f)
-		, mScale(1.f)
-
+		, mRotation(0.f)
 	{
 	}
 	TransformComponent::~TransformComponent()
@@ -19,19 +18,9 @@ namespace ac
 	}
 	void TransformComponent::Initialize()
 	{
-		if (renderer::mainCamera == nullptr)
-		{
-			return;
-		}
-		mPosition = renderer::mainCamera->GetPositionInCameraSpace(mPosition);
 	}
 	void TransformComponent::Update()
 	{
-		if (renderer::mainCamera == nullptr)
-		{
-			return;
-		}
-		mPosition = renderer::mainCamera->GetPositionInCameraSpace(mPosition);
 	}
 	void TransformComponent::LateUpdate()
 	{

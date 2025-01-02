@@ -24,6 +24,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)acCameraComponent.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)acDontDestroyOnLoad.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)acLayer.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)acObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)acResource.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)acResources.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)acRenderer.h" />
@@ -35,8 +36,12 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)acScriptComponent.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)acSpriteRendererComponent.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)acTexture.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)acTilemapRendererComponent.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)acTime.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)acTransformComponent.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)acUIBase.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)acUIHUD.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)acUIManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CommonInclude.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)acMath.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)acEntity.h" />
@@ -63,10 +68,14 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)acScriptComponent.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)acSpriteRendererComponent.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)acTexture.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)acTilemapRendererComponent.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)acTime.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)acEntity.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)acInput.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)acMath.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)acTransformComponent.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)acUIBase.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)acUIHUD.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)acUIManager.cpp" />
   </ItemGroup>
 </Project>

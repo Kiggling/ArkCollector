@@ -3,6 +3,7 @@
 #include "acTime.h"
 #include "acInput.h"
 #include "acSceneManager.h"
+#include "acUIManager.h"
 
 namespace ac
 {
@@ -30,6 +31,7 @@ namespace ac
 		Input::Initialize();
 		Time::Initialize();
 		SceneManager::Initialize();
+		UIManager::Initialize();
 	}
 
 	void Application::Run()
@@ -45,11 +47,13 @@ namespace ac
 		Time::Update();
 
 		SceneManager::Update();
+		UIManager::Update();
 	}
 
 	void Application::LateUpdate()
 	{
 		SceneManager::LateUpdate();
+		UIManager::LateUpdate();
 	}
 
 	void Application::Render()
@@ -59,6 +63,7 @@ namespace ac
 
 		// ȭ�鿡 ����ϰ��� �ϴ� Ŭ������ Render �Լ� ȣ�� (���ڷ� mBackHdc ���)
 		SceneManager::Render(mBackHdc);
+		UIManager::Render(mBackHdc);
 
 		// mBackHdc�� �׸� �͵��� mHdc�� ����
 		copyRenderTarget(mBackHdc, mHdc);

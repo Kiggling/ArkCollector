@@ -1,13 +1,16 @@
 #include "acGameObject.h"
+#include "acTransformComponent.h"
 
 namespace ac
 {
 	GameObject::GameObject()
+		: mbIsDead(false)
 	{
 		for (size_t i = 0; i < (UINT)enums::EComponentType::End; i++)
 		{
 			mComponents.push_back(nullptr);
 		}
+		initializeTransform();
 	}
 	GameObject::~GameObject()
 	{
@@ -54,5 +57,9 @@ namespace ac
 				continue;
 			comp->Render(InHdc);
 		}
+	}
+	void GameObject::initializeTransform()
+	{
+		AddComponent<TransformComponent>();
 	}
 }

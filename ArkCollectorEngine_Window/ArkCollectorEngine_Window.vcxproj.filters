@@ -16,6 +16,12 @@
     <Filter Include="Scenes\Test">
       <UniqueIdentifier>{3e41346d-aac5-4d50-b124-704d3a06dfa2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Scenes\ToolScene">
+      <UniqueIdentifier>{350fc7b4-b3e3-4ca2-981f-d8253a7371ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Camera">
+      <UniqueIdentifier>{4f0c6023-9e75-43a3-90c5-127d783be571}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="acPlayer.cpp">
@@ -26,6 +32,15 @@
     </ClCompile>
     <ClCompile Include="acTestScene.cpp">
       <Filter>Scenes\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="acToolScene.cpp">
+      <Filter>Scenes\ToolScene</Filter>
+    </ClCompile>
+    <ClCompile Include="acCameraScriptComponent.cpp">
+      <Filter>Contents\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="acTile.cpp">
+      <Filter>Scenes\ToolScene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -43,6 +58,15 @@
     </ClInclude>
     <ClInclude Include="acTestScene.h">
       <Filter>Scenes\Test</Filter>
+    </ClInclude>
+    <ClInclude Include="acToolScene.h">
+      <Filter>Scenes\ToolScene</Filter>
+    </ClInclude>
+    <ClInclude Include="acCameraScriptComponent.h">
+      <Filter>Contents\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="acTile.h">
+      <Filter>Scenes\ToolScene</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

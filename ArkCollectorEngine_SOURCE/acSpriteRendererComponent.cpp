@@ -29,10 +29,11 @@ namespace ac
 
 		TransformComponent* tr = GetOwner()->GetComponent<TransformComponent>();
 		math::Vector2 pos = tr->GetPosition();
-		math::Vector2 rot = tr->GetRotation();
-		float scale = tr->GetScale();
+		math::Vector2 scale = tr->GetScale();
+		float rot = tr->GetRotation();
 
 		// pos = renderer::mainCamera->CalculatePosition(pos);
+
 		if (mTexture->GetTextureType()
 			== graphics::Texture::eTextureType::Bmp)
 		{
@@ -47,8 +48,8 @@ namespace ac
 				AlphaBlend(hdc
 					, pos.x
 					, pos.y
-					, mTexture->GetWidth() * mSize.x * scale
-					, mTexture->GetHeight() * mSize.y * scale
+					, mTexture->GetWidth() * mSize.x * scale.x
+					, mTexture->GetHeight() * mSize.y * scale.y
 					, mTexture->GetHdc()
 					, 0, 0
 					, mTexture->GetWidth()
@@ -60,8 +61,8 @@ namespace ac
 				TransparentBlt(hdc
 					, pos.x
 					, pos.y
-					, mTexture->GetWidth() * mSize.x * scale
-					, mTexture->GetHeight() * mSize.y * scale
+					, mTexture->GetWidth() * mSize.x * scale.x
+					, mTexture->GetHeight() * mSize.y * scale.y
 					, mTexture->GetHdc()
 					, 0, 0
 					, mTexture->GetWidth()
@@ -86,8 +87,8 @@ namespace ac
 				, Gdiplus::Rect
 				(
 					pos.x, pos.y
-					, mTexture->GetWidth() * mSize.x * scale
-					, mTexture->GetHeight() * mSize.y * scale
+					, mTexture->GetWidth() * mSize.x * scale.x
+					, mTexture->GetHeight() * mSize.y * scale.y
 				)
 				, 0, 0
 				, mTexture->GetWidth(), mTexture->GetHeight()
