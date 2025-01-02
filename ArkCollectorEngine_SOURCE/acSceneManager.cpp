@@ -51,4 +51,8 @@ namespace ac
 		mActiveScene->Render(hdc);
 		mDontDestroyOnLoad->Render(hdc);
 	}
+	void SceneManager::Destroy()
+	{
+		//mActiveScene->Destroy();
+	}
 }

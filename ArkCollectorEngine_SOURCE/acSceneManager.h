@@ -29,6 +29,7 @@ namespace ac
 		static void Update();
 		static void LateUpdate();
 		static void Render(HDC hdc);
+		static void Destroy();
 
 	private:
 		static std::map<std::wstring, Scene*> mScenes;

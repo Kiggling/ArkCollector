@@ -2,6 +2,7 @@
 #include "CommonInclude.h"
 #include "acEntity.h"
 #include "acLayer.h"
+#include "acGameObject.h"
 
 namespace ac
 {
@@ -15,10 +16,13 @@ namespace ac
 		virtual void Update();
 		virtual void LateUpdate();
 		virtual void Render(HDC hdc);
+		virtual void Destroy();
 
 		virtual void OnEnter();
 		virtual void OnExit();
 
+		void AddGameObject(GameObject* gameObj, const enums::ELayerType layerType);
+		void EraseGameObject(GameObject* gameObj);
 		__forceinline Layer* GetLayer(const enums::ELayerType type) { return mLayers[(UINT)type]; }
 
 	private:
