@@ -41,30 +41,6 @@ namespace ac
 		, mAttackType(eAttackType::None)
 		, mbShield(false)
 		, mShield(nullptr)
-		, mbSkill01(false)
-		, mSkill01Cooldown(5.0f)
-		, mSkill01Timer(0.0f)
-		, mbSkill02(false)
-		, mSkill02Cooldown(5.0f)
-		, mSkill02Timer(0.0f)
-		, mbSkill03(false)
-		, mSkill03Cooldown(5.0f)
-		, mSkill03Timer(0.0f)
-		, mbSkill04(false)
-		, mSkill04Cooldown(5.0f)
-		, mSkill04Timer(0.0f)
-		, mbItem01(false)
-		, mItem01Cooldown(1.0f)
-		, mItem01Timer(0.0f)
-		, mbItem02(false)
-		, mItem02Cooldown(1.0f)
-		, mItem02Timer(0.0f)
-		, mbItem03(false)
-		, mItem03Cooldown(1.0f)
-		, mItem03Timer(0.0f)
-		, mbItem04(false)
-		, mItem04Cooldown(1.0f)
-		, mItem04Timer(0.0f)
 	{
 	}
 	PlayerScriptComponent::~PlayerScriptComponent()
@@ -89,10 +65,8 @@ namespace ac
 
 		if (mAttackType != eAttackType::None && mAnimatorComponent->GetActiveAnimation()->GetAnimationSheetIndex() == 8)
 		{
-			StatComponent* stat = GetOwner()->GetComponent<StatComponent>();
-
 			Projectile* projectile = object::Instantiate<Projectile>(enums::ELayerType::Particle);
-			projectile->SetVelocity(projectileDirection[(UINT)mAttackDirection] * 300.0f);
+			projectile->SetVelocity(projectileDirection[(UINT)mAttackDirection]);
 
 			TransformComponent* projectileTr = projectile->AddComponent<TransformComponent>();
 			math::Vector2 projectileSpawnPosition = GetOwner()->GetComponent<TransformComponent>()->GetPosition() + projectileSpawnOffset[(UINT)mAttackType][(UINT)mAttackDirection];
@@ -113,10 +87,8 @@ namespace ac
 			mAttackType = eAttackType::None;
 		}
 
-		setTimer();
 		setDirection();
 		setState();
-		useItem();
 
 		switch (mState)
 		{
@@ -194,89 +166,9 @@ namespace ac
 	}
 	void PlayerScriptComponent::OnCollisionStay(ColliderComponent* other)
 	{
-		// pick up
-		if (Input::GetKey(EKeyCode::Z))
-		{
-
-		}
 	}
 	void PlayerScriptComponent::OnCollisionExit(ColliderComponent* other)
 	{
-	}
-	void PlayerScriptComponent::setTimer()
-	{
-		if (mbSkill01 == true)
-		{
-			mSkill01Timer += Time::DeltaTime();
-			if (mSkill01Timer >= mSkill01Cooldown)
-			{
-				mbSkill01 = false;
-				mSkill01Timer = 0.0f;
-			}
-		}
-		if (mbSkill02 == true)
-		{
-			mSkill02Timer += Time::DeltaTime();
-			if (mSkill02Timer >= mSkill02Cooldown)
-			{
-				mbSkill02 = false;
-				mSkill02Timer = 0.0f;
-			}
-		}
-		if (mbSkill03 == true)
-		{
-			mSkill03Timer += Time::DeltaTime();
-			if (mSkill03Timer >= mSkill03Cooldown)
-			{
-				mbSkill03 = false;
-				mSkill03Timer = 0.0f;
-			}
-		}
-		if (mbSkill04 == true)
-		{
-			mSkill04Timer += Time::DeltaTime();
-			if (mSkill04Timer >= mSkill04Cooldown)
-			{
-				mbSkill04 = false;
-				mSkill04Timer = 0.0f;
-			}
-		}
-		if (mbItem01 == true)
-		{
-			mItem01Timer += Time::DeltaTime();
-			if (mItem01Timer >= mItem01Cooldown)
-			{
-				mbItem01 = false;
-				mItem01Timer = 0.0f;
-			}
-		}
-		if (mbItem02 == true)
-		{
-			mItem02Timer += Time::DeltaTime();
-			if (mItem02Timer >= mItem02Cooldown)
-			{
-				mbItem02 = false;
-				mItem02Timer = 0.0f;
-			}
-		}
-		if (mbItem03 == true)
-		{
-			mItem03Timer += Time::DeltaTime();
-			if (mItem03Timer >= mItem03Cooldown)
-			{
-				mbItem03 = false;
-				mItem03Timer = 0.0f;
-			}
-		}
-		if (mbItem04 == true)
-		{
-			mItem04Timer += Time::DeltaTime();
-			if (mItem04Timer >= mItem04Cooldown)
-			{
-				mbItem04 = false;
-				mItem04Timer = 0.0f;
-			}
-		}
 	}
 	void PlayerScriptComponent::setDirection()
 	{
@@ -355,25 +247,6 @@ namespace ac
 			mState = eState::Idle;
 		}
 	}
-	void PlayerScriptComponent::useItem()
-	{
-		if (Input::GetKey(EKeyCode::One))
-		{
-			item01();
-		}
-		if (Input::GetKey(EKeyCode::Two))
-		{
-			item02();
-		}
-		if (Input::GetKey(EKeyCode::Three))
-		{
-			item03();
-		}
-		if (Input::GetKey(EKeyCode::Four))
-		{
-			item04();
-		}
-	}
 	void PlayerScriptComponent::idle()
 	{
 		if (mAnimatorComponent->GetActiveAnimation()->GetName().substr(0, 4) == L"Walk" || mAnimatorComponent->IsComplete())
@@ -449,43 +322,28 @@ namespace ac
 		if ((mAnimatorComponent->GetActiveAnimation()->GetName().substr(0, 4) == L"Idle" || mAnimatorComponent->GetActiveAnimation()->GetName().substr(0, 4) == L"Walk")
 			|| mAnimatorComponent->IsComplete())
 		{
-			if (mbSkill01 != true)
-			{
-				mAnimatorComponent->PlayAnimation(L"Attack" + direction[(UINT)mDirection], false);
-				mAttackDirection = mDirection;
-				mAttackType = eAttackType::Skill01;
-
-				mbSkill01 = true;
-			}
+			mAnimatorComponent->PlayAnimation(L"Attack" + direction[(UINT)mDirection], false);
+			mAttackDirection = mDirection;
+			mAttackType = eAttackType::Skill01;
 		}
 	}
 	void PlayerScriptComponent::skill02()
 	{
-		if (mbSkill02 != true)
-		{
-			mbShield = true;
-			AnimatorComponent* shieldAnimatorComp = mShield->GetComponent<AnimatorComponent>();
-			shieldAnimatorComp->PlayAnimation(L"ShieldActivate", false);
+		mbShield = true;
+		AnimatorComponent* shieldAnimatorComp = mShield->GetComponent<AnimatorComponent>();
+		shieldAnimatorComp->PlayAnimation(L"ShieldActivate", false);
 
-			TransformComponent* shieldTr = mShield->GetComponent<TransformComponent>();
-			shieldTr->SetPosition(GetOwner()->GetComponent<TransformComponent>()->GetPosition());
-
-			mbSkill02 = true;
-		}
+		TransformComponent* shieldTr = mShield->GetComponent<TransformComponent>();
+		shieldTr->SetPosition(GetOwner()->GetComponent<TransformComponent>()->GetPosition());
 	}
 	void PlayerScriptComponent::skill03()
 	{
 		if ((mAnimatorComponent->GetActiveAnimation()->GetName().substr(0, 4) == L"Idle" || mAnimatorComponent->GetActiveAnimation()->GetName().substr(0, 4) == L"Walk")
 			|| mAnimatorComponent->IsComplete())
 		{
-			if (mbSkill03 != true)
-			{
-				mAnimatorComponent->PlayAnimation(L"Attack" + direction[(UINT)mDirection], false);
-				mAttackDirection = mDirection;
-				mAttackType = eAttackType::Skill03;
-
-				mbSkill03 = true;
-			}
+			mAnimatorComponent->PlayAnimation(L"Attack" + direction[(UINT)mDirection], false);
+			mAttackDirection = mDirection;
+			mAttackType = eAttackType::Skill03;
 		}
 	}
 	void PlayerScriptComponent::skill04()
@@ -493,58 +351,9 @@ namespace ac
 		if ((mAnimatorComponent->GetActiveAnimation()->GetName().substr(0, 4) == L"Idle" || mAnimatorComponent->GetActiveAnimation()->GetName().substr(0, 4) == L"Walk")
 			|| mAnimatorComponent->IsComplete())
 		{
-			if (mbSkill04 != true)
-			{
-				mAnimatorComponent->PlayAnimation(L"Attack" + direction[(UINT)mDirection], false);
-				mAttackDirection = mDirection;
-				mAttackType = eAttackType::Skill04;
-
-				mbSkill04 = true;
-			}
-		}
-	}
-	// item01 : Hp potion
-	void PlayerScriptComponent::item01()
-	{
-		if (mbItem01 != true)
-		{
-			StatComponent* stat = GetOwner()->GetComponent<StatComponent>();
-			float hp = (stat->GetHp() + stat->GetMaxHp() * 0.3 >= stat->GetMaxHp()) ? stat->GetMaxHp() : stat->GetHp() + stat->GetMaxHp() * 0.3;
-			stat->SetHp(hp);
-
-			mbItem01 = true;
-		}
-	}
-	// item02 : Mp potion
-	void PlayerScriptComponent::item02()
-	{
-		if (mbItem02 != true)
-		{
-			StatComponent* stat = GetOwner()->GetComponent<StatComponent>();
-			float mp = (stat->GetMp() + stat->GetMaxMp() * 0.3 >= stat->GetMaxMp()) ? stat->GetMaxMp() : stat->GetMp() + stat->GetMaxMp() * 0.3;
-			stat->SetMp(mp);
-
-			mbItem02 = true;
-		}
-	}
-	// item03 : 
-	void PlayerScriptComponent::item03()
-	{
-		if (mbItem03 != true)
-		{
-
-
-			mbItem03 = true;
-		}
-	}
-	// item04 : 
-	void PlayerScriptComponent::item04()
-	{
-		if (mbItem04 != true)
-		{
-
-
-			mbItem04 = true;
+			mAnimatorComponent->PlayAnimation(L"Attack" + direction[(UINT)mDirection], false);
+			mAttackDirection = mDirection;
+			mAttackType = eAttackType::Skill04;
 		}
 	}
 	void PlayerScriptComponent::hurt()

@@ -14,11 +14,6 @@ namespace ac
 		virtual void LateUpdate() override;
 		virtual void Render(HDC InHdc) override;
 
-		float GetMaxHp() { return mMaxHp; }
-		void SetMaxHp(float maxHp) { mMaxHp = maxHp; }
-		float GetMaxMp() { return mMaxMp; }
-		void SetMaxMp(float maxMp) { mMaxMp = maxMp; }
-
 		float GetHp() { return mHp; }
 		void SetHp(float hp) { mHp = hp; }
 		float GetMp() { return mMp; }
@@ -30,9 +25,6 @@ namespace ac
 		void SetAttackSpeed(float attackSpeed) { mAttackSpeed = attackSpeed; }
 
 	private:
-		float mMaxHp;
-		float mMaxMp;
-
 		float mHp;
 		float mMp;
 

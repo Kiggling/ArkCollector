@@ -4,7 +4,6 @@
 #include "acProjectile.h"
 #include "acStatComponent.h"
 #include "acColliderComponent.h"
-#include "acTime.h"
 
 namespace ac
 {
@@ -31,7 +30,7 @@ namespace ac
 			return;
 		}
 
-		pos += ((Projectile*)GetOwner())->GetVelocity() * Time::DeltaTime();
+		pos += ((Projectile*)GetOwner())->GetVelocity();
 
 		tr->SetPosition(pos);
 	}

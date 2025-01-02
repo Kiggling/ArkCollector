@@ -110,11 +110,8 @@ namespace ac
 
 		// Player Stat
 		StatComponent* playerStat = mPlayer->AddComponent<StatComponent>();
-		playerStat->SetMaxHp(100.0f);
-		playerStat->SetMaxMp(100.0f);
-		//playerStat->SetHp(playerStat->GetMaxHp());
-		playerStat->SetHp(30.0f);
-		playerStat->SetMp(playerStat->GetMaxMp());
+		playerStat->SetHp(100.0f);
+		playerStat->SetMp(100.0f);
 		playerStat->SetDamage(50.0f);
 		playerStat->SetAttackSpeed(1.0f);
 
