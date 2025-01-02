@@ -45,6 +45,10 @@ namespace ac
 			, math::Vector2 offset
 			, UINT spriteLegth
 			, float duration);
+		void CreateAnimationByFolder(const std::wstring& name
+			, const std::wstring& path
+			, math::Vector2 offset
+			, float duration);
 
 		Animation* FindAnimation(const std::wstring& name);
 		void PlayAnimation(const std::wstring& name, bool loop = true);
@@ -55,6 +59,7 @@ namespace ac
 		std::function<void()>& GetEndEvent(const std::wstring& name);
 
 		bool IsComplete() { return mActiveAnimation->IsComplete(); }
+		Animation* GetActiveAnimation() { return mActiveAnimation; }
 
 	private:
 		std::map<std::wstring, Animation*> mAnimations;
