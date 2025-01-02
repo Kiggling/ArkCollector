@@ -60,9 +60,6 @@ namespace ac
 
 		enums::ELayerType GetLayerType() { return mLayerType; }
 		void SetLayerType(enums::ELayerType layerType) { mLayerType = layerType; }
-
-
-		void SetLayerType(enums::ELayerType InLayerType) { mLayerType = InLayerType; }
 		void SetIsDead(bool InState) { mbIsDead = InState; }
 		bool GetIsDead() { return mbIsDead; }
 	private:
@@ -70,7 +67,6 @@ namespace ac
 	private:
 		eState mState;
 		std::vector<Component*> mComponents;
-		enums::ELayerType mLayerType;
 		enums::ELayerType mLayerType;
 		bool mbIsDead;
 	};

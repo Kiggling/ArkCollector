@@ -74,7 +74,7 @@ namespace ac
 	void UIHUD::OnUpdate()
 	{
 		// 사용 예시 ==================================
-		if (Input::GetKeyDown(EKeyCode::A))
+		/*if (Input::GetKeyDown(EKeyCode::A))
 		{
 			mPercentageHP = max(0.f, mPercentageHP - 0.1f);
 		}
@@ -134,7 +134,7 @@ namespace ac
 			{
 				mPercentageItems[i] = 0.f;
 			}
-		}
+		}*/
 		// ===========================================
 	}
 

@@ -177,7 +177,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)acDontDestroyOnLoad.h">
       <Filter>Scene</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)acObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)acTilemapRendererComponent.h">
       <Filter>Components\TilemapRenderer</Filter>
     </ClInclude>
@@ -195,6 +194,9 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)acStatComponent.h">
       <Filter>Components\Stat</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)acObject.h">
+      <Filter>Common\Object</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
