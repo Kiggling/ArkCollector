@@ -31,6 +31,11 @@ namespace ac::math
 			return v1.x * v2.y - v1.y * v2.x;
 		}
 
+		static float Distance(Vector2& v1, Vector2& v2)
+		{
+			return sqrt(pow(v1.x - v2.x, 2) + pow(v1.y - v2.y, 2));
+		}
+
 		static Vector2 One;
 		static Vector2 Zero;
 		static Vector2 Right;
