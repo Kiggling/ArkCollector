@@ -53,6 +53,6 @@ namespace ac
 	}
 	void SceneManager::Destroy()
 	{
-		//mActiveScene->Destroy();
+		mActiveScene->Destroy();
 	}
 }

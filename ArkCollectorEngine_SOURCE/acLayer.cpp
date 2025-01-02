@@ -43,7 +43,20 @@ namespace ac
 	}
 	void Layer::LateUpdate()
 	{
-		for (auto it = mGameObjects.begin(); it != mGameObjects.end(); )
+		for (GameObject* gameObj : mGameObjects)
+		{
+			if (gameObj == nullptr)
+				continue;
+
+			GameObject::eState state = gameObj->GetActive();
+			if (state == GameObject::eState::Paused || state == GameObject::eState::Dead)
+				continue;
+
+			gameObj->LateUpdate();
+		}
+
+		// Tilemap 만들 때 사용했음
+		/*for (auto it = mGameObjects.begin(); it != mGameObjects.end(); )
 		{
 			if (*it == nullptr)
 				continue;
@@ -56,13 +69,9 @@ namespace ac
 				continue;
 			}
 
-			GameObject::eState state = (*it)->GetActive();
-			if (state == GameObject::eState::Paused || state == GameObject::eState::Dead)
-				continue;
-
 			(*it)->LateUpdate();
 			it++;
-		}
+		}*/
 	}
 	void Layer::Render(HDC hdc)
 	{

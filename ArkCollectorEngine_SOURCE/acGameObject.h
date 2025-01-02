@@ -60,6 +60,8 @@ namespace ac
 
 		enums::ELayerType GetLayerType() { return mLayerType; }
 		void SetLayerType(enums::ELayerType layerType) { mLayerType = layerType; }
+
+		/* TileMap 만들 때 사용*/
 		void SetIsDead(bool InState) { mbIsDead = InState; }
 		bool GetIsDead() { return mbIsDead; }
 	private:
@@ -68,6 +70,8 @@ namespace ac
 		eState mState;
 		std::vector<Component*> mComponents;
 		enums::ELayerType mLayerType;
+		
+		/* TileMap 만들 때 사용 */
 		bool mbIsDead;
 	};
 
