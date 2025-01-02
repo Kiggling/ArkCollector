@@ -19,6 +19,8 @@
 
 ## 게임 구성
 - **View**: 2D 탑 뷰
+- **해상도**: 1440 x 900
+- **맵 크기**: 1440 x 900
 
 ## 게임 시나리오
     - 시작화면
@@ -59,14 +61,6 @@
     - Player
         - Player 객체
         - Player Script
-            - 스킬: Q, W, E, R
-            - 평타: A
-            - 줍기: Z
-            - 아이템 사용: 1, 2, 3, 4
-            - 움직임: 방향키
-            - 대시: Space bar
-            - 능력 창: Tap 키
-            - pause: ESC
     - Boss
         - Boss 객체
         - Boss Script

@@ -5,6 +5,10 @@
 
 namespace ac
 {
+	/* 사용 예시
+	* TransformComponent* tr = gameObj->AddComponent<TransformComponent>();
+	* tr->SetPosition(math::Vector2(1.0f, 1.0f));
+	*/
 	class TransformComponent : public Component
 	{
 	public:

@@ -131,6 +131,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    const UINT width = 1440;
    const UINT height = 920;
 
+
    HWND hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
        posX, posY, width, height, nullptr, nullptr, hInstance, nullptr);
 
