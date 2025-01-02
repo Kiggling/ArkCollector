@@ -15,6 +15,7 @@ namespace ac
 		void Update();
 		void LateUpdate();
 		void Render();
+		void Destroy();
 
 		__forceinline HWND GetHwnd() const { return mHwnd; }
 		__forceinline HDC GetHdc() const { return mHdc; }

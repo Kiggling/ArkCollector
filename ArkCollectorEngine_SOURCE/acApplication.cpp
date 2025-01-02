@@ -3,6 +3,7 @@
 #include "acTime.h"
 #include "acInput.h"
 #include "acSceneManager.h"
+#include "acCollisionManager.h"
 
 namespace ac
 {
@@ -30,6 +31,7 @@ namespace ac
 		Input::Initialize();
 		Time::Initialize();
 		SceneManager::Initialize();
+		CollisionManager::Initialize();
 	}
 
 	void Application::Run()
@@ -37,19 +39,22 @@ namespace ac
 		Update();
 		LateUpdate();
 		Render();
+
+		Destroy();
 	}
 
 	void Application::Update()
 	{
 		Input::Update();
 		Time::Update();
-
+		CollisionManager::Update();
 		SceneManager::Update();
 	}
 
 	void Application::LateUpdate()
 	{
 		SceneManager::LateUpdate();
+		CollisionManager::LateUpdate();
 	}
 
 	void Application::Render()
@@ -59,9 +64,15 @@ namespace ac
 
 		// ȭ�鿡 ����ϰ��� �ϴ� Ŭ������ Render �Լ� ȣ�� (���ڷ� mBackHdc ���)
 		SceneManager::Render(mBackHdc);
+		CollisionManager::Render(mBackHdc);
 
 		// mBackHdc�� �׸� �͵��� mHdc�� ����
 		copyRenderTarget(mBackHdc, mHdc);
+	}
+
+	void Application::Destroy()
+	{
+		SceneManager::Destroy();
 	}
 
 	void Application::adjustWindowRect(HWND hwnd, UINT width, UINT height)

@@ -9,6 +9,8 @@ namespace ac
 
 	void CollisionManager::Initialize()
 	{
+		CollisionLayerMatrixCheck(enums::ELayerType::Player, enums::ELayerType::Player, true);
+		CollisionLayerMatrixCheck(enums::ELayerType::Player, enums::ELayerType::Particle, true);
 	}
 	void CollisionManager::Update()
 	{
@@ -18,9 +20,11 @@ namespace ac
 		for (UINT row = 0; row < (UINT)enums::ELayerType::Max; row++)
 		{
 			for (UINT col = 0; col < (UINT)enums::ELayerType::Max; col++)
-			if (mCollisionLayerMatrix[row][col] == true)
 			{
-				LayerCollision(activeScene, (enums::ELayerType)row, (enums::ELayerType)col);
+				if (mCollisionLayerMatrix[row][col] == true)
+				{
+					LayerCollision(activeScene, (enums::ELayerType)row, (enums::ELayerType)col);
+				}
 			}
 		}
 	}
