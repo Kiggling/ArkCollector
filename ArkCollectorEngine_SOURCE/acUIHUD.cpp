@@ -16,6 +16,8 @@ namespace ac
 		, mSkillsTexture{}
 		, mItemsTexture{}
 		, mSkillAndItemBGTexture(nullptr)
+		, mSkillSrcInfo{}
+		, mItemSrcInfo{}
 		, mSkillAndItemNumbersTexture{}
 		, mBossNameTexture(nullptr)
 		, mBossHPTexture(nullptr)
@@ -49,6 +51,16 @@ namespace ac
 		mItemsTexture[3] = Resources::Find<graphics::Texture>(L"Torch");
 		mBossNameTexture = Resources::Find<graphics::Texture>(L"BossName");
 		mBossHPTexture = Resources::Find<graphics::Texture>(L"BossHP");
+
+		for (int i = 0; i < 4; i++)
+		{
+			mSkillSrcInfo[i] = { 0, 0, mSkillsTexture[i]->GetWidth(), mSkillsTexture[i]->GetHeight() };
+		}
+
+		mItemSrcInfo[0] = { 0, 0, mItemsTexture[0]->GetWidth() / 10, mItemsTexture[0]->GetHeight() };
+		mItemSrcInfo[1] = { 0, 0, mItemsTexture[1]->GetWidth() / 10, mItemsTexture[1]->GetHeight() };
+		mItemSrcInfo[2] = { 0, 0, mItemsTexture[2]->GetWidth() / 8, mItemsTexture[2]->GetHeight() };
+		mItemSrcInfo[3] = { 0, 0, mItemsTexture[3]->GetWidth() / 4, mItemsTexture[3]->GetHeight() };
 	}
 
 	void UIHUD::OnActive()
@@ -144,9 +156,9 @@ namespace ac
 		renderer(InHdc, mHPMPTexture, winWidth * 0.1f + mHPMPTexture->GetWidth() * 0.5f * 5.f, winHeight * 0.08f, mHPMPTexture->GetWidth() * 0.5f * 5.f, 10, 51, 9, 50, 3);
 		renderer(InHdc, mHPMPTexture, winWidth * 0.1f + mHPMPTexture->GetWidth() * 0.5f * 5.f, winHeight * 0.08f, mHPMPTexture->GetWidth() * 0.5f * 5.f * mPercentageMP, 10, 51, 18, 50 * mPercentageMP, 3);
 		// Skill
-		skillAndItemRenderer(InHdc, mSkillsTexture, winWidth * 0.108f, winHeight * 0.1f, mPercentageSkills);
+		skillAndItemRenderer(InHdc, mSkillsTexture, winWidth * 0.108f, winHeight * 0.1f, mPercentageSkills, mSkillSrcInfo);
 		// Item
-		skillAndItemRenderer(InHdc, mItemsTexture, winWidth * 0.108f + mHPMPTexture->GetWidth() * 0.5f * 5.f, winHeight * 0.1f, mPercentageItems);
+		skillAndItemRenderer(InHdc, mItemsTexture, winWidth * 0.108f + mHPMPTexture->GetWidth() * 0.5f * 5.f, winHeight * 0.1f, mPercentageItems, mItemSrcInfo);
 		// 보스 체력
 		renderer(InHdc, mBossHPTexture, winWidth * 0.2f, winHeight * 0.84f, mBossHPTexture->GetWidth() * 11.f, 10, 0, 0, mBossHPTexture->GetWidth(), mBossHPTexture->GetHeight() / 3);
 		renderer(InHdc, mBossHPTexture, winWidth * 0.2f, winHeight * 0.84f, mBossHPTexture->GetWidth() * 11.f, 10, 0, (mBossHPTexture->GetHeight() / 3) * 1, mBossHPTexture->GetWidth(), mBossHPTexture->GetHeight() / 3);
@@ -226,7 +238,7 @@ namespace ac
 				, nullptr/*&imgAtt*/);
 		}
 	}
-	void UIHUD::skillAndItemRenderer(HDC InHdc, graphics::Texture* textures[4], float standardX, float standardY, float percentage[4])
+	void UIHUD::skillAndItemRenderer(HDC InHdc, graphics::Texture* textures[4], float standardX, float standardY, float percentage[4], SrcInfo srcInfo[4])
 	{
 		int backgroundLength = 50;
 		int iconLength = 40;
@@ -243,7 +255,7 @@ namespace ac
 			int yOriginDestForNo = yOriginDestForBackground + backgroundLength - nunberLength;
 
 			renderer(InHdc, mSkillAndItemBGTexture, xOriginDestForBackground, yOriginDestForBackground, backgroundLength, backgroundLength, 0, 0, mSkillAndItemBGTexture->GetWidth(), mSkillAndItemBGTexture->GetHeight());
-			renderer(InHdc, textures[i], xOriginDestForIcon, yOriginDestForIcon, iconLength, iconLength, 0, 0, 16, 16);
+			renderer(InHdc, textures[i], xOriginDestForIcon, yOriginDestForIcon, iconLength, iconLength, srcInfo[i].xDest, srcInfo[i].yDest, srcInfo[i].width, srcInfo[i].height);
 
 			HBRUSH blackBrush = (HBRUSH)GetStockObject(BLACK_BRUSH);
 			HBRUSH oldBrush = (HBRUSH)SelectObject(InHdc, blackBrush);
