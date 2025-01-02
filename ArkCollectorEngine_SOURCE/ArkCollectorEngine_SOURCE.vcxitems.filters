@@ -76,6 +76,12 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)acDontDestroyOnLoad.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)acObject.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)acStatComponent.cpp">
+      <Filter>Components\Stat</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)acApplication.h">
@@ -159,6 +165,12 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)acDontDestroyOnLoad.h">
       <Filter>Scene</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)acObject.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)acStatComponent.h">
+      <Filter>Components\Stat</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Application">
@@ -238,6 +250,12 @@
     </Filter>
     <Filter Include="Common\Header">
       <UniqueIdentifier>{ba49d154-f81f-408a-918d-0750db64a7d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object">
+      <UniqueIdentifier>{fa7d3e5c-b379-4318-be12-e5cd2c9456b5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Stat">
+      <UniqueIdentifier>{e6624609-3504-4798-a9b5-932d9dc8626d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

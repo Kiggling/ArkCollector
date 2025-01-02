@@ -24,6 +24,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)acCameraComponent.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)acDontDestroyOnLoad.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)acLayer.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)acObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)acResource.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)acResources.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)acRenderer.h" />
@@ -34,6 +35,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)acGameObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)acScriptComponent.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)acSpriteRendererComponent.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)acStatComponent.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)acTexture.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)acTime.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)acTransformComponent.h" />
@@ -53,6 +55,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)acCameraComponent.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)acDontDestroyOnLoad.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)acLayer.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)acObject.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)acResource.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)acResources.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)acRenderer.cpp" />
@@ -62,6 +65,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)acGameObject.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)acScriptComponent.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)acSpriteRendererComponent.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)acStatComponent.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)acTexture.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)acTime.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)acEntity.cpp" />
