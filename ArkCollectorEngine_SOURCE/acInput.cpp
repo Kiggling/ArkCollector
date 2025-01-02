@@ -13,6 +13,7 @@ namespace ac
 		'Z', 'X', 'C', 'V', 'B', 'N', 'M',
 		VK_UP, VK_DOWN, VK_LEFT, VK_RIGHT,
 		VK_LBUTTON, VK_MBUTTON, VK_RIGHT, VK_SPACE,
+		'1', '2', '3', '4',
 	};
 
 	void Input::Initialize()
