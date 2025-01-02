@@ -74,7 +74,14 @@ namespace ac
 	void UIHUD::OnUpdate()
 	{
 		// 사용 예시 ==================================
-		/*if (Input::GetKeyDown(EKeyCode::A))
+		/*
+		퍼센트 맴버 변수는 무조건 0 ~ 1 사이의 값으로 정규화 해서 사용하면 됨.
+		*/
+
+
+
+
+		if (Input::GetKeyDown(EKeyCode::A))
 		{
 			mPercentageHP = max(0.f, mPercentageHP - 0.1f);
 		}
@@ -98,6 +105,9 @@ namespace ac
 		{
 			mPercentageBossHP = min(1.f, mPercentageBossHP + 0.1f);
 		}
+
+
+		float skillCool = 5.f;
 		for (int i = 0; i < 4; i++)
 		{
 			if (mPercentageSkills[i] == 0.f)
@@ -109,7 +119,7 @@ namespace ac
 			}
 			else if(mPercentageSkills[i] > 0.f)
 			{
-				mPercentageSkills[i] -= 0.2 * Time::DeltaTime();
+				mPercentageSkills[i] -= (1 / skillCool) * Time::DeltaTime();
 			}
 			else
 			{
@@ -128,13 +138,13 @@ namespace ac
 			}
 			else if (mPercentageItems[i] > 0.f)
 			{
-				mPercentageItems[i] -= 0.5 * Time::DeltaTime();
+				mPercentageItems[i] -= (1/skillCool) * Time::DeltaTime();
 			}
 			else
 			{
 				mPercentageItems[i] = 0.f;
 			}
-		}*/
+		}
 		// ===========================================
 	}
 
