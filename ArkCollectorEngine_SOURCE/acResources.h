@@ -53,6 +53,63 @@ namespace ac
 			}
 		}
 
+		static void MergePngByFolder(const std::wstring& path, const std::wstring& outputFilePath)
+		{
+			std::vector<std::wstring> filePaths;
+			int imageWidth = 0, imageHeight = 0;
+
+			for (const auto& entry : std::filesystem::directory_iterator(path))
+			{
+				if (entry.path().extension() == L".png")
+				{
+					filePaths.push_back(entry.path().wstring());
+				}
+			}
+
+			if (filePaths.size() == 0)
+			{
+				return;
+			}
+
+			Gdiplus::Bitmap firstImage(filePaths[0].c_str());
+			imageWidth = firstImage.GetWidth();
+			imageHeight = firstImage.GetHeight();
+
+			int canvasWidth = imageWidth * filePaths.size();
+			int canvasHeight = imageHeight;
+			Gdiplus::Bitmap spriteSheet(canvasWidth, canvasHeight, PixelFormat32bppARGB);
+
+			Gdiplus::Graphics graphics(&spriteSheet);
+			graphics.Clear(Gdiplus::Color(255, 255, 255, 255));
+
+			for (size_t i = 0; i < filePaths.size(); i++)
+			{
+				Gdiplus::Bitmap image(filePaths[i].c_str());
+				graphics.DrawImage(&image, imageWidth * i, 0, imageWidth, imageHeight);
+			}
+
+			CLSID pngClsid;
+			UINT num = 0, size = 0;
+			Gdiplus::GetImageEncodersSize(&num, &size);
+			if (size == 0) return;
+
+			Gdiplus::ImageCodecInfo* pImageCodecInfo = (Gdiplus::ImageCodecInfo*)(malloc(size));
+			if (pImageCodecInfo == NULL) return;
+
+			Gdiplus::GetImageEncoders(num, size, pImageCodecInfo);
+			for (UINT i = 0; i < num; i++)
+			{
+				if (wcscmp(pImageCodecInfo[i].MimeType, L"image/png") == 0)
+				{
+					pngClsid = pImageCodecInfo[i].Clsid;
+					free(pImageCodecInfo);
+					break;
+				}
+			}
+
+			spriteSheet.Save(outputFilePath.c_str(), &pngClsid, NULL);
+		}
+
 	private:
 		static std::map<std::wstring, Resource*> mResources;
 	};

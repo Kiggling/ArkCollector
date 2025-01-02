@@ -44,6 +44,7 @@ namespace ac
 
 		bool IsComplete() { return mbComplete; }
 		void SetAnimator(class AnimatorComponent* animator) { mAnimator = animator; }
+		int GetAnimationSheetIndex() { return mIndex; }
 
 	private:
 		class AnimatorComponent* mAnimator;

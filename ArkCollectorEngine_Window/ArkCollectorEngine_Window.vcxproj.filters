@@ -22,6 +22,12 @@
     <Filter Include="Contents\Camera">
       <UniqueIdentifier>{4f0c6023-9e75-43a3-90c5-127d783be571}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\Projectile">
+      <UniqueIdentifier>{2b141849-3d7d-4a88-8272-d73d8144b62b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Player\Shield">
+      <UniqueIdentifier>{d0909364-5ab5-4242-8c95-ae85003ca7c9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="acPlayer.cpp">
@@ -32,6 +38,15 @@
     </ClCompile>
     <ClCompile Include="acTestScene.cpp">
       <Filter>Scenes\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="acProjectile.cpp">
+      <Filter>Contents\Projectile</Filter>
+    </ClCompile>
+    <ClCompile Include="acShield.cpp">
+      <Filter>Contents\Player\Shield</Filter>
+    </ClCompile>
+    <ClCompile Include="acProjectileScriptComponent.cpp">
+      <Filter>Contents\Projectile</Filter>
     </ClCompile>
     <ClCompile Include="acToolScene.cpp">
       <Filter>Scenes\ToolScene</Filter>
@@ -58,6 +73,15 @@
     </ClInclude>
     <ClInclude Include="acTestScene.h">
       <Filter>Scenes\Test</Filter>
+    </ClInclude>
+    <ClInclude Include="acProjectile.h">
+      <Filter>Contents\Projectile</Filter>
+    </ClInclude>
+    <ClInclude Include="acShield.h">
+      <Filter>Contents\Player\Shield</Filter>
+    </ClInclude>
+    <ClInclude Include="acProjectileScriptComponent.h">
+      <Filter>Contents\Projectile</Filter>
     </ClInclude>
     <ClInclude Include="acToolScene.h">
       <Filter>Scenes\ToolScene</Filter>

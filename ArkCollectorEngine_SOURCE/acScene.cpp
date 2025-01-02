@@ -56,12 +56,34 @@ namespace ac
 		}
 	}
 
+	void Scene::Destroy()
+	{
+		for (Layer* layer : mLayers)
+		{
+			if (layer == nullptr)
+				continue;
+
+			layer->Destroy();
+		}
+	}
+
 	void Scene::OnEnter()
 	{
 	}
 
 	void Scene::OnExit()
 	{
+	}
+
+	void Scene::AddGameObject(GameObject* gameObj, const enums::ELayerType layerType)
+	{
+		mLayers[(UINT)layerType]->AddGameObject(gameObj);
+	}
+
+	void Scene::EraseGameObject(GameObject* gameObj)
+	{
+		enums::ELayerType layerType = gameObj->GetLayerType();
+		mLayers[(UINT)layerType]->EraseGameObject(gameObj);
 	}
 
 	void Scene::createLayers()

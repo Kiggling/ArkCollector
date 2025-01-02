@@ -22,6 +22,7 @@ namespace ac::enums
 		SpriteRenderer,
 		Animator,
 		Camera,
+		Stat,
 		End,
 	};
 

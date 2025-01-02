@@ -35,6 +35,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)acGameObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)acScriptComponent.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)acSpriteRendererComponent.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)acStatComponent.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)acTexture.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)acTilemapRendererComponent.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)acTime.h" />
@@ -58,6 +59,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)acCameraComponent.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)acDontDestroyOnLoad.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)acLayer.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)acObject.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)acResource.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)acResources.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)acRenderer.cpp" />
@@ -67,6 +69,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)acGameObject.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)acScriptComponent.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)acSpriteRendererComponent.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)acStatComponent.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)acTexture.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)acTilemapRendererComponent.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)acTime.cpp" />
