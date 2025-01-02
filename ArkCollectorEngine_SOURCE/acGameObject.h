@@ -8,6 +8,14 @@ namespace ac
 	class GameObject : public Entity
 	{
 	public:
+		enum class eState
+		{
+			Active,
+			Paused,
+			Dead,
+			End
+		};
+
 		GameObject();
 		~GameObject();
 
@@ -42,9 +50,22 @@ namespace ac
 			return comp;
 		}
 
+		eState GetActive() { return mState; }
+		void SetActive(bool power)
+		{
+			if (power == true) mState = eState::Active;
+			if (power == false) mState = eState::Paused;
+		}
+		void Death() { mState = eState::Dead; }
+
+		enums::ELayerType GetLayerType() { return mLayerType; }
+		void SetLayerType(enums::ELayerType layerType) { mLayerType = layerType; }
+
 
 	private:
+		eState mState;
 		std::vector<Component*> mComponents;
+		enums::ELayerType mLayerType;
 	};
 
 }	
