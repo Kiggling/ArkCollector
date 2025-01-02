@@ -16,7 +16,7 @@ namespace ac
 		A, S, D, F, G, H, J, K, L,
 		Z, X, C, V, B, N, M,
 		UP, DOWN, LEFT, RIGHT,
-		LBUTTON, MBUTTON, RBUTTON, 
+		LBUTTON, MBUTTON, RBUTTON, SPACEBAR,
 		End
 	};
 
