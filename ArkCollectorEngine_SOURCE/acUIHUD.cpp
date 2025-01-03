@@ -3,6 +3,10 @@
 #include "acApplication.h"
 #include "acInput.h"
 #include "acTime.h"
+#include "acSceneManager.h"
+#include "acStatComponent.h"
+#include "..\\ArkCollectorEngine_Window\\acPlayer.h"
+#include "..\\ArkCollectorEngine_Window\\acPlayerStatComponent.h"
 
 extern ac::Application application;
 
@@ -77,49 +81,53 @@ namespace ac
 		/*
 		퍼센트 맴버 변수는 무조건 0 ~ 1 사이의 값으로 정규화 해서 사용하면 됨.
 		*/
+		Scene* dontDestroyOnLoad = SceneManager::GetDontDestroyOnLoad();
+		Layer* playerLayer = dontDestroyOnLoad->GetLayer(enums::ELayerType::Player);
+		std::vector<GameObject*> gameObjects = playerLayer->GetGameObjects();
+		assert(gameObjects.size() > 0);
+		Player* player = (Player*)gameObjects[0];
+		PlayerStatComponent* playerStat = player->GetComponent<PlayerStatComponent>();
 
+		mPercentageHP = max(0.f, playerStat->GetHp() / playerStat->GetMaxHp());
+		mPercentageMP = max(0.f, playerStat->GetMp() / playerStat->GetMaxMp());
 
+		//if (Input::GetKeyDown(EKeyCode::A))
+		//{
+		//	mPercentageHP = max(0.f, mPercentageHP - 0.1f);
+		//}
+		//if (Input::GetKeyDown(EKeyCode::D))
+		//{
+		//	mPercentageHP = min(1.f, mPercentageHP + 0.1f);
+		//}
+		//if (Input::GetKeyDown(EKeyCode::S))
+		//{
+		//	mPercentageMP = max(0.f, mPercentageMP - 0.1f);
+		//}
+		//if (Input::GetKeyDown(EKeyCode::W))
+		//{
+		//	mPercentageMP = min(1.f, mPercentageMP + 0.1f);
+		//}
+		//if (Input::GetKeyDown(EKeyCode::LEFT))
+		//{
+		//	mPercentageBossHP = max(0.f, mPercentageBossHP - 0.1f);
+		//}
+		//if (Input::GetKeyDown(EKeyCode::RIGHT))
+		//{
+		//	mPercentageBossHP = min(1.f, mPercentageBossHP + 0.1f);
+		//}
 
-
-		if (Input::GetKeyDown(EKeyCode::A))
-		{
-			mPercentageHP = max(0.f, mPercentageHP - 0.1f);
-		}
-		if (Input::GetKeyDown(EKeyCode::D))
-		{
-			mPercentageHP = min(1.f, mPercentageHP + 0.1f);
-		}
-		if (Input::GetKeyDown(EKeyCode::S))
-		{
-			mPercentageMP = max(0.f, mPercentageMP - 0.1f);
-		}
-		if (Input::GetKeyDown(EKeyCode::W))
-		{
-			mPercentageMP = min(1.f, mPercentageMP + 0.1f);
-		}
-		if (Input::GetKeyDown(EKeyCode::LEFT))
-		{
-			mPercentageBossHP = max(0.f, mPercentageBossHP - 0.1f);
-		}
-		if (Input::GetKeyDown(EKeyCode::RIGHT))
-		{
-			mPercentageBossHP = min(1.f, mPercentageBossHP + 0.1f);
-		}
-
-
-		float skillCool = 5.f;
 		for (int i = 0; i < 4; i++)
 		{
 			if (mPercentageSkills[i] == 0.f)
 			{
-				if (Input::GetKeyDown(EKeyCode::Z))
+				if (playerStat->GetSkillUsed(i) == true)
 				{
 					mPercentageSkills[i] = 1.f;
 				}
 			}
-			else if(mPercentageSkills[i] > 0.f)
+			else if (mPercentageSkills[i] > 0.f)
 			{
-				mPercentageSkills[i] -= (1 / skillCool) * Time::DeltaTime();
+				mPercentageSkills[i] -= (1 / playerStat->GetSkillCooldown(i)) * Time::DeltaTime();
 			}
 			else
 			{
@@ -131,20 +139,59 @@ namespace ac
 		{
 			if (mPercentageItems[i] == 0.f)
 			{
-				if (Input::GetKeyDown(EKeyCode::X))
+				if (playerStat->GetItemUsed(i) == true)
 				{
 					mPercentageItems[i] = 1.f;
 				}
 			}
 			else if (mPercentageItems[i] > 0.f)
 			{
-				mPercentageItems[i] -= (1/skillCool) * Time::DeltaTime();
+				mPercentageItems[i] -= (1 / playerStat->GetItemCooldown(i)) * Time::DeltaTime();
 			}
 			else
 			{
 				mPercentageItems[i] = 0.f;
 			}
 		}
+
+		//float skillCool = 5.f;
+		//for (int i = 0; i < 4; i++)
+		//{
+		//	if (mPercentageSkills[i] == 0.f)
+		//	{
+		//		if (Input::GetKeyDown(EKeyCode::Z))
+		//		{
+		//			mPercentageSkills[i] = 1.f;
+		//		}
+		//	}
+		//	else if(mPercentageSkills[i] > 0.f)
+		//	{
+		//		mPercentageSkills[i] -= (1 / skillCool) * Time::DeltaTime();
+		//	}
+		//	else
+		//	{
+		//		mPercentageSkills[i] = 0.f;
+		//	}
+		//}
+
+		//for (int i = 0; i < 4; i++)
+		//{
+		//	if (mPercentageItems[i] == 0.f)
+		//	{
+		//		if (Input::GetKeyDown(EKeyCode::X))
+		//		{
+		//			mPercentageItems[i] = 1.f;
+		//		}
+		//	}
+		//	else if (mPercentageItems[i] > 0.f)
+		//	{
+		//		mPercentageItems[i] -= (1/skillCool) * Time::DeltaTime();
+		//	}
+		//	else
+		//	{
+		//		mPercentageItems[i] = 0.f;
+		//	}
+		//}
 		// ===========================================
 	}
 

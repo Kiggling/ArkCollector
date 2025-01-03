@@ -20,6 +20,7 @@
 #include "acBoxCollidier2DComponent.h"
 #include "acProjectileScriptComponent.h"
 #include "acStatComponent.h"
+#include "acPlayerStatComponent.h"
 #include "acScriptComponent.h"
 
 namespace ac
@@ -45,6 +46,7 @@ namespace ac
 
 		// Player
 		mPlayer = object::Instantiate<Player>(enums::ELayerType::Player);
+		object::DontDestroyOnLoad(mPlayer);
 		TransformComponent* playerTr = mPlayer->AddComponent<TransformComponent>();
 		PlayerScriptComponent* plScript = mPlayer->AddComponent<PlayerScriptComponent>();
 
@@ -115,14 +117,14 @@ namespace ac
 		playerCollidier->SetOffset(math::Vector2(-12.0f, -12.0f));
 
 		// Player Stat
-		StatComponent* playerStat = mPlayer->AddComponent<StatComponent>();
-		playerStat->SetMaxHp(100.0f);
-		playerStat->SetMaxMp(100.0f);
-		//playerStat->SetHp(playerStat->GetMaxHp());
-		playerStat->SetHp(30.0f);
-		playerStat->SetMp(playerStat->GetMaxMp());
-		playerStat->SetDamage(50.0f);
-		playerStat->SetAttackSpeed(1.0f);
+		PlayerStatComponent* playerStat = mPlayer->AddComponent<PlayerStatComponent>();
+		//playerStat->SetMaxHp(100.0f);
+		//playerStat->SetMaxMp(100.0f);
+		////playerStat->SetHp(playerStat->GetMaxHp());
+		//playerStat->SetHp(30.0f);
+		//playerStat->SetMp(playerStat->GetMaxMp());
+		//playerStat->SetDamage(50.0f);
+		//playerStat->SetAttackSpeed(1.0f);
 
 		// test Collider
 		Player* testPlayer = object::Instantiate<Player>(enums::ELayerType::Player);

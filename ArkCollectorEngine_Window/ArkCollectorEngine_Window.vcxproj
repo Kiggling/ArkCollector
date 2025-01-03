@@ -24,6 +24,7 @@
     <ClInclude Include="acLoadScenes.h" />
     <ClInclude Include="acPlayer.h" />
     <ClInclude Include="acPlayerScriptComponent.h" />
+    <ClInclude Include="acPlayerStatComponent.h" />
     <ClInclude Include="acProjectile.h" />
     <ClInclude Include="acProjectileScriptComponent.h" />
     <ClInclude Include="acShield.h" />
@@ -35,6 +36,7 @@
     <ClCompile Include="acCameraScriptComponent.cpp" />
     <ClCompile Include="acPlayer.cpp" />
     <ClCompile Include="acPlayerScriptComponent.cpp" />
+    <ClCompile Include="acPlayerStatComponent.cpp" />
     <ClCompile Include="acProjectile.cpp" />
     <ClCompile Include="acProjectileScriptComponent.cpp" />
     <ClCompile Include="acShield.cpp" />
