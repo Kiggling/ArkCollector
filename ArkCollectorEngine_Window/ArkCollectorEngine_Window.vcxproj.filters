@@ -28,6 +28,9 @@
     <Filter Include="Contents\Player\Shield">
       <UniqueIdentifier>{d0909364-5ab5-4242-8c95-ae85003ca7c9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\Boss">
+      <UniqueIdentifier>{7f701453-083b-419c-85a9-b25dc78305c2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="acPlayer.cpp">
@@ -56,6 +59,12 @@
     </ClCompile>
     <ClCompile Include="acTile.cpp">
       <Filter>Scenes\ToolScene</Filter>
+    </ClCompile>
+    <ClCompile Include="acBoss.cpp">
+      <Filter>Contents\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="acBossScriptComponent.cpp">
+      <Filter>Contents\Boss</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -91,6 +100,12 @@
     </ClInclude>
     <ClInclude Include="acTile.h">
       <Filter>Scenes\ToolScene</Filter>
+    </ClInclude>
+    <ClInclude Include="acBoss.h">
+      <Filter>Contents\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="acBossScriptComponent.h">
+      <Filter>Contents\Boss</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

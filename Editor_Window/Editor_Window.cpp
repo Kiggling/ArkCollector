@@ -150,8 +150,9 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    ac::LoadResources();
    ac::LoadScenes();
 
-
-
+   // 매 실행마다 다른 랜덤값을 갖기 위한 변수 선언.
+   int a = 0;
+   srand((unsigned int)&a);
 
    // Toolmap 리소스 창
    ac::Scene* activeScene = ac::SceneManager::GetActiveScene();

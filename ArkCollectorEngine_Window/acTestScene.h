@@ -19,5 +19,6 @@ namespace ac
 
 	private:
 		class Player* mPlayer;
+		class Boss* mBoss;
 	};
 }
