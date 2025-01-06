@@ -12,11 +12,14 @@ namespace ac
 	BossScriptComponent::BossScriptComponent()
 		: mTime(0.0f)
 		, mAttackCool(0.0f)
+		, mTargetPosition(math::Vector2::Zero)
 		, mDistanceFromTarget(math::Vector2::Zero)
 		, mMoveDirection(math::Vector2::Zero)
 		, mState(eState::Idle)
 		, mAnimationDirection(eDirection::Down)
+		, mAttackType(eAttack::None)
 		, mAnimatorComponent(nullptr)
+		, mTransformComponent(nullptr)
 		, mbAttack(false)
 		, mAttackDirection(eDirection::Down)
 		, mTargetPlayer(nullptr)
@@ -27,17 +30,14 @@ namespace ac
 	}
 	void BossScriptComponent::Initialize()
 	{
+		mAnimatorComponent = GetOwner()->GetComponent<AnimatorComponent>();
+		mTransformComponent = GetOwner()->GetComponent<TransformComponent>();
 	}
 	void BossScriptComponent::Update()
 	{
-		if (mAnimatorComponent == nullptr)
-		{
-			mAnimatorComponent = GetOwner()->GetComponent<AnimatorComponent>();
-		}
-
 		setDirection();
 
-		if (!mbAttack && mAttackCool < 3.f)
+		if (!mbAttack && mAttackCool < 6.f)
 		{
 			mAttackCool += Time::DeltaTime();
 		}
@@ -64,19 +64,9 @@ namespace ac
 			land();
 		}
 			break;
-		case ac::BossScriptComponent::eState::Attack01:
+		case ac::BossScriptComponent::eState::Attack:
 		{
-			attack01();
-		}
-			break;
-		case ac::BossScriptComponent::eState::Attack02:
-		{
-			attack02();
-		}
-			break;
-		case ac::BossScriptComponent::eState::Attack03:
-		{
-			attack03();
+			attack();
 		}
 			break;
 		case ac::BossScriptComponent::eState::Hurt:
@@ -115,31 +105,14 @@ namespace ac
 	}
 	void BossScriptComponent::idle()
 	{
-		if (mDistanceFromTarget.length() <= 100.f && mAttackCool >= 3.f)
+		if (isAttacking())
 		{
-			mbAttack = true;
-
-			int attackState = rand() % 3;
-
-			mState = attackType[attackState];
-			switch (mState)
-			{
-			case ac::BossScriptComponent::eState::Attack01:
-				playAnimation(L"Attack01", false);
-				break;
-			case ac::BossScriptComponent::eState::Attack02:
-				playAnimation(L"Attack02", false);
-				break;
-			case ac::BossScriptComponent::eState::Attack03:
-				playAnimation(L"Attack03", false);
-				break;
-			default:
-				break;
-			}
-
 			return;
 		}
-	
+		if (judgeTeleport())
+		{
+			return;
+		}
 
 		mTime += Time::DeltaTime();
 
@@ -154,28 +127,12 @@ namespace ac
 	}
 	void BossScriptComponent::walk()
 	{
-		if (mDistanceFromTarget.length() <= 100.f && mAttackCool >= 3.f)
+		if (isAttacking())
 		{
-			mbAttack = true;
-
-			int attackState = rand() % 3;
-
-			mState = attackType[attackState];
-			switch (mState)
-			{
-			case ac::BossScriptComponent::eState::Attack01:
-				playAnimation(L"Attack01", false);
-				break;
-			case ac::BossScriptComponent::eState::Attack02:
-				playAnimation(L"Attack02", false);
-				break;
-			case ac::BossScriptComponent::eState::Attack03:
-				playAnimation(L"Attack03", false);
-				break;
-			default:
-				break;
-			}
-
+			return;
+		}
+		if (judgeTeleport())
+		{
 			return;
 		}
 
@@ -185,49 +142,51 @@ namespace ac
 		{
 			mState = eState::Idle();
 			playAnimation(L"Idle", true);
+
+			mTime = 0.0f;
 		}
 
-		TransformComponent* tr = GetOwner()->GetComponent<TransformComponent>();
-		math::Vector2 pos = tr->GetPosition();
+		math::Vector2 pos = mTransformComponent->GetPosition();
 
 		pos.x += mMoveDirection.x * 50.f * Time::DeltaTime();
 		pos.y += mMoveDirection.y * 50.f * Time::DeltaTime();
 
-		tr->SetPosition(pos);
+		mTransformComponent->SetPosition(pos);
 	}
 	void BossScriptComponent::jump()
 	{
+		if (mAnimatorComponent->IsComplete())
+		{
+			if (mTime == 0.f)
+			{
+				mTransformComponent->SetPosition(mTargetPosition);
+			}
+			if (mTime >= 1.5f)
+			{
+				mState = eState::Land;
+				playAnimation(L"Land", false);
+			}
+			mTime += Time::DeltaTime();
+
+		}
 	}
 	void BossScriptComponent::land()
 	{
-	}
-	void BossScriptComponent::attack01()
-	{
 		if (mAnimatorComponent->IsComplete())
 		{
-			mAttackCool = 0.f;
-			mbAttack = false;
-			mState = eState::Idle();
-			playAnimation(L"Idle", true);
+			mAttackCool = 1.f;
+			mState = eState::Idle;
+			playAnimation(L"Idle", false);
 		}
 	}
-	void BossScriptComponent::attack02()
+	void BossScriptComponent::attack()
 	{
 		if (mAnimatorComponent->IsComplete())
 		{
 			mAttackCool = 0.f;
 			mbAttack = false;
 			mState = eState::Idle();
-			playAnimation(L"Idle", true);
-		}
-	}
-	void BossScriptComponent::attack03()
-	{
-		if (mAnimatorComponent->IsComplete())
-		{
-			mAttackCool = 0.f;
-			mbAttack = false;
-			mState = eState::Idle();
+			mAttackType = eAttack::None;
 			playAnimation(L"Idle", true);
 		}
 	}
@@ -243,13 +202,12 @@ namespace ac
 	}
 	void BossScriptComponent::setDirection()
 	{
-		TransformComponent* tr = GetOwner()->GetComponent<TransformComponent>();
-		math::Vector2 pos = tr->GetPosition();
+		math::Vector2 pos = mTransformComponent->GetPosition();
 
 		TransformComponent* targetTr = mTargetPlayer->GetComponent<TransformComponent>();
-		math::Vector2 targetPos = targetTr->GetPosition();
+		mTargetPosition = targetTr->GetPosition();
 
-		mDistanceFromTarget = mMoveDirection = targetPos - pos;
+		mDistanceFromTarget = mMoveDirection = mTargetPosition - pos;
 		mMoveDirection.normalize();
 
 		/* 방향 벡터 부호
@@ -301,5 +259,49 @@ namespace ac
 				mAnimationDirection = eDirection::Up;
 			}
 		}
+	}
+	bool BossScriptComponent::isAttacking()
+	{
+		if (mDistanceFromTarget.length() <= 100.f && mAttackCool >= 3.f)
+		{
+			mbAttack = true;
+			mState = eState::Attack;
+
+			int attackState = rand() % 3;
+
+			mAttackType = attackTypes[attackState];
+			switch (mAttackType)
+			{
+			case ac::BossScriptComponent::eAttack::None:
+				break;
+			case ac::BossScriptComponent::eAttack::Attack01:
+				playAnimation(L"Attack01", false);
+				break;
+			case ac::BossScriptComponent::eAttack::Attack02:
+				playAnimation(L"Attack02", false);
+				break;
+			case ac::BossScriptComponent::eAttack::Attack03:
+				playAnimation(L"Attack03", false);
+				break;
+			case ac::BossScriptComponent::eAttack::End:
+				break;
+			default:
+				break;
+			}
+
+			return true;
+		}
+		return false;
+	}
+	bool BossScriptComponent::judgeTeleport()
+	{
+		if (mAttackCool >= 6.f)
+		{
+			mState = eState::Jump;
+			playAnimation(L"Jump", false);
+
+			return true;
+		}
+		return false;
 	}
 }
