@@ -149,9 +149,16 @@ namespace ac
 		// Boss
 		mBoss = object::Instantiate<Boss>(enums::ELayerType::Boss);
 		TransformComponent* bossTr = mBoss->AddComponent<TransformComponent>();
-		
+		bossTr->SetPosition(math::Vector2(700.0f, 400.0f));
+		bossTr->SetWidth(40.0f);
+		bossTr->SetHeight(60.0f);
+
 		BossScriptComponent* bossScript = mBoss->AddComponent<BossScriptComponent>();
 		bossScript->SetTarget(mPlayer);
+
+		BoxCollidier2DComponent* bossCollidier = mBoss->AddComponent<BoxCollidier2DComponent>();
+		bossCollidier->SetSize(math::Vector2(bossTr->GetWidth(), bossTr->GetHeight()));
+		bossCollidier->SetOffset(math::Vector2(-bossTr->GetWidth() / 2.f, -bossTr->GetHeight() / 2.f));
 
 		AnimatorComponent* bossAnimatorComp = mBoss->AddComponent<AnimatorComponent>();
 		graphics::Texture* bossTexture = Resources::Find<graphics::Texture>(L"BossIdleDown");
@@ -237,10 +244,6 @@ namespace ac
 
 
 		bossAnimatorComp->PlayAnimation(L"IdleDown", true);
-
-		bossTr->SetPosition(math::Vector2(700.0f, 400.0f));
-		bossTr->SetWidth(24.0f);
-		bossTr->SetHeight(24.0f);
 
 		Scene::Initialize();
 

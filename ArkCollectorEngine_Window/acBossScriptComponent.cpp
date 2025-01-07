@@ -107,16 +107,18 @@ namespace ac
 	{
 		if (isAttacking())
 		{
+			mTime = 0.f;
 			return;
 		}
 		if (judgeTeleport())
 		{
+			mTime = 0.f;
 			return;
 		}
 
 		mTime += Time::DeltaTime();
 
-		if (mTime > 2.f)
+		if (mTime > 1.5f)
 		{
 			mState = eState::Walk;
 			
@@ -129,16 +131,18 @@ namespace ac
 	{
 		if (isAttacking())
 		{
+			mTime = 0.f;
 			return;
 		}
 		if (judgeTeleport())
 		{
+			mTime = 0.f;
 			return;
 		}
 
 		mTime += Time::DeltaTime();
 
-		if (mTime > 2.f)
+		if (mTime > 3.f)
 		{
 			mState = eState::Idle();
 			playAnimation(L"Idle", true);
@@ -160,9 +164,11 @@ namespace ac
 			if (mTime == 0.f)
 			{
 				mTransformComponent->SetPosition(mTargetPosition);
+				mAnimatorComponent->StopAnimation();
 			}
-			if (mTime >= 1.5f)
+			if (mTime >= 1.f)
 			{
+				mTime = 0.f;
 				mState = eState::Land;
 				playAnimation(L"Land", false);
 			}
@@ -174,7 +180,7 @@ namespace ac
 	{
 		if (mAnimatorComponent->IsComplete())
 		{
-			mAttackCool = 1.f;
+			mAttackCool = 2.5f;
 			mState = eState::Idle;
 			playAnimation(L"Idle", false);
 		}
@@ -300,6 +306,7 @@ namespace ac
 			mState = eState::Jump;
 			playAnimation(L"Jump", false);
 
+			mAttackCool = 0.f;
 			return true;
 		}
 		return false;
