@@ -2,6 +2,7 @@
 #include "CommonInclude.h"
 #include "acUIBase.h"
 #include "acTexture.h"
+#include "acGameObject.h"
 
 namespace ac
 {

@@ -5,6 +5,8 @@
 #include "acInput.h"
 #include "acTime.h"
 #include "acPlayer.h"
+#include "acColliderComponent.h"
+#include "acStatComponent.h"
 
 namespace ac
 {
@@ -18,8 +20,10 @@ namespace ac
 		, mState(eState::Idle)
 		, mAnimationDirection(eDirection::Down)
 		, mAttackType(eAttack::None)
+		, mStatComponent(nullptr)
 		, mAnimatorComponent(nullptr)
 		, mTransformComponent(nullptr)
+		, mColliderComponent(nullptr)
 		, mbAttack(false)
 		, mAttackDirection(eDirection::Down)
 		, mTargetPlayer(nullptr)
@@ -30,8 +34,10 @@ namespace ac
 	}
 	void BossScriptComponent::Initialize()
 	{
+		mStatComponent = GetOwner()->GetComponent<StatComponent>();
 		mAnimatorComponent = GetOwner()->GetComponent<AnimatorComponent>();
 		mTransformComponent = GetOwner()->GetComponent<TransformComponent>();
+		mColliderComponent = GetOwner()->GetComponent<ColliderComponent>();
 	}
 	void BossScriptComponent::Update()
 	{
@@ -44,6 +50,10 @@ namespace ac
 
 		switch (mState)
 		{
+		case ac::BossScriptComponent::eState::None:
+		{
+			none();
+		}
 		case ac::BossScriptComponent::eState::Idle:
 		{
 			idle();
@@ -96,12 +106,38 @@ namespace ac
 	}
 	void BossScriptComponent::OnCollisionEnter(ColliderComponent* other)
 	{
+		float hp = mStatComponent->GetHp();
+
+		hp = (hp - 25.f >= 0 ? hp - 25.f : 0);
+		mStatComponent->SetHp(hp);
+
+		if (hp == 0)
+		{
+			playAnimation(L"Death", false);
+			mState = eState::Death;
+		}
+		else
+		{
+			playAnimation(L"Hurt", false);
+			mState = eState::Hurt;
+		}
 	}
 	void BossScriptComponent::OnCollisionStay(ColliderComponent* other)
 	{
 	}
 	void BossScriptComponent::OnCollisionExit(ColliderComponent* other)
 	{
+	}
+	void BossScriptComponent::none()
+	{
+		mTime += Time::DeltaTime();
+
+		if (mTime > 1.f)
+		{
+			mTime = 0.f;
+			mState = eState::Land;
+			playAnimation(L"Land", false);
+		}
 	}
 	void BossScriptComponent::idle()
 	{
@@ -110,7 +146,7 @@ namespace ac
 			mTime = 0.f;
 			return;
 		}
-		if (judgeTeleport())
+		if (hasToTeleport())
 		{
 			mTime = 0.f;
 			return;
@@ -134,7 +170,7 @@ namespace ac
 			mTime = 0.f;
 			return;
 		}
-		if (judgeTeleport())
+		if (hasToTeleport())
 		{
 			mTime = 0.f;
 			return;
@@ -144,7 +180,7 @@ namespace ac
 
 		if (mTime > 3.f)
 		{
-			mState = eState::Idle();
+			mState = eState::Idle;
 			playAnimation(L"Idle", true);
 
 			mTime = 0.0f;
@@ -161,23 +197,17 @@ namespace ac
 	{
 		if (mAnimatorComponent->IsComplete())
 		{
-			if (mTime == 0.f)
-			{
-				mTransformComponent->SetPosition(mTargetPosition);
-				mAnimatorComponent->StopAnimation();
-			}
-			if (mTime >= 1.f)
-			{
-				mTime = 0.f;
-				mState = eState::Land;
-				playAnimation(L"Land", false);
-			}
-			mTime += Time::DeltaTime();
+			mTransformComponent->SetPosition(mTargetPosition);
+			mAnimatorComponent->StopAnimation();
+			mColliderComponent->SetActivate(false);
 
+			mState = eState::None;
 		}
 	}
 	void BossScriptComponent::land()
 	{
+		mColliderComponent->SetActivate(true);
+
 		if (mAnimatorComponent->IsComplete())
 		{
 			mAttackCool = 2.5f;
@@ -191,16 +221,22 @@ namespace ac
 		{
 			mAttackCool = 0.f;
 			mbAttack = false;
-			mState = eState::Idle();
+			mState = eState::Idle;
 			mAttackType = eAttack::None;
 			playAnimation(L"Idle", true);
 		}
 	}
 	void BossScriptComponent::hurt()
 	{
+		if (mAnimatorComponent->IsComplete())
+		{
+			mState = eState::Idle;
+			playAnimation(L"Idle", true);
+		}
 	}
 	void BossScriptComponent::death()
 	{
+		mColliderComponent->SetActivate(false);
 	}
 	void BossScriptComponent::playAnimation(std::wstring name, bool loop)
 	{
@@ -299,7 +335,7 @@ namespace ac
 		}
 		return false;
 	}
-	bool BossScriptComponent::judgeTeleport()
+	bool BossScriptComponent::hasToTeleport()
 	{
 		if (mAttackCool >= 6.f)
 		{

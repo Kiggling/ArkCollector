@@ -8,6 +8,7 @@ namespace ac
 	public:
 		enum class eState
 		{
+			None,
 			Idle,
 			Walk,
 			Jump,
@@ -53,6 +54,7 @@ namespace ac
 		eAttack attackTypes[3] = { eAttack::Attack01, eAttack::Attack02 , eAttack::Attack03 };
 		std::wstring directions[4] = { L"Down", L"Up", L"Left", L"Right" };
 
+		void none();
 		void idle();
 		void walk();
 		void jump();
@@ -63,21 +65,23 @@ namespace ac
 		void playAnimation(std::wstring name, bool loop);
 		void setDirection();
 		bool isAttacking();
-		bool judgeTeleport();
+		bool hasToTeleport();
 	private:
-		class Player* mTargetPlayer;				// 보스의 타겟
-		float mTime;
-		float mAttackCool;							// 보스의 공격 쿨타임(3초마다 한 번씩 공격, 6초이상 공격을 하지 않았다면 타겟 위치로 순간이동(점프 후 랜드))
-		math::Vector2 mTargetPosition;				// 타겟의 위치
-		math::Vector2 mDistanceFromTarget;			// 타겟과의 거리
-		math::Vector2 mMoveDirection;				// 보스가 실제 이동할 방향
-		eState mState;
-		eAttack mAttackType;
-		eDirection mAnimationDirection;				// 재생할 에니매이션 방향
-		class AnimatorComponent* mAnimatorComponent;
-		class TransformComponent* mTransformComponent;
-		bool mbAttack;
-		eDirection mAttackDirection;
+		class Player* mTargetPlayer;					// 보스의 타겟
+		float mTime;									// idle, walk 등의 행동으로 넘어가는 대기 시간
+		float mAttackCool;								// 보스의 공격 쿨타임(3초마다 한 번씩 공격, 6초이상 공격을 하지 않았다면 타겟 위치로 순간이동(점프 후 랜드))
+		math::Vector2 mTargetPosition;					// 타겟의 위치
+		math::Vector2 mDistanceFromTarget;				// 타겟과의 거리
+		math::Vector2 mMoveDirection;					// 보스가 실제 이동할 방향
+		eState mState;									// 보스 상태
+		eAttack mAttackType;							// 보스 일반 공격 타입 (3가지 존재)
+		eDirection mAnimationDirection;					// 재생할 에니매이션 방향
+		class StatComponent* mStatComponent;			// 보스 스텟 컴포넌트
+		class AnimatorComponent* mAnimatorComponent;	// 보스 애니메이션 컴포넌트
+		class TransformComponent* mTransformComponent;	// 보스 위치 상태 컴포넌트
+		class ColliderComponent* mColliderComponent;	// 보스 충돌 컴포넌트
+		bool mbAttack;									// 보스가 공격하고 있는지
+		eDirection mAttackDirection;					// 보스의 공격방향
 
 	};
 }

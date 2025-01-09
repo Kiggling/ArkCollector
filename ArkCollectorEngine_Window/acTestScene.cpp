@@ -117,7 +117,6 @@ namespace ac
 
 		BoxCollidier2DComponent* playerCollidier = mPlayer->AddComponent<BoxCollidier2DComponent>();
 		playerCollidier->SetSize(math::Vector2(playerTr->GetWidth(), playerTr->GetHeight()));
-		playerCollidier->SetOffset(math::Vector2(-12.0f, -12.0f));
 
 		// Player Stat
 		StatComponent* playerStat = mPlayer->AddComponent<StatComponent>();
@@ -158,7 +157,10 @@ namespace ac
 
 		BoxCollidier2DComponent* bossCollidier = mBoss->AddComponent<BoxCollidier2DComponent>();
 		bossCollidier->SetSize(math::Vector2(bossTr->GetWidth(), bossTr->GetHeight()));
-		bossCollidier->SetOffset(math::Vector2(-bossTr->GetWidth() / 2.f, -bossTr->GetHeight() / 2.f));
+
+		StatComponent* bossStat = mBoss->AddComponent<StatComponent>();
+		bossStat->SetMaxHp(100.f);
+		bossStat->SetHp(100.f);
 
 		AnimatorComponent* bossAnimatorComp = mBoss->AddComponent<AnimatorComponent>();
 		graphics::Texture* bossTexture = Resources::Find<graphics::Texture>(L"BossIdleDown");
