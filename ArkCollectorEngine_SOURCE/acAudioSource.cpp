@@ -7,6 +7,7 @@ namespace ac
 {
 	AudioSource::AudioSource()
 		: Component(enums::EComponentType::AudioSource)
+		, mAudioClip(nullptr)
 	{
 	}
 	AudioSource::~AudioSource()
@@ -28,9 +29,9 @@ namespace ac
 	void AudioSource::Render(HDC hdc)
 	{
 	}
-	void AudioSource::Play()
+	void AudioSource::Play(float volume)
 	{
-		mAudioClip->Play();
+		mAudioClip->Play(volume);
 	}
 	void AudioSource::Stop()
 	{

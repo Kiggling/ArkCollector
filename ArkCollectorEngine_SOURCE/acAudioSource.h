@@ -15,7 +15,7 @@ namespace ac
 		void LateUpdate() override;
 		void Render(HDC hdc) override;
 
-		void Play();
+		void Play(float volume = 1.0f);
 		void Stop();
 		void SetLoop(bool loop);
 

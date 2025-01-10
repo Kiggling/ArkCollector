@@ -39,9 +39,10 @@ namespace ac
 			return false;
 		return true;
 	}
-	void Fmod::SoundPlay(FMOD::Sound* sound, FMOD::Channel** channel)
+	void Fmod::SoundPlay(FMOD::Sound* sound, FMOD::Channel** channel, float volume)
 	{
 		mCoreSystem->playSound(sound, 0, false, channel);
+		(*channel)->setVolume(volume);
 	}
 	void Fmod::Set3DListenerAttributes(const Vector2* pos)
 	{

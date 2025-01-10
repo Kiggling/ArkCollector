@@ -19,7 +19,7 @@ namespace ac
 	public:
 		static void Initialize();
 		static bool CreateSound(const std::string& path, FMOD::Sound** sound);
-		static void SoundPlay(FMOD::Sound* sound, FMOD::Channel** channel);
+		static void SoundPlay(FMOD::Sound* sound, FMOD::Channel** channel, float volume);
 		static void Set3DListenerAttributes(const Vector2* pos);
 		static void Release();
 	private:

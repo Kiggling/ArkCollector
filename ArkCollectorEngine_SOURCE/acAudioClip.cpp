@@ -29,14 +29,14 @@ namespace ac
 		return S_OK;
 	}
 
-	void AudioClip::Play()
+	void AudioClip::Play(float volume)
 	{
 		if (mbLoop)
 			mSound->setMode(FMOD_LOOP_NORMAL);
 		else
 			mSound->setMode(FMOD_LOOP_OFF);
 
-		Fmod::SoundPlay(mSound, &mChannel);
+		Fmod::SoundPlay(mSound, &mChannel, volume);
 	}
 
 	void AudioClip::Stop()
@@ -51,5 +51,4 @@ namespace ac
 
 		mChannel->set3DAttributes(&fmodPos, &fmodVel);
 	}
-
 }

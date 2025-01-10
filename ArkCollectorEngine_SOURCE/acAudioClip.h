@@ -12,7 +12,7 @@ namespace ac
 
 		virtual HRESULT Load(const std::wstring& path) override;
 
-		void Play();
+		void Play(float volume);
 		void Stop();
 		void Set3DAttributes(const Vector2 pos);
 		void SetLoop(bool loop) { mbLoop = loop; }
