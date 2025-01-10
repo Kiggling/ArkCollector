@@ -61,7 +61,7 @@ namespace ac
 
 		bool IsComplete() 
 		{ 
-			if (mActiveAnimation)
+			if (mActiveAnimation != nullptr)
 				return mActiveAnimation->IsComplete();
 			else
 				return true;

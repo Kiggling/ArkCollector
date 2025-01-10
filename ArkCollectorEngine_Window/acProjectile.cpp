@@ -16,6 +16,7 @@ namespace ac
 	}
 	Projectile::~Projectile()
 	{
+		int a = 0;
 	}
 	void Projectile::Initialize()
 	{

@@ -72,7 +72,7 @@ namespace ac
 	}
 	void PlayerScriptComponent::Initialize()
 	{
-		mShield = object::Instantiate<Shield>(enums::ELayerType::Particle);
+		mShield = object::Instantiate<Shield>(enums::ELayerType::PlayerParticle);
 		TransformComponent* shieldTr = mShield->AddComponent<TransformComponent>();
 		// shield script?
 
@@ -91,7 +91,7 @@ namespace ac
 		{
 			StatComponent* stat = GetOwner()->GetComponent<StatComponent>();
 
-			Projectile* projectile = object::Instantiate<Projectile>(enums::ELayerType::Particle);
+			Projectile* projectile = object::Instantiate<Projectile>(enums::ELayerType::PlayerParticle);
 			projectile->SetVelocity(projectileDirection[(UINT)mAttackDirection] * 300.0f);
 
 			TransformComponent* projectileTr = projectile->AddComponent<TransformComponent>();

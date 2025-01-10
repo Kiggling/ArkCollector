@@ -187,5 +187,35 @@ namespace ac
 			Resources::Load<graphics::Texture>(L"BossDeathLeft", L"..\\Content\\Skeleton_Boss\\Left\\Png\\AncientSkeletonLeftDeath.png");
 		}
 
+
+		// Boss Effects
+		{
+			// Dust
+			Resources::Load<graphics::Texture>(L"Dust", L"..\\Content\\Effects\\Effects\\VFX\\Destroy Effect.png");
+			// Wave
+			// // Small
+			Resources::Load<graphics::Texture>(L"WaveSmallDown", L"..\\Content\\Effects\\Effects\\Wave\\Small\\Down\\WaveSmallDown.png");
+			Resources::Load<graphics::Texture>(L"WaveSmallUp", L"..\\Content\\Effects\\Effects\\Wave\\Small\\Up\\WaveSmallUp.png");
+			Resources::Load<graphics::Texture>(L"WaveSmallRight", L"..\\Content\\Effects\\Effects\\Wave\\Small\\Right\\WaveSmallRight.png");
+			Resources::Load<graphics::Texture>(L"WaveSmallLeft", L"..\\Content\\Effects\\Effects\\Wave\\Small\\Left\\WaveSmallLeft.png");
+			// // Big
+			Resources::Load<graphics::Texture>(L"WaveBigDown", L"..\\Content\\Effects\\Effects\\Wave\\Big\\Down\\WaveBigDown.png");
+			Resources::Load<graphics::Texture>(L"WaveBigUp", L"..\\Content\\Effects\\Effects\\Wave\\Big\\Up\\WaveBigUp.png");
+			Resources::Load<graphics::Texture>(L"WaveBigRight", L"..\\Content\\Effects\\Effects\\Wave\\Big\\Right\\WaveBigRight.png");
+			Resources::Load<graphics::Texture>(L"WaveBigLeft", L"..\\Content\\Effects\\Effects\\Wave\\Big\\Left\\WaveBigLeft.png");
+			// Rain
+			// // Small
+			Resources::Load<graphics::Texture>(L"RainSmallOrange", L"..\\Content\\Effects\\Effects\\Pickup effects\\Png\\Gem Pickup effect.png");
+			Resources::Load<graphics::Texture>(L"RainSmallYello", L"..\\Content\\Effects\\Effects\\Pickup effects\\Png\\Gold Pickup effect.png");
+			Resources::Load<graphics::Texture>(L"RainSmallRed", L"..\\Content\\Effects\\Effects\\Pickup effects\\Png\\Health Potion Pickup effect.png");
+			Resources::Load<graphics::Texture>(L"RainSmallBlue", L"..\\Content\\Effects\\Effects\\Pickup effects\\Png\\Mana Potion Pickup effect.png");
+			Resources::Load<graphics::Texture>(L"RainSmallGreen", L"..\\Content\\Effects\\Effects\\Pickup effects\\Png\\Stamina Potion Pickup effect.png");
+			// // Big
+			Resources::Load<graphics::Texture>(L"RainBigOrange", L"..\\Content\\Effects\\Effects\\Rarity Effects\\Png\\Legendary effect.png");
+			Resources::Load<graphics::Texture>(L"RainBigYello", L"..\\Content\\Effects\\Effects\\Rarity Effects\\Png\\Rare effect.png");
+			Resources::Load<graphics::Texture>(L"RainBigRed", L"..\\Content\\Effects\\Effects\\Rarity Effects\\Png\\Mythic effect.png");
+			Resources::Load<graphics::Texture>(L"RainBigBlue", L"..\\Content\\Effects\\Effects\\Rarity Effects\\Png\\Magic effect.png");
+			Resources::Load<graphics::Texture>(L"RainBigGray", L"..\\Content\\Effects\\Effects\\Rarity Effects\\Png\\Common effect.png");
+		}
 	}
 }

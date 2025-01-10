@@ -245,6 +245,9 @@ namespace ac
 		bossTexture = Resources::Find<graphics::Texture>(L"BossDeathUp");
 		bossAnimatorComp->CreateAnimation(L"DeathUp", bossTexture, math::Vector2(0.0f, 0.0f), math::Vector2(80.0f, 80.0f), math::Vector2::Zero, 9, 0.2f);
 
+		bossTexture = Resources::Find<graphics::Texture>(L"Dust");
+		bossAnimatorComp->CreateAnimation(L"Dust", bossTexture, math::Vector2(0.0f, 0.0f), math::Vector2(48.0f, 48.0f), math::Vector2::Zero, 6, 0.2f);
+
 
 		bossAnimatorComp->PlayAnimation(L"IdleDown", true);
 
