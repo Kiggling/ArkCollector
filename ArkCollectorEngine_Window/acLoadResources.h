@@ -98,9 +98,16 @@ namespace ac
 
 		// Player Sound
 		{
+			// death
+			Resources::Load<AudioClip>(L"PlayerDeath", L"..\\Content\\Sound\\Player\\Player_Death.wav");
+			// footstep
+			Resources::Load<AudioClip>(L"Playerfootstep0", L"..\\Content\\Sound\\Player\\Player_Footstep0.wav");
+			Resources::Load<AudioClip>(L"Playerfootstep1", L"..\\Content\\Sound\\Player\\Player_Footstep1.wav");
+			// base attack
 			Resources::Load<AudioClip>(L"PlayerArrowSound", L"..\\Content\\Sound\\Player\\Player_Arrow_Attack.wav");
+			// skills
 			Resources::Load<AudioClip>(L"PlayerSkill01Sound", L"..\\Content\\Sound\\Player\\Player_Skill01.wav");
-			//Resources::Load<AudioClip>(L"PlayerSkill02Sound", L"..\\Content\\Sound\\Player\\Player_Skill02.wav");
+			Resources::Load<AudioClip>(L"PlayerSkill02Sound", L"..\\Content\\Sound\\Player\\Player_Skill02.wav");
 			//Resources::Load<AudioClip>(L"PlayerSkill03Sound", L"..\\Content\\Sound\\Player\\Player_Skill03.wav");
 			//Resources::Load<AudioClip>(L"PlayerSkill04Sound", L"..\\Content\\Sound\\Player\\Player_Skill04.wav");
 		}
