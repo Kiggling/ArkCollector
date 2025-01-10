@@ -22,6 +22,11 @@
 #include "acStatComponent.h"
 #include "acPlayerStatComponent.h"
 #include "acScriptComponent.h"
+#include "acBoss.h"
+#include "acBossScriptComponent.h"
+#include "acApplication.h"
+
+extern ac::Application application;
 
 namespace ac
 {
@@ -114,7 +119,6 @@ namespace ac
 
 		BoxCollidier2DComponent* playerCollidier = mPlayer->AddComponent<BoxCollidier2DComponent>();
 		playerCollidier->SetSize(math::Vector2(playerTr->GetWidth(), playerTr->GetHeight()));
-		playerCollidier->SetOffset(math::Vector2(-12.0f, -12.0f));
 
 		// Player Stat
 		PlayerStatComponent* playerStat = mPlayer->AddComponent<PlayerStatComponent>();
@@ -142,6 +146,108 @@ namespace ac
 		testPlayerStat->SetMp(100.0f);
 		testPlayerStat->SetDamage(5.0f);
 		testPlayerStat->SetAttackSpeed(1.0f);
+
+		// Boss
+		mBoss = object::Instantiate<Boss>(enums::ELayerType::Boss);
+		TransformComponent* bossTr = mBoss->AddComponent<TransformComponent>();
+		bossTr->SetPosition(math::Vector2(700.0f, 400.0f));
+		bossTr->SetWidth(40.0f);
+		bossTr->SetHeight(60.0f);
+
+		BossScriptComponent* bossScript = mBoss->AddComponent<BossScriptComponent>();
+		bossScript->SetTarget(mPlayer);
+
+		BoxCollidier2DComponent* bossCollidier = mBoss->AddComponent<BoxCollidier2DComponent>();
+		bossCollidier->SetSize(math::Vector2(bossTr->GetWidth(), bossTr->GetHeight()));
+
+		StatComponent* bossStat = mBoss->AddComponent<StatComponent>();
+		bossStat->SetMaxHp(1000.f);
+		bossStat->SetHp(1000.f);
+
+		AnimatorComponent* bossAnimatorComp = mBoss->AddComponent<AnimatorComponent>();
+		graphics::Texture* bossTexture = Resources::Find<graphics::Texture>(L"BossIdleDown");
+		bossAnimatorComp->CreateAnimation(L"IdleDown", bossTexture, math::Vector2(0.0f, 0.0f), math::Vector2(80.0f, 80.0f), math::Vector2::Zero, 7, 0.2f);
+		bossTexture = Resources::Find<graphics::Texture>(L"BossIdleLeft");
+		bossAnimatorComp->CreateAnimation(L"IdleLeft", bossTexture, math::Vector2(0.0f, 0.0f), math::Vector2(80.0f, 80.0f), math::Vector2::Zero, 7, 0.2f);
+		bossTexture = Resources::Find<graphics::Texture>(L"BossIdleRight");
+		bossAnimatorComp->CreateAnimation(L"IdleRight", bossTexture, math::Vector2(0.0f, 0.0f), math::Vector2(80.0f, 80.0f), math::Vector2::Zero, 7, 0.2f);
+		bossTexture = Resources::Find<graphics::Texture>(L"BossIdleUp");
+		bossAnimatorComp->CreateAnimation(L"IdleUp", bossTexture, math::Vector2(0.0f, 0.0f), math::Vector2(80.0f, 80.0f), math::Vector2::Zero, 7, 0.2f);
+
+		bossTexture = Resources::Find<graphics::Texture>(L"BossWalkDown");
+		bossAnimatorComp->CreateAnimation(L"WalkDown", bossTexture, math::Vector2(0.0f, 0.0f), math::Vector2(80.0f, 80.0f), math::Vector2::Zero, 8, 0.1f);
+		bossTexture = Resources::Find<graphics::Texture>(L"BossWalkLeft");
+		bossAnimatorComp->CreateAnimation(L"WalkLeft", bossTexture, math::Vector2(0.0f, 0.0f), math::Vector2(96.0f, 96.0f), math::Vector2::Zero, 8, 0.1f);
+		bossTexture = Resources::Find<graphics::Texture>(L"BossWalkRight");
+		bossAnimatorComp->CreateAnimation(L"WalkRight", bossTexture, math::Vector2(0.0f, 0.0f), math::Vector2(96.0f, 96.0f), math::Vector2::Zero, 8, 0.1f);
+		bossTexture = Resources::Find<graphics::Texture>(L"BossWalkUp");
+		bossAnimatorComp->CreateAnimation(L"WalkUp", bossTexture, math::Vector2(0.0f, 0.0f), math::Vector2(80.0f, 80.0f), math::Vector2::Zero, 8, 0.1f);
+
+		bossTexture = Resources::Find<graphics::Texture>(L"BossJumpDown");
+		bossAnimatorComp->CreateAnimation(L"JumpDown", bossTexture, math::Vector2(0.0f, 0.0f), math::Vector2(80.0f, 80.0f), math::Vector2::Zero, 5, 0.1f);
+		bossTexture = Resources::Find<graphics::Texture>(L"BossJumpLeft");
+		bossAnimatorComp->CreateAnimation(L"JumpLeft", bossTexture, math::Vector2(0.0f, 0.0f), math::Vector2(80.0f, 80.0f), math::Vector2::Zero, 5, 0.1f);
+		bossTexture = Resources::Find<graphics::Texture>(L"BossJumpRight");
+		bossAnimatorComp->CreateAnimation(L"JumpRight", bossTexture, math::Vector2(0.0f, 0.0f), math::Vector2(80.0f, 80.0f), math::Vector2::Zero, 5, 0.1f);
+		bossTexture = Resources::Find<graphics::Texture>(L"BossJumpUp");
+		bossAnimatorComp->CreateAnimation(L"JumpUp", bossTexture, math::Vector2(0.0f, 0.0f), math::Vector2(80.0f, 80.0f), math::Vector2::Zero, 5, 0.1f);
+
+		bossTexture = Resources::Find<graphics::Texture>(L"BossLandDown");
+		bossAnimatorComp->CreateAnimation(L"LandDown", bossTexture, math::Vector2(0.0f, 0.0f), math::Vector2(80.0f, 80.0f), math::Vector2::Zero, 4, 0.1f);
+		bossTexture = Resources::Find<graphics::Texture>(L"BossLandLeft");
+		bossAnimatorComp->CreateAnimation(L"LandLeft", bossTexture, math::Vector2(0.0f, 0.0f), math::Vector2(80.0f, 80.0f), math::Vector2::Zero, 4, 0.1f);
+		bossTexture = Resources::Find<graphics::Texture>(L"BossLandRight");
+		bossAnimatorComp->CreateAnimation(L"LandRight", bossTexture, math::Vector2(0.0f, 0.0f), math::Vector2(80.0f, 80.0f), math::Vector2::Zero, 4, 0.1f);
+		bossTexture = Resources::Find<graphics::Texture>(L"BossLandUp");
+		bossAnimatorComp->CreateAnimation(L"LandUp", bossTexture, math::Vector2(0.0f, 0.0f), math::Vector2(80.0f, 80.0f), math::Vector2::Zero, 4, 0.1f);
+
+		bossTexture = Resources::Find<graphics::Texture>(L"BossAttack01Down");
+		bossAnimatorComp->CreateAnimation(L"Attack01Down", bossTexture, math::Vector2(0.0f, 0.0f), math::Vector2(80.0f, 80.0f), math::Vector2::Zero, 7, 0.1f);
+		bossTexture = Resources::Find<graphics::Texture>(L"BossAttack01Left");
+		bossAnimatorComp->CreateAnimation(L"Attack01Left", bossTexture, math::Vector2(0.0f, 0.0f), math::Vector2(80.0f, 80.0f), math::Vector2::Zero, 7, 0.1f);
+		bossTexture = Resources::Find<graphics::Texture>(L"BossAttack01Right");
+		bossAnimatorComp->CreateAnimation(L"Attack01Right", bossTexture, math::Vector2(0.0f, 0.0f), math::Vector2(80.0f, 80.0f), math::Vector2::Zero, 7, 0.1f);
+		bossTexture = Resources::Find<graphics::Texture>(L"BossAttack01Up");
+		bossAnimatorComp->CreateAnimation(L"Attack01Up", bossTexture, math::Vector2(0.0f, 0.0f), math::Vector2(80.0f, 80.0f), math::Vector2::Zero, 7, 0.1f);
+
+		bossTexture = Resources::Find<graphics::Texture>(L"BossAttack02Down");
+		bossAnimatorComp->CreateAnimation(L"Attack02Down", bossTexture, math::Vector2(0.0f, 0.0f), math::Vector2(80.0f, 80.0f), math::Vector2::Zero, 13, 0.1f);
+		bossTexture = Resources::Find<graphics::Texture>(L"BossAttack02Left");
+		bossAnimatorComp->CreateAnimation(L"Attack02Left", bossTexture, math::Vector2(0.0f, 0.0f), math::Vector2(80.0f, 80.0f), math::Vector2::Zero, 13, 0.1f);
+		bossTexture = Resources::Find<graphics::Texture>(L"BossAttack02Right");
+		bossAnimatorComp->CreateAnimation(L"Attack02Right", bossTexture, math::Vector2(0.0f, 0.0f), math::Vector2(80.0f, 80.0f), math::Vector2::Zero, 13, 0.1f);
+		bossTexture = Resources::Find<graphics::Texture>(L"BossAttack02Up");
+		bossAnimatorComp->CreateAnimation(L"Attack02Up", bossTexture, math::Vector2(0.0f, 0.0f), math::Vector2(80.0f, 80.0f), math::Vector2::Zero, 13, 0.1f);
+
+		bossTexture = Resources::Find<graphics::Texture>(L"BossAttack03Down");
+		bossAnimatorComp->CreateAnimation(L"Attack03Down", bossTexture, math::Vector2(0.0f, 0.0f), math::Vector2(80.0f, 80.0f), math::Vector2::Zero, 7, 0.1f);
+		bossTexture = Resources::Find<graphics::Texture>(L"BossAttack03Left");
+		bossAnimatorComp->CreateAnimation(L"Attack03Left", bossTexture, math::Vector2(0.0f, 0.0f), math::Vector2(80.0f, 80.0f), math::Vector2::Zero, 7, 0.1f);
+		bossTexture = Resources::Find<graphics::Texture>(L"BossAttack03Right");
+		bossAnimatorComp->CreateAnimation(L"Attack03Right", bossTexture, math::Vector2(0.0f, 0.0f), math::Vector2(80.0f, 80.0f), math::Vector2::Zero, 7, 0.1f);
+		bossTexture = Resources::Find<graphics::Texture>(L"BossAttack03Up");
+		bossAnimatorComp->CreateAnimation(L"Attack03Up", bossTexture, math::Vector2(0.0f, 0.0f), math::Vector2(80.0f, 80.0f), math::Vector2::Zero, 7, 0.1f);
+
+		bossTexture = Resources::Find<graphics::Texture>(L"BossHurtDown");
+		bossAnimatorComp->CreateAnimation(L"HurtDown", bossTexture, math::Vector2(0.0f, 0.0f), math::Vector2(80.0f, 80.0f), math::Vector2::Zero, 4, 0.1f);
+		bossTexture = Resources::Find<graphics::Texture>(L"BossHurtLeft");
+		bossAnimatorComp->CreateAnimation(L"HurtLeft", bossTexture, math::Vector2(0.0f, 0.0f), math::Vector2(80.0f, 80.0f), math::Vector2::Zero, 4, 0.1f);
+		bossTexture = Resources::Find<graphics::Texture>(L"BossHurtRight");
+		bossAnimatorComp->CreateAnimation(L"HurtRight", bossTexture, math::Vector2(0.0f, 0.0f), math::Vector2(80.0f, 80.0f), math::Vector2::Zero, 4, 0.1f);
+		bossTexture = Resources::Find<graphics::Texture>(L"BossHurtUp");
+		bossAnimatorComp->CreateAnimation(L"HurtUp", bossTexture, math::Vector2(0.0f, 0.0f), math::Vector2(80.0f, 80.0f), math::Vector2::Zero, 4, 0.1f);
+
+		bossTexture = Resources::Find<graphics::Texture>(L"BossDeathDown");
+		bossAnimatorComp->CreateAnimation(L"DeathDown", bossTexture, math::Vector2(0.0f, 0.0f), math::Vector2(80.0f, 80.0f), math::Vector2::Zero, 9, 0.2f);
+		bossTexture = Resources::Find<graphics::Texture>(L"BossDeathLeft");
+		bossAnimatorComp->CreateAnimation(L"DeathLeft", bossTexture, math::Vector2(0.0f, 0.0f), math::Vector2(80.0f, 80.0f), math::Vector2::Zero, 9, 0.2f);
+		bossTexture = Resources::Find<graphics::Texture>(L"BossDeathRight");
+		bossAnimatorComp->CreateAnimation(L"DeathRight", bossTexture, math::Vector2(0.0f, 0.0f), math::Vector2(80.0f, 80.0f), math::Vector2::Zero, 9, 0.2f);
+		bossTexture = Resources::Find<graphics::Texture>(L"BossDeathUp");
+		bossAnimatorComp->CreateAnimation(L"DeathUp", bossTexture, math::Vector2(0.0f, 0.0f), math::Vector2(80.0f, 80.0f), math::Vector2::Zero, 9, 0.2f);
+
+
+		bossAnimatorComp->PlayAnimation(L"IdleDown", true);
 
 		Scene::Initialize();
 

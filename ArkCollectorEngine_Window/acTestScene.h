@@ -16,8 +16,9 @@ namespace ac
 		
 		void OnEnter() override;
 		void OnExit() override;
-
+		
 	private:
 		class Player* mPlayer;
+		class Boss* mBoss;
 	};
 }

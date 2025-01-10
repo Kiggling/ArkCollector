@@ -3,8 +3,10 @@
 #include "acApplication.h"
 #include "acInput.h"
 #include "acTime.h"
+#include "acLayer.h"
 #include "acSceneManager.h"
 #include "acStatComponent.h"
+#include "..\\ArkCollectorEngine_Window\\acBoss.h"
 #include "..\\ArkCollectorEngine_Window\\acPlayer.h"
 #include "..\\ArkCollectorEngine_Window\\acPlayerStatComponent.h"
 
@@ -116,6 +118,30 @@ namespace ac
 		//	mPercentageBossHP = min(1.f, mPercentageBossHP + 0.1f);
 		//}
 
+
+		// Boss 체력 업데이트
+		Layer* bossLayer = SceneManager::GetActiveScene()->GetLayer(enums::ELayerType::Boss);
+		Boss* boss = nullptr;
+		for (GameObject* obj : bossLayer->GetGameObjects())
+		{
+			boss = dynamic_cast<Boss*>(obj);
+			if (boss != nullptr)
+			{
+				break;
+			}
+		}
+		if (boss != nullptr)
+		{
+			StatComponent* bossStat = boss->GetComponent<StatComponent>();
+			 
+			float bossMaxHp = bossStat->GetMaxHp();
+			float bossCurrentHp = bossStat->GetHp();
+
+			mPercentageBossHP = bossCurrentHp / bossMaxHp;
+		}
+
+
+		float skillCool = 5.f;
 		for (int i = 0; i < 4; i++)
 		{
 			if (mPercentageSkills[i] == 0.f)
@@ -153,45 +179,6 @@ namespace ac
 				mPercentageItems[i] = 0.f;
 			}
 		}
-
-		//float skillCool = 5.f;
-		//for (int i = 0; i < 4; i++)
-		//{
-		//	if (mPercentageSkills[i] == 0.f)
-		//	{
-		//		if (Input::GetKeyDown(EKeyCode::Z))
-		//		{
-		//			mPercentageSkills[i] = 1.f;
-		//		}
-		//	}
-		//	else if(mPercentageSkills[i] > 0.f)
-		//	{
-		//		mPercentageSkills[i] -= (1 / skillCool) * Time::DeltaTime();
-		//	}
-		//	else
-		//	{
-		//		mPercentageSkills[i] = 0.f;
-		//	}
-		//}
-
-		//for (int i = 0; i < 4; i++)
-		//{
-		//	if (mPercentageItems[i] == 0.f)
-		//	{
-		//		if (Input::GetKeyDown(EKeyCode::X))
-		//		{
-		//			mPercentageItems[i] = 1.f;
-		//		}
-		//	}
-		//	else if (mPercentageItems[i] > 0.f)
-		//	{
-		//		mPercentageItems[i] -= (1/skillCool) * Time::DeltaTime();
-		//	}
-		//	else
-		//	{
-		//		mPercentageItems[i] = 0.f;
-		//	}
-		//}
 		// ===========================================
 	}
 

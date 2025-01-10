@@ -34,7 +34,7 @@ namespace ac
 
 	PlayerScriptComponent::PlayerScriptComponent()
 		: mState(eState::Idle)
-		, mDirection(eDirection::Down)
+		, mAnimationDirection(eDirection::Down)
 		, mAnimatorComponent(nullptr)
 		, mbAttack(false)
 		, mAttackDirection(eDirection::Down)
@@ -133,7 +133,7 @@ namespace ac
 			land();
 			break;
 		case ac::PlayerScriptComponent::eState::Attack:
-			attack();
+			isAttacking();
 			break;
 		case ac::PlayerScriptComponent::eState::Skill01:
 			skill01();
@@ -304,19 +304,19 @@ namespace ac
 	{
 		if (Input::GetKey(EKeyCode::UP))
 		{
-			mDirection = eDirection::Up;
+			mAnimationDirection = eDirection::Up;
 		}
 		if (Input::GetKey(EKeyCode::DOWN))
 		{
-			mDirection = eDirection::Down;
+			mAnimationDirection = eDirection::Down;
 		}
 		if (Input::GetKey(EKeyCode::LEFT))
 		{
-			mDirection = eDirection::Left;
+			mAnimationDirection = eDirection::Left;
 		}
 		if (Input::GetKey(EKeyCode::RIGHT))
 		{
-			mDirection = eDirection::Right;
+			mAnimationDirection = eDirection::Right;
 		}
 	}
 	void PlayerScriptComponent::setState()
@@ -400,7 +400,7 @@ namespace ac
 	{
 		if (mAnimatorComponent->GetActiveAnimation()->GetName().substr(0, 4) == L"Walk" || mAnimatorComponent->IsComplete())
 		{
-			mAnimatorComponent->PlayAnimation(L"Idle" + direction[(UINT)mDirection], false);
+			mAnimatorComponent->PlayAnimation(L"Idle" + direction[(UINT)mAnimationDirection], false);
 		}
 	}
 	void PlayerScriptComponent::walk()
@@ -408,7 +408,7 @@ namespace ac
 		std::wstring animationName = mAnimatorComponent->GetActiveAnimation()->GetName();
 		if (animationName.substr(0, 4) == L"Idle" || mAnimatorComponent->IsComplete())
 		{
-			mAnimatorComponent->PlayAnimation(L"Walk" + direction[(UINT)mDirection], false);
+			mAnimatorComponent->PlayAnimation(L"Walk" + direction[(UINT)mAnimationDirection], false);
 		}
 		else if (animationName.substr(0, 4) != L"Walk" && animationName.substr(0, 4) != L"Jump")
 		{
@@ -444,7 +444,7 @@ namespace ac
 		std::wstring animationName = mAnimatorComponent->GetActiveAnimation()->GetName();
 		if (animationName.substr(0, 4) == L"Idle" || animationName.substr(0, 4) == L"Walk" || mAnimatorComponent->IsComplete())
 		{
-			mAnimatorComponent->PlayAnimation(L"Jump" + direction[(UINT)mDirection], false);
+			mAnimatorComponent->PlayAnimation(L"Jump" + direction[(UINT)mAnimationDirection], false);
 		}
 		else if (animationName.substr(0, 4) != L"Jump")
 		{
@@ -456,13 +456,13 @@ namespace ac
 	void PlayerScriptComponent::land()
 	{
 	}
-	void PlayerScriptComponent::attack()
+	void PlayerScriptComponent::isAttacking()
 	{
 		if ((mAnimatorComponent->GetActiveAnimation()->GetName().substr(0, 4) == L"Idle" || mAnimatorComponent->GetActiveAnimation()->GetName().substr(0, 4) == L"Walk")
 			|| mAnimatorComponent->IsComplete())
 		{
-			mAnimatorComponent->PlayAnimation(L"Attack" + direction[(UINT)mDirection], false);
-			mAttackDirection = mDirection;
+			mAnimatorComponent->PlayAnimation(L"Attack" + direction[(UINT)mAnimationDirection], false);
+			mAttackDirection = mAnimationDirection;
 			mAttackType = eAttackType::BasicAttack;
 		}
 	}
@@ -474,8 +474,8 @@ namespace ac
 			PlayerStatComponent* stat = GetOwner()->GetComponent<PlayerStatComponent>();
 			if (stat->GetSkillUsed(0) != true)
 			{
-				mAnimatorComponent->PlayAnimation(L"Attack" + direction[(UINT)mDirection], false);
-				mAttackDirection = mDirection;
+				mAnimatorComponent->PlayAnimation(L"Attack" + direction[(UINT)mAnimationDirection], false);
+				mAttackDirection = mAnimationDirection;
 				mAttackType = eAttackType::Skill01;
 
 				stat->SetSkillUsed(0, true);
@@ -505,8 +505,8 @@ namespace ac
 			PlayerStatComponent* stat = GetOwner()->GetComponent<PlayerStatComponent>();
 			if (stat->GetSkillUsed(2) != true)
 			{
-				mAnimatorComponent->PlayAnimation(L"Attack" + direction[(UINT)mDirection], false);
-				mAttackDirection = mDirection;
+				mAnimatorComponent->PlayAnimation(L"Attack" + direction[(UINT)mAnimationDirection], false);
+				mAttackDirection = mAnimationDirection;
 				mAttackType = eAttackType::Skill03;
 
 				stat->SetSkillUsed(2, true);
@@ -521,8 +521,8 @@ namespace ac
 			PlayerStatComponent* stat = GetOwner()->GetComponent<PlayerStatComponent>();
 			if (stat->GetSkillUsed(3) != true)
 			{
-				mAnimatorComponent->PlayAnimation(L"Attack" + direction[(UINT)mDirection], false);
-				mAttackDirection = mDirection;
+				mAnimatorComponent->PlayAnimation(L"Attack" + direction[(UINT)mAnimationDirection], false);
+				mAttackDirection = mAnimationDirection;
 				mAttackType = eAttackType::Skill04;
 
 				stat->SetSkillUsed(3, true);
@@ -581,14 +581,14 @@ namespace ac
 	{
 		if (mAnimatorComponent->GetActiveAnimation()->GetName().substr(0, 4) != L"Hurt")
 		{
-			mAnimatorComponent->PlayAnimation(L"Hurt" + direction[(UINT)mDirection], false);
+			mAnimatorComponent->PlayAnimation(L"Hurt" + direction[(UINT)mAnimationDirection], false);
 		}
 	}
 	void PlayerScriptComponent::death()
 	{
 		if (mAnimatorComponent->GetActiveAnimation()->GetName().substr(0, 5) != L"Death")
 		{
-			mAnimatorComponent->PlayAnimation(L"Death" + direction[(UINT)mDirection], false);
+			mAnimatorComponent->PlayAnimation(L"Death" + direction[(UINT)mAnimationDirection], false);
 		}
 	}
 }

@@ -68,7 +68,7 @@ namespace ac
 		void walk();
 		void jump();
 		void land();
-		void attack();
+		void isAttacking();
 		void skill01();
 		void skill02();
 		void skill03();
@@ -82,7 +82,7 @@ namespace ac
 
 	private:
 		eState mState;
-		eDirection mDirection;
+		eDirection mAnimationDirection;
 		class AnimatorComponent* mAnimatorComponent;
 		
 		bool mbAttack;

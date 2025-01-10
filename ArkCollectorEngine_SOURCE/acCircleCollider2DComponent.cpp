@@ -19,12 +19,25 @@ namespace ac
 	}
 	void CircleCollider2DComponent::Update()
 	{
+		if (!GetActivate())
+		{
+			return;
+		}
 	}
 	void CircleCollider2DComponent::LateUpdate()
 	{
+		if (!GetActivate())
+		{
+			return;
+		}
 	}
 	void CircleCollider2DComponent::Render(HDC InHdc)
 	{
+		if (!GetActivate())
+		{
+			return;
+		}
+
 		TransformComponent* tr = this->GetOwner()->GetComponent<TransformComponent>();
 		math::Vector2 centerPos = tr->GetPosition();
 		float gameObjWidth = tr->GetWidth();

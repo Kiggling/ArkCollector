@@ -11,6 +11,7 @@ namespace ac
 	{
 		CollisionLayerMatrixCheck(enums::ELayerType::Player, enums::ELayerType::Player, true);
 		CollisionLayerMatrixCheck(enums::ELayerType::Player, enums::ELayerType::Particle, true);
+		CollisionLayerMatrixCheck(enums::ELayerType::Particle, enums::ELayerType::Boss, true);
 	}
 	void CollisionManager::Update()
 	{
@@ -65,11 +66,19 @@ namespace ac
 			{
 				continue;
 			}
+			if (leftCol->GetActivate() == false)
+			{
+				continue;
+			}
 			for (GameObject* right : scene->GetLayer((enums::ELayerType)right)->GetGameObjects())
 			{
 				ColliderComponent* rightCol = right->GetComponent<ColliderComponent>();
 
 				if (rightCol == nullptr)
+				{
+					continue;
+				}
+				if (rightCol->GetActivate() == false)
 				{
 					continue;
 				}

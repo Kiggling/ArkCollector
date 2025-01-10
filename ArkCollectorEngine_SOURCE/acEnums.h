@@ -7,6 +7,7 @@ namespace ac::enums
 		None,
 		BackGround,
 		Tile,
+		Boss,
 		Player,
 		Floor,
 		Particle,

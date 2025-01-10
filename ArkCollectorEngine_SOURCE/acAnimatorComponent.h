@@ -52,13 +52,20 @@ namespace ac
 
 		Animation* FindAnimation(const std::wstring& name);
 		void PlayAnimation(const std::wstring& name, bool loop = true);
+		void StopAnimation();
 
 		Events* FindEvents(const std::wstring& name);
 		std::function<void()>& GetStartEvent(const std::wstring& name);
 		std::function<void()>& GetCompleteEvent(const std::wstring& name);
 		std::function<void()>& GetEndEvent(const std::wstring& name);
 
-		bool IsComplete() { return mActiveAnimation->IsComplete(); }
+		bool IsComplete() 
+		{ 
+			if (mActiveAnimation)
+				return mActiveAnimation->IsComplete();
+			else
+				return true;
+		}
 		Animation* GetActiveAnimation() { return mActiveAnimation; }
 
 	private:
