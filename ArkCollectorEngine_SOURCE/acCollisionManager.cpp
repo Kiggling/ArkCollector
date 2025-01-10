@@ -11,6 +11,7 @@ namespace ac
 	{
 		CollisionLayerMatrixCheck(enums::ELayerType::Player, enums::ELayerType::Player, true);
 		CollisionLayerMatrixCheck(enums::ELayerType::Player, enums::ELayerType::Particle, true);
+		CollisionLayerMatrixCheck(enums::ELayerType::Particle, enums::ELayerType::Boss, true);
 	}
 	void CollisionManager::Update()
 	{
