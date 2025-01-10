@@ -7,6 +7,7 @@
 #include "acPlayer.h"
 #include "acColliderComponent.h"
 #include "acStatComponent.h"
+#include "acBossStatComponent.h"
 
 namespace ac
 {
@@ -34,7 +35,7 @@ namespace ac
 	}
 	void BossScriptComponent::Initialize()
 	{
-		mStatComponent = GetOwner()->GetComponent<StatComponent>();
+		mStatComponent = GetOwner()->GetComponent<BossStatComponent>();
 		mAnimatorComponent = GetOwner()->GetComponent<AnimatorComponent>();
 		mTransformComponent = GetOwner()->GetComponent<TransformComponent>();
 		mColliderComponent = GetOwner()->GetComponent<ColliderComponent>();

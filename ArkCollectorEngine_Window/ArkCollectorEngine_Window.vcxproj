@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClInclude Include="acBoss.h" />
     <ClInclude Include="acBossScriptComponent.h" />
+    <ClInclude Include="acBossStatComponent.h" />
     <ClInclude Include="acCameraScriptComponent.h" />
     <ClInclude Include="acLoadResources.h" />
     <ClInclude Include="acLoadScenes.h" />
@@ -37,6 +38,7 @@
   <ItemGroup>
     <ClCompile Include="acBoss.cpp" />
     <ClCompile Include="acBossScriptComponent.cpp" />
+    <ClCompile Include="acBossStatComponent.cpp" />
     <ClCompile Include="acCameraScriptComponent.cpp" />
     <ClCompile Include="acPlayer.cpp" />
     <ClCompile Include="acPlayerScriptComponent.cpp" />

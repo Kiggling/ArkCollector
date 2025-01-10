@@ -76,7 +76,7 @@ namespace ac
 		eState mState;									// 보스 상태
 		eAttack mAttackType;							// 보스 일반 공격 타입 (3가지 존재)
 		eDirection mAnimationDirection;					// 재생할 에니매이션 방향
-		class StatComponent* mStatComponent;			// 보스 스텟 컴포넌트
+		class BossStatComponent* mStatComponent;			// 보스 스텟 컴포넌트
 		class AnimatorComponent* mAnimatorComponent;	// 보스 애니메이션 컴포넌트
 		class TransformComponent* mTransformComponent;	// 보스 위치 상태 컴포넌트
 		class ColliderComponent* mColliderComponent;	// 보스 충돌 컴포넌트
