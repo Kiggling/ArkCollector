@@ -98,23 +98,34 @@ namespace ac
 
 		// Player Sound
 		{
+			// jump
+			Resources::Load<AudioClip>(L"PlayerJump", L"..\\Content\\Sound\\Player\\Player_Jump.wav");
+			// hurt
+			Resources::Load<AudioClip>(L"PlayerHurt", L"..\\Content\\Sound\\Player\\Player_Hurt.wav");
 			// death
 			Resources::Load<AudioClip>(L"PlayerDeath", L"..\\Content\\Sound\\Player\\Player_Death.wav");
 			// footstep
-			Resources::Load<AudioClip>(L"Playerfootstep0", L"..\\Content\\Sound\\Player\\Player_Footstep0.wav");
-			Resources::Load<AudioClip>(L"Playerfootstep1", L"..\\Content\\Sound\\Player\\Player_Footstep1.wav");
+			Resources::Load<AudioClip>(L"PlayerFootstep", L"..\\Content\\Sound\\Player\\Player_Footstep.wav");
 			// base attack
 			Resources::Load<AudioClip>(L"PlayerArrowSound", L"..\\Content\\Sound\\Player\\Player_Arrow_Attack.wav");
 			// skills
 			Resources::Load<AudioClip>(L"PlayerSkill01Sound", L"..\\Content\\Sound\\Player\\Player_Skill01.wav");
 			Resources::Load<AudioClip>(L"PlayerSkill02Sound", L"..\\Content\\Sound\\Player\\Player_Skill02.wav");
-			//Resources::Load<AudioClip>(L"PlayerSkill03Sound", L"..\\Content\\Sound\\Player\\Player_Skill03.wav");
-			//Resources::Load<AudioClip>(L"PlayerSkill04Sound", L"..\\Content\\Sound\\Player\\Player_Skill04.wav");
+			Resources::Load<AudioClip>(L"PlayerSkill03Sound", L"..\\Content\\Sound\\Player\\Player_Skill03.wav");
+			Resources::Load<AudioClip>(L"PlayerSkill04Sound", L"..\\Content\\Sound\\Player\\Player_Skill04.wav");
+			// items
+			Resources::Load<AudioClip>(L"PlayerItem01Sound", L"..\\Content\\Sound\\Player\\Player_Item01.wav");
+			Resources::Load<AudioClip>(L"PlayerItem02Sound", L"..\\Content\\Sound\\Player\\Player_Item02.wav");
+			//Resources::Load<AudioClip>(L"PlayerItem03Sound", L"..\\Content\\Sound\\Player\\Player_Item03.wav");
+			//Resources::Load<AudioClip>(L"PlayerItem04Sound", L"..\\Content\\Sound\\Player\\Player_Item04.wav");
 		}
 		
 		// Map
 		{
 			Resources::Load<graphics::Texture>(L"Dungeon", L"..\\Content\\Dungeon60.bmp");
+
+			// sound
+			Resources::Load<AudioClip>(L"DungeonSound", L"..\\Content\\Sound\\Map\\Dungeon.wav");
 		}
 
 		// Scene

@@ -44,30 +44,6 @@ namespace ac
 		, mAttackType(eAttackType::None)
 		, mbShield(false)
 		, mShield(nullptr)
-		//, mbSkill01(false)
-		//, mSkill01Cooldown(5.0f)
-		//, mSkill01Timer(0.0f)
-		//, mbSkill02(false)
-		//, mSkill02Cooldown(5.0f)
-		//, mSkill02Timer(0.0f)
-		//, mbSkill03(false)
-		//, mSkill03Cooldown(5.0f)
-		//, mSkill03Timer(0.0f)
-		//, mbSkill04(false)
-		//, mSkill04Cooldown(5.0f)
-		//, mSkill04Timer(0.0f)
-		//, mbItem01(false)
-		//, mItem01Cooldown(1.0f)
-		//, mItem01Timer(0.0f)
-		//, mbItem02(false)
-		//, mItem02Cooldown(1.0f)
-		//, mItem02Timer(0.0f)
-		//, mbItem03(false)
-		//, mItem03Cooldown(1.0f)
-		//, mItem03Timer(0.0f)
-		//, mbItem04(false)
-		//, mItem04Cooldown(1.0f)
-		//, mItem04Timer(0.0f)
 	{
 	}
 	PlayerScriptComponent::~PlayerScriptComponent()
@@ -117,7 +93,7 @@ namespace ac
 
 			AudioClip* ac = Resources::Find<AudioClip>(audioName[(UINT)mAttackType]);
 			mAudioSource->SetClip(ac);
-			mAudioSource->Play();
+			mAudioSource->Play(0.3f);
 
 			mAttackType = eAttackType::None;
 		}
@@ -236,78 +212,6 @@ namespace ac
 				}
 			}
 		}
-		//if (mbSkill01 == true)
-		//{
-		//	mSkill01Timer += Time::DeltaTime();
-		//	if (mSkill01Timer >= mSkill01Cooldown)
-		//	{
-		//		mbSkill01 = false;
-		//		mSkill01Timer = 0.0f;
-		//	}
-		//}
-		//if (mbSkill02 == true)
-		//{
-		//	mSkill02Timer += Time::DeltaTime();
-		//	if (mSkill02Timer >= mSkill02Cooldown)
-		//	{
-		//		mbSkill02 = false;
-		//		mSkill02Timer = 0.0f;
-		//	}
-		//}
-		//if (mbSkill03 == true)
-		//{
-		//	mSkill03Timer += Time::DeltaTime();
-		//	if (mSkill03Timer >= mSkill03Cooldown)
-		//	{
-		//		mbSkill03 = false;
-		//		mSkill03Timer = 0.0f;
-		//	}
-		//}
-		//if (mbSkill04 == true)
-		//{
-		//	mSkill04Timer += Time::DeltaTime();
-		//	if (mSkill04Timer >= mSkill04Cooldown)
-		//	{
-		//		mbSkill04 = false;
-		//		mSkill04Timer = 0.0f;
-		//	}
-		//}
-		//if (mbItem01 == true)
-		//{
-		//	mItem01Timer += Time::DeltaTime();
-		//	if (mItem01Timer >= mItem01Cooldown)
-		//	{
-		//		mbItem01 = false;
-		//		mItem01Timer = 0.0f;
-		//	}
-		//}
-		//if (mbItem02 == true)
-		//{
-		//	mItem02Timer += Time::DeltaTime();
-		//	if (mItem02Timer >= mItem02Cooldown)
-		//	{
-		//		mbItem02 = false;
-		//		mItem02Timer = 0.0f;
-		//	}
-		//}
-		//if (mbItem03 == true)
-		//{
-		//	mItem03Timer += Time::DeltaTime();
-		//	if (mItem03Timer >= mItem03Cooldown)
-		//	{
-		//		mbItem03 = false;
-		//		mItem03Timer = 0.0f;
-		//	}
-		//}
-		//if (mbItem04 == true)
-		//{
-		//	mItem04Timer += Time::DeltaTime();
-		//	if (mItem04Timer >= mItem04Cooldown)
-		//	{
-		//		mbItem04 = false;
-		//		mItem04Timer = 0.0f;
-		//	}
-		//}
 	}
 	void PlayerScriptComponent::setDirection()
 	{
@@ -410,6 +314,8 @@ namespace ac
 		if (mAnimatorComponent->GetActiveAnimation()->GetName().substr(0, 4) == L"Walk" || mAnimatorComponent->IsComplete())
 		{
 			mAnimatorComponent->PlayAnimation(L"Idle" + direction[(UINT)mAnimationDirection], false);
+
+			mAudioSource->Stop();
 		}
 	}
 	void PlayerScriptComponent::walk()
@@ -418,6 +324,10 @@ namespace ac
 		if (animationName.substr(0, 4) == L"Idle" || mAnimatorComponent->IsComplete())
 		{
 			mAnimatorComponent->PlayAnimation(L"Walk" + direction[(UINT)mAnimationDirection], false);
+
+			AudioClip* ac = Resources::Find<AudioClip>(L"PlayerFootstep");
+			mAudioSource->SetClip(ac);
+			mAudioSource->Play(0.2f);
 		}
 		else if (animationName.substr(0, 4) != L"Walk" && animationName.substr(0, 4) != L"Jump")
 		{
@@ -454,13 +364,16 @@ namespace ac
 		if (animationName.substr(0, 4) == L"Idle" || animationName.substr(0, 4) == L"Walk" || mAnimatorComponent->IsComplete())
 		{
 			mAnimatorComponent->PlayAnimation(L"Jump" + direction[(UINT)mAnimationDirection], false);
+
+			mAudioSource->Stop();
+			AudioClip* ac = Resources::Find<AudioClip>(L"PlayerJump");
+			mAudioSource->SetClip(ac);
+			mAudioSource->Play(0.5f);
 		}
 		else if (animationName.substr(0, 4) != L"Jump")
 		{
 			return;
 		}
-
-
 	}
 	void PlayerScriptComponent::land()
 	{
@@ -504,6 +417,10 @@ namespace ac
 			shieldTr->SetPosition(GetOwner()->GetComponent<TransformComponent>()->GetPosition());
 
 			stat->SetSkillUsed(1, true);
+
+			AudioClip* ac = Resources::Find<AudioClip>(L"PlayerSkill02Sound");
+			mAudioSource->SetClip(ac);
+			mAudioSource->Play(0.3f);
 		}
 	}
 	void PlayerScriptComponent::skill03()
@@ -549,6 +466,10 @@ namespace ac
 			stat->SetHp(hp);
 
 			stat->SetItemUsed(0, true);
+
+			AudioClip* ac = Resources::Find<AudioClip>(L"PlayerItem01Sound");
+			mAudioSource->SetClip(ac);
+			mAudioSource->Play();
 		}
 	}
 	// item02 : Mp potion
@@ -562,6 +483,10 @@ namespace ac
 			stat->SetMp(mp);
 
 			stat->SetItemUsed(1, true);
+
+			AudioClip* ac = Resources::Find<AudioClip>(L"PlayerItem02Sound");
+			mAudioSource->SetClip(ac);
+			mAudioSource->Play();
 		}
 	}
 	// item03 : 
@@ -570,7 +495,9 @@ namespace ac
 		PlayerStatComponent* stat = GetOwner()->GetComponent<PlayerStatComponent>();
 		if (stat->GetItemUsed(2) != true)
 		{
-
+			// TODO: 
+			// 1. item03번 썼을때 효과 적용되는 코드 작성
+			// 2. 사운드 코드 작성
 
 			stat->SetItemUsed(2, true);
 		}
@@ -581,7 +508,9 @@ namespace ac
 		PlayerStatComponent* stat = GetOwner()->GetComponent<PlayerStatComponent>();
 		if (stat->GetItemUsed(3) != true)
 		{
-
+			// TODO: 
+			// 1. item04번 썼을때 효과 적용되는 코드 작성
+			// 2. 사운드 코드 작성
 
 			stat->SetItemUsed(3, true);
 		}
@@ -591,6 +520,12 @@ namespace ac
 		if (mAnimatorComponent->GetActiveAnimation()->GetName().substr(0, 4) != L"Hurt")
 		{
 			mAnimatorComponent->PlayAnimation(L"Hurt" + direction[(UINT)mAnimationDirection], false);
+
+			mAudioSource->Stop();
+
+			AudioClip* ac = Resources::Find<AudioClip>(L"PlayerHurt");
+			mAudioSource->SetClip(ac);
+			mAudioSource->Play();
 		}
 	}
 	void PlayerScriptComponent::death()
@@ -598,6 +533,12 @@ namespace ac
 		if (mAnimatorComponent->GetActiveAnimation()->GetName().substr(0, 5) != L"Death")
 		{
 			mAnimatorComponent->PlayAnimation(L"Death" + direction[(UINT)mAnimationDirection], false);
+
+			mAudioSource->Stop();
+
+			AudioClip* ac = Resources::Find<AudioClip>(L"PlayerDeath");
+			mAudioSource->SetClip(ac);
+			mAudioSource->Play();
 		}
 	}
 }

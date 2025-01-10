@@ -53,6 +53,12 @@ namespace ac
 		graphics::Texture* texture = Resources::Find<graphics::Texture>(L"Dungeon");
 		sr->SetTexture(texture);
 
+		AudioSource* backgroundAs = background->AddComponent<AudioSource>();
+		AudioClip* backgroundAc = Resources::Find<AudioClip>(L"DungeonSound");
+		backgroundAs->SetClip(backgroundAc);
+		backgroundAs->SetLoop(true);
+		backgroundAs->Play(0.5f);
+
 		// Player
 		mPlayer = object::Instantiate<Player>(enums::ELayerType::Player);
 		object::DontDestroyOnLoad(mPlayer);
