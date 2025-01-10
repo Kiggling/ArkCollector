@@ -3,6 +3,10 @@
 #include "acApplication.h"
 #include "acInput.h"
 #include "acTime.h"
+#include "acLayer.h"
+#include "acSceneManager.h"
+#include "acStatComponent.h"
+#include "..\\ArkCollectorEngine_Window\\acBoss.h"
 
 extern ac::Application application;
 
@@ -97,13 +101,26 @@ namespace ac
 		{
 			mPercentageMP = min(1.f, mPercentageMP + 0.1f);
 		}
-		if (Input::GetKeyDown(EKeyCode::LEFT))
+
+		// Boss 체력 업데이트
+		Layer* bossLayer = SceneManager::GetActiveScene()->GetLayer(enums::ELayerType::Boss);
+		Boss* boss = nullptr;
+		for (GameObject* obj : bossLayer->GetGameObjects())
 		{
-			mPercentageBossHP = max(0.f, mPercentageBossHP - 0.1f);
+			boss = dynamic_cast<Boss*>(obj);
+			if (boss != nullptr)
+			{
+				break;
+			}
 		}
-		if (Input::GetKeyDown(EKeyCode::RIGHT))
+		if (boss != nullptr)
 		{
-			mPercentageBossHP = min(1.f, mPercentageBossHP + 0.1f);
+			StatComponent* bossStat = boss->GetComponent<StatComponent>();
+			 
+			float bossMaxHp = bossStat->GetMaxHp();
+			float bossCurrentHp = bossStat->GetHp();
+
+			mPercentageBossHP = bossCurrentHp / bossMaxHp;
 		}
 
 

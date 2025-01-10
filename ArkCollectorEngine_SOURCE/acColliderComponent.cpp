@@ -8,6 +8,7 @@ namespace ac
 
 	ColliderComponent::ColliderComponent(enums::EColliderType InType)
 		: Component(enums::EComponentType::Collider)
+		, mbActivate(true)
 		, mID(mCollisionID++)
 		, mColliderType(InType)
 		, mSize(math::Vector2::One)

@@ -21,6 +21,11 @@
 #include "acProjectileScriptComponent.h"
 #include "acStatComponent.h"
 #include "acScriptComponent.h"
+#include "acBoss.h"
+#include "acBossScriptComponent.h"
+#include "acApplication.h"
+
+extern ac::Application application;
 
 namespace ac
 {
@@ -112,7 +117,6 @@ namespace ac
 
 		BoxCollidier2DComponent* playerCollidier = mPlayer->AddComponent<BoxCollidier2DComponent>();
 		playerCollidier->SetSize(math::Vector2(playerTr->GetWidth(), playerTr->GetHeight()));
-		playerCollidier->SetOffset(math::Vector2(-12.0f, -12.0f));
 
 		// Player Stat
 		StatComponent* playerStat = mPlayer->AddComponent<StatComponent>();

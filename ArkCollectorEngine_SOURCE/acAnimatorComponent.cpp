@@ -53,7 +53,9 @@ namespace ac
 	void AnimatorComponent::Render(HDC hdc)
 	{
 		if (mActiveAnimation)
+		{
 			mActiveAnimation->Render(hdc);
+		}
 	}
 	void AnimatorComponent::CreateAnimation(const std::wstring& name
 		, graphics::Texture* spriteSheet
@@ -149,6 +151,10 @@ namespace ac
 		mActiveAnimation = animation;
 		mActiveAnimation->Reset();
 		mbLoop = loop;
+	}
+	void AnimatorComponent::StopAnimation()
+	{
+		mActiveAnimation = nullptr;
 	}
 	AnimatorComponent::Events* AnimatorComponent::FindEvents(const std::wstring& name)
 	{

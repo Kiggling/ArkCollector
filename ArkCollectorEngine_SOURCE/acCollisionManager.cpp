@@ -66,11 +66,19 @@ namespace ac
 			{
 				continue;
 			}
+			if (leftCol->GetActivate() == false)
+			{
+				continue;
+			}
 			for (GameObject* right : scene->GetLayer((enums::ELayerType)right)->GetGameObjects())
 			{
 				ColliderComponent* rightCol = right->GetComponent<ColliderComponent>();
 
 				if (rightCol == nullptr)
+				{
+					continue;
+				}
+				if (rightCol->GetActivate() == false)
 				{
 					continue;
 				}
