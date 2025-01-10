@@ -5,6 +5,7 @@
 #include "acSceneManager.h"
 #include "acCollisionManager.h"
 #include "acUIManager.h"
+#include "acFmod.h"
 
 namespace ac
 {
@@ -31,6 +32,9 @@ namespace ac
 
 		Input::Initialize();
 		Time::Initialize();
+
+		Fmod::Initialize();
+		CollisionManager::Initialize();
 		SceneManager::Initialize();
 		UIManager::Initialize();
 	}

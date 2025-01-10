@@ -22,6 +22,8 @@ namespace ac::enums
 		SpriteRenderer,
 		Animator,
 		Camera,
+		AudioListener,
+		AudioSource,
 		Stat,
 		End,
 	};

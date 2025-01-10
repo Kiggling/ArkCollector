@@ -92,6 +92,8 @@ namespace ac
 		bool mbShield;
 		class Shield* mShield;
 
+		class AudioSource* mAudioSource;
+
 		bool mbSkill01;
 		float mSkill01Cooldown;
 		float mSkill01Timer;

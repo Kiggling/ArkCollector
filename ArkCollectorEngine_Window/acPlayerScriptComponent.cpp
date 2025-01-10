@@ -14,12 +14,15 @@
 #include "acShield.h"
 #include "acStatComponent.h"
 #include "acProjectileScriptComponent.h"
+#include "acAudioClip.h"
+#include "acAudioSource.h"
 
 namespace ac
 {
 	std::wstring direction[] = {L"Down", L"Up", L"Left", L"Right"};
 	std::wstring state[] = { L"Idle", L"Walk", L"Jump", L"Land", L"Attack", L"Hurt", L"Death"};
 	std::wstring attackName[] = { L"None", L"Arrow", L"Fireball", L"Shield", L"LightningArrow", L"Blackhole"};
+	std::wstring audioName[] = { L"None", L"PlayerArrowSound", L"PlayerSkill01Sound", L"PlayerSkill02Sound", L"PlayerSkill03Sound", L"PlayerSkill04Sound" };
 	math::Vector2 projectileDirection[] = { math::Vector2(0.0f, 1.0f), math::Vector2(0.0f, -1.0f), math::Vector2(-1.0f, 0.0f), math::Vector2(1.0f, 0.0f) };
 	math::Vector2 projectileSpawnOffset[6][4] = {
 		{},
@@ -79,6 +82,8 @@ namespace ac
 		graphics::Texture* shieldTexture = Resources::Find<graphics::Texture>(L"PlayerShield");
 		AnimatorComponent* shieldAnimatorComp = mShield->AddComponent<AnimatorComponent>();
 		shieldAnimatorComp->CreateAnimation(L"ShieldActivate", shieldTexture, math::Vector2(0.0f, 0.0f), math::Vector2(64.0f, 64.0f), math::Vector2::Zero, 10, 0.1f);
+
+		mAudioSource = GetOwner()->GetComponent<AudioSource>();
 	}
 	void PlayerScriptComponent::Update()
 	{
@@ -109,6 +114,10 @@ namespace ac
 
 			BoxCollidier2DComponent* collidier = projectile->AddComponent<BoxCollidier2DComponent>();
 			collidier->SetSize(math::Vector2(projectileTr->GetWidth(), projectileTr->GetHeight()));
+
+			AudioClip* ac = Resources::Find<AudioClip>(audioName[(UINT)mAttackType]);
+			mAudioSource->SetClip(ac);
+			mAudioSource->Play();
 
 			mAttackType = eAttackType::None;
 		}

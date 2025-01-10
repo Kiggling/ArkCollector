@@ -1,6 +1,7 @@
 #pragma once
 #include "..\\ArkCollectorEngine_SOURCE\\acResources.h"
 #include "..\\ArkCollectorEngine_SOURCE\\acTexture.h"
+#include "..\\ArkCollectorEngine_SOURCE\\acAudioClip.h"
 
 namespace ac
 {
@@ -93,6 +94,15 @@ namespace ac
 			Resources::Load<graphics::Texture>(L"PlayerBlackholeLeft", L"..\\Content\\Skeleton_Hunter\\Projectile\\Blackhole\\PlayerBlackholeLeft.png");
 			Resources::Load<graphics::Texture>(L"PlayerBlackholeUp", L"..\\Content\\Skeleton_Hunter\\Projectile\\Blackhole\\PlayerBlackholeUp.png");
 			Resources::Load<graphics::Texture>(L"PlayerBlackholeDown", L"..\\Content\\Skeleton_Hunter\\Projectile\\Blackhole\\PlayerBlackholeDown.png");
+		}
+
+		// Player Sound
+		{
+			Resources::Load<AudioClip>(L"PlayerArrowSound", L"..\\Content\\Sound\\Player\\Player_Arrow_Attack.wav");
+			Resources::Load<AudioClip>(L"PlayerSkill01Sound", L"..\\Content\\Sound\\Player\\Player_Skill01.wav");
+			//Resources::Load<AudioClip>(L"PlayerSkill02Sound", L"..\\Content\\Sound\\Player\\Player_Skill02.wav");
+			//Resources::Load<AudioClip>(L"PlayerSkill03Sound", L"..\\Content\\Sound\\Player\\Player_Skill03.wav");
+			//Resources::Load<AudioClip>(L"PlayerSkill04Sound", L"..\\Content\\Sound\\Player\\Player_Skill04.wav");
 		}
 		
 		// Map

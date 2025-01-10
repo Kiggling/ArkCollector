@@ -22,6 +22,10 @@
 #include "acStatComponent.h"
 #include "acScriptComponent.h"
 
+#include "acAudioClip.h"
+#include "acAudioListener.h"
+#include "acAudioSource.h"
+
 namespace ac
 {
 	TestScene::TestScene()
@@ -45,7 +49,12 @@ namespace ac
 
 		// Player
 		mPlayer = object::Instantiate<Player>(enums::ELayerType::Player);
+		object::DontDestroyOnLoad(mPlayer);
+		mPlayer->AddComponent<AudioListener>();
 		TransformComponent* playerTr = mPlayer->AddComponent<TransformComponent>();
+		AudioSource* playerAs = mPlayer->AddComponent<AudioSource>();
+		AudioClip* playerAc = Resources::Find<AudioClip>(L"PlayerArrowSound");
+		playerAs->SetClip(playerAc);
 		PlayerScriptComponent* plScript = mPlayer->AddComponent<PlayerScriptComponent>();
 
 		graphics::Texture* playerTexture = Resources::Find<graphics::Texture>(L"PlayerIdleDown");
@@ -140,6 +149,13 @@ namespace ac
 		testPlayerStat->SetMp(100.0f);
 		testPlayerStat->SetDamage(5.0f);
 		testPlayerStat->SetAttackSpeed(1.0f);
+
+		// Audio test
+		//AudioClip* ac = Resources::Load<AudioClip>(L"TestSound", L"..\\Content\\Sound\\test01.wav");
+
+		//AudioSource* as = testPlayer->AddComponent<AudioSource>();
+		//as->SetClip(ac);
+		//as->Play();
 
 		Scene::Initialize();
 

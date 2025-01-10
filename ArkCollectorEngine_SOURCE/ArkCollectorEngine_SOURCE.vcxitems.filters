@@ -94,6 +94,18 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)acStatComponent.cpp">
       <Filter>Components\Stat</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)acFmod.cpp">
+      <Filter>Fmod</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)acAudioListener.cpp">
+      <Filter>Components\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)acAudioSource.cpp">
+      <Filter>Components\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)acAudioClip.cpp">
+      <Filter>Resourse\Audio</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)acApplication.h">
@@ -198,6 +210,18 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)acObject.h">
       <Filter>Common\Object</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)acFmod.h">
+      <Filter>Fmod</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)acAudioListener.h">
+      <Filter>Components\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)acAudioSource.h">
+      <Filter>Components\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)acAudioClip.h">
+      <Filter>Resourse\Audio</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Application">
@@ -295,6 +319,15 @@
     </Filter>
     <Filter Include="Components\Stat">
       <UniqueIdentifier>{e6624609-3504-4798-a9b5-932d9dc8626d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fmod">
+      <UniqueIdentifier>{91628027-6124-4065-9b88-239b4375110f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resourse\Audio">
+      <UniqueIdentifier>{8928bea6-2eb6-4c1f-adb5-c73a608b4aef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Audio">
+      <UniqueIdentifier>{59439d4f-154b-4ffd-b181-1c4a74b292f5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
