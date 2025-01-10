@@ -59,6 +59,7 @@ namespace ac
 
 	void Application::LateUpdate()
 	{
+		CollisionManager::LateUpdate();
 		SceneManager::LateUpdate();
 		UIManager::LateUpdate();
 	}
@@ -69,6 +70,7 @@ namespace ac
 		clearRenderTarget();
 
 		// ȭ�鿡 ����ϰ��� �ϴ� Ŭ������ Render �Լ� ȣ�� (���ڷ� mBackHdc ���)
+		CollisionManager::Render(mBackHdc);
 		SceneManager::Render(mBackHdc);
 		UIManager::Render(mBackHdc);
 

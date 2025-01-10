@@ -28,12 +28,15 @@
     <Filter Include="Contents\Player\Shield">
       <UniqueIdentifier>{d0909364-5ab5-4242-8c95-ae85003ca7c9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\Player\Script">
+      <UniqueIdentifier>{f838e61d-50f6-41f8-a365-258ee3c5f70c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Player\Stat">
+      <UniqueIdentifier>{3b321682-066b-432c-bfee-c7a3d2140144}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="acPlayer.cpp">
-      <Filter>Contents\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="acPlayerScriptComponent.cpp">
       <Filter>Contents\Player</Filter>
     </ClCompile>
     <ClCompile Include="acTestScene.cpp">
@@ -57,12 +60,15 @@
     <ClCompile Include="acTile.cpp">
       <Filter>Scenes\ToolScene</Filter>
     </ClCompile>
+    <ClCompile Include="acPlayerScriptComponent.cpp">
+      <Filter>Contents\Player\Script</Filter>
+    </ClCompile>
+    <ClCompile Include="acPlayerStatComponent.cpp">
+      <Filter>Contents\Player\Stat</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="acPlayer.h">
-      <Filter>Contents\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="acPlayerScriptComponent.h">
       <Filter>Contents\Player</Filter>
     </ClInclude>
     <ClInclude Include="acLoadScenes.h">
@@ -91,6 +97,12 @@
     </ClInclude>
     <ClInclude Include="acTile.h">
       <Filter>Scenes\ToolScene</Filter>
+    </ClInclude>
+    <ClInclude Include="acPlayerScriptComponent.h">
+      <Filter>Contents\Player\Script</Filter>
+    </ClInclude>
+    <ClInclude Include="acPlayerStatComponent.h">
+      <Filter>Contents\Player\Stat</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

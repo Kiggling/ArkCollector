@@ -12,7 +12,7 @@
 #include "acObject.h"
 #include "acBoxCollidier2DComponent.h"
 #include "acShield.h"
-#include "acStatComponent.h"
+#include "acPlayerStatComponent.h"
 #include "acProjectileScriptComponent.h"
 #include "acAudioClip.h"
 #include "acAudioSource.h"
@@ -37,37 +37,37 @@ namespace ac
 
 	PlayerScriptComponent::PlayerScriptComponent()
 		: mState(eState::Idle)
-		, mDirection(eDirection::Down)
+		, mAnimationDirection(eDirection::Down)
 		, mAnimatorComponent(nullptr)
 		, mbAttack(false)
 		, mAttackDirection(eDirection::Down)
 		, mAttackType(eAttackType::None)
 		, mbShield(false)
 		, mShield(nullptr)
-		, mbSkill01(false)
-		, mSkill01Cooldown(5.0f)
-		, mSkill01Timer(0.0f)
-		, mbSkill02(false)
-		, mSkill02Cooldown(5.0f)
-		, mSkill02Timer(0.0f)
-		, mbSkill03(false)
-		, mSkill03Cooldown(5.0f)
-		, mSkill03Timer(0.0f)
-		, mbSkill04(false)
-		, mSkill04Cooldown(5.0f)
-		, mSkill04Timer(0.0f)
-		, mbItem01(false)
-		, mItem01Cooldown(1.0f)
-		, mItem01Timer(0.0f)
-		, mbItem02(false)
-		, mItem02Cooldown(1.0f)
-		, mItem02Timer(0.0f)
-		, mbItem03(false)
-		, mItem03Cooldown(1.0f)
-		, mItem03Timer(0.0f)
-		, mbItem04(false)
-		, mItem04Cooldown(1.0f)
-		, mItem04Timer(0.0f)
+		//, mbSkill01(false)
+		//, mSkill01Cooldown(5.0f)
+		//, mSkill01Timer(0.0f)
+		//, mbSkill02(false)
+		//, mSkill02Cooldown(5.0f)
+		//, mSkill02Timer(0.0f)
+		//, mbSkill03(false)
+		//, mSkill03Cooldown(5.0f)
+		//, mSkill03Timer(0.0f)
+		//, mbSkill04(false)
+		//, mSkill04Cooldown(5.0f)
+		//, mSkill04Timer(0.0f)
+		//, mbItem01(false)
+		//, mItem01Cooldown(1.0f)
+		//, mItem01Timer(0.0f)
+		//, mbItem02(false)
+		//, mItem02Cooldown(1.0f)
+		//, mItem02Timer(0.0f)
+		//, mbItem03(false)
+		//, mItem03Cooldown(1.0f)
+		//, mItem03Timer(0.0f)
+		//, mbItem04(false)
+		//, mItem04Cooldown(1.0f)
+		//, mItem04Timer(0.0f)
 	{
 	}
 	PlayerScriptComponent::~PlayerScriptComponent()
@@ -110,7 +110,7 @@ namespace ac
 			projectileAnimator->PlayAnimation(attackName[(UINT)mAttackType] + direction[(UINT)mAttackDirection], true);
 
 			ProjectileScriptComponent* sc = projectile->AddComponent<ProjectileScriptComponent>();
-			sc->SetDamage(GetOwner()->GetComponent<StatComponent>()->GetDamage());
+			sc->SetDamage(GetOwner()->GetComponent<PlayerStatComponent>()->GetDamage());
 
 			BoxCollidier2DComponent* collidier = projectile->AddComponent<BoxCollidier2DComponent>();
 			collidier->SetSize(math::Vector2(projectileTr->GetWidth(), projectileTr->GetHeight()));
@@ -142,7 +142,7 @@ namespace ac
 			land();
 			break;
 		case ac::PlayerScriptComponent::eState::Attack:
-			attack();
+			isAttacking();
 			break;
 		case ac::PlayerScriptComponent::eState::Skill01:
 			skill01();
@@ -214,96 +214,118 @@ namespace ac
 	}
 	void PlayerScriptComponent::setTimer()
 	{
-		if (mbSkill01 == true)
+		PlayerStatComponent* stat = GetOwner()->GetComponent<PlayerStatComponent>();
+		for (int i = 0; i < 4; i++)
 		{
-			mSkill01Timer += Time::DeltaTime();
-			if (mSkill01Timer >= mSkill01Cooldown)
+			if (stat->GetSkillUsed(i) == true)
 			{
-				mbSkill01 = false;
-				mSkill01Timer = 0.0f;
+				mSkillTimer[i] += Time::DeltaTime();
+				if (mSkillTimer[i] >= stat->GetSkillCooldown(i))
+				{
+					stat->SetSkillUsed(i, false);
+					mSkillTimer[i] = 0.0f;
+				}
+			}
+			if (stat->GetItemUsed(i) == true)
+			{
+				mItemTimer[i] += Time::DeltaTime();
+				if (mItemTimer[i] >= stat->GetItemCooldown(i))
+				{
+					stat->SetItemUsed(i, false);
+					mItemTimer[i] = 0.0f;
+				}
 			}
 		}
-		if (mbSkill02 == true)
-		{
-			mSkill02Timer += Time::DeltaTime();
-			if (mSkill02Timer >= mSkill02Cooldown)
-			{
-				mbSkill02 = false;
-				mSkill02Timer = 0.0f;
-			}
-		}
-		if (mbSkill03 == true)
-		{
-			mSkill03Timer += Time::DeltaTime();
-			if (mSkill03Timer >= mSkill03Cooldown)
-			{
-				mbSkill03 = false;
-				mSkill03Timer = 0.0f;
-			}
-		}
-		if (mbSkill04 == true)
-		{
-			mSkill04Timer += Time::DeltaTime();
-			if (mSkill04Timer >= mSkill04Cooldown)
-			{
-				mbSkill04 = false;
-				mSkill04Timer = 0.0f;
-			}
-		}
-		if (mbItem01 == true)
-		{
-			mItem01Timer += Time::DeltaTime();
-			if (mItem01Timer >= mItem01Cooldown)
-			{
-				mbItem01 = false;
-				mItem01Timer = 0.0f;
-			}
-		}
-		if (mbItem02 == true)
-		{
-			mItem02Timer += Time::DeltaTime();
-			if (mItem02Timer >= mItem02Cooldown)
-			{
-				mbItem02 = false;
-				mItem02Timer = 0.0f;
-			}
-		}
-		if (mbItem03 == true)
-		{
-			mItem03Timer += Time::DeltaTime();
-			if (mItem03Timer >= mItem03Cooldown)
-			{
-				mbItem03 = false;
-				mItem03Timer = 0.0f;
-			}
-		}
-		if (mbItem04 == true)
-		{
-			mItem04Timer += Time::DeltaTime();
-			if (mItem04Timer >= mItem04Cooldown)
-			{
-				mbItem04 = false;
-				mItem04Timer = 0.0f;
-			}
-		}
+		//if (mbSkill01 == true)
+		//{
+		//	mSkill01Timer += Time::DeltaTime();
+		//	if (mSkill01Timer >= mSkill01Cooldown)
+		//	{
+		//		mbSkill01 = false;
+		//		mSkill01Timer = 0.0f;
+		//	}
+		//}
+		//if (mbSkill02 == true)
+		//{
+		//	mSkill02Timer += Time::DeltaTime();
+		//	if (mSkill02Timer >= mSkill02Cooldown)
+		//	{
+		//		mbSkill02 = false;
+		//		mSkill02Timer = 0.0f;
+		//	}
+		//}
+		//if (mbSkill03 == true)
+		//{
+		//	mSkill03Timer += Time::DeltaTime();
+		//	if (mSkill03Timer >= mSkill03Cooldown)
+		//	{
+		//		mbSkill03 = false;
+		//		mSkill03Timer = 0.0f;
+		//	}
+		//}
+		//if (mbSkill04 == true)
+		//{
+		//	mSkill04Timer += Time::DeltaTime();
+		//	if (mSkill04Timer >= mSkill04Cooldown)
+		//	{
+		//		mbSkill04 = false;
+		//		mSkill04Timer = 0.0f;
+		//	}
+		//}
+		//if (mbItem01 == true)
+		//{
+		//	mItem01Timer += Time::DeltaTime();
+		//	if (mItem01Timer >= mItem01Cooldown)
+		//	{
+		//		mbItem01 = false;
+		//		mItem01Timer = 0.0f;
+		//	}
+		//}
+		//if (mbItem02 == true)
+		//{
+		//	mItem02Timer += Time::DeltaTime();
+		//	if (mItem02Timer >= mItem02Cooldown)
+		//	{
+		//		mbItem02 = false;
+		//		mItem02Timer = 0.0f;
+		//	}
+		//}
+		//if (mbItem03 == true)
+		//{
+		//	mItem03Timer += Time::DeltaTime();
+		//	if (mItem03Timer >= mItem03Cooldown)
+		//	{
+		//		mbItem03 = false;
+		//		mItem03Timer = 0.0f;
+		//	}
+		//}
+		//if (mbItem04 == true)
+		//{
+		//	mItem04Timer += Time::DeltaTime();
+		//	if (mItem04Timer >= mItem04Cooldown)
+		//	{
+		//		mbItem04 = false;
+		//		mItem04Timer = 0.0f;
+		//	}
+		//}
 	}
 	void PlayerScriptComponent::setDirection()
 	{
 		if (Input::GetKey(EKeyCode::UP))
 		{
-			mDirection = eDirection::Up;
+			mAnimationDirection = eDirection::Up;
 		}
 		if (Input::GetKey(EKeyCode::DOWN))
 		{
-			mDirection = eDirection::Down;
+			mAnimationDirection = eDirection::Down;
 		}
 		if (Input::GetKey(EKeyCode::LEFT))
 		{
-			mDirection = eDirection::Left;
+			mAnimationDirection = eDirection::Left;
 		}
 		if (Input::GetKey(EKeyCode::RIGHT))
 		{
-			mDirection = eDirection::Right;
+			mAnimationDirection = eDirection::Right;
 		}
 	}
 	void PlayerScriptComponent::setState()
@@ -387,7 +409,7 @@ namespace ac
 	{
 		if (mAnimatorComponent->GetActiveAnimation()->GetName().substr(0, 4) == L"Walk" || mAnimatorComponent->IsComplete())
 		{
-			mAnimatorComponent->PlayAnimation(L"Idle" + direction[(UINT)mDirection], false);
+			mAnimatorComponent->PlayAnimation(L"Idle" + direction[(UINT)mAnimationDirection], false);
 		}
 	}
 	void PlayerScriptComponent::walk()
@@ -395,7 +417,7 @@ namespace ac
 		std::wstring animationName = mAnimatorComponent->GetActiveAnimation()->GetName();
 		if (animationName.substr(0, 4) == L"Idle" || mAnimatorComponent->IsComplete())
 		{
-			mAnimatorComponent->PlayAnimation(L"Walk" + direction[(UINT)mDirection], false);
+			mAnimatorComponent->PlayAnimation(L"Walk" + direction[(UINT)mAnimationDirection], false);
 		}
 		else if (animationName.substr(0, 4) != L"Walk" && animationName.substr(0, 4) != L"Jump")
 		{
@@ -431,7 +453,7 @@ namespace ac
 		std::wstring animationName = mAnimatorComponent->GetActiveAnimation()->GetName();
 		if (animationName.substr(0, 4) == L"Idle" || animationName.substr(0, 4) == L"Walk" || mAnimatorComponent->IsComplete())
 		{
-			mAnimatorComponent->PlayAnimation(L"Jump" + direction[(UINT)mDirection], false);
+			mAnimatorComponent->PlayAnimation(L"Jump" + direction[(UINT)mAnimationDirection], false);
 		}
 		else if (animationName.substr(0, 4) != L"Jump")
 		{
@@ -443,13 +465,13 @@ namespace ac
 	void PlayerScriptComponent::land()
 	{
 	}
-	void PlayerScriptComponent::attack()
+	void PlayerScriptComponent::isAttacking()
 	{
 		if ((mAnimatorComponent->GetActiveAnimation()->GetName().substr(0, 4) == L"Idle" || mAnimatorComponent->GetActiveAnimation()->GetName().substr(0, 4) == L"Walk")
 			|| mAnimatorComponent->IsComplete())
 		{
-			mAnimatorComponent->PlayAnimation(L"Attack" + direction[(UINT)mDirection], false);
-			mAttackDirection = mDirection;
+			mAnimatorComponent->PlayAnimation(L"Attack" + direction[(UINT)mAnimationDirection], false);
+			mAttackDirection = mAnimationDirection;
 			mAttackType = eAttackType::BasicAttack;
 		}
 	}
@@ -458,19 +480,21 @@ namespace ac
 		if ((mAnimatorComponent->GetActiveAnimation()->GetName().substr(0, 4) == L"Idle" || mAnimatorComponent->GetActiveAnimation()->GetName().substr(0, 4) == L"Walk")
 			|| mAnimatorComponent->IsComplete())
 		{
-			if (mbSkill01 != true)
+			PlayerStatComponent* stat = GetOwner()->GetComponent<PlayerStatComponent>();
+			if (stat->GetSkillUsed(0) != true)
 			{
-				mAnimatorComponent->PlayAnimation(L"Attack" + direction[(UINT)mDirection], false);
-				mAttackDirection = mDirection;
+				mAnimatorComponent->PlayAnimation(L"Attack" + direction[(UINT)mAnimationDirection], false);
+				mAttackDirection = mAnimationDirection;
 				mAttackType = eAttackType::Skill01;
 
-				mbSkill01 = true;
+				stat->SetSkillUsed(0, true);
 			}
 		}
 	}
 	void PlayerScriptComponent::skill02()
 	{
-		if (mbSkill02 != true)
+		PlayerStatComponent* stat = GetOwner()->GetComponent<PlayerStatComponent>();
+		if (stat->GetSkillUsed(1) != true)
 		{
 			mbShield = true;
 			AnimatorComponent* shieldAnimatorComp = mShield->GetComponent<AnimatorComponent>();
@@ -479,7 +503,7 @@ namespace ac
 			TransformComponent* shieldTr = mShield->GetComponent<TransformComponent>();
 			shieldTr->SetPosition(GetOwner()->GetComponent<TransformComponent>()->GetPosition());
 
-			mbSkill02 = true;
+			stat->SetSkillUsed(1, true);
 		}
 	}
 	void PlayerScriptComponent::skill03()
@@ -487,13 +511,14 @@ namespace ac
 		if ((mAnimatorComponent->GetActiveAnimation()->GetName().substr(0, 4) == L"Idle" || mAnimatorComponent->GetActiveAnimation()->GetName().substr(0, 4) == L"Walk")
 			|| mAnimatorComponent->IsComplete())
 		{
-			if (mbSkill03 != true)
+			PlayerStatComponent* stat = GetOwner()->GetComponent<PlayerStatComponent>();
+			if (stat->GetSkillUsed(2) != true)
 			{
-				mAnimatorComponent->PlayAnimation(L"Attack" + direction[(UINT)mDirection], false);
-				mAttackDirection = mDirection;
+				mAnimatorComponent->PlayAnimation(L"Attack" + direction[(UINT)mAnimationDirection], false);
+				mAttackDirection = mAnimationDirection;
 				mAttackType = eAttackType::Skill03;
 
-				mbSkill03 = true;
+				stat->SetSkillUsed(2, true);
 			}
 		}
 	}
@@ -502,72 +527,77 @@ namespace ac
 		if ((mAnimatorComponent->GetActiveAnimation()->GetName().substr(0, 4) == L"Idle" || mAnimatorComponent->GetActiveAnimation()->GetName().substr(0, 4) == L"Walk")
 			|| mAnimatorComponent->IsComplete())
 		{
-			if (mbSkill04 != true)
+			PlayerStatComponent* stat = GetOwner()->GetComponent<PlayerStatComponent>();
+			if (stat->GetSkillUsed(3) != true)
 			{
-				mAnimatorComponent->PlayAnimation(L"Attack" + direction[(UINT)mDirection], false);
-				mAttackDirection = mDirection;
+				mAnimatorComponent->PlayAnimation(L"Attack" + direction[(UINT)mAnimationDirection], false);
+				mAttackDirection = mAnimationDirection;
 				mAttackType = eAttackType::Skill04;
 
-				mbSkill04 = true;
+				stat->SetSkillUsed(3, true);
 			}
 		}
 	}
 	// item01 : Hp potion
 	void PlayerScriptComponent::item01()
 	{
-		if (mbItem01 != true)
+		PlayerStatComponent* stat = GetOwner()->GetComponent<PlayerStatComponent>();
+		if (stat->GetItemUsed(0) != true)
 		{
-			StatComponent* stat = GetOwner()->GetComponent<StatComponent>();
+			PlayerStatComponent* stat = GetOwner()->GetComponent<PlayerStatComponent>();
 			float hp = (stat->GetHp() + stat->GetMaxHp() * 0.3 >= stat->GetMaxHp()) ? stat->GetMaxHp() : stat->GetHp() + stat->GetMaxHp() * 0.3;
 			stat->SetHp(hp);
 
-			mbItem01 = true;
+			stat->SetItemUsed(0, true);
 		}
 	}
 	// item02 : Mp potion
 	void PlayerScriptComponent::item02()
 	{
-		if (mbItem02 != true)
+		PlayerStatComponent* stat = GetOwner()->GetComponent<PlayerStatComponent>();
+		if (stat->GetItemUsed(1) != true)
 		{
-			StatComponent* stat = GetOwner()->GetComponent<StatComponent>();
+			PlayerStatComponent* stat = GetOwner()->GetComponent<PlayerStatComponent>();
 			float mp = (stat->GetMp() + stat->GetMaxMp() * 0.3 >= stat->GetMaxMp()) ? stat->GetMaxMp() : stat->GetMp() + stat->GetMaxMp() * 0.3;
 			stat->SetMp(mp);
 
-			mbItem02 = true;
+			stat->SetItemUsed(1, true);
 		}
 	}
 	// item03 : 
 	void PlayerScriptComponent::item03()
 	{
-		if (mbItem03 != true)
+		PlayerStatComponent* stat = GetOwner()->GetComponent<PlayerStatComponent>();
+		if (stat->GetItemUsed(2) != true)
 		{
 
 
-			mbItem03 = true;
+			stat->SetItemUsed(2, true);
 		}
 	}
 	// item04 : 
 	void PlayerScriptComponent::item04()
 	{
-		if (mbItem04 != true)
+		PlayerStatComponent* stat = GetOwner()->GetComponent<PlayerStatComponent>();
+		if (stat->GetItemUsed(3) != true)
 		{
 
 
-			mbItem04 = true;
+			stat->SetItemUsed(3, true);
 		}
 	}
 	void PlayerScriptComponent::hurt()
 	{
 		if (mAnimatorComponent->GetActiveAnimation()->GetName().substr(0, 4) != L"Hurt")
 		{
-			mAnimatorComponent->PlayAnimation(L"Hurt" + direction[(UINT)mDirection], false);
+			mAnimatorComponent->PlayAnimation(L"Hurt" + direction[(UINT)mAnimationDirection], false);
 		}
 	}
 	void PlayerScriptComponent::death()
 	{
 		if (mAnimatorComponent->GetActiveAnimation()->GetName().substr(0, 5) != L"Death")
 		{
-			mAnimatorComponent->PlayAnimation(L"Death" + direction[(UINT)mDirection], false);
+			mAnimatorComponent->PlayAnimation(L"Death" + direction[(UINT)mAnimationDirection], false);
 		}
 	}
 }

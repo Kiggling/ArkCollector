@@ -124,23 +124,85 @@ namespace ac
 
 
 		// UI
-		// // 플레이어
-		Resources::Load<graphics::Texture>(L"HPBAR", L"..\\Content\\RPG_UI\\HUD Health Bar\\HUDHealthBar.png");
-		Resources::Load<graphics::Texture>(L"Skill1", L"..\\Content\\RPG_UI\\Skill Icons\\Sorceress Icons\\Sorceress Green Skills\\Png\\Sorceress Green Skill 01.png");
-		Resources::Load<graphics::Texture>(L"Skill2", L"..\\Content\\RPG_UI\\Skill Icons\\Warrior Icons\\Warrior Purple Skills\\Png\\Warrior Purple Skill 01.png");
-		Resources::Load<graphics::Texture>(L"Skill3", L"..\\Content\\RPG_UI\\Skill Icons\\Necromancer Icons\\Necromancer Green Skills\\Png\\Necromancer Green Skill 02.png");
-		Resources::Load<graphics::Texture>(L"Skill4", L"..\\Content\\RPG_UI\\Skill Icons\\Necromancer Icons\\Necromancer Green Skills\\Png\\Necromancer Green Skill 07.png");
-		Resources::Load<graphics::Texture>(L"SkillBackground", L"..\\Content\\RPG_UI\\HUD\\Hotbar\\HotbarSkillBackground\\Png\\HotbarSkillBackground2.png");
-		Resources::Load<graphics::Texture>(L"SkillNo1", L"..\\Content\\RPG_UI\\HUD\\Hotbar\\HotbarSkillNo\\Png\\HotbarSkillNo1.png");
-		Resources::Load<graphics::Texture>(L"SkillNo2", L"..\\Content\\RPG_UI\\HUD\\Hotbar\\HotbarSkillNo\\Png\\HotbarSkillNo2.png");
-		Resources::Load<graphics::Texture>(L"SkillNo3", L"..\\Content\\RPG_UI\\HUD\\Hotbar\\HotbarSkillNo\\Png\\HotbarSkillNo3.png");
-		Resources::Load<graphics::Texture>(L"SkillNo4", L"..\\Content\\RPG_UI\\HUD\\Hotbar\\HotbarSkillNo\\Png\\HotbarSkillNo4.png");
-		Resources::Load<graphics::Texture>(L"HPPotion", L"..\\Content\\Pickups_Pixel\\Pickups\\Potions\\Health\\Png\\SmallHealthPotion.png");
-		Resources::Load<graphics::Texture>(L"MPPotion", L"..\\Content\\Pickups_Pixel\\Pickups\\Potions\\Mana\\Png\\SmallManaPotion.png");
-		Resources::Load<graphics::Texture>(L"TimeStop", L"..\\Content\\Pickups_Pixel\\Pickups\\Gems\\Png\\PinkGem.png");
-		Resources::Load<graphics::Texture>(L"Torch", L"..\\Content\\Lava_Tileset_Pixel\\Animated Tiles\\Lava Dungeon\\Deco\\Png\\Torch.png");
-		// // 보스
-		Resources::Load<graphics::Texture>(L"BossHP", L"..\\Content\\RPG_UI\\Boss Health Bar\\BossHealthBar.png");
-		Resources::Load<graphics::Texture>(L"BossName", L"..\\Content\\RPG_UI\\Boss Names\\Boss Names1.png");
+		{
+			// 플레이어
+			Resources::Load<graphics::Texture>(L"HPBAR", L"..\\Content\\RPG_UI\\HUD Health Bar\\HUDHealthBar.png");
+			Resources::Load<graphics::Texture>(L"Skill1", L"..\\Content\\RPG_UI\\Skill Icons\\Sorceress Icons\\Sorceress Green Skills\\Png\\Sorceress Green Skill 01.png");
+			Resources::Load<graphics::Texture>(L"Skill2", L"..\\Content\\RPG_UI\\Skill Icons\\Warrior Icons\\Warrior Purple Skills\\Png\\Warrior Purple Skill 01.png");
+			Resources::Load<graphics::Texture>(L"Skill3", L"..\\Content\\RPG_UI\\Skill Icons\\Necromancer Icons\\Necromancer Green Skills\\Png\\Necromancer Green Skill 02.png");
+			Resources::Load<graphics::Texture>(L"Skill4", L"..\\Content\\RPG_UI\\Skill Icons\\Necromancer Icons\\Necromancer Green Skills\\Png\\Necromancer Green Skill 07.png");
+			Resources::Load<graphics::Texture>(L"SkillBackground", L"..\\Content\\RPG_UI\\HUD\\Hotbar\\HotbarSkillBackground\\Png\\HotbarSkillBackground2.png");
+			Resources::Load<graphics::Texture>(L"SkillNo1", L"..\\Content\\RPG_UI\\HUD\\Hotbar\\HotbarSkillNo\\Png\\HotbarSkillNo1.png");
+			Resources::Load<graphics::Texture>(L"SkillNo2", L"..\\Content\\RPG_UI\\HUD\\Hotbar\\HotbarSkillNo\\Png\\HotbarSkillNo2.png");
+			Resources::Load<graphics::Texture>(L"SkillNo3", L"..\\Content\\RPG_UI\\HUD\\Hotbar\\HotbarSkillNo\\Png\\HotbarSkillNo3.png");
+			Resources::Load<graphics::Texture>(L"SkillNo4", L"..\\Content\\RPG_UI\\HUD\\Hotbar\\HotbarSkillNo\\Png\\HotbarSkillNo4.png");
+			Resources::Load<graphics::Texture>(L"HPPotion", L"..\\Content\\Pickups_Pixel\\Pickups\\Potions\\Health\\Png\\SmallHealthPotion.png");
+			Resources::Load<graphics::Texture>(L"MPPotion", L"..\\Content\\Pickups_Pixel\\Pickups\\Potions\\Mana\\Png\\SmallManaPotion.png");
+			Resources::Load<graphics::Texture>(L"TimeStop", L"..\\Content\\Pickups_Pixel\\Pickups\\Gems\\Png\\PinkGem.png");
+			Resources::Load<graphics::Texture>(L"Torch", L"..\\Content\\Lava_Tileset_Pixel\\Animated Tiles\\Lava Dungeon\\Deco\\Png\\Torch.png");
+
+			// 보스
+			Resources::Load<graphics::Texture>(L"BossHP", L"..\\Content\\RPG_UI\\Boss Health Bar\\BossHealthBar.png");
+			Resources::Load<graphics::Texture>(L"BossName", L"..\\Content\\RPG_UI\\Boss Names\\Boss Names1.png");
+		}
+
+
+		// Boss-Skeleton-Boss
+		// 			Idle,
+		//			Walk,
+		//			Jump,
+		//			Land,
+		//			Attack,
+		//			Hurt,
+		//			Death,
+		//			End,
+		{
+			// Idle
+			Resources::Load<graphics::Texture>(L"BossIdleDown", L"..\\Content\\Skeleton_Boss\\Down\\Png\\AncientSkeletonDownIdle.png");
+			Resources::Load<graphics::Texture>(L"BossIdleUp", L"..\\Content\\Skeleton_Boss\\Up\\Png\\AncientSkeletonUpIdle.png");
+			Resources::Load<graphics::Texture>(L"BossIdleRight", L"..\\Content\\Skeleton_Boss\\Right\\Png\\AncientSkeletonRightIdle.png");
+			Resources::Load<graphics::Texture>(L"BossIdleLeft", L"..\\Content\\Skeleton_Boss\\Left\\Png\\AncientSkeletonLeftIdle.png");
+			// Walk
+			Resources::Load<graphics::Texture>(L"BossWalkDown", L"..\\Content\\Skeleton_Boss\\Down\\Png\\AncientSkeletonDownWalk.png");
+			Resources::Load<graphics::Texture>(L"BossWalkUp", L"..\\Content\\Skeleton_Boss\\Up\\Png\\AncientSkeletonUpWalk.png");
+			Resources::Load<graphics::Texture>(L"BossWalkRight", L"..\\Content\\Skeleton_Boss\\Right\\Png\\AncientSkeletonRightWalk.png");
+			Resources::Load<graphics::Texture>(L"BossWalkLeft", L"..\\Content\\Skeleton_Boss\\Left\\Png\\AncientSkeletonLeftWalk.png");
+			// Jump
+			Resources::Load<graphics::Texture>(L"BossJumpDown", L"..\\Content\\Skeleton_Boss\\Down\\Png\\AncientSkeletonDownJump.png");
+			Resources::Load<graphics::Texture>(L"BossJumpUp", L"..\\Content\\Skeleton_Boss\\Up\\Png\\AncientSkeletonUpJump.png");
+			Resources::Load<graphics::Texture>(L"BossJumpRight", L"..\\Content\\Skeleton_Boss\\Right\\Png\\AncientSkeletonRightJump.png");
+			Resources::Load<graphics::Texture>(L"BossJumpLeft", L"..\\Content\\Skeleton_Boss\\Left\\Png\\AncientSkeletonLeftJump.png");
+			// Land
+			Resources::Load<graphics::Texture>(L"BossLandDown", L"..\\Content\\Skeleton_Boss\\Down\\Png\\AncientSkeletonDownLand.png");
+			Resources::Load<graphics::Texture>(L"BossLandUp", L"..\\Content\\Skeleton_Boss\\Up\\Png\\AncientSkeletonUpLand.png");
+			Resources::Load<graphics::Texture>(L"BossLandRight", L"..\\Content\\Skeleton_Boss\\Right\\Png\\AncientSkeletonRightLand.png");
+			Resources::Load<graphics::Texture>(L"BossLandLeft", L"..\\Content\\Skeleton_Boss\\Left\\Png\\AncientSkeletonLeftLand.png");
+			// Attack01
+			Resources::Load<graphics::Texture>(L"BossAttack01Down", L"..\\Content\\Skeleton_Boss\\Down\\Png\\AncientSkeletonDownAttack01.png");
+			Resources::Load<graphics::Texture>(L"BossAttack01Up", L"..\\Content\\Skeleton_Boss\\Up\\Png\\AncientSkeletonUpAttack01.png");
+			Resources::Load<graphics::Texture>(L"BossAttack01Right", L"..\\Content\\Skeleton_Boss\\Right\\Png\\AncientSkeletonRightAttack01.png");
+			Resources::Load<graphics::Texture>(L"BossAttack01Left", L"..\\Content\\Skeleton_Boss\\Left\\Png\\AncientSkeletonLeftAttack01.png");
+			// Attack02
+			Resources::Load<graphics::Texture>(L"BossAttack02Down", L"..\\Content\\Skeleton_Boss\\Down\\Png\\AncientSkeletonDownAttack02.png");
+			Resources::Load<graphics::Texture>(L"BossAttack02Up", L"..\\Content\\Skeleton_Boss\\Up\\Png\\AncientSkeletonUpAttack02.png");
+			Resources::Load<graphics::Texture>(L"BossAttack02Right", L"..\\Content\\Skeleton_Boss\\Right\\Png\\AncientSkeletonRightAttack02.png");
+			Resources::Load<graphics::Texture>(L"BossAttack02Left", L"..\\Content\\Skeleton_Boss\\Left\\Png\\AncientSkeletonLeftAttack02.png");
+			// Attack03
+			Resources::Load<graphics::Texture>(L"BossAttack03Down", L"..\\Content\\Skeleton_Boss\\Down\\Png\\AncientSkeletonDownAttack03.png");
+			Resources::Load<graphics::Texture>(L"BossAttack03Up", L"..\\Content\\Skeleton_Boss\\Up\\Png\\AncientSkeletonUpAttack03.png");
+			Resources::Load<graphics::Texture>(L"BossAttack03Right", L"..\\Content\\Skeleton_Boss\\Right\\Png\\AncientSkeletonRightAttack03.png");
+			Resources::Load<graphics::Texture>(L"BossAttack03Left", L"..\\Content\\Skeleton_Boss\\Left\\Png\\AncientSkeletonLeftAttack03.png");
+			// Hurt
+			Resources::Load<graphics::Texture>(L"BossHurtDown", L"..\\Content\\Skeleton_Boss\\Down\\Png\\AncientSkeletonDownHurt.png");
+			Resources::Load<graphics::Texture>(L"BossHurtUp", L"..\\Content\\Skeleton_Boss\\Up\\Png\\AncientSkeletonUpHurt.png");
+			Resources::Load<graphics::Texture>(L"BossHurtRight", L"..\\Content\\Skeleton_Boss\\Right\\Png\\AncientSkeletonRightHurt.png");
+			Resources::Load<graphics::Texture>(L"BossHurtLeft", L"..\\Content\\Skeleton_Boss\\Left\\Png\\AncientSkeletonLeftHurt.png");
+			// Death
+			Resources::Load<graphics::Texture>(L"BossDeathDown", L"..\\Content\\Skeleton_Boss\\Down\\Png\\AncientSkeletonDownDeath.png");
+			Resources::Load<graphics::Texture>(L"BossDeathUp", L"..\\Content\\Skeleton_Boss\\Up\\Png\\AncientSkeletonUpDeath.png");
+			Resources::Load<graphics::Texture>(L"BossDeathRight", L"..\\Content\\Skeleton_Boss\\Right\\Png\\AncientSkeletonRightDeath.png");
+			Resources::Load<graphics::Texture>(L"BossDeathLeft", L"..\\Content\\Skeleton_Boss\\Left\\Png\\AncientSkeletonLeftDeath.png");
+		}
+
 	}
 }

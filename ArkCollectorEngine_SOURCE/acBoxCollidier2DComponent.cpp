@@ -18,19 +18,31 @@ namespace ac
 	}
 	void BoxCollidier2DComponent::Update()
 	{
+		if (!GetActivate())
+		{
+			return;
+		}
 	}
 	void BoxCollidier2DComponent::LateUpdate()
 	{
+		if (!GetActivate())
+		{
+			return;
+		}
 	}
 	void BoxCollidier2DComponent::Render(HDC InHdc)
 	{
+		if (!GetActivate())
+		{
+			return;
+		}
 		TransformComponent* tr = this->GetOwner()->GetComponent<TransformComponent>();
 		math::Vector2 centerPos = tr->GetPosition();
 		float gameObjWidth = tr->GetWidth();
 		float gameObjHeight = tr->GetHeight();
 
-		centerPos.x = centerPos.x + gameObjWidth / 2 + GetOffset().x;
-		centerPos.y = centerPos.y + gameObjHeight / 2 + GetOffset().y;
+		centerPos.x = centerPos.x + GetOffset().x;
+		centerPos.y = centerPos.y + GetOffset().y;
 
 		SetCenterPosition(centerPos);
 

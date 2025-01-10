@@ -68,7 +68,7 @@ namespace ac
 		void walk();
 		void jump();
 		void land();
-		void attack();
+		void isAttacking();
 		void skill01();
 		void skill02();
 		void skill03();
@@ -82,7 +82,7 @@ namespace ac
 
 	private:
 		eState mState;
-		eDirection mDirection;
+		eDirection mAnimationDirection;
 		class AnimatorComponent* mAnimatorComponent;
 		
 		bool mbAttack;
@@ -98,33 +98,43 @@ namespace ac
 		float mSkill01Cooldown;
 		float mSkill01Timer;
 
-		bool mbSkill02;
-		float mSkill02Cooldown;
-		float mSkill02Timer;
+		bool mbSkillUsed[4];
+		float mSkillTimer[4];
 
-		bool mbSkill03;
-		float mSkill03Cooldown;
-		float mSkill03Timer;
+		bool mbItemUsed[4];
+		float mItemTimer[4];
 
-		bool mbSkill04;
-		float mSkill04Cooldown;
-		float mSkill04Timer;
+		//bool mbSkill01;
+		//float mSkill01Cooldown;
+		//float mSkill01Timer;
 
-		bool mbItem01;
-		float mItem01Cooldown;
-		float mItem01Timer;
+		//bool mbSkill02;
+		//float mSkill02Cooldown;
+		//float mSkill02Timer;
 
-		bool mbItem02;
-		float mItem02Cooldown;
-		float mItem02Timer;
+		//bool mbSkill03;
+		//float mSkill03Cooldown;
+		//float mSkill03Timer;
 
-		bool mbItem03;
-		float mItem03Cooldown;
-		float mItem03Timer;
+		//bool mbSkill04;
+		//float mSkill04Cooldown;
+		//float mSkill04Timer;
 
-		bool mbItem04;
-		float mItem04Cooldown;
-		float mItem04Timer;
+		//bool mbItem01;
+		//float mItem01Cooldown;
+		//float mItem01Timer;
+
+		//bool mbItem02;
+		//float mItem02Cooldown;
+		//float mItem02Timer;
+
+		//bool mbItem03;
+		//float mItem03Cooldown;
+		//float mItem03Timer;
+
+		//bool mbItem04;
+		//float mItem04Cooldown;
+		//float mItem04Timer;
 	};
 }
 
