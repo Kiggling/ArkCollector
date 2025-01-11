@@ -25,6 +25,7 @@
 #include "acBoss.h"
 #include "acBossScriptComponent.h"
 #include "acApplication.h"
+#include "acBossStatComponent.h"
 
 #include "acAudioClip.h"
 #include "acAudioListener.h"
@@ -174,9 +175,7 @@ namespace ac
 		BoxCollidier2DComponent* bossCollidier = mBoss->AddComponent<BoxCollidier2DComponent>();
 		bossCollidier->SetSize(math::Vector2(bossTr->GetWidth(), bossTr->GetHeight()));
 
-		StatComponent* bossStat = mBoss->AddComponent<StatComponent>();
-		bossStat->SetMaxHp(1000.f);
-		bossStat->SetHp(1000.f);
+		BossStatComponent* bossStat = mBoss->AddComponent<BossStatComponent>();
 
 		AnimatorComponent* bossAnimatorComp = mBoss->AddComponent<AnimatorComponent>();
 		graphics::Texture* bossTexture = Resources::Find<graphics::Texture>(L"BossIdleDown");
