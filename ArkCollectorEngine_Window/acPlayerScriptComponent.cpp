@@ -44,7 +44,13 @@ namespace ac
 		, mAttackType(eAttackType::None)
 		, mbShield(false)
 		, mShield(nullptr)
+		, mAudioSource(nullptr)
 	{
+		for (size_t i = 0; i < 4; i++)
+		{
+			mSkillTimer[i] = 0.0f;
+			mItemTimer[i] = 0.0f;
+		}
 	}
 	PlayerScriptComponent::~PlayerScriptComponent()
 	{
@@ -68,6 +74,7 @@ namespace ac
 			mAnimatorComponent = GetOwner()->GetComponent<AnimatorComponent>();
 		}
 
+		// 공격 애니메이션 중 발사체 나가는 모션에 발사체 생성
 		if (mAttackType != eAttackType::None && mAnimatorComponent->GetActiveAnimation()->GetAnimationSheetIndex() == 8)
 		{
 			StatComponent* stat = GetOwner()->GetComponent<StatComponent>();
@@ -188,6 +195,7 @@ namespace ac
 	void PlayerScriptComponent::OnCollisionExit(ColliderComponent* other)
 	{
 	}
+	// 사용한 스킬과 아이템의 쿨타임 계산
 	void PlayerScriptComponent::setTimer()
 	{
 		PlayerStatComponent* stat = GetOwner()->GetComponent<PlayerStatComponent>();
@@ -213,6 +221,7 @@ namespace ac
 			}
 		}
 	}
+	// 플레이어의 방향 정하는 함수
 	void PlayerScriptComponent::setDirection()
 	{
 		if (Input::GetKey(EKeyCode::UP))
@@ -232,6 +241,7 @@ namespace ac
 			mAnimationDirection = eDirection::Right;
 		}
 	}
+	// 플레이어의 상태를 결정하는 함수
 	void PlayerScriptComponent::setState()
 	{
 		if (GetOwner()->GetComponent<StatComponent>()->GetHp() <= 0.00000001f)
@@ -280,16 +290,17 @@ namespace ac
 			mState = eState::Hurt;
 			stateChange = true;
 		}
-		//if (death) death를 판단할 수 있는 조건 작성
-		//{
-		//	mState = eState::Death;
-		//	stateChange = true;
-		//}
+		if (Input::GetKey(EKeyCode::Y)) //death를 판단할 수 있는 조건 작성
+		{
+			mState = eState::Death;
+			stateChange = true;
+		}
 		if (!stateChange)
 		{
 			mState = eState::Idle;
 		}
 	}
+	// 아이템 사용 함수
 	void PlayerScriptComponent::useItem()
 	{
 		if (Input::GetKey(EKeyCode::One))
@@ -309,6 +320,7 @@ namespace ac
 			item04();
 		}
 	}
+	// 가만히 있을 때 실행되는 함수
 	void PlayerScriptComponent::idle()
 	{
 		if (mAnimatorComponent->GetActiveAnimation()->GetName().substr(0, 4) == L"Walk" || mAnimatorComponent->IsComplete())
@@ -318,6 +330,7 @@ namespace ac
 			mAudioSource->Stop();
 		}
 	}
+	// w, a, s, d로 움직일 때 실행되는 함수
 	void PlayerScriptComponent::walk()
 	{
 		std::wstring animationName = mAnimatorComponent->GetActiveAnimation()->GetName();
@@ -358,6 +371,7 @@ namespace ac
 
 		tr->SetPosition(pos);
 	}
+	// space를 눌렀을 때 실행되는 함수(점프)
 	void PlayerScriptComponent::jump()
 	{
 		std::wstring animationName = mAnimatorComponent->GetActiveAnimation()->GetName();
@@ -378,6 +392,7 @@ namespace ac
 	void PlayerScriptComponent::land()
 	{
 	}
+	// a키를 눌러 공격할 때 실행되는 함수
 	void PlayerScriptComponent::isAttacking()
 	{
 		if ((mAnimatorComponent->GetActiveAnimation()->GetName().substr(0, 4) == L"Idle" || mAnimatorComponent->GetActiveAnimation()->GetName().substr(0, 4) == L"Walk")
@@ -388,6 +403,7 @@ namespace ac
 			mAttackType = eAttackType::BasicAttack;
 		}
 	}
+	// q키를 눌러 1번 스킬을 사용할 때 실행되는 함수
 	void PlayerScriptComponent::skill01()
 	{
 		if ((mAnimatorComponent->GetActiveAnimation()->GetName().substr(0, 4) == L"Idle" || mAnimatorComponent->GetActiveAnimation()->GetName().substr(0, 4) == L"Walk")
@@ -404,6 +420,7 @@ namespace ac
 			}
 		}
 	}
+	// w키를 눌러 2번 스킬을 사용할 때 실행되는 함수
 	void PlayerScriptComponent::skill02()
 	{
 		PlayerStatComponent* stat = GetOwner()->GetComponent<PlayerStatComponent>();
@@ -423,6 +440,7 @@ namespace ac
 			mAudioSource->Play(0.3f);
 		}
 	}
+	// e키를 눌러 3번 스킬을 사용할 때 실행되는 함수
 	void PlayerScriptComponent::skill03()
 	{
 		if ((mAnimatorComponent->GetActiveAnimation()->GetName().substr(0, 4) == L"Idle" || mAnimatorComponent->GetActiveAnimation()->GetName().substr(0, 4) == L"Walk")
@@ -439,6 +457,7 @@ namespace ac
 			}
 		}
 	}
+	// r키를 눌러 4번 스킬을 사용할 때 실행되는 함수
 	void PlayerScriptComponent::skill04()
 	{
 		if ((mAnimatorComponent->GetActiveAnimation()->GetName().substr(0, 4) == L"Idle" || mAnimatorComponent->GetActiveAnimation()->GetName().substr(0, 4) == L"Walk")
@@ -515,6 +534,7 @@ namespace ac
 			stat->SetItemUsed(3, true);
 		}
 	}
+	// 피격됐을 때 실행되는 함수
 	void PlayerScriptComponent::hurt()
 	{
 		if (mAnimatorComponent->GetActiveAnimation()->GetName().substr(0, 4) != L"Hurt")
@@ -528,6 +548,7 @@ namespace ac
 			mAudioSource->Play();
 		}
 	}
+	// 사망 시 실행되는 함수
 	void PlayerScriptComponent::death()
 	{
 		if (mAnimatorComponent->GetActiveAnimation()->GetName().substr(0, 5) != L"Death")

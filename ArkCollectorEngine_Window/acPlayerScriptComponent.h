@@ -94,14 +94,8 @@ namespace ac
 
 		class AudioSource* mAudioSource;
 
-		bool mbSkill01;
-		float mSkill01Cooldown;
-		float mSkill01Timer;
-
-		bool mbSkillUsed[4];
 		float mSkillTimer[4];
 
-		bool mbItemUsed[4];
 		float mItemTimer[4];
 	};
 }

@@ -27,3 +27,11 @@ namespace ac
 		static FMOD::System* mCoreSystem;
 	};
 }
+
+// 사용예시
+// 1. LoadResources.h - Resources::Load<AudioClip>(L"PlayerJump", L"..\\Content\\Sound\\Player\\Player_Jump.wav");
+// 2. AudioSource* playerAs = mPlayer->AddComponent<AudioSource>();
+//	  AudioClip* playerAc = Resources::Find<AudioClip>(L"PlayerJump");
+//    playerAs->SetClip(playerAc);
+// 3. playerAs->Play(volume); 하면 사운드 출력 (volume은 0.0f ~ 1.0f)
+//
