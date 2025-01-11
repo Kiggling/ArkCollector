@@ -5,11 +5,14 @@
 #include "acStatComponent.h"
 #include "acColliderComponent.h"
 #include "acTime.h"
+#include "acAnimatorComponent.h"
 
 namespace ac
 {
 	ProjectileScriptComponent::ProjectileScriptComponent()
 		: mDamage(0.0f)
+		, mEffectType(eEffectType::Projectile)
+		, mDamageType(eDamageType::Projectile)
 	{
 	}
 	ProjectileScriptComponent::~ProjectileScriptComponent()
@@ -20,20 +23,33 @@ namespace ac
 	}
 	void ProjectileScriptComponent::Update()
 	{
-		TransformComponent* tr = GetOwner()->GetComponent<TransformComponent>();
-		math::Vector2 pos = tr->GetPosition();
-		math::Vector2 startPos = ((Projectile*)GetOwner())->GetStartPosition();
-		float range = ((Projectile*)GetOwner())->GetRange();
-
-		if (math::Vector2::Distance(pos, startPos) >= range)
+		if (mEffectType == eEffectType::Effect)
 		{
-			GetOwner()->Death();
+			AnimatorComponent* animator = GetOwner()->GetComponent<AnimatorComponent>();
+
+			if (animator->IsComplete())
+			{
+				GetOwner()->Death();
+			}
 			return;
 		}
+		else if (mEffectType == eEffectType::Projectile)
+		{
+			TransformComponent* tr = GetOwner()->GetComponent<TransformComponent>();
+			math::Vector2 pos = tr->GetPosition();
+			math::Vector2 startPos = ((Projectile*)GetOwner())->GetStartPosition();
+			float range = ((Projectile*)GetOwner())->GetRange();
 
-		pos += ((Projectile*)GetOwner())->GetVelocity() * Time::DeltaTime();
+			if (math::Vector2::Distance(pos, startPos) >= range)
+			{
+				GetOwner()->Death();
+				return;
+			}
 
-		tr->SetPosition(pos);
+			pos += ((Projectile*)GetOwner())->GetVelocity() * Time::DeltaTime();
+
+			tr->SetPosition(pos);
+		}
 	}
 	void ProjectileScriptComponent::LateUpdate()
 	{
@@ -49,11 +65,18 @@ namespace ac
 		float otherHp = otherStat->GetHp();
 		otherStat->SetHp(otherHp - mDamage);
 
-		// TODO: 2. play effect animation
+		if (mDamageType == eDamageType::Effect)
+		{
+			return;
+		}
+		else if (mDamageType == eDamageType::Projectile)
+		{
+			// TODO: 2. play effect animation
 
 
-		// 3. destroy projectile
-		GetOwner()->Death();
+			// 3. destroy projectile
+			GetOwner()->Death();
+		}
 	}
 	void ProjectileScriptComponent::OnCollisionStay(ColliderComponent* other)
 	{

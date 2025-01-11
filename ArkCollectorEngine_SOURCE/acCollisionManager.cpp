@@ -9,11 +9,8 @@ namespace ac
 
 	void CollisionManager::Initialize()
 	{
-		CollisionLayerMatrixCheck(enums::ELayerType::BossParticle, enums::ELayerType::Player, true);
 		CollisionLayerMatrixCheck(enums::ELayerType::Player, enums::ELayerType::BossParticle, true);
 		CollisionLayerMatrixCheck(enums::ELayerType::Boss, enums::ELayerType::PlayerParticle, true);
-		CollisionLayerMatrixCheck(enums::ELayerType::Boss, enums::ELayerType::Player, true);
-		CollisionLayerMatrixCheck(enums::ELayerType::Player, enums::ELayerType::Player, true);
 	}
 	void CollisionManager::Update()
 	{
@@ -60,7 +57,7 @@ namespace ac
 	// Check all GameObjects in two layers 
 	void CollisionManager::LayerCollision(Scene* scene, enums::ELayerType left, enums::ELayerType right)
 	{
-		for (GameObject* left : scene->GetLayer((enums::ELayerType)left)->GetGameObjects())
+		for (GameObject* left : SceneManager::GetGameObjects(left))
 		{
 			ColliderComponent* leftCol = left->GetComponent<ColliderComponent>();
 
@@ -72,7 +69,7 @@ namespace ac
 			{
 				continue;
 			}
-			for (GameObject* right : scene->GetLayer((enums::ELayerType)right)->GetGameObjects())
+			for (GameObject* right : SceneManager::GetGameObjects(right))
 			{
 				ColliderComponent* rightCol = right->GetComponent<ColliderComponent>();
 

@@ -114,7 +114,7 @@ namespace ac
 
 		playerAnimatorComp->PlayAnimation(L"IdleDown", true);
 
-		playerTr->SetPosition(math::Vector2(100.0f, 100.0f));
+		playerTr->SetPosition(math::Vector2(400.0f, 400.0f));
 		playerTr->SetWidth(24.0f);
 		playerTr->SetHeight(24.0f);
 
@@ -123,13 +123,13 @@ namespace ac
 
 		// Player Stat
 		PlayerStatComponent* playerStat = mPlayer->AddComponent<PlayerStatComponent>();
-		//playerStat->SetMaxHp(100.0f);
-		//playerStat->SetMaxMp(100.0f);
-		////playerStat->SetHp(playerStat->GetMaxHp());
-		//playerStat->SetHp(30.0f);
-		//playerStat->SetMp(playerStat->GetMaxMp());
-		//playerStat->SetDamage(50.0f);
-		//playerStat->SetAttackSpeed(1.0f);
+		playerStat->SetMaxHp(100.0f);
+		playerStat->SetMaxMp(100.0f);
+		//playerStat->SetHp(playerStat->GetMaxHp());
+		playerStat->SetHp(100.0f);
+		playerStat->SetMp(playerStat->GetMaxMp());
+		playerStat->SetDamage(50.0f);
+		playerStat->SetAttackSpeed(1.0f);
 
 		// test Collider
 		Player* testPlayer = object::Instantiate<Player>(enums::ELayerType::Player);

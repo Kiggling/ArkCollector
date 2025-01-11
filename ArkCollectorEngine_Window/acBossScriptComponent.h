@@ -36,6 +36,7 @@ namespace ac
 			Up,
 			Left,
 			Right,
+			None,
 			End,
 		};
 
@@ -44,7 +45,25 @@ namespace ac
 			Dust,
 			WaveSmall,
 			WaveBig,
+			RainBigRed,
 			End,
+		};
+
+		struct FAnimationInfo	// name / scale / size / spriteLength / duration
+		{
+			std::wstring name;
+			math::Vector2 scale;
+			math::Vector2 size;
+			UINT spriteLength;
+			float duration;
+		};
+		struct FProjectileInfo	// effectType / damgeType / dameg / velocity / range
+		{
+			ProjectileScriptComponent::eEffectType effectType;
+			ProjectileScriptComponent::eDamageType damageType;
+			float damage;
+			math::Vector2 velocity;
+			float range;
 		};
 
 		BossScriptComponent();
@@ -62,6 +81,7 @@ namespace ac
 		void SetTarget(class Player* InTarget) { mTargetPlayer = InTarget; }
 
 	private:
+
 		eAttack attackTypes[3] = { eAttack::Attack01, eAttack::Attack02 , eAttack::Attack03 };
 		std::wstring directions[4] = { L"Down", L"Up", L"Left", L"Right" };
 
@@ -74,10 +94,8 @@ namespace ac
 		void hurt();
 		void death();
 		void playAnimation(std::wstring name, bool loop);
-		void playEffectAnimation(UINT idx, std::wstring name, bool hasDirection, math::Vector2 offset, math::Vector2 scale, bool loop);
-		void setEffectCollision(UINT idx, eEffect effectType, math::Vector2 scale);
+		void playEffectAnimation(FAnimationInfo aniInfo, FProjectileInfo projInfo, int direction, math::Vector2 offset, bool collisionActivate, bool loop = false);
 		void setDirection();
-		void resetEffect();
 		bool isAttacking();
 		bool hasToTeleport();
 	private:
@@ -87,8 +105,7 @@ namespace ac
 		math::Vector2 mTargetPosition;					// 타겟의 위치
 		math::Vector2 mDistanceFromTarget;				// 타겟과의 거리
 		math::Vector2 mMoveDirection;					// 보스가 실제 이동할 방향
-		math::Vector2 mEffectSizes[3];					// 보스의 이펙트 크기
-		eState mState;									// 보스 상태
+		eState mEffectType;									// 보스 상태
 		eAttack mAttackType;							// 보스 일반 공격 타입 (3가지 존재)
 		eDirection mAnimationDirection;					// 재생할 에니매이션 방향
 		BossStatComponent* mStatComponent;				// 보스 스텟 컴포넌트
@@ -97,7 +114,6 @@ namespace ac
 		class ColliderComponent* mColliderComponent;	// 보스 충돌 컴포넌트
 		bool mbAttack;									// 보스가 공격하고 있는지
 		eDirection mAttackDirection;					// 보스의 공격방향
-		Projectile* mEffects[4];						// 보스 이펙트 (한 번에 하나의 이펙트만 사용할 경우 (index 0)만 사용, 한 번에 여러 이펙트(ex 발사체)가 사용된다면 다른 index도 사용)
 
 	};
 }
