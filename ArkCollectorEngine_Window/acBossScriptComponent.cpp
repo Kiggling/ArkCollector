@@ -6,11 +6,37 @@
 #include "acTime.h"
 #include "acPlayer.h"
 #include "acColliderComponent.h"
-#include "acStatComponent.h"
-#include "acBossStatComponent.h"
+#include "acObject.h"
+#include "acBoxCollidier2DComponent.h"
+#include "acResources.h"
+#include "acProjectileScriptComponent.h"
 
 namespace ac
 {
+	BossScriptComponent::FAnimationInfo animationInfo[4] = {
+		{ L"Dust", math::Vector2(2.f, 2.f), math::Vector2(48.f, 48.f), 6, 0.2f},
+		{ L"WaveSmall", math::Vector2(2.f, 2.f), math::Vector2(32.f, 32.f), 3, 0.2f},
+		{ L"WaveBig", math::Vector2(1.5f, 1.5f), math::Vector2(64.f, 64.f), 1, 0.2f},
+		{ L"RainBigRed", math::Vector2(1.5f, 1.5f), math::Vector2(6.f,26.f), 8, 0.2f},
+	};
+	BossScriptComponent::FProjectileInfo projectileInfo[4] = {
+		{ ProjectileScriptComponent::eEffectType::Effect, ProjectileScriptComponent::eDamageType::None, 0.f, math::Vector2::Zero, 0.f },
+		{ ProjectileScriptComponent::eEffectType::Effect, ProjectileScriptComponent::eDamageType::Effect, 50.f, math::Vector2::Zero, 0.f },
+		{ ProjectileScriptComponent::eEffectType::Projectile, ProjectileScriptComponent::eDamageType::Effect, 1.f, math::Vector2::Zero, 250.f },
+		{ ProjectileScriptComponent::eEffectType::Projectile, ProjectileScriptComponent::eDamageType::Projectile, 1.f, math::Vector2(0.f, 100.f), 120.f },
+	};
+	math::Vector2 waveOffset[4] = {
+		{ 0.f, 30.f },
+		{ 0.f, -30.f },
+		{ -30.f, 0.f },
+		{ 30.f, 0.f },
+	};
+	math::Vector2 waveBigVelocity[4] = {
+		{ 0.f, 500.f },
+		{ 0.f, -500.f },
+		{ -500.f, 0.f },
+		{ 500.f, 0.f },
+	};
 
 	BossScriptComponent::BossScriptComponent()
 		: mTime(0.0f)
@@ -18,7 +44,7 @@ namespace ac
 		, mTargetPosition(math::Vector2::Zero)
 		, mDistanceFromTarget(math::Vector2::Zero)
 		, mMoveDirection(math::Vector2::Zero)
-		, mState(eState::Idle)
+		, mEffectType(eState::Idle)
 		, mAnimationDirection(eDirection::Down)
 		, mAttackType(eAttack::None)
 		, mStatComponent(nullptr)
@@ -49,7 +75,7 @@ namespace ac
 			mAttackCool += Time::DeltaTime();
 		}
 
-		switch (mState)
+		switch (mEffectType)
 		{
 		case ac::BossScriptComponent::eState::None:
 		{
@@ -109,18 +135,18 @@ namespace ac
 	{
 		float hp = mStatComponent->GetHp();
 
-		hp = (hp - 25.f >= 0 ? hp - 25.f : 0);
-		mStatComponent->SetHp(hp);
+		//hp = (hp - 25.f >= 0 ? hp - 25.f : 0);
+		//mStatComponent->SetHp(hp);
 
 		if (hp == 0)
 		{
 			playAnimation(L"Death", false);
-			mState = eState::Death;
+			mEffectType = eState::Death;
 		}
 		else
 		{
 			playAnimation(L"Hurt", false);
-			mState = eState::Hurt;
+			mEffectType = eState::Hurt;
 		}
 	}
 	void BossScriptComponent::OnCollisionStay(ColliderComponent* other)
@@ -136,8 +162,9 @@ namespace ac
 		if (mTime > 1.f)
 		{
 			mTime = 0.f;
-			mState = eState::Land;
+			mEffectType = eState::Land;
 			playAnimation(L"Land", false);
+			playEffectAnimation(animationInfo[(UINT)eEffect::Dust], projectileInfo[(UINT)eEffect::Dust], (UINT)eDirection::None, math::Vector2(0.f, 20.f), false);
 		}
 	}
 	void BossScriptComponent::idle()
@@ -157,7 +184,7 @@ namespace ac
 
 		if (mTime > 1.5f)
 		{
-			mState = eState::Walk;
+			mEffectType = eState::Walk;
 			
 			playAnimation(L"Walk", true);
 
@@ -181,7 +208,7 @@ namespace ac
 
 		if (mTime > 3.f)
 		{
-			mState = eState::Idle;
+			mEffectType = eState::Idle;
 			playAnimation(L"Idle", true);
 
 			mTime = 0.0f;
@@ -202,7 +229,7 @@ namespace ac
 			mAnimatorComponent->StopAnimation();
 			mColliderComponent->SetActivate(false);
 
-			mState = eState::None;
+			mEffectType = eState::None;
 		}
 	}
 	void BossScriptComponent::land()
@@ -212,17 +239,58 @@ namespace ac
 		if (mAnimatorComponent->IsComplete())
 		{
 			mAttackCool = 2.5f;
-			mState = eState::Idle;
-			playAnimation(L"Idle", false);
+			mEffectType = eState::Walk;
+			playAnimation(L"Walk", false);
 		}
 	}
 	void BossScriptComponent::attack()
 	{
+		switch (mAttackType)
+		{
+		case ac::BossScriptComponent::eAttack::None:
+			break;
+		case ac::BossScriptComponent::eAttack::Attack01:
+			if (mAnimatorComponent->IsComplete())
+			{
+				playEffectAnimation(animationInfo[(UINT)eEffect::WaveSmall], projectileInfo[(UINT)eEffect::WaveSmall], (UINT)mAnimationDirection, waveOffset[(UINT)mAnimationDirection], true);
+			}
+			break;
+		case ac::BossScriptComponent::eAttack::Attack02:
+			for (int direction = 0; direction < (UINT)eDirection::None; direction++)
+			{
+				if (mTime <= 0.1f)
+				{
+					projectileInfo[(UINT)eEffect::WaveBig].velocity = waveBigVelocity[direction];
+					playEffectAnimation(animationInfo[(UINT)eEffect::WaveBig], projectileInfo[(UINT)eEffect::WaveBig], direction, waveOffset[(UINT)direction], true);
+				}
+			}
+			if (mTime >= 0.4f) mTime = 0.f;
+			mTime += Time::DeltaTime();
+			break;
+		case ac::BossScriptComponent::eAttack::Attack03:
+			if (mTime <= 0.04f)
+			{
+				UINT range = 300;
+				math::Vector2 offset = math::Vector2(rand() % (range / 2), rand() % (range / 2));
+				offset = offset * math::Vector2((rand() % 2 ? 1 : -1), (rand() % 2 ? 1 : -1));
+				offset.y -= 50.f;
+
+				playEffectAnimation(animationInfo[(UINT)eEffect::RainBigRed], projectileInfo[(UINT)eEffect::RainBigRed], (UINT)eDirection::None, offset, true);
+			}
+			if (mTime >= 0.2) mTime = 0.f;
+			mTime += Time::DeltaTime();
+			break;
+		case ac::BossScriptComponent::eAttack::End:
+			break;
+		default:
+			break;
+		}
 		if (mAnimatorComponent->IsComplete())
 		{
+			mTime = 0.f;
 			mAttackCool = 0.f;
 			mbAttack = false;
-			mState = eState::Idle;
+			mEffectType = eState::Idle;
 			mAttackType = eAttack::None;
 			playAnimation(L"Idle", true);
 		}
@@ -231,7 +299,7 @@ namespace ac
 	{
 		if (mAnimatorComponent->IsComplete())
 		{
-			mState = eState::Idle;
+			mEffectType = eState::Idle;
 			playAnimation(L"Idle", true);
 		}
 	}
@@ -242,6 +310,40 @@ namespace ac
 	void BossScriptComponent::playAnimation(std::wstring name, bool loop)
 	{
 		mAnimatorComponent->PlayAnimation(name + directions[(int)mAnimationDirection], loop);
+	}
+	void BossScriptComponent::playEffectAnimation(FAnimationInfo aniInfo, FProjectileInfo projInfo, int direction, math::Vector2 offset, bool collisionActivate, bool loop)
+	{
+		Projectile* proj = object::Instantiate<Projectile>(enums::ELayerType::BossParticle);
+		
+		TransformComponent* tr = proj->GetComponent<TransformComponent>();
+		math::Vector2 pos = mTransformComponent->GetPosition() + offset;
+		tr->SetPosition(pos);
+		tr->SetScale(aniInfo.scale);
+		proj->SetStartPosition(pos);
+		proj->SetVelocity(projInfo.velocity);
+		proj->SetRange(projInfo.range);
+
+		ProjectileScriptComponent* projScript = proj->AddComponent<ProjectileScriptComponent>();
+		projScript->SetDamage(projInfo.damage);
+		projScript->SetEffectType(projInfo.effectType);
+		projScript->SetDamageType(projInfo.damageType);
+
+		if (collisionActivate)
+		{
+			BoxCollidier2DComponent* projBoxCol = proj->AddComponent<BoxCollidier2DComponent>();
+			projBoxCol->SetSize(aniInfo.size * aniInfo.scale);
+		}
+
+		AnimatorComponent* projAnimator = proj->AddComponent<AnimatorComponent>();
+		std::wstring animationName = aniInfo.name;
+		if (direction != (UINT)eDirection::None)
+		{
+			animationName += directions[direction];
+		}
+		graphics::Texture* projTexture = Resources::Find<graphics::Texture>(animationName);
+		projAnimator->CreateAnimation(animationName, projTexture, math::Vector2(0.0f, 0.0f), aniInfo.size, math::Vector2::Zero, aniInfo.spriteLength, aniInfo.duration);
+		proj->GetComponent<AnimatorComponent>()->PlayAnimation(animationName, loop);
+
 	}
 	void BossScriptComponent::setDirection()
 	{
@@ -308,7 +410,7 @@ namespace ac
 		if (mDistanceFromTarget.length() <= 100.f && mAttackCool >= 3.f)
 		{
 			mbAttack = true;
-			mState = eState::Attack;
+			mEffectType = eState::Attack;
 
 			int attackState = rand() % 3;
 
@@ -340,7 +442,7 @@ namespace ac
 	{
 		if (mAttackCool >= 6.f)
 		{
-			mState = eState::Jump;
+			mEffectType = eState::Jump;
 			playAnimation(L"Jump", false);
 
 			mAttackCool = 0.f;

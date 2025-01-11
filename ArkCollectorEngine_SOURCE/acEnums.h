@@ -10,7 +10,8 @@ namespace ac::enums
 		Boss,
 		Player,
 		Floor,
-		Particle,
+		PlayerParticle,
+		BossParticle,
 		Max = 16,
 	};
   

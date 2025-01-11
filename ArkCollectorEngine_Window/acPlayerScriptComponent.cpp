@@ -36,7 +36,7 @@ namespace ac
 	int spriteLength[] = {0, 1, 61, 0, 30, 60};
 
 	PlayerScriptComponent::PlayerScriptComponent()
-		: mState(eState::Idle)
+		: mEffectType(eState::Idle)
 		, mAnimationDirection(eDirection::Down)
 		, mAnimatorComponent(nullptr)
 		, mbAttack(false)
@@ -57,7 +57,7 @@ namespace ac
 	}
 	void PlayerScriptComponent::Initialize()
 	{
-		mShield = object::Instantiate<Shield>(enums::ELayerType::Particle);
+		mShield = object::Instantiate<Shield>(enums::ELayerType::PlayerParticle);
 		TransformComponent* shieldTr = mShield->AddComponent<TransformComponent>();
 		// shield script?
 
@@ -79,7 +79,7 @@ namespace ac
 		{
 			StatComponent* stat = GetOwner()->GetComponent<StatComponent>();
 
-			Projectile* projectile = object::Instantiate<Projectile>(enums::ELayerType::Particle);
+			Projectile* projectile = object::Instantiate<Projectile>(enums::ELayerType::PlayerParticle);
 			projectile->SetVelocity(projectileDirection[(UINT)mAttackDirection] * 300.0f);
 
 			TransformComponent* projectileTr = projectile->AddComponent<TransformComponent>();
@@ -110,7 +110,7 @@ namespace ac
 		setState();
 		useItem();
 
-		switch (mState)
+		switch (mEffectType)
 		{
 		case ac::PlayerScriptComponent::eState::Idle:
 			idle();
@@ -172,17 +172,10 @@ namespace ac
 	}
 	void PlayerScriptComponent::OnCollisionEnter(ColliderComponent* other)
 	{
-		if (mbShield == false && mState != eState::Hurt)
+		if (mbShield == false && mEffectType != eState::Hurt)
 		{
-			mState = eState::Hurt;
+			mEffectType = eState::Hurt;
 		}
-
-		TransformComponent* tr = other->GetOwner()->GetComponent<TransformComponent>();
-
-		math::Vector2 pos = tr->GetPosition();
-
-		pos.x += 50;
-		tr->SetPosition(pos);
 	}
 	void PlayerScriptComponent::OnCollisionStay(ColliderComponent* other)
 	{
@@ -245,49 +238,49 @@ namespace ac
 	void PlayerScriptComponent::setState()
 	{
 		if (GetOwner()->GetComponent<StatComponent>()->GetHp() <= 0.00000001f)
-			mState = eState::Death;
-		if (mState == eState::Death || (mState == eState::Hurt && !mAnimatorComponent->IsComplete()))
+			mEffectType = eState::Death;
+		if (mEffectType == eState::Death || (mEffectType == eState::Hurt && !mAnimatorComponent->IsComplete()))
 			return;
 
 		bool stateChange = false;
 		if (Input::GetKey(EKeyCode::UP) || Input::GetKey(EKeyCode::DOWN) || Input::GetKey(EKeyCode::LEFT) || Input::GetKey(EKeyCode::RIGHT))
 		{
-			mState = eState::Walk;
+			mEffectType = eState::Walk;
 			stateChange = true;
 		}
 		if (Input::GetKey(EKeyCode::SPACEBAR))
 		{
-			mState = eState::Jump;
+			mEffectType = eState::Jump;
 			stateChange = true;
 		}
 		if (Input::GetKey(EKeyCode::A))
 		{
-			mState = eState::Attack;
+			mEffectType = eState::Attack;
 			stateChange = true;
 		}
 		if (Input::GetKey(EKeyCode::Q))
 		{
-			mState = eState::Skill01;
+			mEffectType = eState::Skill01;
 			stateChange = true;
 		}
 		if (Input::GetKey(EKeyCode::W))
 		{
-			mState = eState::Skill02;
+			mEffectType = eState::Skill02;
 			stateChange = true;
 		}
 		if (Input::GetKey(EKeyCode::E))
 		{
-			mState = eState::Skill03;
+			mEffectType = eState::Skill03;
 			stateChange = true;
 		}
 		if (Input::GetKey(EKeyCode::R))
 		{
-			mState = eState::Skill04;
+			mEffectType = eState::Skill04;
 			stateChange = true;
 		}
 		if (Input::GetKey(EKeyCode::T)) //hurt를 판단할 수 있는 조건 작성
 		{
-			mState = eState::Hurt;
+			mEffectType = eState::Hurt;
 			stateChange = true;
 		}
 		if (Input::GetKey(EKeyCode::Y)) //death를 판단할 수 있는 조건 작성
@@ -297,7 +290,7 @@ namespace ac
 		}
 		if (!stateChange)
 		{
-			mState = eState::Idle;
+			mEffectType = eState::Idle;
 		}
 	}
 	// 아이템 사용 함수

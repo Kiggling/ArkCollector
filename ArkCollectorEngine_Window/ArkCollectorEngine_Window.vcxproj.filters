@@ -34,6 +34,9 @@
     <Filter Include="Contents\Player\Stat">
       <UniqueIdentifier>{3b321682-066b-432c-bfee-c7a3d2140144}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\Boss">
+      <UniqueIdentifier>{8ccbb8d5-f8ca-40ce-a164-8252d8383a37}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="acPlayer.cpp">
@@ -65,6 +68,15 @@
     </ClCompile>
     <ClCompile Include="acPlayerStatComponent.cpp">
       <Filter>Contents\Player\Stat</Filter>
+    </ClCompile>
+    <ClCompile Include="acBoss.cpp">
+      <Filter>Contents\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="acBossScriptComponent.cpp">
+      <Filter>Contents\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="acBossStatComponent.cpp">
+      <Filter>Contents\Boss</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -103,6 +115,15 @@
     </ClInclude>
     <ClInclude Include="acPlayerStatComponent.h">
       <Filter>Contents\Player\Stat</Filter>
+    </ClInclude>
+    <ClInclude Include="acBoss.h">
+      <Filter>Contents\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="acBossScriptComponent.h">
+      <Filter>Contents\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="acBossStatComponent.h">
+      <Filter>Contents\Boss</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -1,5 +1,8 @@
 #pragma once
 #include "..\\ArkCollectorEngine_SOURCE\acScriptComponent.h"
+#include "acBossStatComponent.h"
+#include "acProjectile.h"
+#include "acProjectileScriptComponent.h"
 
 namespace ac
 {
@@ -33,7 +36,34 @@ namespace ac
 			Up,
 			Left,
 			Right,
+			None,
 			End,
+		};
+
+		enum class eEffect
+		{
+			Dust,
+			WaveSmall,
+			WaveBig,
+			RainBigRed,
+			End,
+		};
+
+		struct FAnimationInfo	// name / scale / size / spriteLength / duration
+		{
+			std::wstring name;
+			math::Vector2 scale;
+			math::Vector2 size;
+			UINT spriteLength;
+			float duration;
+		};
+		struct FProjectileInfo	// effectType / damgeType / dameg / velocity / range
+		{
+			ProjectileScriptComponent::eEffectType effectType;
+			ProjectileScriptComponent::eDamageType damageType;
+			float damage;
+			math::Vector2 velocity;
+			float range;
 		};
 
 		BossScriptComponent();
@@ -51,6 +81,7 @@ namespace ac
 		void SetTarget(class Player* InTarget) { mTargetPlayer = InTarget; }
 
 	private:
+
 		eAttack attackTypes[3] = { eAttack::Attack01, eAttack::Attack02 , eAttack::Attack03 };
 		std::wstring directions[4] = { L"Down", L"Up", L"Left", L"Right" };
 
@@ -63,6 +94,7 @@ namespace ac
 		void hurt();
 		void death();
 		void playAnimation(std::wstring name, bool loop);
+		void playEffectAnimation(FAnimationInfo aniInfo, FProjectileInfo projInfo, int direction, math::Vector2 offset, bool collisionActivate, bool loop = false);
 		void setDirection();
 		bool isAttacking();
 		bool hasToTeleport();
@@ -73,10 +105,10 @@ namespace ac
 		math::Vector2 mTargetPosition;					// 타겟의 위치
 		math::Vector2 mDistanceFromTarget;				// 타겟과의 거리
 		math::Vector2 mMoveDirection;					// 보스가 실제 이동할 방향
-		eState mState;									// 보스 상태
+		eState mEffectType;									// 보스 상태
 		eAttack mAttackType;							// 보스 일반 공격 타입 (3가지 존재)
 		eDirection mAnimationDirection;					// 재생할 에니매이션 방향
-		class BossStatComponent* mStatComponent;			// 보스 스텟 컴포넌트
+		BossStatComponent* mStatComponent;				// 보스 스텟 컴포넌트
 		class AnimatorComponent* mAnimatorComponent;	// 보스 애니메이션 컴포넌트
 		class TransformComponent* mTransformComponent;	// 보스 위치 상태 컴포넌트
 		class ColliderComponent* mColliderComponent;	// 보스 충돌 컴포넌트

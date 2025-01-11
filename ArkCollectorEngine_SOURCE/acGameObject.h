@@ -50,13 +50,13 @@ namespace ac
 			return comp;
 		}
 
-		eState GetActive() { return mState; }
+		eState GetActive() { return mEffectType; }
 		void SetActive(bool power)
 		{
-			if (power == true) mState = eState::Active;
-			if (power == false) mState = eState::Paused;
+			if (power == true) mEffectType = eState::Active;
+			if (power == false) mEffectType = eState::Paused;
 		}
-		void Death() { mState = eState::Dead; }
+		void Death() { mEffectType = eState::Dead; }
 
 		enums::ELayerType GetLayerType() { return mLayerType; }
 		void SetLayerType(enums::ELayerType layerType) { mLayerType = layerType; }
@@ -67,7 +67,7 @@ namespace ac
 	private:
 		void initializeTransform();
 	private:
-		eState mState;
+		eState mEffectType;
 		std::vector<Component*> mComponents;
 		enums::ELayerType mLayerType;
 		
