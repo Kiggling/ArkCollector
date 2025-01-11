@@ -81,7 +81,7 @@ namespace ac
 		void death();
 
 	private:
-		eState mEffectType;
+		eState mState;
 		eDirection mAnimationDirection;
 		class AnimatorComponent* mAnimatorComponent;
 		

@@ -36,7 +36,7 @@ namespace ac
 	int spriteLength[] = {0, 1, 61, 0, 30, 60};
 
 	PlayerScriptComponent::PlayerScriptComponent()
-		: mEffectType(eState::Idle)
+		: mState(eState::Idle)
 		, mAnimationDirection(eDirection::Down)
 		, mAnimatorComponent(nullptr)
 		, mbAttack(false)
@@ -110,7 +110,7 @@ namespace ac
 		setState();
 		useItem();
 
-		switch (mEffectType)
+		switch (mState)
 		{
 		case ac::PlayerScriptComponent::eState::Idle:
 			idle();
@@ -172,9 +172,9 @@ namespace ac
 	}
 	void PlayerScriptComponent::OnCollisionEnter(ColliderComponent* other)
 	{
-		if (mbShield == false && mEffectType != eState::Hurt)
+		if (mbShield == false && mState != eState::Hurt)
 		{
-			mEffectType = eState::Hurt;
+			mState = eState::Hurt;
 		}
 	}
 	void PlayerScriptComponent::OnCollisionStay(ColliderComponent* other)
@@ -238,49 +238,49 @@ namespace ac
 	void PlayerScriptComponent::setState()
 	{
 		if (GetOwner()->GetComponent<StatComponent>()->GetHp() <= 0.00000001f)
-			mEffectType = eState::Death;
-		if (mEffectType == eState::Death || (mEffectType == eState::Hurt && !mAnimatorComponent->IsComplete()))
+			mState = eState::Death;
+		if (mState == eState::Death || (mState == eState::Hurt && !mAnimatorComponent->IsComplete()))
 			return;
 
 		bool stateChange = false;
 		if (Input::GetKey(EKeyCode::UP) || Input::GetKey(EKeyCode::DOWN) || Input::GetKey(EKeyCode::LEFT) || Input::GetKey(EKeyCode::RIGHT))
 		{
-			mEffectType = eState::Walk;
+			mState = eState::Walk;
 			stateChange = true;
 		}
 		if (Input::GetKey(EKeyCode::SPACEBAR))
 		{
-			mEffectType = eState::Jump;
+			mState = eState::Jump;
 			stateChange = true;
 		}
 		if (Input::GetKey(EKeyCode::A))
 		{
-			mEffectType = eState::Attack;
+			mState = eState::Attack;
 			stateChange = true;
 		}
 		if (Input::GetKey(EKeyCode::Q))
 		{
-			mEffectType = eState::Skill01;
+			mState = eState::Skill01;
 			stateChange = true;
 		}
 		if (Input::GetKey(EKeyCode::W))
 		{
-			mEffectType = eState::Skill02;
+			mState = eState::Skill02;
 			stateChange = true;
 		}
 		if (Input::GetKey(EKeyCode::E))
 		{
-			mEffectType = eState::Skill03;
+			mState = eState::Skill03;
 			stateChange = true;
 		}
 		if (Input::GetKey(EKeyCode::R))
 		{
-			mEffectType = eState::Skill04;
+			mState = eState::Skill04;
 			stateChange = true;
 		}
 		if (Input::GetKey(EKeyCode::T)) //hurt를 판단할 수 있는 조건 작성
 		{
-			mEffectType = eState::Hurt;
+			mState = eState::Hurt;
 			stateChange = true;
 		}
 		if (Input::GetKey(EKeyCode::Y)) //death를 판단할 수 있는 조건 작성
@@ -290,7 +290,7 @@ namespace ac
 		}
 		if (!stateChange)
 		{
-			mEffectType = eState::Idle;
+			mState = eState::Idle;
 		}
 	}
 	// 아이템 사용 함수
