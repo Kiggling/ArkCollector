@@ -97,6 +97,8 @@ namespace ac
 		float mSkillTimer[4];
 
 		float mItemTimer[4];
+
+		bool mbItem04Active;
 	};
 }
 

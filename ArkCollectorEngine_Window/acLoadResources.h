@@ -132,7 +132,15 @@ namespace ac
 		Resources::Load<graphics::Texture>(L"DungeonTileset", L"..\\Content\\Dungeon_Tileset\\Png\\DungeonTileset.png");
 		Resources::Load<graphics::Texture>(L"SpringFloor", L"..\\Content\\Dungeon_Tileset\\Png\\SpringFloor.bmp");
 		Resources::Load<graphics::Texture>(L"Dungeon", L"..\\Content\\Dungeon_Tileset\\Dungeon60.bmp");
+		Resources::Load<graphics::Texture>(L"LampOn", L"..\\Content\\Lava_Tileset_Pixel\\Animated Tiles\\Lava Dungeon\\Deco\\Png\\Lava lamp.png");
+		Resources::Load<graphics::Texture>(L"LampOff", L"..\\Content\\Lava_Tileset_Pixel\\Animated Tiles\\Lava Dungeon\\Deco\\Png\\Lava lamp off.png");
 
+		Resources::Load<graphics::Texture>(L"Cover_5", L"..\\Content\\Cover\\black_5.png");
+		Resources::Load<graphics::Texture>(L"Cover_4", L"..\\Content\\Cover\\black_4.png");
+		Resources::Load<graphics::Texture>(L"Cover_3", L"..\\Content\\Cover\\black_3.png");
+		Resources::Load<graphics::Texture>(L"Cover_2", L"..\\Content\\Cover\\black_2.png");
+		Resources::Load<graphics::Texture>(L"Cover_1", L"..\\Content\\Cover\\black_1.png");
+		Resources::Load<graphics::Texture>(L"Cover_0", L"..\\Content\\Cover\\black_0.png");
 
 		// UI
 		{

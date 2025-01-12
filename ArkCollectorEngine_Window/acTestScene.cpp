@@ -26,10 +26,10 @@
 #include "acBossScriptComponent.h"
 #include "acApplication.h"
 #include "acBossStatComponent.h"
-
 #include "acAudioClip.h"
 #include "acAudioListener.h"
 #include "acAudioSource.h"
+#include "acLamp.h"
 
 extern ac::Application application;
 
@@ -265,12 +265,77 @@ namespace ac
 
 		bossAnimatorComp->PlayAnimation(L"IdleDown", true);
 
+		// Lamps
+		math::Vector2 lampsLocation[] = {math::Vector2(400.0f, 300.0f), math::Vector2(1040.0f, 300.0f), math::Vector2(720.0f, 450.0f), math::Vector2(400.0f, 600.0f), math::Vector2(1040.0f, 600.0f)};
+		srand(time(NULL));
+		for (size_t i = 0; i < 5; i++)
+		{
+			mLamps[i] = object::Instantiate<Lamp>(enums::ELayerType::Tile);
+			mLamps[i]->SetTimerLimit(20.0f + (rand() % 30));
+
+			TransformComponent* lampTr = mLamps[i]->AddComponent<TransformComponent>();
+			lampTr->SetPosition(lampsLocation[i]);
+			lampTr->SetWidth(24.0f);
+			lampTr->SetHeight(24.0f);
+
+			graphics::Texture* lampTexture = Resources::Find<graphics::Texture>(L"LampOn");
+			AnimatorComponent* lampAnimatorComp = mLamps[i]->AddComponent<AnimatorComponent>();
+			lampAnimatorComp->CreateAnimation(L"On", lampTexture, math::Vector2(0.0f, 0.0f), math::Vector2(32.0f, 32.0f), math::Vector2::Zero, 3, 0.2f);
+			lampTexture = Resources::Find<graphics::Texture>(L"LampOff");
+			lampAnimatorComp->CreateAnimation(L"Off", lampTexture, math::Vector2(0.0f, 0.0f), math::Vector2(32.0f, 32.0f), math::Vector2::Zero, 3, 0.2f);
+
+			lampAnimatorComp->PlayAnimation(L"On", true);
+
+			//LampScriptComponent* lampScript = mLamps[i]->AddComponent<LampScriptComponent>();
+
+			BoxCollidier2DComponent* lampCollidier = mLamps[i]->AddComponent<BoxCollidier2DComponent>();
+			lampCollidier->SetSize(math::Vector2(lampTr->GetWidth(), lampTr->GetHeight()));
+		}
+
+		// Layer에서 제일 위에 mCover를 둬서 반투명 구현
+		mCover = object::Instantiate<GameObject>(enums::ELayerType::Cover);
+		mCover->AddComponent<TransformComponent>();
+		SpriteRenderer* coverSr = mCover->AddComponent<SpriteRenderer>();
+		graphics::Texture* coverTexture = Resources::Find<graphics::Texture>(L"Cover_5");
+		coverSr->SetTexture(coverTexture);
+
+		// 플레이어가 DontDestroyOnLoad에 있어서 플레이어를 가릴 커버 구현
+		mCoverDontDestroyOnLoad = object::Instantiate<GameObject>(enums::ELayerType::Cover);
+		object::DontDestroyOnLoad(mCoverDontDestroyOnLoad);
+		mCoverDontDestroyOnLoad->AddComponent<TransformComponent>();
+		SpriteRenderer* coverDontDestroyOnLoadSr = mCoverDontDestroyOnLoad->AddComponent<SpriteRenderer>();
+		graphics::Texture* coverDontDestroyOnLoadTexture = Resources::Find<graphics::Texture>(L"Cover_5");
+		coverDontDestroyOnLoadSr->SetTexture(coverTexture);
+
 		Scene::Initialize();
 
 		UIManager::Push(enums::EUIType::HUD);
 	}
 	void TestScene::Update()
 	{
+		// lampCount = 램프가 몇 개 켜져있는지 저장하는 변수
+		int lampCount = 0;
+		for (size_t i = 0; i < 5; i++)
+		{
+			if (mLamps[i]->GetLight() == true)
+			{
+				lampCount++;
+			}
+		}
+		if (lampCount == 0) // 램프가 다 꺼지면 플레이어 사망
+		{
+			mPlayer->GetComponent<PlayerStatComponent>()->SetHp(0.0f);
+		}
+
+		// 켜져있는 램프 개수에 따라 Cover의 투명도 설정
+		SpriteRenderer* coverSr = mCover->GetComponent<SpriteRenderer>();
+		graphics::Texture* coverTexture = Resources::Find<graphics::Texture>(L"Cover_" + std::to_wstring(lampCount));
+		coverSr->SetTexture(coverTexture);
+
+		SpriteRenderer* coverDontDestroyOnLoadSr = mCoverDontDestroyOnLoad->GetComponent<SpriteRenderer>();
+		graphics::Texture* coverDontDestroyOnLoadTexture = Resources::Find<graphics::Texture>(L"Cover_" + std::to_wstring(lampCount));
+		coverDontDestroyOnLoadSr->SetTexture(coverDontDestroyOnLoadTexture);
+
 		Scene::Update();
 	}
 	void TestScene::LateUpdate()

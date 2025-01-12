@@ -37,6 +37,9 @@
     <Filter Include="Contents\Boss">
       <UniqueIdentifier>{8ccbb8d5-f8ca-40ce-a164-8252d8383a37}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\Lamp">
+      <UniqueIdentifier>{74ef0eb4-78ee-4205-87ca-b2ea3c2f4044}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="acPlayer.cpp">
@@ -77,6 +80,9 @@
     </ClCompile>
     <ClCompile Include="acBossStatComponent.cpp">
       <Filter>Contents\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="acLamp.cpp">
+      <Filter>Contents\Lamp</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -124,6 +130,9 @@
     </ClInclude>
     <ClInclude Include="acBossStatComponent.h">
       <Filter>Contents\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="acLamp.h">
+      <Filter>Contents\Lamp</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

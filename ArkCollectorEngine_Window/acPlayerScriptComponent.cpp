@@ -16,6 +16,7 @@
 #include "acProjectileScriptComponent.h"
 #include "acAudioClip.h"
 #include "acAudioSource.h"
+#include "acLamp.h"
 
 namespace ac
 {
@@ -45,6 +46,7 @@ namespace ac
 		, mbShield(false)
 		, mShield(nullptr)
 		, mAudioSource(nullptr)
+		, mbItem04Active(false)
 	{
 		for (size_t i = 0; i < 4; i++)
 		{
@@ -172,17 +174,25 @@ namespace ac
 	}
 	void PlayerScriptComponent::OnCollisionEnter(ColliderComponent* other)
 	{
-		if (mbShield == false && mState != eState::Hurt)
+		if (mbShield == false && mState != eState::Hurt && other->GetOwner()->GetLayerType() != enums::ELayerType::Tile)
 		{
 			mState = eState::Hurt;
 		}
 	}
 	void PlayerScriptComponent::OnCollisionStay(ColliderComponent* other)
 	{
-		// pick up
-		if (Input::GetKey(EKeyCode::Z))
+		Lamp* lamp = dynamic_cast<Lamp*>(other->GetOwner());
+		if (lamp != nullptr)
 		{
-
+			if (Input::GetKey(EKeyCode::Four) && lamp->GetLight() == false && mbItem04Active == true)
+			{
+				lamp->SetLight(true);
+				mbItem04Active = false;
+			}
+			if (Input::GetKey(EKeyCode::Z) && lamp->GetLight() == true)
+			{
+				mbItem04Active = true;
+			}
 		}
 	}
 	void PlayerScriptComponent::OnCollisionExit(ColliderComponent* other)
@@ -538,7 +548,7 @@ namespace ac
 
 			AudioClip* ac = Resources::Find<AudioClip>(L"PlayerHurt");
 			mAudioSource->SetClip(ac);
-			mAudioSource->Play();
+			mAudioSource->Play(0.5f);
 		}
 	}
 	// 사망 시 실행되는 함수
@@ -552,7 +562,7 @@ namespace ac
 
 			AudioClip* ac = Resources::Find<AudioClip>(L"PlayerDeath");
 			mAudioSource->SetClip(ac);
-			mAudioSource->Play();
+			mAudioSource->Play(0.5f);
 		}
 	}
 }

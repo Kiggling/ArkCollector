@@ -23,6 +23,7 @@
     <ClInclude Include="acBossScriptComponent.h" />
     <ClInclude Include="acBossStatComponent.h" />
     <ClInclude Include="acCameraScriptComponent.h" />
+    <ClInclude Include="acLamp.h" />
     <ClInclude Include="acLoadResources.h" />
     <ClInclude Include="acLoadScenes.h" />
     <ClInclude Include="acPlayer.h" />
@@ -40,6 +41,7 @@
     <ClCompile Include="acBossScriptComponent.cpp" />
     <ClCompile Include="acBossStatComponent.cpp" />
     <ClCompile Include="acCameraScriptComponent.cpp" />
+    <ClCompile Include="acLamp.cpp" />
     <ClCompile Include="acPlayer.cpp" />
     <ClCompile Include="acPlayerScriptComponent.cpp" />
     <ClCompile Include="acPlayerStatComponent.cpp" />

@@ -14,7 +14,7 @@ namespace ac
 		SetAttackSpeed(1.0f);
 
 		float skillCooldown[] = { 2.0f, 3.0f, 5.0f, 10.0f };
-		float itemCooldown[] = { 3.0f, 3.0f, 60.0f, 30.0f };
+		float itemCooldown[] = { 3.0f, 3.0f, 60.0f, 1.0f };
 
 		for (int i = 0; i < 4; i++)
 		{
