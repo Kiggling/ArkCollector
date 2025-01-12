@@ -12,6 +12,7 @@ namespace ac::enums
 		Floor,
 		PlayerParticle,
 		BossParticle,
+		Cover,
 		Max = 16,
 	};
   

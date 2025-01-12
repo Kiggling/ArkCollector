@@ -10,6 +10,7 @@ namespace ac
 	void CollisionManager::Initialize()
 	{
 		CollisionLayerMatrixCheck(enums::ELayerType::Player, enums::ELayerType::BossParticle, true);
+		CollisionLayerMatrixCheck(enums::ELayerType::Player, enums::ELayerType::Tile, true);
 		CollisionLayerMatrixCheck(enums::ELayerType::Boss, enums::ELayerType::PlayerParticle, true);
 	}
 	void CollisionManager::Update()
