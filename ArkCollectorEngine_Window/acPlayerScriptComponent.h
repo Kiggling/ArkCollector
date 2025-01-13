@@ -80,6 +80,8 @@ namespace ac
 		void hurt();
 		void death();
 
+		void playAudio(const std::wstring& audioName, float volume = 1.0f);
+
 	private:
 		eState mState;
 		eDirection mAnimationDirection;
