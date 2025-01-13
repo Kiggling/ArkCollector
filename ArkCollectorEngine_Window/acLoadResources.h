@@ -245,5 +245,17 @@ namespace ac
 			Resources::Load<graphics::Texture>(L"RainBigBlue", L"..\\Content\\Effects\\Effects\\Rarity Effects\\Png\\Magic effect.png");
 			Resources::Load<graphics::Texture>(L"RainBigGray", L"..\\Content\\Effects\\Effects\\Rarity Effects\\Png\\Common effect.png");
 		}
+		// Wall
+		{
+			Resources::Load<graphics::Texture>(L"WallBuildDown", L"..\\Content\\craftpix-free-magic-and-traps-top-down-pixel-art-asset\\2 Barricades\\Down\\Build.png");
+			Resources::Load<graphics::Texture>(L"WallBuildUp", L"..\\Content\\craftpix-free-magic-and-traps-top-down-pixel-art-asset\\2 Barricades\\Up\\Build.png");
+			Resources::Load<graphics::Texture>(L"WallBuildRight", L"..\\Content\\craftpix-free-magic-and-traps-top-down-pixel-art-asset\\2 Barricades\\Right\\Build.png");
+			Resources::Load<graphics::Texture>(L"WallBuildLeft", L"..\\Content\\craftpix-free-magic-and-traps-top-down-pixel-art-asset\\2 Barricades\\Left\\Build.png");
+
+			Resources::Load<graphics::Texture>(L"WallDestroyDown", L"..\\Content\\craftpix-free-magic-and-traps-top-down-pixel-art-asset\\2 Barricades\\Down\\Destroy.png");
+			Resources::Load<graphics::Texture>(L"WallDestroyUp", L"..\\Content\\craftpix-free-magic-and-traps-top-down-pixel-art-asset\\2 Barricades\\Up\\Destroy.png");
+			Resources::Load<graphics::Texture>(L"WallDestroyRight", L"..\\Content\\craftpix-free-magic-and-traps-top-down-pixel-art-asset\\2 Barricades\\Right\\Destroy.png");
+			Resources::Load<graphics::Texture>(L"WallDestroyLeft", L"..\\Content\\craftpix-free-magic-and-traps-top-down-pixel-art-asset\\2 Barricades\\Left\\Destroy.png");
+		}
 	}
 }

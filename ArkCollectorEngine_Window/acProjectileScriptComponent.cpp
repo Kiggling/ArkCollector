@@ -6,6 +6,7 @@
 #include "acColliderComponent.h"
 #include "acTime.h"
 #include "acAnimatorComponent.h"
+#include "acPlayerScriptComponent.h"
 
 namespace ac
 {
@@ -61,6 +62,13 @@ namespace ac
 	{
 		// 1. apply damage to other GameObject
 		GameObject* otherGameObj = other->GetOwner();
+		PlayerScriptComponent* playerScript = otherGameObj->GetComponent<PlayerScriptComponent>();
+
+		if (playerScript != nullptr && playerScript->GetInvincible())
+		{
+			return;
+		}
+
 		StatComponent* otherStat = otherGameObj->GetComponent<StatComponent>();
 		float otherHp = otherStat->GetHp();
 		otherStat->SetHp(otherHp - mDamage);

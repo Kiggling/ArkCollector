@@ -18,6 +18,10 @@ namespace ac
 		void OnExit() override;
 		
 	private:
+		void mapInit();
+		void playerInit();
+		void bossInit();
+	private:
 		class Player* mPlayer;
 		class Boss* mBoss;
 	};

@@ -58,6 +58,8 @@ namespace ac
 		virtual void OnCollisionStay(class ColliderComponent* other) override;
 		virtual void OnCollisionExit(class ColliderComponent* other) override;
 
+		bool GetInvincible() { return mbinvincible; };
+
 	private:
 		void setTimer();
 		void setDirection();
@@ -90,6 +92,7 @@ namespace ac
 		eAttackType mAttackType;
 
 		bool mbShield;
+		bool mbinvincible;
 		class Shield* mShield;
 
 		class AudioSource* mAudioSource;
