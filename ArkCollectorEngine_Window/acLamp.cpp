@@ -1,6 +1,9 @@
 #include "acLamp.h"
 #include "acTime.h"
 #include "acAnimatorComponent.h"
+#include "acAudioSource.h"
+#include "acAudioClip.h"
+#include "acResources.h"
 
 namespace ac
 {
@@ -22,9 +25,10 @@ namespace ac
 	{
 		if (mbLight == true)
 			mTimer += Time::DeltaTime();
-		if (mTimer >= mTimerLimit)
+		if (mbLight == true && mTimer >= mTimerLimit)
 		{
 			GetComponent<AnimatorComponent>()->PlayAnimation(L"Off", true);
+			playAudio(L"LampOffSound");
 
 			mbLight = false;
 		}
@@ -48,10 +52,19 @@ namespace ac
 			mTimer = 0.0f;
 
 			GetComponent<AnimatorComponent>()->PlayAnimation(L"On", true);
+			playAudio(L"LampOnSound", 0.5f);
 		}
 		else
 		{
 			GetComponent<AnimatorComponent>()->PlayAnimation(L"Off", true);
+			playAudio(L"LampOffSound");
 		}
+	}
+	void Lamp::playAudio(const std::wstring& audioName, float volume)
+	{
+		AudioSource* as = GetComponent<AudioSource>();
+		AudioClip* ac = Resources::Find<AudioClip>(audioName);
+		as->SetClip(ac);
+		as->Play(volume);
 	}
 }

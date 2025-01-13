@@ -290,6 +290,10 @@ namespace ac
 
 			BoxCollidier2DComponent* lampCollidier = mLamps[i]->AddComponent<BoxCollidier2DComponent>();
 			lampCollidier->SetSize(math::Vector2(lampTr->GetWidth(), lampTr->GetHeight()));
+
+			AudioSource* lampAs = mLamps[i]->AddComponent<AudioSource>();
+			AudioClip* lampAc = Resources::Find<AudioClip>(L"LampOnSound");
+			lampAs->SetClip(lampAc);
 		}
 
 		// Layer에서 제일 위에 mCover를 둬서 반투명 구현

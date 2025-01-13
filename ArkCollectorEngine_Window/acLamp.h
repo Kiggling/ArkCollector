@@ -24,6 +24,9 @@ namespace ac
 		void SetLight(bool light);
 
 	private:
+		void playAudio(const std::wstring& audioName, float volume = 1.0f);
+
+	private:
 		float mTimer;
 		float mTimerLimit;
 

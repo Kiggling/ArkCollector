@@ -98,6 +98,8 @@ namespace ac
 
 		// Player Sound
 		{
+			// pickup
+			Resources::Load<AudioClip>(L"PlayerPickup", L"..\\Content\\Sound\\Player\\Player_Pickup.wav");
 			// jump
 			Resources::Load<AudioClip>(L"PlayerJump", L"..\\Content\\Sound\\Player\\Player_Jump.wav");
 			// hurt
@@ -252,6 +254,17 @@ namespace ac
 			Resources::Load<graphics::Texture>(L"RainBigRed", L"..\\Content\\Effects\\Effects\\Rarity Effects\\Png\\Mythic effect.png");
 			Resources::Load<graphics::Texture>(L"RainBigBlue", L"..\\Content\\Effects\\Effects\\Rarity Effects\\Png\\Magic effect.png");
 			Resources::Load<graphics::Texture>(L"RainBigGray", L"..\\Content\\Effects\\Effects\\Rarity Effects\\Png\\Common effect.png");
+		}
+
+		// Lamp
+		{
+			// texture
+			Resources::Load<graphics::Texture>(L"LampOn", L"..\\Content\\Lava_Tileset_Pixel\\Animated Tiles\\Lava Dungeon\\Deco\\Png\\Lava lamp.png");
+			Resources::Load<graphics::Texture>(L"LampOff", L"..\\Content\\Lava_Tileset_Pixel\\Animated Tiles\\Lava Dungeon\\Deco\\Png\\Lava lamp off.png");
+
+			// sound
+			Resources::Load<AudioClip>(L"LampOnSound", L"..\\Content\\Sound\\Lamp\\Lamp_On.wav");
+			Resources::Load<AudioClip>(L"LampOffSound", L"..\\Content\\Sound\\Lamp\\Lamp_Off.wav");
 		}
 	}
 }
