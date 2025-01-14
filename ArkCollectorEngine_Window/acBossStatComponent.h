@@ -14,6 +14,9 @@ namespace ac
 		virtual void LateUpdate() override;
 		virtual void Render(HDC InHdc) override;
 
+		float GetLastHP() { return mLastHP; };
+		void SetLastHP(float InLastHP) { mLastHP = InLastHP; };
 	private:
+		float mLastHP;
 	};
 }

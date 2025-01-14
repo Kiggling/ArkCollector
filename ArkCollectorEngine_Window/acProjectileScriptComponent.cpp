@@ -7,6 +7,9 @@
 #include "acTime.h"
 #include "acAnimatorComponent.h"
 #include "acPlayerScriptComponent.h"
+#include "acBossStatComponent.h"
+#include "acBossScriptComponent.h"
+#include "acBoss.h"
 
 namespace ac
 {
@@ -71,7 +74,20 @@ namespace ac
 
 		StatComponent* otherStat = otherGameObj->GetComponent<StatComponent>();
 		float otherHp = otherStat->GetHp();
-		otherStat->SetHp(otherHp - mDamage);
+		otherStat->SetHp((otherHp - mDamage) < 0.f ? 0.f : otherHp - mDamage);
+
+		Boss* boss = dynamic_cast<Boss*>(otherGameObj);
+		if (boss != nullptr)
+		{
+			BossScriptComponent* bossScript = boss->GetComponent<BossScriptComponent>();
+
+			if (bossScript->GetState() == BossScriptComponent::eState::Gimmick)
+			{
+				BossStatComponent* bossStat = boss->GetComponent<BossStatComponent>();
+				float bossLastHp = bossStat->GetLastHP();
+				bossStat->SetLastHP((bossLastHp - mDamage) < 0.f ? 0.f : bossLastHp - mDamage);
+			}
+		}
 
 		if (mDamageType == eDamageType::Effect)
 		{

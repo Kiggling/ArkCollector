@@ -94,18 +94,28 @@ namespace ac
 		virtual void OnCollisionExit(class ColliderComponent* other) override;
 
 		void SetTarget(class Player* InTarget) { mTargetPlayer = InTarget; }
+		void SetState(eState InState) { mState = InState; };
+		void SetGimmick(eGimmick InGimmick) { mGimmick = InGimmick; };
+		void SetGimmickState(eGimmickState InGimmickState) { mGimmickState = InGimmickState; };
+		eState GetState() { return mState; };
+		eGimmick GetGimmick() { return mGimmick; };
+		eGimmickState GetGimmickState() { return mGimmickState; };
 
 	private:
 
 		eAttack attackTypes[3] = { eAttack::Attack01, eAttack::Attack02 , eAttack::Attack03 };
 		std::wstring directions[4] = { L"Down", L"Up", L"Left", L"Right" };
 
+		void initComp();
 		void none();
 		void idle();
 		void walk();
 		void jump();
 		void land();
 		void attack();
+		void attack01();
+		void attack02();
+		void attack03();
 		void gimmick();
 		void hurt();
 		void death();
@@ -115,11 +125,9 @@ namespace ac
 		void checkGimmick();
 		void gimmickHP100();
 		void gimmickHP0();
-		void createWall();
+		bool isIllusion();
 		bool isAttacking();
 		bool hasToTeleport();
-
-
 
 		// HP100 기믹 함수
 		void noneHP100();
@@ -127,6 +135,16 @@ namespace ac
 		void landHP100();
 		void waitHP100();
 		void attackHP100();
+		void createWall();
+
+		// HP0 기믹 함수
+		void noneHP0();
+		void jumpHP0();
+		void landHP0();
+		void waitHP0();
+		void attackHP0();
+		void createIllusion(class TransformComponent* tr, math::Vector2 pos, size_t i);
+
 	private:
 		class Player* mTargetPlayer;					// 보스의 타겟
 		float mTime;									// idle, walk 등의 행동으로 넘어가는 대기 시간

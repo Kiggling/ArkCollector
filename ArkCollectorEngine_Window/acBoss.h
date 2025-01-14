@@ -13,7 +13,10 @@ namespace ac
 		virtual void LateUpdate() override;
 		virtual void Render(HDC InHdc) override;
 
+		bool GetIsIllusion() { return mbIsIllusion; };
+		void SetIsIllusion(bool InState) { mbIsIllusion = InState; };
 	private:
+		bool mbIsIllusion;
 
 	};
 

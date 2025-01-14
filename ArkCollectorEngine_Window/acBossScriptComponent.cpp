@@ -14,6 +14,7 @@
 #include "acWall.h"
 #include "acWallScriptComponent.h"
 #include "acWallStatComponent.h"
+#include "acBoss.h"
 
 extern ac::Application application;
 
@@ -30,6 +31,12 @@ namespace ac
 		{ ProjectileScriptComponent::eEffectType::Effect, ProjectileScriptComponent::eDamageType::Effect, 50.f, math::Vector2::Zero, 0.f },
 		{ ProjectileScriptComponent::eEffectType::Projectile, ProjectileScriptComponent::eDamageType::Effect, 1.f, math::Vector2::Zero, 250.f },
 		{ ProjectileScriptComponent::eEffectType::Projectile, ProjectileScriptComponent::eDamageType::Projectile, 1.f, math::Vector2(0.f, 100.f), 120.f },
+	};
+	math::Vector2 bossIllusionPositionOffset[4] = {
+		math::Vector2(100.f, 0),
+		math::Vector2(-100.f, 0),
+		math::Vector2(0 , 100.f),
+		math::Vector2(0 , -100.f),
 	};
 	math::Vector2 colliderInfo[4]
 	{
@@ -76,13 +83,10 @@ namespace ac
 	}
 	void BossScriptComponent::Initialize()
 	{
-		mStatComponent = GetOwner()->GetComponent<BossStatComponent>();
-		mAnimatorComponent = GetOwner()->GetComponent<AnimatorComponent>();
-		mTransformComponent = GetOwner()->GetComponent<TransformComponent>();
-		mColliderComponent = GetOwner()->GetComponent<ColliderComponent>();
 	}
 	void BossScriptComponent::Update()
 	{
+		initComp();
 		setDirection();
 		checkGimmick();
 		
@@ -154,12 +158,17 @@ namespace ac
 	}
 	void BossScriptComponent::OnCollisionEnter(ColliderComponent* other)
 	{
-		float hp = mStatComponent->GetHp();
-
-		if (hp == 0)
+		if (isIllusion())
+			return;
+		if (mState == eState::Gimmick)
 		{
-			playAnimation(L"Death", false);
-			mState = eState::Death;
+			float hp = mStatComponent->GetLastHP();
+
+			if (hp == 0)
+			{
+				playAnimation(L"Death", false);
+				mState = eState::Death;
+			}
 		}
 		else
 		{
@@ -172,6 +181,17 @@ namespace ac
 	}
 	void BossScriptComponent::OnCollisionExit(ColliderComponent* other)
 	{
+	}
+	void BossScriptComponent::initComp()
+	{
+		if(mStatComponent == nullptr)
+			mStatComponent = GetOwner()->GetComponent<BossStatComponent>();
+		if (mAnimatorComponent == nullptr)
+			mAnimatorComponent = GetOwner()->GetComponent<AnimatorComponent>();
+		if (mTransformComponent == nullptr)
+			mTransformComponent = GetOwner()->GetComponent<TransformComponent>();
+		if (mColliderComponent == nullptr)
+			mColliderComponent = GetOwner()->GetComponent<ColliderComponent>();
 	}
 	void BossScriptComponent::none()
 	{
@@ -268,40 +288,13 @@ namespace ac
 		case ac::BossScriptComponent::eAttack::None:
 			break;
 		case ac::BossScriptComponent::eAttack::Attack01:
-			if (mAnimatorComponent->IsComplete())
-			{
-				playEffectAnimation(animationInfo[(UINT)eEffect::WaveSmall], projectileInfo[(UINT)eEffect::WaveSmall], colliderInfo[(UINT)eEffect::WaveSmall], (UINT)mAnimationDirection, waveOffset[(UINT)mAnimationDirection], true);
-			}
+			attack01();
 			break;
 		case ac::BossScriptComponent::eAttack::Attack02:
-			for (int direction = 0; direction < (UINT)eDirection::None; direction++)
-			{
-				if (mTime <= 0.1f)
-				{
-					math::Vector2 colInfo = colliderInfo[(UINT)eEffect::WaveBig];
-					if (direction == (UINT)eDirection::Left || direction == (UINT)eDirection::Right)
-					{
-						colInfo.swapXY();
-					}
-					projectileInfo[(UINT)eEffect::WaveBig].velocity = waveBigVelocity[direction];
-					playEffectAnimation(animationInfo[(UINT)eEffect::WaveBig], projectileInfo[(UINT)eEffect::WaveBig], colInfo, direction, waveOffset[(UINT)direction], true);
-				}
-			}
-			if (mTime >= 0.4f) mTime = 0.f;
-			mTime += Time::DeltaTime();
+			attack02();
 			break;
 		case ac::BossScriptComponent::eAttack::Attack03:
-			if (mTime <= 0.04f)
-			{
-				UINT range = 300;
-				math::Vector2 offset = math::Vector2(rand() % (range / 2), rand() % (range / 2));
-				offset = offset * math::Vector2((rand() % 2 ? 1 : -1), (rand() % 2 ? 1 : -1));
-				offset.y -= 50.f;
-
-				playEffectAnimation(animationInfo[(UINT)eEffect::RainBigRed], projectileInfo[(UINT)eEffect::RainBigRed], colliderInfo[(UINT)eEffect::RainBigRed], (UINT)eDirection::None, offset, true);
-			}
-			if (mTime >= 0.2) mTime = 0.f;
-			mTime += Time::DeltaTime();
+			attack03();
 			break;
 		case ac::BossScriptComponent::eAttack::End:
 			break;
@@ -317,6 +310,45 @@ namespace ac
 			mAttackType = eAttack::None;
 			playAnimation(L"Idle", true);
 		}
+	}
+	void BossScriptComponent::attack01()
+	{
+		if (mAnimatorComponent->IsComplete())
+		{
+			playEffectAnimation(animationInfo[(UINT)eEffect::WaveSmall], projectileInfo[(UINT)eEffect::WaveSmall], colliderInfo[(UINT)eEffect::WaveSmall], (UINT)mAnimationDirection, waveOffset[(UINT)mAnimationDirection], true);
+		}
+	}
+	void BossScriptComponent::attack02()
+	{
+		for (int direction = 0; direction < (UINT)eDirection::None; direction++)
+		{
+			if (mTime <= 0.1f)
+			{
+				math::Vector2 colInfo = colliderInfo[(UINT)eEffect::WaveBig];
+				if (direction == (UINT)eDirection::Left || direction == (UINT)eDirection::Right)
+				{
+					colInfo.swapXY();
+				}
+				projectileInfo[(UINT)eEffect::WaveBig].velocity = waveBigVelocity[direction];
+				playEffectAnimation(animationInfo[(UINT)eEffect::WaveBig], projectileInfo[(UINT)eEffect::WaveBig], colInfo, direction, waveOffset[(UINT)direction], true);
+			}
+		}
+		if (mTime >= 0.4f) mTime = 0.f;
+		mTime += Time::DeltaTime();
+	}
+	void BossScriptComponent::attack03()
+	{
+		if (mTime <= 0.04f)
+		{
+			UINT range = 300;
+			math::Vector2 offset = math::Vector2(rand() % (range / 2), rand() % (range / 2));
+			offset = offset * math::Vector2((rand() % 2 ? 1 : -1), (rand() % 2 ? 1 : -1));
+			offset.y -= 50.f;
+
+			playEffectAnimation(animationInfo[(UINT)eEffect::RainBigRed], projectileInfo[(UINT)eEffect::RainBigRed], colliderInfo[(UINT)eEffect::RainBigRed], (UINT)eDirection::None, offset, true);
+		}
+		if (mTime >= 0.2) mTime = 0.f;
+		mTime += Time::DeltaTime();
 	}
 	void BossScriptComponent::gimmick()
 	{
@@ -388,6 +420,11 @@ namespace ac
 	}
 	void BossScriptComponent::setDirection()
 	{
+		if (isIllusion())
+		{
+			return;
+		}
+
 		math::Vector2 pos = mTransformComponent->GetPosition();
 
 		TransformComponent* targetTr = mTargetPlayer->GetComponent<TransformComponent>();
@@ -454,18 +491,15 @@ namespace ac
 		}
 		if (mStatComponent->GetHp() <= 100.f && mGimmickCheck[2] == false)
 		{
-			mState = eState::Gimmick;
 			mGimmick = eGimmick::HP100;
-			mGimmickState = eGimmickState::Jump;
-			playAnimation(L"Jump", false);
-			mTime = 0.f;
-			mAttackCool = 0.f;
-			mColliderComponent->SetActivate(false);
 		}
 		if (mStatComponent->GetHp() == 0.f && mGimmickCheck[3] == false)
 		{
-			mState = eState::Gimmick;
 			mGimmick = eGimmick::HP0;
+		}
+		if (mGimmick != eGimmick::None)
+		{
+			mState = eState::Gimmick;
 			mGimmickState = eGimmickState::Jump;
 			playAnimation(L"Jump", false);
 			mTime = 0.f;
@@ -497,14 +531,31 @@ namespace ac
 		default:
 			break;
 		}
-
-		// 플레이어를 주시
-		// 맵 좌우에 벽이 하나씩 생김
-		// 벽 뒤에 숨으면 생존
 	}
 	void BossScriptComponent::gimmickHP0()
 	{
-		int a = 0;
+		switch (mGimmickState)
+		{
+		case ac::BossScriptComponent::eGimmickState::None:
+			noneHP0();
+			break;
+		case ac::BossScriptComponent::eGimmickState::Jump:
+			jumpHP0();
+			break;
+		case ac::BossScriptComponent::eGimmickState::Land:
+			landHP0();
+			break;
+		case ac::BossScriptComponent::eGimmickState::Wait:
+			waitHP0();
+			break;
+		case ac::BossScriptComponent::eGimmickState::Attack:
+			attackHP0();
+			break;
+		case ac::BossScriptComponent::eGimmickState::End:
+			break;
+		default:
+			break;
+		}
 	}
 	void BossScriptComponent::createWall()
 	{
@@ -555,8 +606,25 @@ namespace ac
 		wallAnimator->CreateAnimation(animationName, wallTexture, math::Vector2(0.0f, 0.0f), math::Vector2(36.0f, 64.0f), math::Vector2::Zero, 6, 0.2f);
 		wallAnimator->PlayAnimation(animationName, false);
 	}
+	bool BossScriptComponent::isIllusion()
+	{
+		Boss* bossIllusion = dynamic_cast<Boss*>(GetOwner());
+
+		if (bossIllusion == nullptr)
+			return false;
+
+		if (bossIllusion->GetIsIllusion())
+			return true;
+		else
+			return false;
+	}
 	bool BossScriptComponent::isAttacking()
 	{
+		if (isIllusion())
+		{
+			return false;
+		}
+
 		if (mDistanceFromTarget.length() <= 100.f && mAttackCool >= 3.f)
 		{
 			mbAttack = true;
@@ -699,5 +767,152 @@ namespace ac
 			mColliderComponent->SetActivate(true);
 			mGimmickCheck[2] = true;
 		}
+	}
+	void BossScriptComponent::noneHP0()
+	{
+		mTime += Time::DeltaTime();
+
+		if (mTime > 1.f)
+		{
+			mTime = 0.f;
+			mGimmickState = eGimmickState::Land;
+			mAnimatorComponent->PlayAnimation(L"LandDown", false);
+			playEffectAnimation(animationInfo[(UINT)eEffect::Dust], projectileInfo[(UINT)eEffect::Dust], colliderInfo[(UINT)eEffect::Dust], (UINT)eDirection::None, math::Vector2(0.f, 20.f), false);
+		}
+	}
+	void BossScriptComponent::jumpHP0()
+	{
+		if (mAnimatorComponent->IsComplete())
+		{
+			mAnimatorComponent->StopAnimation();
+
+			int bossIndex = rand() % 4;
+
+			TransformComponent* tr = nullptr;
+			math::Vector2 pos = math::Vector2(application.GetWidth() / 2.f, application.GetHeight() / 2.f);
+			
+			for (size_t i = 0; i < 4; i++)
+			{
+				if (i == bossIndex)
+				{
+					tr = GetOwner()->GetComponent<TransformComponent>();
+					tr->SetPosition(pos + bossIllusionPositionOffset[i]);
+					continue;
+				}
+				else
+				{
+					createIllusion(tr, pos, i);
+				}
+			}
+			mGimmickState = eGimmickState::None;
+		}
+	}
+	void BossScriptComponent::landHP0()
+	{
+		mTime += Time::DeltaTime();
+
+		if (mTime >= 2.f)
+		{
+			mTime = 0.f;
+			mGimmickState = eGimmickState::Wait;
+			mAnimatorComponent->PlayAnimation(L"Attack03HalfLeftDown", false);
+			mColliderComponent->SetActivate(true);
+		}
+	}
+	void BossScriptComponent::waitHP0()
+	{
+		mTime += Time::DeltaTime();
+
+		math::Vector2 pos = mTransformComponent->GetPosition();
+		
+		if (isIllusion())
+		{
+			if ((int)(mTime * 10) % 2)
+			{
+				pos.x += 0.5f;
+			}
+			else
+			{
+				pos.x -= 0.5f;
+			}
+		}
+		else
+		{
+			if ((int)(mTime * 10) % 2)
+			{
+				pos.x += 0.3f;
+			}
+			else
+			{
+				pos.x -= 0.3f;
+			}
+		}
+		mTransformComponent->SetPosition(pos);
+
+		if (mTime >= 6.f)
+		{
+			mAnimatorComponent->PlayAnimation(L"Attack03HalfRightDown", false);
+
+			if (!isIllusion())
+			{
+				FAnimationInfo aniInfo = animationInfo[(UINT)eEffect::Dust];
+				FProjectileInfo projInfo = projectileInfo[(UINT)eEffect::Dust];
+				math::Vector2 colInfo = aniInfo.size;
+
+				aniInfo.scale = math::Vector2(100.f, 100.f);
+				projInfo.damage = 100.f;
+
+				playEffectAnimation(aniInfo, projInfo, colInfo, (UINT)eDirection::None, math::Vector2(0.f, 0.f), true);
+			}
+			
+			mTime = 0.f;
+			mGimmickState = eGimmickState::Attack;
+		}
+	}
+	void BossScriptComponent::attackHP0()
+	{
+		mTime += Time::DeltaTime();
+
+		if (mTime > 2.f)
+		{
+			if (isIllusion())
+			{
+				GetOwner()->Death();
+			}
+
+			mTime = 0.f;
+			mState = eState::Idle;
+			mGimmick = eGimmick::None;
+			mGimmickState = eGimmickState::End;
+			mGimmickCheck[3] = true;
+		}
+	}
+	void BossScriptComponent::createIllusion(TransformComponent* tr, math::Vector2 pos, size_t i)
+	{
+		Boss* bossIllusion = object::Instantiate<Boss>(enums::ELayerType::Boss);
+		bossIllusion->SetIsIllusion(true);
+
+		tr = bossIllusion->GetComponent<TransformComponent>();
+		tr->SetPosition(pos + bossIllusionPositionOffset[i]);
+		tr->SetWidth(40.0f);
+		tr->SetHeight(60.0f);
+
+		BossStatComponent* bossIllusionStat = bossIllusion->AddComponent<BossStatComponent>();
+
+		BoxCollidier2DComponent* bossIllusionCollidier = bossIllusion->AddComponent<BoxCollidier2DComponent>();
+		bossIllusionCollidier->SetSize(math::Vector2(tr->GetWidth(), tr->GetHeight()));
+		bossIllusionCollidier->SetActivate(false);
+
+		BossScriptComponent* bossIllusionScript = bossIllusion->AddComponent<BossScriptComponent>();
+		bossIllusionScript->SetState(eState::Gimmick);
+		bossIllusionScript->SetGimmick(eGimmick::HP0);
+		bossIllusionScript->SetGimmickState(eGimmickState::None);
+
+		AnimatorComponent* bossIllusionAnimatorComp = bossIllusion->AddComponent<AnimatorComponent>();
+		graphics::Texture* bossIllusionTexture = Resources::Find<graphics::Texture>(L"BossLandDown");
+		bossIllusionAnimatorComp->CreateAnimation(L"LandDown", bossIllusionTexture, math::Vector2(0.0f, 0.0f), math::Vector2(80.0f, 80.0f), math::Vector2::Zero, 4, 0.1f);
+		bossIllusionTexture = Resources::Find<graphics::Texture>(L"BossAttack03Down");
+		bossIllusionAnimatorComp->CreateAnimation(L"Attack03HalfLeftDown", bossIllusionTexture, math::Vector2(0.0f, 0.0f), math::Vector2(80.0f, 80.0f), math::Vector2::Zero, 5, 0.1f);
+		bossIllusionAnimatorComp->CreateAnimation(L"Attack03HalfRightDown", bossIllusionTexture, math::Vector2(320.0f, 0.0f), math::Vector2(80.0f, 80.0f), math::Vector2::Zero, 3, 0.1f);
 	}
 }

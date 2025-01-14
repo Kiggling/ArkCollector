@@ -36,6 +36,8 @@ extern ac::Application application;
 namespace ac
 {
 	TestScene::TestScene()
+		: mBoss(nullptr)
+		, mPlayer(nullptr)
 	{
 	}
 	TestScene::~TestScene()
@@ -315,6 +317,20 @@ namespace ac
 		bossAnimatorComp->CreateAnimation(L"Attack01SwordUpRight", bossTexture, math::Vector2(320.0f, 0.0f), math::Vector2(80.0f, 80.0f), math::Vector2::Zero, 1, 0.1f);
 		bossTexture = Resources::Find<graphics::Texture>(L"BossAttack01Up");
 		bossAnimatorComp->CreateAnimation(L"Attack01SwordUpUp", bossTexture, math::Vector2(320.0f, 0.0f), math::Vector2(80.0f, 80.0f), math::Vector2::Zero, 1, 0.1f);
+
+		bossTexture = Resources::Find<graphics::Texture>(L"BossAttack03Down");
+		bossAnimatorComp->CreateAnimation(L"Attack03HalfLeftDown", bossTexture, math::Vector2(0.0f, 0.0f), math::Vector2(80.0f, 80.0f), math::Vector2::Zero, 5, 0.1f);
+		bossAnimatorComp->CreateAnimation(L"Attack03HalfRightDown", bossTexture, math::Vector2(320.0f, 0.0f), math::Vector2(80.0f, 80.0f), math::Vector2::Zero, 3, 0.1f);
+		bossTexture = Resources::Find<graphics::Texture>(L"BossAttack03Left");
+		bossAnimatorComp->CreateAnimation(L"Attack03HalfLeftLeft", bossTexture, math::Vector2(0.0f, 0.0f), math::Vector2(80.0f, 80.0f), math::Vector2::Zero, 5, 0.1f);
+		bossAnimatorComp->CreateAnimation(L"Attack03HalfRightLeft", bossTexture, math::Vector2(320.0f, 0.0f), math::Vector2(80.0f, 80.0f), math::Vector2::Zero, 3, 0.1f);
+		bossTexture = Resources::Find<graphics::Texture>(L"BossAttack03Right");
+		bossAnimatorComp->CreateAnimation(L"Attack03HalfLeftRight", bossTexture, math::Vector2(0.0f, 0.0f), math::Vector2(80.0f, 80.0f), math::Vector2::Zero, 5, 0.1f);
+		bossAnimatorComp->CreateAnimation(L"Attack03HalfRightRight", bossTexture, math::Vector2(320.0f, 0.0f), math::Vector2(80.0f, 80.0f), math::Vector2::Zero, 3, 0.1f);
+		bossTexture = Resources::Find<graphics::Texture>(L"BossAttack03Up");
+		bossAnimatorComp->CreateAnimation(L"Attack03HalfLeftUp", bossTexture, math::Vector2(0.0f, 0.0f), math::Vector2(80.0f, 80.0f), math::Vector2::Zero, 5, 0.1f);
+		bossAnimatorComp->CreateAnimation(L"Attack03HalfRightUp", bossTexture, math::Vector2(320.0f, 0.0f), math::Vector2(80.0f, 80.0f), math::Vector2::Zero, 3, 0.1f);
+
 
 		bossAnimatorComp->PlayAnimation(L"IdleDown", true);
 	}

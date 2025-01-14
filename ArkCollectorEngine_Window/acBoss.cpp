@@ -4,6 +4,7 @@
 namespace ac
 {
 	Boss::Boss()
+		: mbIsIllusion(false)
 	{
 	}
 	Boss::~Boss()
