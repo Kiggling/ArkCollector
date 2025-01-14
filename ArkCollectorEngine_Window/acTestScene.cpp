@@ -121,26 +121,6 @@ namespace ac
 
 		UIManager::Push(enums::EUIType::HUD);
 	}
-	void TestScene::Update()
-	{
-		Scene::Update();
-	}
-	void TestScene::LateUpdate()
-	{
-		Scene::LateUpdate();
-	}
-	void TestScene::Render(HDC hdc)
-	{
-		Scene::Render(hdc);
-	}
-	void TestScene::OnEnter()
-	{
-		Scene::OnEnter();
-	}
-	void TestScene::OnExit()
-	{
-		Scene::OnExit();
-	}
 	void TestScene::mapInit()
 	{
 		// Map

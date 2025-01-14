@@ -33,6 +33,7 @@ namespace ac
 		enum class eGimmick
 		{
 			None,
+			HP200,
 			HP100,
 			HP0,
 			End,

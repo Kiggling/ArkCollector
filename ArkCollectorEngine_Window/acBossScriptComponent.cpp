@@ -489,6 +489,10 @@ namespace ac
 		{
 			return;
 		}
+		if (mStatComponent->GetHp() <= 200.f && mGimmickCheck[1] == false)
+		{
+			mGimmick = eGimmick::HP200;
+		}
 		if (mStatComponent->GetHp() <= 100.f && mGimmickCheck[2] == false)
 		{
 			mGimmick = eGimmick::HP100;
