@@ -43,6 +43,7 @@ namespace ac
 		, mAttackDirection(eDirection::Down)
 		, mAttackType(eAttackType::None)
 		, mbShield(false)
+		, mbinvincible(false)
 		, mShield(nullptr)
 		, mAudioSource(nullptr)
 	{
@@ -172,7 +173,7 @@ namespace ac
 	}
 	void PlayerScriptComponent::OnCollisionEnter(ColliderComponent* other)
 	{
-		if (mbShield == false && mState != eState::Hurt)
+		if (mbShield == false && mbinvincible == false && mState != eState::Hurt && other->GetOwner()->GetLayerType() == enums::ELayerType::BossParticle)
 		{
 			mState = eState::Hurt;
 		}
@@ -184,9 +185,19 @@ namespace ac
 		{
 
 		}
+
+		if (other->GetOwner()->GetLayerType() == enums::ELayerType::Object)
+		{
+			mbinvincible = true;
+		}
+
 	}
 	void PlayerScriptComponent::OnCollisionExit(ColliderComponent* other)
 	{
+		if (other->GetOwner()->GetLayerType() == enums::ELayerType::Object)
+		{
+			mbinvincible = false;
+		}
 	}
 	// 사용한 스킬과 아이템의 쿨타임 계산
 	void PlayerScriptComponent::setTimer()

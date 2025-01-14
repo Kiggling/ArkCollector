@@ -37,6 +37,24 @@
     <Filter Include="Contents\Boss">
       <UniqueIdentifier>{8ccbb8d5-f8ca-40ce-a164-8252d8383a37}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\Boss\Script">
+      <UniqueIdentifier>{2da13ff6-7ede-43d9-a4e1-cf795b6b5f9f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Boss\Stat">
+      <UniqueIdentifier>{c956fc85-04c4-4b2b-967a-6bdad52e8e80}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Wall">
+      <UniqueIdentifier>{c1d21969-9228-4bd9-b574-740519afff74}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Wall\Script">
+      <UniqueIdentifier>{f83ba8c2-bad8-4d5b-a65c-93c3d8619568}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Wall\Stat">
+      <UniqueIdentifier>{61429a5f-b054-46db-96c6-c51f22dd1461}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Projectile\Script">
+      <UniqueIdentifier>{8c8e4120-2b2d-4f35-97c0-83fc183137b2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="acPlayer.cpp">
@@ -50,9 +68,6 @@
     </ClCompile>
     <ClCompile Include="acShield.cpp">
       <Filter>Contents\Player\Shield</Filter>
-    </ClCompile>
-    <ClCompile Include="acProjectileScriptComponent.cpp">
-      <Filter>Contents\Projectile</Filter>
     </ClCompile>
     <ClCompile Include="acToolScene.cpp">
       <Filter>Scenes\ToolScene</Filter>
@@ -73,10 +88,22 @@
       <Filter>Contents\Boss</Filter>
     </ClCompile>
     <ClCompile Include="acBossScriptComponent.cpp">
-      <Filter>Contents\Boss</Filter>
+      <Filter>Contents\Boss\Script</Filter>
     </ClCompile>
     <ClCompile Include="acBossStatComponent.cpp">
-      <Filter>Contents\Boss</Filter>
+      <Filter>Contents\Boss\Stat</Filter>
+    </ClCompile>
+    <ClCompile Include="acWall.cpp">
+      <Filter>Contents\Wall</Filter>
+    </ClCompile>
+    <ClCompile Include="acWallScriptComponent.cpp">
+      <Filter>Contents\Wall\Script</Filter>
+    </ClCompile>
+    <ClCompile Include="acWallStatComponent.cpp">
+      <Filter>Contents\Wall\Stat</Filter>
+    </ClCompile>
+    <ClCompile Include="acProjectileScriptComponent.cpp">
+      <Filter>Contents\Projectile\Script</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -98,9 +125,6 @@
     <ClInclude Include="acShield.h">
       <Filter>Contents\Player\Shield</Filter>
     </ClInclude>
-    <ClInclude Include="acProjectileScriptComponent.h">
-      <Filter>Contents\Projectile</Filter>
-    </ClInclude>
     <ClInclude Include="acToolScene.h">
       <Filter>Scenes\ToolScene</Filter>
     </ClInclude>
@@ -120,10 +144,22 @@
       <Filter>Contents\Boss</Filter>
     </ClInclude>
     <ClInclude Include="acBossScriptComponent.h">
-      <Filter>Contents\Boss</Filter>
+      <Filter>Contents\Boss\Script</Filter>
     </ClInclude>
     <ClInclude Include="acBossStatComponent.h">
-      <Filter>Contents\Boss</Filter>
+      <Filter>Contents\Boss\Stat</Filter>
+    </ClInclude>
+    <ClInclude Include="acWall.h">
+      <Filter>Contents\Wall</Filter>
+    </ClInclude>
+    <ClInclude Include="acWallScriptComponent.h">
+      <Filter>Contents\Wall\Script</Filter>
+    </ClInclude>
+    <ClInclude Include="acWallStatComponent.h">
+      <Filter>Contents\Wall\Stat</Filter>
+    </ClInclude>
+    <ClInclude Include="acProjectileScriptComponent.h">
+      <Filter>Contents\Projectile\Script</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

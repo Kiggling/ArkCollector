@@ -3,9 +3,10 @@
 namespace ac
 {
 	BossStatComponent::BossStatComponent()
+		: mLastHP(100.f)
 	{
-		SetMaxHp(1000.0f);
-		SetHp(1000.0f);
+		SetMaxHp(250.0f);
+		SetHp(250.0f);
 		SetDamage(50.0f);
 	}
 	BossStatComponent::~BossStatComponent()

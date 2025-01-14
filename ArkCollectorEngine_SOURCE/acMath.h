@@ -134,5 +134,13 @@ namespace ac::math
 
 			return *this;
 		}
+		Vector2 swapXY()
+		{
+			float tmp = x;
+			x = y;
+			y = tmp;
+
+			return *this;
+		}
 	};
 }

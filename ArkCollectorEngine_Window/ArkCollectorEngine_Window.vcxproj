@@ -34,6 +34,9 @@
     <ClInclude Include="acTestScene.h" />
     <ClInclude Include="acTile.h" />
     <ClInclude Include="acToolScene.h" />
+    <ClInclude Include="acWall.h" />
+    <ClInclude Include="acWallScriptComponent.h" />
+    <ClInclude Include="acWallStatComponent.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="acBoss.cpp" />
@@ -49,6 +52,9 @@
     <ClCompile Include="acTestScene.cpp" />
     <ClCompile Include="acTile.cpp" />
     <ClCompile Include="acToolScene.cpp" />
+    <ClCompile Include="acWall.cpp" />
+    <ClCompile Include="acWallScriptComponent.cpp" />
+    <ClCompile Include="acWallStatComponent.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>

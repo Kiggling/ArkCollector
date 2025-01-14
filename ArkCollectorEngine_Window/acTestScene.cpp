@@ -36,6 +36,8 @@ extern ac::Application application;
 namespace ac
 {
 	TestScene::TestScene()
+		: mBoss(nullptr)
+		, mPlayer(nullptr)
 	{
 	}
 	TestScene::~TestScene()
@@ -47,6 +49,54 @@ namespace ac
 		//CameraComponent* cameraComp = camera->AddComponent<CameraComponent>();
 		//renderer::mainCamera = cameraComp;
 
+		mapInit();
+		playerInit();
+		bossInit();
+
+		// test Collider
+		Player* testPlayer = object::Instantiate<Player>(enums::ELayerType::Player);
+		testPlayer->SetName(L"testPlayer");
+		TransformComponent* testPlayerTr = testPlayer->AddComponent<TransformComponent>();
+		ScriptComponent* testPlScript = testPlayer->AddComponent<ScriptComponent>();
+		testPlayerTr->SetPosition(math::Vector2(100.0f, 200.0f));
+		testPlayerTr->SetWidth(24.0f);
+		testPlayerTr->SetHeight(24.0f);
+		BoxCollidier2DComponent* testPlayerCollidier = testPlayer->AddComponent<BoxCollidier2DComponent>();
+		testPlayerCollidier->SetSize(math::Vector2(testPlayerTr->GetWidth(), testPlayerTr->GetHeight()));
+		StatComponent* testPlayerStat = testPlayer->AddComponent<StatComponent>();
+		testPlayerStat->SetName(L"testPlayerStat");
+		testPlayerStat->SetHp(100.0f);
+		testPlayerStat->SetMp(100.0f);
+		testPlayerStat->SetDamage(5.0f);
+		testPlayerStat->SetAttackSpeed(1.0f);
+
+
+		Scene::Initialize();
+
+		UIManager::Push(enums::EUIType::HUD);
+	}
+	void TestScene::Update()
+	{
+		Scene::Update();
+	}
+	void TestScene::LateUpdate()
+	{
+		Scene::LateUpdate();
+	}
+	void TestScene::Render(HDC hdc)
+	{
+		Scene::Render(hdc);
+	}
+	void TestScene::OnEnter()
+	{
+		Scene::OnEnter();
+	}
+	void TestScene::OnExit()
+	{
+		Scene::OnExit();
+	}
+	void TestScene::mapInit()
+	{
 		// Map
 		GameObject* background = object::Instantiate<GameObject>(enums::ELayerType::BackGround);
 		background->AddComponent<TransformComponent>();
@@ -59,7 +109,9 @@ namespace ac
 		backgroundAs->SetClip(backgroundAc);
 		backgroundAs->SetLoop(true);
 		backgroundAs->Play(0.5f);
-
+	}
+	void TestScene::playerInit()
+	{
 		// Player
 		mPlayer = object::Instantiate<Player>(enums::ELayerType::Player);
 		object::DontDestroyOnLoad(mPlayer);
@@ -144,24 +196,9 @@ namespace ac
 		playerStat->SetMp(playerStat->GetMaxMp());
 		playerStat->SetDamage(50.0f);
 		playerStat->SetAttackSpeed(1.0f);
-
-		// test Collider
-		Player* testPlayer = object::Instantiate<Player>(enums::ELayerType::Player);
-		testPlayer->SetName(L"testPlayer");
-		TransformComponent* testPlayerTr = testPlayer->AddComponent<TransformComponent>();
-		ScriptComponent* testPlScript = testPlayer->AddComponent<ScriptComponent>();
-		testPlayerTr->SetPosition(math::Vector2(100.0f, 200.0f));
-		testPlayerTr->SetWidth(24.0f);
-		testPlayerTr->SetHeight(24.0f);
-		BoxCollidier2DComponent* testPlayerCollidier = testPlayer->AddComponent<BoxCollidier2DComponent>();
-		testPlayerCollidier->SetSize(math::Vector2(testPlayerTr->GetWidth(), testPlayerTr->GetHeight()));
-		StatComponent* testPlayerStat = testPlayer->AddComponent<StatComponent>();
-		testPlayerStat->SetName(L"testPlayerStat");
-		testPlayerStat->SetHp(100.0f);
-		testPlayerStat->SetMp(100.0f);
-		testPlayerStat->SetDamage(5.0f);
-		testPlayerStat->SetAttackSpeed(1.0f);
-
+	}
+	void TestScene::bossInit()
+	{
 		// Boss
 		mBoss = object::Instantiate<Boss>(enums::ELayerType::Boss);
 		TransformComponent* bossTr = mBoss->AddComponent<TransformComponent>();
@@ -259,34 +296,42 @@ namespace ac
 		bossTexture = Resources::Find<graphics::Texture>(L"BossDeathUp");
 		bossAnimatorComp->CreateAnimation(L"DeathUp", bossTexture, math::Vector2(0.0f, 0.0f), math::Vector2(80.0f, 80.0f), math::Vector2::Zero, 9, 0.2f);
 
-		bossTexture = Resources::Find<graphics::Texture>(L"Dust");
-		bossAnimatorComp->CreateAnimation(L"Dust", bossTexture, math::Vector2(0.0f, 0.0f), math::Vector2(48.0f, 48.0f), math::Vector2::Zero, 6, 0.2f);
+		bossTexture = Resources::Find<graphics::Texture>(L"BossAttack01Down");
+		bossAnimatorComp->CreateAnimation(L"Attack01HalfLeftDown", bossTexture, math::Vector2(0.0f, 0.0f), math::Vector2(80.0f, 80.0f), math::Vector2::Zero, 4, 0.1f);
+		bossAnimatorComp->CreateAnimation(L"Attack01HalfRightDown", bossTexture, math::Vector2(320.0f, 0.0f), math::Vector2(80.0f, 80.0f), math::Vector2::Zero, 3, 0.1f);
+		bossTexture = Resources::Find<graphics::Texture>(L"BossAttack01Left");
+		bossAnimatorComp->CreateAnimation(L"Attack01HalfLeftLeft", bossTexture, math::Vector2(0.0f, 0.0f), math::Vector2(80.0f, 80.0f), math::Vector2::Zero, 4, 0.1f);
+		bossAnimatorComp->CreateAnimation(L"Attack01HalfRightLeft", bossTexture, math::Vector2(320.0f, 0.0f), math::Vector2(80.0f, 80.0f), math::Vector2::Zero, 3, 0.1f);
+		bossTexture = Resources::Find<graphics::Texture>(L"BossAttack01Right");
+		bossAnimatorComp->CreateAnimation(L"Attack01HalfLeftRight", bossTexture, math::Vector2(0.0f, 0.0f), math::Vector2(80.0f, 80.0f), math::Vector2::Zero, 4, 0.1f);
+		bossAnimatorComp->CreateAnimation(L"Attack01HalfRightRight", bossTexture, math::Vector2(320.0f, 0.0f), math::Vector2(80.0f, 80.0f), math::Vector2::Zero, 3, 0.1f);
+		bossTexture = Resources::Find<graphics::Texture>(L"BossAttack01Up");
+		bossAnimatorComp->CreateAnimation(L"Attack01HalfLeftUp", bossTexture, math::Vector2(0.0f, 0.0f), math::Vector2(80.0f, 80.0f), math::Vector2::Zero, 4, 0.1f);
+		bossAnimatorComp->CreateAnimation(L"Attack01HalfRightUp", bossTexture, math::Vector2(320.0f, 0.0f), math::Vector2(80.0f, 80.0f), math::Vector2::Zero, 3, 0.1f);
+
+		bossTexture = Resources::Find<graphics::Texture>(L"BossAttack01Down");
+		bossAnimatorComp->CreateAnimation(L"Attack01SwordUpDown", bossTexture, math::Vector2(320.0f, 0.0f), math::Vector2(80.0f, 80.0f), math::Vector2::Zero, 1, 0.1f);
+		bossTexture = Resources::Find<graphics::Texture>(L"BossAttack01Left");
+		bossAnimatorComp->CreateAnimation(L"Attack01SwordUpLeft", bossTexture, math::Vector2(320.0f, 0.0f), math::Vector2(80.0f, 80.0f), math::Vector2::Zero, 1, 0.1f);
+		bossTexture = Resources::Find<graphics::Texture>(L"BossAttack01Right");
+		bossAnimatorComp->CreateAnimation(L"Attack01SwordUpRight", bossTexture, math::Vector2(320.0f, 0.0f), math::Vector2(80.0f, 80.0f), math::Vector2::Zero, 1, 0.1f);
+		bossTexture = Resources::Find<graphics::Texture>(L"BossAttack01Up");
+		bossAnimatorComp->CreateAnimation(L"Attack01SwordUpUp", bossTexture, math::Vector2(320.0f, 0.0f), math::Vector2(80.0f, 80.0f), math::Vector2::Zero, 1, 0.1f);
+
+		bossTexture = Resources::Find<graphics::Texture>(L"BossAttack03Down");
+		bossAnimatorComp->CreateAnimation(L"Attack03HalfLeftDown", bossTexture, math::Vector2(0.0f, 0.0f), math::Vector2(80.0f, 80.0f), math::Vector2::Zero, 5, 0.1f);
+		bossAnimatorComp->CreateAnimation(L"Attack03HalfRightDown", bossTexture, math::Vector2(320.0f, 0.0f), math::Vector2(80.0f, 80.0f), math::Vector2::Zero, 3, 0.1f);
+		bossTexture = Resources::Find<graphics::Texture>(L"BossAttack03Left");
+		bossAnimatorComp->CreateAnimation(L"Attack03HalfLeftLeft", bossTexture, math::Vector2(0.0f, 0.0f), math::Vector2(80.0f, 80.0f), math::Vector2::Zero, 5, 0.1f);
+		bossAnimatorComp->CreateAnimation(L"Attack03HalfRightLeft", bossTexture, math::Vector2(320.0f, 0.0f), math::Vector2(80.0f, 80.0f), math::Vector2::Zero, 3, 0.1f);
+		bossTexture = Resources::Find<graphics::Texture>(L"BossAttack03Right");
+		bossAnimatorComp->CreateAnimation(L"Attack03HalfLeftRight", bossTexture, math::Vector2(0.0f, 0.0f), math::Vector2(80.0f, 80.0f), math::Vector2::Zero, 5, 0.1f);
+		bossAnimatorComp->CreateAnimation(L"Attack03HalfRightRight", bossTexture, math::Vector2(320.0f, 0.0f), math::Vector2(80.0f, 80.0f), math::Vector2::Zero, 3, 0.1f);
+		bossTexture = Resources::Find<graphics::Texture>(L"BossAttack03Up");
+		bossAnimatorComp->CreateAnimation(L"Attack03HalfLeftUp", bossTexture, math::Vector2(0.0f, 0.0f), math::Vector2(80.0f, 80.0f), math::Vector2::Zero, 5, 0.1f);
+		bossAnimatorComp->CreateAnimation(L"Attack03HalfRightUp", bossTexture, math::Vector2(320.0f, 0.0f), math::Vector2(80.0f, 80.0f), math::Vector2::Zero, 3, 0.1f);
 
 
 		bossAnimatorComp->PlayAnimation(L"IdleDown", true);
-
-		Scene::Initialize();
-
-		UIManager::Push(enums::EUIType::HUD);
-	}
-	void TestScene::Update()
-	{
-		Scene::Update();
-	}
-	void TestScene::LateUpdate()
-	{
-		Scene::LateUpdate();
-	}
-	void TestScene::Render(HDC hdc)
-	{
-		Scene::Render(hdc);
-	}
-	void TestScene::OnEnter()
-	{
-		Scene::OnEnter();
-	}
-	void TestScene::OnExit()
-	{
-		Scene::OnExit();
 	}
 }
