@@ -1,3 +1,4 @@
+#pragma once
 #include "..\\ArkCollectorEngine_SOURCE\\acGameObject.h"
 
 namespace ac

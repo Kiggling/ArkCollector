@@ -82,6 +82,8 @@ namespace ac
 		void hurt();
 		void death();
 
+		void playAudio(const std::wstring& audioName, float volume = 1.0f);
+
 	private:
 		eState mState;
 		eDirection mAnimationDirection;
@@ -100,6 +102,8 @@ namespace ac
 		float mSkillTimer[4];
 
 		float mItemTimer[4];
+
+		bool mbItem04Active;
 	};
 }
 

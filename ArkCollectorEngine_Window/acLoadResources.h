@@ -98,6 +98,8 @@ namespace ac
 
 		// Player Sound
 		{
+			// pickup
+			Resources::Load<AudioClip>(L"PlayerPickup", L"..\\Content\\Sound\\Player\\Player_Pickup.wav");
 			// jump
 			Resources::Load<AudioClip>(L"PlayerJump", L"..\\Content\\Sound\\Player\\Player_Jump.wav");
 			// hurt
@@ -132,7 +134,15 @@ namespace ac
 		Resources::Load<graphics::Texture>(L"DungeonTileset", L"..\\Content\\Dungeon_Tileset\\Png\\DungeonTileset.png");
 		Resources::Load<graphics::Texture>(L"SpringFloor", L"..\\Content\\Dungeon_Tileset\\Png\\SpringFloor.bmp");
 		Resources::Load<graphics::Texture>(L"Dungeon", L"..\\Content\\Dungeon_Tileset\\Dungeon60.bmp");
+		Resources::Load<graphics::Texture>(L"LampOn", L"..\\Content\\Lava_Tileset_Pixel\\Animated Tiles\\Lava Dungeon\\Deco\\Png\\Lava lamp.png");
+		Resources::Load<graphics::Texture>(L"LampOff", L"..\\Content\\Lava_Tileset_Pixel\\Animated Tiles\\Lava Dungeon\\Deco\\Png\\Lava lamp off.png");
 
+		Resources::Load<graphics::Texture>(L"Cover_5", L"..\\Content\\Cover\\black_5.png");
+		Resources::Load<graphics::Texture>(L"Cover_4", L"..\\Content\\Cover\\black_4.png");
+		Resources::Load<graphics::Texture>(L"Cover_3", L"..\\Content\\Cover\\black_3.png");
+		Resources::Load<graphics::Texture>(L"Cover_2", L"..\\Content\\Cover\\black_2.png");
+		Resources::Load<graphics::Texture>(L"Cover_1", L"..\\Content\\Cover\\black_1.png");
+		Resources::Load<graphics::Texture>(L"Cover_0", L"..\\Content\\Cover\\black_0.png");
 
 		// UI
 		{
@@ -256,6 +266,17 @@ namespace ac
 			Resources::Load<graphics::Texture>(L"WallDestroyUp", L"..\\Content\\craftpix-free-magic-and-traps-top-down-pixel-art-asset\\2 Barricades\\Up\\Destroy.png");
 			Resources::Load<graphics::Texture>(L"WallDestroyRight", L"..\\Content\\craftpix-free-magic-and-traps-top-down-pixel-art-asset\\2 Barricades\\Right\\Destroy.png");
 			Resources::Load<graphics::Texture>(L"WallDestroyLeft", L"..\\Content\\craftpix-free-magic-and-traps-top-down-pixel-art-asset\\2 Barricades\\Left\\Destroy.png");
+		}
+
+		// Lamp
+		{
+			// texture
+			Resources::Load<graphics::Texture>(L"LampOn", L"..\\Content\\Lava_Tileset_Pixel\\Animated Tiles\\Lava Dungeon\\Deco\\Png\\Lava lamp.png");
+			Resources::Load<graphics::Texture>(L"LampOff", L"..\\Content\\Lava_Tileset_Pixel\\Animated Tiles\\Lava Dungeon\\Deco\\Png\\Lava lamp off.png");
+
+			// sound
+			Resources::Load<AudioClip>(L"LampOnSound", L"..\\Content\\Sound\\Lamp\\Lamp_On.wav");
+			Resources::Load<AudioClip>(L"LampOffSound", L"..\\Content\\Sound\\Lamp\\Lamp_Off.wav");
 		}
 	}
 }

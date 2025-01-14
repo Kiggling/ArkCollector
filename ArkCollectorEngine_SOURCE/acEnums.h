@@ -13,6 +13,7 @@ namespace ac::enums
 		Object,
 		PlayerParticle,
 		BossParticle,
+		Cover,
 		Max = 16,
 	};
   

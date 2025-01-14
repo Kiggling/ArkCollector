@@ -24,5 +24,9 @@ namespace ac
 	private:
 		class Player* mPlayer;
 		class Boss* mBoss;
+		class Lamp* mLamps[5];
+
+		class GameObject* mCover;
+		class GameObject* mCoverDontDestroyOnLoad;
 	};
 }

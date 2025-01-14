@@ -16,6 +16,7 @@
 #include "acProjectileScriptComponent.h"
 #include "acAudioClip.h"
 #include "acAudioSource.h"
+#include "acLamp.h"
 
 namespace ac
 {
@@ -46,6 +47,7 @@ namespace ac
 		, mbinvincible(false)
 		, mShield(nullptr)
 		, mAudioSource(nullptr)
+		, mbItem04Active(false)
 	{
 		for (size_t i = 0; i < 4; i++)
 		{
@@ -99,9 +101,7 @@ namespace ac
 			BoxCollidier2DComponent* collidier = projectile->AddComponent<BoxCollidier2DComponent>();
 			collidier->SetSize(math::Vector2(projectileTr->GetWidth(), projectileTr->GetHeight()));
 
-			AudioClip* ac = Resources::Find<AudioClip>(audioName[(UINT)mAttackType]);
-			mAudioSource->SetClip(ac);
-			mAudioSource->Play(0.3f);
+			playAudio(audioName[(UINT)mAttackType], 0.3f);
 
 			mAttackType = eAttackType::None;
 		}
@@ -180,10 +180,19 @@ namespace ac
 	}
 	void PlayerScriptComponent::OnCollisionStay(ColliderComponent* other)
 	{
-		// pick up
-		if (Input::GetKey(EKeyCode::Z))
+		Lamp* lamp = dynamic_cast<Lamp*>(other->GetOwner());
+		if (lamp != nullptr)
 		{
-
+			if (Input::GetKey(EKeyCode::Four) && lamp->GetLight() == false && mbItem04Active == true)
+			{
+				lamp->SetLight(true);
+				mbItem04Active = false;
+			}
+			if (Input::GetKey(EKeyCode::Z) && lamp->GetLight() == true)
+			{
+				mbItem04Active = true;
+				playAudio(L"PlayerPickup");
+			}
 		}
 
 		if (other->GetOwner()->GetLayerType() == enums::ELayerType::Object)
@@ -342,9 +351,7 @@ namespace ac
 		{
 			mAnimatorComponent->PlayAnimation(L"Walk" + direction[(UINT)mAnimationDirection], false);
 
-			AudioClip* ac = Resources::Find<AudioClip>(L"PlayerFootstep");
-			mAudioSource->SetClip(ac);
-			mAudioSource->Play(0.2f);
+			playAudio(L"PlayerFootstep", 0.2f);
 		}
 		else if (animationName.substr(0, 4) != L"Walk" && animationName.substr(0, 4) != L"Jump")
 		{
@@ -384,9 +391,7 @@ namespace ac
 			mAnimatorComponent->PlayAnimation(L"Jump" + direction[(UINT)mAnimationDirection], false);
 
 			mAudioSource->Stop();
-			AudioClip* ac = Resources::Find<AudioClip>(L"PlayerJump");
-			mAudioSource->SetClip(ac);
-			mAudioSource->Play(0.5f);
+			playAudio(L"PlayerJump", 0.5f);
 		}
 		else if (animationName.substr(0, 4) != L"Jump")
 		{
@@ -439,9 +444,7 @@ namespace ac
 
 			stat->SetSkillUsed(1, true);
 
-			AudioClip* ac = Resources::Find<AudioClip>(L"PlayerSkill02Sound");
-			mAudioSource->SetClip(ac);
-			mAudioSource->Play(0.3f);
+			playAudio(L"PlayerSkill02Sound", 0.3f);
 		}
 	}
 	// e키를 눌러 3번 스킬을 사용할 때 실행되는 함수
@@ -490,9 +493,7 @@ namespace ac
 
 			stat->SetItemUsed(0, true);
 
-			AudioClip* ac = Resources::Find<AudioClip>(L"PlayerItem01Sound");
-			mAudioSource->SetClip(ac);
-			mAudioSource->Play();
+			playAudio(L"PlayerItem01Sound");
 		}
 	}
 	// item02 : Mp potion
@@ -507,9 +508,7 @@ namespace ac
 
 			stat->SetItemUsed(1, true);
 
-			AudioClip* ac = Resources::Find<AudioClip>(L"PlayerItem02Sound");
-			mAudioSource->SetClip(ac);
-			mAudioSource->Play();
+			playAudio(L"PlayerItem02Sound");
 		}
 	}
 	// item03 : 
@@ -547,9 +546,7 @@ namespace ac
 
 			mAudioSource->Stop();
 
-			AudioClip* ac = Resources::Find<AudioClip>(L"PlayerHurt");
-			mAudioSource->SetClip(ac);
-			mAudioSource->Play();
+			playAudio(L"PlayerHurt", 0.5f);
 		}
 	}
 	// 사망 시 실행되는 함수
@@ -561,9 +558,13 @@ namespace ac
 
 			mAudioSource->Stop();
 
-			AudioClip* ac = Resources::Find<AudioClip>(L"PlayerDeath");
-			mAudioSource->SetClip(ac);
-			mAudioSource->Play();
+			playAudio(L"PlayerDeath", 0.5f);
 		}
+	}
+	void PlayerScriptComponent::playAudio(const std::wstring& audioName, float volume)
+	{
+		AudioClip* ac = Resources::Find<AudioClip>(audioName);
+		mAudioSource->SetClip(ac);
+		mAudioSource->Play(volume);
 	}
 }
