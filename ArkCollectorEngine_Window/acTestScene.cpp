@@ -135,7 +135,7 @@ namespace ac
 				lampCount++;
 			}
 		}
-		if (lampCount == 0) // 램프가 다 꺼지면 플레이어 사망
+		if (lampCount == 0 && mBoss->GetComponent<BossScriptComponent>()->GetGimmick() != BossScriptComponent::eGimmick::HP200) // 램프가 다 꺼지면 플레이어 사망
 		{
 			mPlayer->GetComponent<PlayerStatComponent>()->SetHp(0.0f);
 		}
