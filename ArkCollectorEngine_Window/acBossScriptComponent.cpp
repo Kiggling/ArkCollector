@@ -24,13 +24,13 @@ namespace ac
 {
 	BossScriptComponent::FAnimationInfo animationInfo[4] = {
 		{ L"Dust", math::Vector2(2.f, 2.f), math::Vector2(48.f, 48.f), 6, 0.2f},
-		{ L"WaveSmall", math::Vector2(2.f, 2.f), math::Vector2(32.f, 32.f), 3, 0.2f},
+		{ L"WaveSmall", math::Vector2(2.f, 2.f), math::Vector2(32.f, 32.f), 1, 0.2f},
 		{ L"WaveBig", math::Vector2(1.5f, 1.5f), math::Vector2(64.f, 64.f), 1, 0.2f},
 		{ L"RainBigRed", math::Vector2(1.5f, 1.5f), math::Vector2(6.f,26.f), 8, 0.2f},
 	};
 	BossScriptComponent::FProjectileInfo projectileInfo[4] = {
 		{ ProjectileScriptComponent::eEffectType::Effect, ProjectileScriptComponent::eDamageType::None, 0.f, math::Vector2::Zero, 0.f },
-		{ ProjectileScriptComponent::eEffectType::Effect, ProjectileScriptComponent::eDamageType::Effect, 50.f, math::Vector2::Zero, 0.f },
+		{ ProjectileScriptComponent::eEffectType::Projectile, ProjectileScriptComponent::eDamageType::Effect, 50.f, math::Vector2::Zero, 200.f },
 		{ ProjectileScriptComponent::eEffectType::Projectile, ProjectileScriptComponent::eDamageType::Effect, 1.f, math::Vector2::Zero, 250.f },
 		{ ProjectileScriptComponent::eEffectType::Projectile, ProjectileScriptComponent::eDamageType::Projectile, 1.f, math::Vector2(0.f, 100.f), 120.f },
 	};
@@ -172,8 +172,9 @@ namespace ac
 				mState = eState::Death;
 			}
 		}
-		else
+		else if(mState != eState::Attack)
 		{
+			mbAttack = false;
 			playAnimation(L"Hurt", false);
 			mState = eState::Hurt;
 		}
@@ -317,6 +318,7 @@ namespace ac
 	{
 		if (mAnimatorComponent->IsComplete())
 		{
+			projectileInfo[(UINT)eEffect::WaveSmall].velocity = waveBigVelocity[(UINT)mAnimationDirection];
 			playEffectAnimation(animationInfo[(UINT)eEffect::WaveSmall], projectileInfo[(UINT)eEffect::WaveSmall], colliderInfo[(UINT)eEffect::WaveSmall], (UINT)mAnimationDirection, waveOffset[(UINT)mAnimationDirection], true);
 		}
 	}
@@ -340,7 +342,8 @@ namespace ac
 	}
 	void BossScriptComponent::attack03()
 	{
-		if (mTime <= 0.04f)
+		float sin = sinf((mTime / 1.f) * 2 * PI);
+		if (sin < 0.00001f)
 		{
 			UINT range = 300;
 			math::Vector2 offset = math::Vector2(rand() % (range / 2), rand() % (range / 2));
@@ -349,7 +352,6 @@ namespace ac
 
 			playEffectAnimation(animationInfo[(UINT)eEffect::RainBigRed], projectileInfo[(UINT)eEffect::RainBigRed], colliderInfo[(UINT)eEffect::RainBigRed], (UINT)eDirection::None, offset, true);
 		}
-		if (mTime >= 0.2) mTime = 0.f;
 		mTime += Time::DeltaTime();
 	}
 	void BossScriptComponent::gimmick()
@@ -494,10 +496,10 @@ namespace ac
 		{
 			return;
 		}
-		if (mStatComponent->GetHp() <= 200.f && mGimmickCheck[1] == false)
+		/*if (mStatComponent->GetHp() <= 200.f && mGimmickCheck[1] == false)
 		{
 			mGimmick = eGimmick::HP200;
-		}
+		}*/
 		if (mStatComponent->GetHp() <= 100.f && mGimmickCheck[2] == false)
 		{
 			mGimmick = eGimmick::HP100;

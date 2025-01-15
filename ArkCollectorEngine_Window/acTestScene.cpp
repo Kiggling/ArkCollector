@@ -49,6 +49,9 @@ namespace ac
 		//CameraComponent* cameraComp = camera->AddComponent<CameraComponent>();
 		//renderer::mainCamera = cameraComp;
 
+		TransformComponent::MovementRangeLeftTop = math::Vector2(120, 180);
+		TransformComponent::MovementRangeRightBottom = math::Vector2(1320, 780);
+
 		mapInit();
 		playerInit();
 		bossInit();
@@ -120,6 +123,49 @@ namespace ac
 		Scene::Initialize();
 
 		UIManager::Push(enums::EUIType::HUD);
+	}
+	void TestScene::Update()
+	{
+		// lampCount = 램프가 몇 개 켜져있는지 저장하는 변수
+		int lampCount = 0;
+		for (size_t i = 0; i < 5; i++)
+		{
+			if (mLamps[i]->GetLight() == true)
+			{
+				lampCount++;
+			}
+		}
+		if (lampCount == 0) // 램프가 다 꺼지면 플레이어 사망
+		{
+			mPlayer->GetComponent<PlayerStatComponent>()->SetHp(0.0f);
+		}
+
+		// 켜져있는 램프 개수에 따라 Cover의 투명도 설정
+		SpriteRenderer* coverSr = mCover->GetComponent<SpriteRenderer>();
+		graphics::Texture* coverTexture = Resources::Find<graphics::Texture>(L"Cover_" + std::to_wstring(lampCount));
+		coverSr->SetTexture(coverTexture);
+
+		SpriteRenderer* coverDontDestroyOnLoadSr = mCoverDontDestroyOnLoad->GetComponent<SpriteRenderer>();
+		graphics::Texture* coverDontDestroyOnLoadTexture = Resources::Find<graphics::Texture>(L"Cover_" + std::to_wstring(lampCount));
+		coverDontDestroyOnLoadSr->SetTexture(coverDontDestroyOnLoadTexture);
+
+		Scene::Update();
+	}
+	void TestScene::LateUpdate()
+	{
+		Scene::LateUpdate();
+	}
+	void TestScene::Render(HDC hdc)
+	{
+		Scene::Render(hdc);
+	}
+	void TestScene::OnEnter()
+	{
+		Scene::OnEnter();
+	}
+	void TestScene::OnExit()
+	{
+		Scene::OnExit();
 	}
 	void TestScene::mapInit()
 	{
@@ -359,48 +405,5 @@ namespace ac
 		bossAnimatorComp->CreateAnimation(L"Attack03HalfRightUp", bossTexture, math::Vector2(320.0f, 0.0f), math::Vector2(80.0f, 80.0f), math::Vector2::Zero, 3, 0.1f);
 
 		bossAnimatorComp->PlayAnimation(L"IdleDown", true);
-	}
-	void TestScene::Update()
-	{
-		// lampCount = 램프가 몇 개 켜져있는지 저장하는 변수
-		int lampCount = 0;
-		for (size_t i = 0; i < 5; i++)
-		{
-			if (mLamps[i]->GetLight() == true)
-			{
-				lampCount++;
-			}
-		}
-		if (lampCount == 0 && mBoss->GetComponent<BossScriptComponent>()->GetGimmick() != BossScriptComponent::eGimmick::HP200) // 램프가 다 꺼지면 플레이어 사망
-		{
-			mPlayer->GetComponent<PlayerStatComponent>()->SetHp(0.0f);
-		}
-
-		// 켜져있는 램프 개수에 따라 Cover의 투명도 설정
-		SpriteRenderer* coverSr = mCover->GetComponent<SpriteRenderer>();
-		graphics::Texture* coverTexture = Resources::Find<graphics::Texture>(L"Cover_" + std::to_wstring(lampCount));
-		coverSr->SetTexture(coverTexture);
-
-		SpriteRenderer* coverDontDestroyOnLoadSr = mCoverDontDestroyOnLoad->GetComponent<SpriteRenderer>();
-		graphics::Texture* coverDontDestroyOnLoadTexture = Resources::Find<graphics::Texture>(L"Cover_" + std::to_wstring(lampCount));
-		coverDontDestroyOnLoadSr->SetTexture(coverDontDestroyOnLoadTexture);
-
-		Scene::Update();
-	}
-	void TestScene::LateUpdate()
-	{
-		Scene::LateUpdate();
-	}
-	void TestScene::Render(HDC hdc)
-	{
-		Scene::Render(hdc);
-	}
-	void TestScene::OnEnter()
-	{
-		Scene::OnEnter();
-	}
-	void TestScene::OnExit()
-	{
-		Scene::OnExit();
 	}
 }
