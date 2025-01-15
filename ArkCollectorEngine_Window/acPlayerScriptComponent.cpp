@@ -48,6 +48,7 @@ namespace ac
 		, mShield(nullptr)
 		, mAudioSource(nullptr)
 		, mbItem04Active(false)
+		, mDamageIncrease(1.0f)
 	{
 		for (size_t i = 0; i < 4; i++)
 		{
@@ -96,7 +97,7 @@ namespace ac
 			projectileAnimator->PlayAnimation(attackName[(UINT)mAttackType] + direction[(UINT)mAttackDirection], true);
 
 			ProjectileScriptComponent* sc = projectile->AddComponent<ProjectileScriptComponent>();
-			sc->SetDamage(GetOwner()->GetComponent<PlayerStatComponent>()->GetDamage());
+			sc->SetDamage(GetOwner()->GetComponent<PlayerStatComponent>()->GetDamage() * mDamageIncrease);
 
 			BoxCollidier2DComponent* collidier = projectile->AddComponent<BoxCollidier2DComponent>();
 			collidier->SetSize(math::Vector2(projectileTr->GetWidth(), projectileTr->GetHeight()));
@@ -243,6 +244,8 @@ namespace ac
 				}
 			}
 		}
+		if (mItemTimer[2] > 10.0f && mDamageIncrease > 1.000001f)
+			mDamageIncrease = 1.0f;
 	}
 	// 플레이어의 방향 정하는 함수
 	void PlayerScriptComponent::setDirection()
@@ -530,6 +533,7 @@ namespace ac
 			// TODO: 
 			// 1. item03번 썼을때 효과 적용되는 코드 작성
 			// 2. 사운드 코드 작성
+			mDamageIncrease = 1.2f;
 
 			stat->SetItemUsed(2, true);
 		}

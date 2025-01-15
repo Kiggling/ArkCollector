@@ -104,6 +104,8 @@ namespace ac
 		float mItemTimer[4];
 
 		bool mbItem04Active;
+
+		float mDamageIncrease;
 	};
 }
 
