@@ -52,6 +52,13 @@ namespace ac
 
 			pos += ((Projectile*)GetOwner())->GetVelocity() * Time::DeltaTime();
 
+			if (pos.x < TransformComponent::MovementRangeLeftTop.x || pos.x > TransformComponent::MovementRangeRightBottom.x
+				|| pos.y < TransformComponent::MovementRangeLeftTop.y || pos.y > TransformComponent::MovementRangeRightBottom.y)
+			{
+				GetOwner()->Death();
+				return;
+			}
+
 			tr->SetPosition(pos);
 		}
 	}

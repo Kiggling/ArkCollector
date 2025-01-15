@@ -1,9 +1,13 @@
 #include "acTransformComponent.h"
 #include "acRenderer.h"
 #include "acCameraComponent.h"
+#include "acApplication.h"
 
 namespace ac
 {
+	math::Vector2 TransformComponent::MovementRangeLeftTop = math::Vector2(0.f, 0.f);
+	math::Vector2 TransformComponent::MovementRangeRightBottom = math::Vector2(0.f, 0.f);
+
 	TransformComponent::TransformComponent()
 		: Component(enums::EComponentType::Transform)
 		, mPosition(math::Vector2::Zero)

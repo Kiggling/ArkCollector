@@ -15,12 +15,22 @@ namespace ac
 		TransformComponent();
 		~TransformComponent();
 
+		static math::Vector2 MovementRangeLeftTop;
+		static math::Vector2 MovementRangeRightBottom;
+
 		virtual void Initialize() override;
 		virtual void Update() override;
 		virtual void LateUpdate() override;
 		virtual void Render(HDC InHdc) override;
 
-		void SetPosition(math::Vector2 InPos) { mPosition = InPos; }
+		void SetPosition(math::Vector2 InPos) { 
+			InPos.x = max(InPos.x, MovementRangeLeftTop.x);
+			InPos.x = min(InPos.x, MovementRangeRightBottom.x);
+			InPos.y = max(InPos.y, MovementRangeLeftTop.y);
+			InPos.y = min(InPos.y, MovementRangeRightBottom.y);
+
+			mPosition = InPos; 
+		}
 		void SetScale(math::Vector2 InScale) { mScale = InScale; }
 		void SetRotation(float InRot) { mRotation = InRot; }
 		void SetWidth(float InWidth) { mWidth = InWidth; }
