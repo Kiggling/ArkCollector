@@ -46,20 +46,20 @@ namespace ac
 
 		SetCenterPosition(centerPos);
 
-		HBRUSH transparentBrush = (HBRUSH)GetStockObject(NULL_BRUSH);
-		HBRUSH oldBrush = (HBRUSH)SelectObject(InHdc, transparentBrush);
+		//HBRUSH transparentBrush = (HBRUSH)GetStockObject(NULL_BRUSH);
+		//HBRUSH oldBrush = (HBRUSH)SelectObject(InHdc, transparentBrush);
 
-		HPEN greenPen = CreatePen(PS_SOLID, 2,RGB(0, 255, 0));
-		HPEN oldPen = (HPEN)SelectObject(InHdc, greenPen);
+		//HPEN greenPen = CreatePen(PS_SOLID, 2,RGB(0, 255, 0));
+		//HPEN oldPen = (HPEN)SelectObject(InHdc, greenPen);
 
-		Rectangle(InHdc
-			, centerPos.x - GetSize().x / 2
-			, centerPos.y - GetSize().y / 2
-			, centerPos.x + GetSize().x / 2
-			, centerPos.y + GetSize().y / 2);
+		//Rectangle(InHdc
+		//	, centerPos.x - GetSize().x / 2
+		//	, centerPos.y - GetSize().y / 2
+		//	, centerPos.x + GetSize().x / 2
+		//	, centerPos.y + GetSize().y / 2);
 
-		SelectObject(InHdc, oldBrush);
-		SelectObject(InHdc, oldPen);
-		DeleteObject(greenPen);
+		//SelectObject(InHdc, oldBrush);
+		//SelectObject(InHdc, oldPen);
+		//DeleteObject(greenPen);
 	}
 }
