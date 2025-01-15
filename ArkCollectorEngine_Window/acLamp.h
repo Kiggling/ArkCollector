@@ -18,10 +18,13 @@ namespace ac
 		virtual void LateUpdate() override;
 		virtual void Render(HDC InHdc) override;
 
+		float GetTimerLimit() { return mTimerLimit; }
 		void SetTimerLimit(float timerLimit) { mTimerLimit = timerLimit; }
-
+		float GetTimer() { return mTimer; }
 		bool GetLight() { return mbLight; }
 		void SetLight(bool light);
+		bool GetSafe() { return mbSafe; }
+		void SetSafe(bool safe) { mbSafe = safe; }
 
 	private:
 		void playAudio(const std::wstring& audioName, float volume = 1.0f);
@@ -31,6 +34,7 @@ namespace ac
 		float mTimerLimit;
 
 		bool mbLight;
+		bool mbSafe;
 	};
 }
 

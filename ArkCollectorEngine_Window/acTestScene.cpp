@@ -94,7 +94,7 @@ namespace ac
 			//LampScriptComponent* lampScript = mLamps[i]->AddComponent<LampScriptComponent>();
 
 			BoxCollidier2DComponent* lampCollidier = mLamps[i]->AddComponent<BoxCollidier2DComponent>();
-			lampCollidier->SetSize(math::Vector2(lampTr->GetWidth(), lampTr->GetHeight()));
+			lampCollidier->SetSize(math::Vector2(lampTr->GetWidth(), lampTr->GetHeight()) * 2);
 
 			AudioSource* lampAs = mLamps[i]->AddComponent<AudioSource>();
 			AudioClip* lampAc = Resources::Find<AudioClip>(L"LampOnSound");
@@ -234,6 +234,7 @@ namespace ac
 
 		BossScriptComponent* bossScript = mBoss->AddComponent<BossScriptComponent>();
 		bossScript->SetTarget(mPlayer);
+		bossScript->SetScene(this);
 
 		BoxCollidier2DComponent* bossCollidier = mBoss->AddComponent<BoxCollidier2DComponent>();
 		bossCollidier->SetSize(math::Vector2(bossTr->GetWidth(), bossTr->GetHeight()));
@@ -370,7 +371,7 @@ namespace ac
 				lampCount++;
 			}
 		}
-		if (lampCount == 0) // 램프가 다 꺼지면 플레이어 사망
+		if (lampCount == 0 && mBoss->GetComponent<BossScriptComponent>()->GetGimmick() != BossScriptComponent::eGimmick::HP200) // 램프가 다 꺼지면 플레이어 사망
 		{
 			mPlayer->GetComponent<PlayerStatComponent>()->SetHp(0.0f);
 		}

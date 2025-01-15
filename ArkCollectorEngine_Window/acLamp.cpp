@@ -11,6 +11,7 @@ namespace ac
 		: mTimer(0.0f)
 		, mTimerLimit(20.0f)
 		, mbLight(true)
+		, mbSafe(false)
 	{
 	}
 	Lamp::~Lamp()
@@ -23,13 +24,13 @@ namespace ac
 	// 타이머로 시간 재다가 시간이 Limit만큼 되면 불 끄기
 	void Lamp::Update()
 	{
-		if (mbLight == true)
-			mTimer += Time::DeltaTime();
+		mTimer += Time::DeltaTime();
 		if (mbLight == true && mTimer >= mTimerLimit)
 		{
 			GetComponent<AnimatorComponent>()->PlayAnimation(L"Off", true);
 			playAudio(L"LampOffSound");
 
+			mTimer = 0.0f;
 			mbLight = false;
 		}
 

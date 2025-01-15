@@ -254,6 +254,8 @@ namespace ac
 			Resources::Load<graphics::Texture>(L"RainBigRed", L"..\\Content\\Effects\\Effects\\Rarity Effects\\Png\\Mythic effect.png");
 			Resources::Load<graphics::Texture>(L"RainBigBlue", L"..\\Content\\Effects\\Effects\\Rarity Effects\\Png\\Magic effect.png");
 			Resources::Load<graphics::Texture>(L"RainBigGray", L"..\\Content\\Effects\\Effects\\Rarity Effects\\Png\\Common effect.png");
+			// Fire
+			Resources::Load<graphics::Texture>(L"FireEruption", L"..\\Content\\Effects\\Effects\\Fire\\FireEruption.png");
 		}
 		// Wall
 		{

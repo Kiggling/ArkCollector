@@ -193,6 +193,10 @@ namespace ac
 				mbItem04Active = true;
 				playAudio(L"PlayerPickup");
 			}
+			if (lamp->GetSafe() == true)
+			{
+				mbinvincible = true;
+			}
 		}
 
 		if (other->GetOwner()->GetLayerType() == enums::ELayerType::Object)
@@ -204,6 +208,12 @@ namespace ac
 	void PlayerScriptComponent::OnCollisionExit(ColliderComponent* other)
 	{
 		if (other->GetOwner()->GetLayerType() == enums::ELayerType::Object)
+		{
+			mbinvincible = false;
+		}
+
+		Lamp* lamp = dynamic_cast<Lamp*>(other->GetOwner());
+		if (lamp != nullptr && lamp->GetSafe() == true)
 		{
 			mbinvincible = false;
 		}

@@ -98,9 +98,11 @@ namespace ac
 		void SetState(eState InState) { mState = InState; };
 		void SetGimmick(eGimmick InGimmick) { mGimmick = InGimmick; };
 		void SetGimmickState(eGimmickState InGimmickState) { mGimmickState = InGimmickState; };
+		void SetScene(class Scene* InScene) { mScene = InScene; }
 		eState GetState() { return mState; };
 		eGimmick GetGimmick() { return mGimmick; };
 		eGimmickState GetGimmickState() { return mGimmickState; };
+		class Scene* GetScene() { return mScene; }
 
 	private:
 
@@ -124,11 +126,19 @@ namespace ac
 		void playEffectAnimation(FAnimationInfo aniInfo, FProjectileInfo projInfo, math::Vector2 colInfo, int direction, math::Vector2 offset, bool collisionActivate, bool loop = false);
 		void setDirection();
 		void checkGimmick();
+		void gimmickHP200();
 		void gimmickHP100();
 		void gimmickHP0();
 		bool isIllusion();
 		bool isAttacking();
 		bool hasToTeleport();
+
+		// HP200 기믹 함수
+		void noneHP200();
+		void jumpHP200();
+		void landHP200();
+		void waitHP200();
+		void attackHP200();
 
 		// HP100 기믹 함수
 		void noneHP100();
@@ -164,6 +174,7 @@ namespace ac
 		class ColliderComponent* mColliderComponent;	// 보스 충돌 컴포넌트
 		bool mbAttack;									// 보스가 공격하고 있는지
 		std::bitset<4> mGimmickCheck;					// 보스의 기믹 수행 체크
+		class Scene* mScene;							// 보스가 속해있는 Scene의 포인터
 	};
 }
 

@@ -15,6 +15,8 @@
 #include "acWallScriptComponent.h"
 #include "acWallStatComponent.h"
 #include "acBoss.h"
+#include "acLamp.h"
+#include "acTestScene.h"
 
 extern ac::Application application;
 
@@ -356,6 +358,9 @@ namespace ac
 		{
 		case ac::BossScriptComponent::eGimmick::None:
 			break;
+		case ac::BossScriptComponent::eGimmick::HP200:
+			gimmickHP200();
+			break;
 		case ac::BossScriptComponent::eGimmick::HP100:
 			gimmickHP100();
 			break;
@@ -509,6 +514,31 @@ namespace ac
 			mTime = 0.f;
 			mAttackCool = 0.f;
 			mColliderComponent->SetActivate(false);
+		}
+	}
+	void BossScriptComponent::gimmickHP200()
+	{
+		switch (mGimmickState)
+		{
+		case ac::BossScriptComponent::eGimmickState::None:
+			noneHP200();
+			break;
+		case ac::BossScriptComponent::eGimmickState::Jump:
+			jumpHP200();
+			break;
+		case ac::BossScriptComponent::eGimmickState::Land:
+			landHP200();
+			break;
+		case ac::BossScriptComponent::eGimmickState::Wait:
+			waitHP200();
+			break;
+		case ac::BossScriptComponent::eGimmickState::Attack:
+			attackHP200();
+			break;
+		case ac::BossScriptComponent::eGimmickState::End:
+			break;
+		default:
+			break;
 		}
 	}
 	void BossScriptComponent::gimmickHP100()
@@ -671,6 +701,133 @@ namespace ac
 			return true;
 		}
 		return false;
+	}
+	void BossScriptComponent::noneHP200()
+	{
+		mTime += Time::DeltaTime();
+
+		if (mTime > 1.f)
+		{
+			TestScene* ts = dynamic_cast<TestScene*>(mScene);
+			if (ts == nullptr)
+			{
+
+			}
+			Lamp** lamps = ts->GetLamps();
+			for (size_t i = 0; i < 5; i++)
+			{
+				lamps[i]->SetLight(true);
+			}
+
+			mTime = 0.f;
+			mGimmickState = eGimmickState::Land;
+			playAnimation(L"Land", false);
+			playEffectAnimation(animationInfo[(UINT)eEffect::Dust], projectileInfo[(UINT)eEffect::Dust], colliderInfo[(UINT)eEffect::Dust], (UINT)eDirection::None, math::Vector2(0.f, 20.f), false);
+		}
+	}
+	void BossScriptComponent::jumpHP200()
+	{
+		if (mAnimatorComponent->IsComplete())
+		{
+			math::Vector2 pos = math::Vector2::Zero;
+			pos.x = application.GetWidth() / 2.f;
+			pos.y = application.GetHeight() / 2.f;
+
+			mAnimatorComponent->StopAnimation();
+			mTransformComponent->SetPosition(pos);
+
+			mGimmickState = eGimmickState::Wait;
+		}
+	}
+	void BossScriptComponent::landHP200()
+	{
+		mTime += Time::DeltaTime();
+
+		if (mTime > 2.f)
+		{
+			mTime = 0.f;
+			mState = eState::Idle;
+			mGimmick = eGimmick::None;
+			mGimmickState = eGimmickState::End;
+			mColliderComponent->SetActivate(true);
+			mGimmickCheck[1] = true;
+		}
+	}
+	void BossScriptComponent::waitHP200()
+	{
+		mTime += Time::DeltaTime();
+
+		TestScene* ts = dynamic_cast<TestScene*>(mScene);
+		assert(ts != nullptr);
+		Lamp** lamps = ts->GetLamps();
+		if (mTime > 1.f)
+		{
+			int safeLampIndex = 0;
+			float safeLampTimer = lamps[0]->GetTimer();
+			for (size_t i = 0; i < 5; i++)
+			{
+				if (lamps[i]->GetTimer() < safeLampTimer)
+				{
+					safeLampIndex = i;
+					safeLampTimer = lamps[i]->GetTimer();
+				}
+			}
+
+			lamps[safeLampIndex]->SetSafe(true);
+
+			TransformComponent* safeLampTr = lamps[safeLampIndex]->GetComponent<TransformComponent>();
+			math::Vector2 pos = safeLampTr->GetPosition();
+
+			if ((int)(mTime * 10) % 2)
+			{
+				pos.x += 0.5f;
+			}
+			else
+			{
+				pos.x -= 0.5f;
+			}
+			safeLampTr->SetPosition(pos);
+		}
+		if (mTime > 6.f)
+		{
+			mTime = 0.f;
+			for (size_t i = 0; i < 5; i++)
+			{
+				lamps[i]->SetLight(false);
+			}
+
+			mGimmickState = eGimmickState::Attack;
+		}
+	}
+	void BossScriptComponent::attackHP200()
+	{
+		mTime += Time::DeltaTime();
+
+		if (mTime > 1.f)
+		{
+			FAnimationInfo aniInfo = {
+					L"FireEruption",
+					math::Vector2(1.f, 1.f),
+					math::Vector2(64.f, 64.f),
+					13,
+					0.2f
+			};
+			FProjectileInfo projInfo = {
+				ProjectileScriptComponent::eEffectType::Effect,
+				ProjectileScriptComponent::eDamageType::Effect,
+				100.f,
+				math::Vector2::Zero,
+				800.f
+			};
+			math::Vector2 colInfo = math::Vector2(32.f, 32.f);
+			if (mAnimationDirection == eDirection::Left || mAnimationDirection == eDirection::Right)
+			{
+				colInfo.swapXY();
+			}
+			playEffectAnimation(aniInfo, projInfo, colInfo, (UINT)eDirection::None, mDistanceFromTarget, true);
+
+			mGimmickState = eGimmickState::None;
+		}
 	}
 	void BossScriptComponent::noneHP100()
 	{

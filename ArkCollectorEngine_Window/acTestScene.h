@@ -16,6 +16,8 @@ namespace ac
 		
 		void OnEnter() override;
 		void OnExit() override;
+
+		class Lamp** GetLamps() { return mLamps; }
 		
 	private:
 		void mapInit();
