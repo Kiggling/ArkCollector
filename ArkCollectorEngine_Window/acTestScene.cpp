@@ -266,7 +266,7 @@ namespace ac
 		//playerStat->SetHp(playerStat->GetMaxHp());
 		playerStat->SetHp(100.0f);
 		playerStat->SetMp(playerStat->GetMaxMp());
-		playerStat->SetDamage(50.0f);
+		playerStat->SetDamage(5.0f);
 		playerStat->SetAttackSpeed(1.0f);
 	}
 	void TestScene::bossInit()

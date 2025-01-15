@@ -35,6 +35,7 @@ namespace ac
 	};
 	math::Vector2 projectileSize[] = {math::Vector2::Zero, math::Vector2(32.0f, 32.0f), math::Vector2(100.0f, 100.0f), math::Vector2::Zero, math::Vector2(100.0f, 100.0f), math::Vector2(32.0f, 32.0f)};
 	int spriteLength[] = {0, 1, 61, 0, 30, 60};
+	float skillDamage[] = {0.0f, 1.0f, 2.0f, 0.0f, 3.0f, 4.0f};
 
 	PlayerScriptComponent::PlayerScriptComponent()
 		: mState(eState::Idle)
@@ -97,7 +98,7 @@ namespace ac
 			projectileAnimator->PlayAnimation(attackName[(UINT)mAttackType] + direction[(UINT)mAttackDirection], true);
 
 			ProjectileScriptComponent* sc = projectile->AddComponent<ProjectileScriptComponent>();
-			sc->SetDamage(GetOwner()->GetComponent<PlayerStatComponent>()->GetDamage() * mDamageIncrease);
+			sc->SetDamage(GetOwner()->GetComponent<PlayerStatComponent>()->GetDamage() * skillDamage[(UINT)mAttackType] * mDamageIncrease);
 
 			BoxCollidier2DComponent* collidier = projectile->AddComponent<BoxCollidier2DComponent>();
 			collidier->SetSize(math::Vector2(projectileTr->GetWidth(), projectileTr->GetHeight()));
