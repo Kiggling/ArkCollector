@@ -1,14 +1,13 @@
-#pragma once
+Ôªø#pragma once
 #include "..\\ArkCollectorEngine_SOURCE\\acResources.h"
 #include "..\\ArkCollectorEngine_SOURCE\\acTexture.h"
 #include "..\\ArkCollectorEngine_SOURCE\\acAudioClip.h"
 
+
 namespace ac
 {
-	void LoadResources()
+	void PlayerResources()
 	{
-		//Resources::Load<graphics::Texture>();
-
 		// Player-Skeleton-Hunter
 		// 			Idle,
 		//			Walk,
@@ -121,7 +120,9 @@ namespace ac
 			//Resources::Load<AudioClip>(L"PlayerItem03Sound", L"..\\Content\\Sound\\Player\\Player_Item03.wav");
 			//Resources::Load<AudioClip>(L"PlayerItem04Sound", L"..\\Content\\Sound\\Player\\Player_Item04.wav");
 		}
-		
+	}
+	void MapResources()
+	{
 		// Map
 		{
 			Resources::Load<graphics::Texture>(L"Dungeon", L"..\\Content\\Dungeon60.bmp");
@@ -129,7 +130,9 @@ namespace ac
 			// sound
 			Resources::Load<AudioClip>(L"DungeonSound", L"..\\Content\\Sound\\Map\\Dungeon.wav");
 		}
-
+	}
+	void SceneResources()
+	{
 		// Scene
 		Resources::Load<graphics::Texture>(L"DungeonTileset", L"..\\Content\\Dungeon_Tileset\\Png\\DungeonTileset.png");
 		Resources::Load<graphics::Texture>(L"SpringFloor", L"..\\Content\\Dungeon_Tileset\\Png\\SpringFloor.bmp");
@@ -143,10 +146,12 @@ namespace ac
 		Resources::Load<graphics::Texture>(L"Cover_2", L"..\\Content\\Cover\\black_2.png");
 		Resources::Load<graphics::Texture>(L"Cover_1", L"..\\Content\\Cover\\black_1.png");
 		Resources::Load<graphics::Texture>(L"Cover_0", L"..\\Content\\Cover\\black_0.png");
-
+	}
+	void UIResources()
+	{
 		// UI
 		{
-			// «√∑π¿ÃæÓ
+			// ÌîåÎ†àÏù¥Ïñ¥
 			Resources::Load<graphics::Texture>(L"HPBAR", L"..\\Content\\RPG_UI\\HUD Health Bar\\HUDHealthBar.png");
 			Resources::Load<graphics::Texture>(L"Skill1", L"..\\Content\\RPG_UI\\Skill Icons\\Sorceress Icons\\Sorceress Green Skills\\Png\\Sorceress Green Skill 01.png");
 			Resources::Load<graphics::Texture>(L"Skill2", L"..\\Content\\RPG_UI\\Skill Icons\\Warrior Icons\\Warrior Purple Skills\\Png\\Warrior Purple Skill 01.png");
@@ -162,12 +167,13 @@ namespace ac
 			Resources::Load<graphics::Texture>(L"TimeStop", L"..\\Content\\Pickups_Pixel\\Pickups\\Gems\\Png\\PinkGem.png");
 			Resources::Load<graphics::Texture>(L"Torch", L"..\\Content\\Lava_Tileset_Pixel\\Animated Tiles\\Lava Dungeon\\Deco\\Png\\Torch.png");
 
-			// ∫∏Ω∫
+			// Î≥¥Ïä§
 			Resources::Load<graphics::Texture>(L"BossHP", L"..\\Content\\RPG_UI\\Boss Health Bar\\BossHealthBar.png");
 			Resources::Load<graphics::Texture>(L"BossName", L"..\\Content\\RPG_UI\\Boss Names\\Boss Names1.png");
 		}
-
-
+	}
+	void BossResources()
+	{
 		// Boss-Skeleton-Boss
 		// 			Idle,
 		//			Walk,
@@ -257,6 +263,9 @@ namespace ac
 			// Fire
 			Resources::Load<graphics::Texture>(L"FireEruption", L"..\\Content\\Effects\\Effects\\Fire\\FireEruption.png");
 		}
+	}
+	void WallResources()
+	{
 		// Wall
 		{
 			Resources::Load<graphics::Texture>(L"WallBuildDown", L"..\\Content\\craftpix-free-magic-and-traps-top-down-pixel-art-asset\\2 Barricades\\Down\\Build.png");
@@ -269,7 +278,9 @@ namespace ac
 			Resources::Load<graphics::Texture>(L"WallDestroyRight", L"..\\Content\\craftpix-free-magic-and-traps-top-down-pixel-art-asset\\2 Barricades\\Right\\Destroy.png");
 			Resources::Load<graphics::Texture>(L"WallDestroyLeft", L"..\\Content\\craftpix-free-magic-and-traps-top-down-pixel-art-asset\\2 Barricades\\Left\\Destroy.png");
 		}
-
+	}
+	void LampResources()
+	{
 		// Lamp
 		{
 			// texture
@@ -280,5 +291,24 @@ namespace ac
 			Resources::Load<AudioClip>(L"LampOnSound", L"..\\Content\\Sound\\Lamp\\Lamp_On.wav");
 			Resources::Load<AudioClip>(L"LampOffSound", L"..\\Content\\Sound\\Lamp\\Lamp_Off.wav");
 		}
+	}
+	void LoadResources()
+	{
+		//Resources::Load<graphics::Texture>();
+		std::thread t1(PlayerResources);
+		std::thread t2(BossResources);
+		std::thread t3(LampResources);
+		std::thread t4(MapResources);
+		std::thread t5(SceneResources);
+		std::thread t6(UIResources);
+		std::thread t7(WallResources);
+
+		t1.join();
+		t2.join();
+		t3.join();
+		t4.join();
+		t5.join();
+		t6.join();
+		t7.join();
 	}
 }

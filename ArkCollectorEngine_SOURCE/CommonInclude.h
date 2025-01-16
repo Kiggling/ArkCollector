@@ -13,6 +13,8 @@
 #include <list>
 #include <stack>
 #include <queue>
+#include <thread>
+#include <mutex>
 
 #include "acMath.h"
 #include "acEnums.h"
