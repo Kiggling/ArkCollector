@@ -1,5 +1,4 @@
 # Win API 프로젝트 - Ark Collector
-[![image](https://github.com/user-attachments/assets/85d10095-204d-4a20-94ce-2204d193cc0c)](https://youtu.be/kwFxH_ZBNbI)
 
 1. [주제](#주제)
 2. [인원](#인원)
@@ -19,7 +18,7 @@
 - [장우현](https://github.com/dngus1683)
 
 ## 시연 영상
-[유튜브](https://youtu.be/kwFxH_ZBNbI)
+[![image](https://github.com/user-attachments/assets/85d10095-204d-4a20-94ce-2204d193cc0c)](https://youtu.be/kwFxH_ZBNbI)
 
 ## 개발 기간
 2024.11.25 ~ 2025.01.15
