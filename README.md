@@ -1,4 +1,6 @@
 # Win API 프로젝트 - Ark Collector
+[![image](https://github.com/user-attachments/assets/85d10095-204d-4a20-94ce-2204d193cc0c)](https://youtu.be/kwFxH_ZBNbI)
+
 1. [주제](#주제)
 2. [인원](#인원)
 3. [시연 영상](#시연-영상)
@@ -10,7 +12,7 @@
 9. [커밋 컨벤션](#커밋-컨벤션)
 8. [리소스](#리소스)
 ## 주제
-레이드 만들기.
+보스 레이드 만들기.
 
 ## 인원
 - [조성환](https://github.com/rnrn213)
